@@ -18,7 +18,10 @@ const styles = StyleSheet.create({
     fontSize: size.normal,
     fontFamily: family.SFProText_Semibold,
   },
-  backgroundImage: {flex: 1, justifyContent: 'center'},
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
