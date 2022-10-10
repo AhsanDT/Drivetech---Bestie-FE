@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Splash from '../screens/Splash';
-import AuthStack from './stacks/AuthStack';
+// import AuthStack from './stacks/AuthStack';
 // import Walkthrough from '../screens/Walkthrough';
 import AuthStack from '../navigation/stacks/AuthStack';
 // import DrawerTabs from '../navigation/drawer';
@@ -17,7 +17,6 @@ const MainAppNav = () => {
         initialRouteName="AuthStack"
         screenOptions={{headerShown: false}}>
         <AppStack.Screen name={'Splash'} component={Splash} />
-
 
         <AppStack.Screen name={'Auth'} component={AuthStack} />
 

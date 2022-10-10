@@ -26,7 +26,7 @@ const AppInput = ({
   keyboardType,
   maxLength,
   error,
-  textEntry
+  textEntry,
 }) => {
   const [showPass, setShowPass] = React.useState(secureTextEntry);
 
@@ -37,7 +37,7 @@ const AppInput = ({
       <Input
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
-        secureTextEntry={textEntry ||showPass}
+        secureTextEntry={textEntry || showPass}
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
         leftIcon={leftIcon}
