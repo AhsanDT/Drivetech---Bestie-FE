@@ -7,10 +7,21 @@ export const colors = {
 
   // Black Color
   b1: '#000000',
+  b2: '#222222',
+  b3: '#363636',
 
   //Gray Color
   g1: '#E2E2E2',
+
   g2: '#B3B3B3',
+
+  g2: '#F6F7FB',
+  g3: '#9B9B9B',
+  g4: '#C4C4C4',
+  g5: '#A2A0A8',
+  g6: '#A2A0A8',
+  g7: '#D9D9D9',
+
 
   //Green
   gr1: '#00A66C',
@@ -21,6 +32,8 @@ export const colors = {
   // red
   red: 'red',
 
+  //Blue
+  bl: '#145DA0',
   //******************- Gradients -*******************/
 
   p_gradient: ['#FF8F8E', '#E79069'],

@@ -1,77 +1,67 @@
 import * as yup from 'yup';
 
-export const PhoneAuthFields = {
-  contact: '',
+import {emailRegex} from './constant';
+
+export const CustomerRegisterStep1Fields = {
+  address: '',
+  street: '',
+  postCode: '',
+  province: '',
+  barangay: '',
+  city: '',
+  country: '',
 };
 
-export const signupFormFields = {
-  fullname: '',
-  email: '',
-  contact: '',
-  password: '',
-};
-export const socialSignupFormFields = {
-  fullname: '',
-  contact: '',
-};
-
-export const updateFormFields = {
+export const CustomerRegisterStep2Fields = {
   firstName: '',
   lastName: '',
   email: '',
-};
-export const AddPersonalInfoField = {
-  image: '',
-  desc: '',
+  phone: '',
+  govtID: '',
+  password: '',
 };
 
-export const AddSupportInfoField = {
-  image: '',
+export const SPRegisterStep1Fields = {
+  city: '',
+  country: '',
+};
+
+export const SignUPFormFields = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  country: '',
+  city: '',
+  age: '',
+};
+
+export const SPRegisterStep3Fields = {
   hourly_rate: '',
-  desc: '',
 };
 
 export const loginFormFields = {
   email: '',
   password: '',
 };
-
-export const forgotFormFields = {
-  email: '',
-};
-
-export const resetFormFields = {
+export const createFormFields = {
   password: '',
   confirmPassword: '',
 };
-
+export const forgotFormFields = {
+  email: '',
+};
 export const codeFormFields = {
   code: '',
 };
-
-export const editFormFields = {
-  email: '',
-  phone: '',
-  bio: '',
-};
-
-export const editSupportFormFields = {
-  fullname: '',
-  email: '',
-  phone: '',
-  hourly_rate: '',
-  bio: '',
-};
-
-export const addCardFormFields = {
-  fullname: '',
-  country: '',
+export const Addkiddsfield = {
+  kidAge: '',
+  kidName: '',
 };
 
 export const LoginVS = yup.object().shape({
   email: yup
     .string()
-    .required('Email Required')
+    .required('Email address or phone number is required')
     .email('Please provide a valid email address'),
   password: yup
     .string()
@@ -79,91 +69,53 @@ export const LoginVS = yup.object().shape({
     .required('Password Required'),
 });
 
-export const SignupVS = yup.object().shape({
-  fullname: yup.string().required('Full Name Required'),
-  email: yup
-    .string()
-    .required('Email Required')
-    .email('Please provide a valid email address'),
-  contact: yup
-    .number()
-    .typeError('Invalid phone number')
-    .required('Phone number Required'),
-  password: yup
-    .string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password Required'),
-});
-
-export const SocialLoginSignupVS = yup.object().shape({
-  fullname: yup.string().required('Full Name Required'),
-  contact: yup
-    .number()
-    .typeError('Invalid phone number')
-    .required('Phone number Required'),
-});
-
-export const ForgotPasswordVS = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email Required')
-    .email('Please provide a valid email address'),
-});
-
-export const PhoneAuthFieldsVS = yup.object().shape({
-  contact: yup
-    .number()
-    .typeError('Invalid phone number')
-    .required('Phone number Required'),
-});
-
-export const editProfileFieldsVS = yup.object().shape({
+export const SignUpVS = yup.object().shape({
+  firstName: yup.string().required('First Name Required'),
+  lastName: yup.string().required('Last Name Required'),
   phone: yup
-    .number()
-    .typeError('Invalid phone number')
-    .required('Phone number Required'),
-  email: yup
     .string()
-    .required('Email Required')
-    .email('Please provide a valid email address'),
-  bio: yup.string('Invalid description').required('Bio data Required'),
+    .min(11, 'Phone number must be at least 11 characters')
+    .required('Phone Number Required'),
+  country: yup.string().required('Country Name Required'),
+  city: yup.string().required('City Name Required'),
+  age: yup.string().required('Age Requried'),
 });
 
-export const editSupportProfileFieldsVS = yup.object().shape({
-  fullname: yup.string().required('Full Name Required'),
+// export const CustomerRegisterStep2VS = yup.object().shape({
+//   firstName: yup.string().required('First Name Required').label('firstName'),
+//   lastName: yup.string().required('Last Name Required').label('lastName'),
+//   email: yup
+//     .string()
+//     .email('please Enter Valid Email')
+//     .required('Email Address Required')
+//     .label('email'),
+//   phone: yup.string().required('Phone Number Required').label('phone'),
+//   govtID: yup.string().required('Govt ID Required').label('govtID'),
+//   password: yup.string().required('Password Required').label('password'),
+// });
 
-  phone: yup
-    .number()
-    .typeError('Invalid phone number')
-    .required('Phone number Required'),
-  email: yup
-    .string()
-    .required('Email Required')
-    .email('Please provide a valid email address'),
-  hourly_rate: yup.string().required('Hourly Rate Required'),
-  bio: yup.string('Invalid description').required('Bio data Required'),
-});
+// export const SPRegisterStep1VS = yup.object().shape({
+//   city: yup.string().required('City Name Required').label('city'),
+//   country: yup.string().required('Country Name Required').label('country'),
+// });
 
-export const AddPersonalInfoVS = yup.object().shape({
-  image: yup.object().shape().required('Image Required'),
-  desc: yup.string().required('Description Required'),
-});
+// export const SPRegisterStep2VS = yup.object().shape({
+//   firstName: yup.string().required('First Name Required').label('firstName'),
+//   lastName: yup.string().required('Last Name Required').label('lastName'),
+//   email: yup.string().required('Email Address Required').label('email'),
+//   phone: yup.string().required('Phone Number Required').label('phone'),
+//   govtID: yup.string().required('Govt ID Required').label('govtID'),
+//   password: yup.string().required('Password Required').label('password'),
+// });
 
-export const AddSupportInfoVS = yup.object().shape({
-  image: yup.object().shape().required('Image Required'),
-  hourly_rate: yup.string().required('Hourly Rate Required'),
-  desc: yup.string().required('Description Required'),
-});
-export const CodeVS = yup.object().shape({
-  code: yup
-    .string()
-    .required('OTP Required')
-    .matches(/^[0-9]+$/, 'OTP must be only digits')
-    .min(6, 'OTP must be exactly 6 digits')
-    .max(6, 'OTP must be exactly 6 digits'),
-});
+// export const SPRegisterStep3VS = yup.object().shape({
+//   hourly_rate: yup
+//     .string()
+//     .required('Hourly Rate Required')
+//     .label('hourly_rate'),
+// });
 
-export const ResetPasswordVS = yup.object().shape({
+export const CreatePasswordVS = yup.object().shape({
   password: yup
     .string()
     .min(6, 'Password must be at least 6 characters')
@@ -176,18 +128,14 @@ export const ResetPasswordVS = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'New Passwords do not match'),
 });
 
-export const BudgetBoost = yup.object().shape({
-  budget: yup
+export const ForgotPasswordVS = yup.object().shape({
+  email: yup
     .string()
-    .required('Budget Required')
-    .matches(/^[0-9]+$/, 'Budget must be only digits'),
-  duration: yup
-    .string()
-    .required('Duration Required')
-    .matches('Duration must Date format'),
+    .required('Email Required')
+    .email('Please provide a valid email address'),
 });
 
-export const addCardVS = yup.object().shape({
-  fullname: yup.string().required('Full Name Required'),
-  country: yup.string().required('Country Required'),
-});
+// export const AddKiddsVS = yup.object().shape({
+//   kidName: yup.string().required('Kid Name Required').label('kidName'),
+//   kidAge: yup.string().required('Kid Age Required').label('kidAge'),
+// });
