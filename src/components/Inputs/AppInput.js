@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   container: {},
   inputStyle: {
     fontFamily: family.Poppin_Regular,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     borderBottomWidth: 0,
     color: colors.g3,
   },
@@ -94,17 +94,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('5'),
   },
   textStyle: {
-    // marginVertical: WP('2'),
     paddingHorizontal: WP('6'),
     marginBottom: 10,
     color: colors.b1,
-    fontSize: size.normal,
-    fontFamily: family.Poppin_Bold,
-    fontWeight: '500',
+    fontSize: size.text_14,
+    fontFamily: family.Poppin_Medium,
   },
 
   errorStyle: {
-    fontSize: size.xxxtiny,
+    fontSize: size.text_10,
     color: colors.p1,
     paddingHorizontal: 25,
     textAlign: 'left',

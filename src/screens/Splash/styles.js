@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
   logoTxtStyle: {
     marginTop: WP('5'),
     color: colors.white,
-    fontSize: size.normal,
-    fontFamily: family.SFProText_Semibold,
+    fontSize: size.text_16,
+    fontFamily: family.Poppin_SemiBold,
   },
   backgroundImage: {
     flex: 1,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
-    fontSize: size.h6,
+    fontSize: size.text_22,
     fontFamily: family.Poppin_Bold,
     color: colors.white,
     textAlign: 'center',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   accountStyles: {
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     color: colors.white,
     fontFamily: family.Poppin_Regular,
     textAlign: 'center',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
   BottomTextStyle: {
     textAlign: 'center',
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     color: colors.white,
     marginVertical: WP('4.5'),
     fontFamily: family.Poppin_Medium,
