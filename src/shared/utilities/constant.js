@@ -83,6 +83,36 @@ const drawerList = [
   },
 ];
 
+const Selection_List = [
+  {
+    title: 'Male',
+    value: 'Male',
+  },
+  {
+    title: 'Female',
+    value: 'Female',
+  },
+  {
+    title: 'Other',
+    value: 'Other',
+  },
+];
+
+const Pronoun_List = [
+  {
+    title: 'she/her',
+    value: 'she/her',
+  },
+  {
+    title: 'him/he',
+    value: 'him/he',
+  },
+  {
+    title: 'they/them',
+    value: 'they/them',
+  },
+];
+
 export {
   web_client_id,
   stripe_publishableKey,
@@ -90,4 +120,6 @@ export {
   networkText,
   image_options,
   drawerList,
+  Selection_List,
+  Pronoun_List
 };

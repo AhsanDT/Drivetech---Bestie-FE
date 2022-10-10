@@ -7,8 +7,27 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   contentContainer: {
-    paddingHorizontal: WP('3.85'),
-    flex: 1,
+    padding: WP('3'),
+    marginVertical: WP('6'),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  Spacer: {
+    height: 2,
+    width: WP('40'),
+    backgroundColor: colors.g1,
+  },
+  IconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  OrTextStyle: {
+    fontSize: size.xsmall,
+    colors: colors.b1,
+    fontFamily: family.Poppin_Medium,
+    textAlign: 'center',
+    marginVertical: WP('-2.5'),
   },
   imageCon: {
     height: WP('60'),
@@ -27,14 +46,19 @@ const styles = StyleSheet.create({
     fontFamily: family.Gilroy_Bold,
   },
   googleStyle: {
-    height: 20,
-    width: 20,
-    resizeMode: 'contain',
+    height: WP('12'),
+    width: WP('12'),
+    marginRight: 2,
+  },
+  fbIconStyle: {
+    height: WP('12'),
+    width: WP('12'),
+    marginLeft: 5,
   },
   appleStyle: {
-    height: 20,
-    width: 16,
-    resizeMode: 'contain',
+    height: WP('12'),
+    width: WP('12'),
+    marginLeft: 5,
   },
   btnTextStyle: {
     fontSize: size.tiny,
@@ -42,21 +66,48 @@ const styles = StyleSheet.create({
     color: colors.g3,
   },
   forgotText: {
-    color: colors.r1,
-    fontFamily: family.Gilroy_Medium,
+    color: colors.red,
+    fontFamily: family.Poppin_Medium,
     fontSize: size.tiny,
-    marginBottom: 20,
+    marginBottom: 50,
+    marginTop: -18,
+    marginHorizontal: WP('5'),
+    textAlign: 'right',
   },
   footerText: {
     textAlign: 'center',
-    color: colors.b1,
-    fontFamily: family.Gilroy_Medium,
+    color: colors.b3,
+    fontFamily: family.Poppin_Medium,
     fontSize: size.tiny,
-    width: '70%',
+    marginVertical: WP('7'),
   },
   btnCon: {
     width: '100%',
     marginVertical: 20,
+  },
+  accountStyles: {
+    fontSize: size.tiny,
+    color: colors.white,
+    fontFamily: family.Poppin_Regular,
+    textAlign: 'center',
+  },
+
+  signUpStyle: {
+    fontFamily: family.Poppin_Bold,
+    fontWeight: 'bold',
+  },
+  termStyle: {
+    color: colors.bl,
+    fontFamily: family.Poppin_Medium,
+    fontSize: size.tiny,
+  },
+
+  BottomTextStyle: {
+    textAlign: 'center',
+    color: colors.b2,
+    marginVertical: WP('2.5'),
+    fontFamily: family.Poppin_Medium,
+    fontSize: size.tiny,
   },
 });
 
