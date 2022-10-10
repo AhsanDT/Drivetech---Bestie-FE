@@ -16,6 +16,7 @@ export * from './Inputs/AppInput';
 
 //Modals
 export * from './Modal/DeleteModal';
+export * from './Modal/ImagePickerModal';
 
 //TextFields
 export * from './TextFields/ProfileField';
@@ -28,10 +29,8 @@ export * from './Fields/BlankField';
 // export * from './Hooks/useActionCable';
 // export * from './Hooks/useChannel';
 
-
 //Footer
 export * from './Footer/AuthFooter';
 
 // Drop Down
 export * from './DropDown/DropDown';
-

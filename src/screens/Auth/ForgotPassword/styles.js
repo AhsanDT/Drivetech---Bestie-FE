@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   btCon: {
-    alignSelf: 'center',
-    marginVertical: WP('30'),
+    marginVertical: WP('10'),
   },
 });
 export default styles;

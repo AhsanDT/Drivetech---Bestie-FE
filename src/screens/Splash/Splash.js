@@ -47,25 +47,26 @@ const Splash = ({navigation}) => {
           </Text>
         </Text>
       </View>
-
-      <Text style={styles.BottomTextStyle}>
-        By signing in to you account, you agree to our {'\n'}
-        <Text
-          style={styles.termStyle}
-          onPress={() => {
-            navigation.replace('Auth', {screen: 'Login'});
-          }}>
-          Privacy & Policy
+      <View style={styles.footerContainer}>
+        <Text style={styles.BottomTextStyle}>
+          By signing in to you account, you agree to our {'\n'}
+          <Text
+            style={styles.termStyle}
+            onPress={() => {
+              navigation.replace('Auth', {screen: 'Login'});
+            }}>
+            Privacy & Policy
+          </Text>
+          <Text> and </Text>
+          <Text
+            style={styles.termStyle}
+            onPress={() => {
+              navigation.replace('Auth', {screen: 'Login'});
+            }}>
+            Terms & Conditions.
+          </Text>
         </Text>
-        <Text> and </Text>
-        <Text
-          style={styles.termStyle}
-          onPress={() => {
-            navigation.replace('Auth', {screen: 'Login'});
-          }}>
-          Terms & Conditions.
-        </Text>
-      </Text>
+      </View>
     </ImageBackground>
   );
 };

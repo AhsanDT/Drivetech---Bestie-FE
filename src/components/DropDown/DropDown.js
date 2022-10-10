@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {colors, family, size, WP, scrWidth} from '../../shared/exporter';
 import {Dropdown} from 'react-native-element-dropdown';
 import {Divider, Icon} from 'react-native-elements';
+import {AppInput} from '../Inputs/AppInput';
 
 export const DropDown = ({
   options,
@@ -13,6 +14,7 @@ export const DropDown = ({
   containerStyle,
   touched,
   error,
+  searchInput,
 }) => {
   const renderItem = item => {
     return (
@@ -51,11 +53,7 @@ export const DropDown = ({
         // search
         // searchPlaceholder="Specify here"
       />
-      {touched && error && (
-        <View>
-          <Text style={styles.errorStyle}>{error}</Text>
-        </View>
-      )}
+
     </View>
   );
 };
@@ -115,6 +113,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     position: 'absolute',
     top: 65,
-
   },
 });

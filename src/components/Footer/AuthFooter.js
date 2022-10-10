@@ -13,10 +13,7 @@ export const AuthFooter = ({onPress, title, subtitle}) => {
         {title}
         <Text
           onPress={onPress}
-          style={[
-            styles.footerText,
-            {fontWeight: 'bold', fontFamily: family.Poppin_Bold},
-          ]}>
+          style={[styles.footerText, {fontFamily: family.Poppin_Bold}]}>
           {subtitle}
         </Text>
       </Text>
@@ -27,8 +24,6 @@ export const AuthFooter = ({onPress, title, subtitle}) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    marginVertical: WP('25'),
-    padding: WP('3'),
   },
   footerText: {
     justifyContent: 'flex-end',
