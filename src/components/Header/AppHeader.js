@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   logoTxtStyle: {
     left: WP('2.3'),
     color: colors.b1,
-    fontSize: size.h4,
+    fontSize: size.text_24,
     fontFamily: family.Poppin_Bold,
     fontWeight: 'bold',
     marginBottom: WP('6'),

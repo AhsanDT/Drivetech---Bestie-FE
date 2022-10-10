@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   OrTextStyle: {
-    fontSize: size.xsmall,
+    fontSize: size.text_14,
     colors: colors.b1,
     fontFamily: family.Poppin_Medium,
     textAlign: 'center',
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   textStyle: {
-    fontSize: size.h4,
+    fontSize: size.text_24,
     color: colors.b1,
-    fontFamily: family.Gilroy_Bold,
+    fontFamily: family.Poppin_Medium,
   },
   googleStyle: {
-    height: WP('12'),
-    width: WP('12'),
+    height: WP('10'),
+    width: WP('10'),
     marginRight: 2,
   },
   fbIconStyle: {
@@ -61,14 +61,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   btnTextStyle: {
-    fontSize: size.tiny,
-    fontFamily: family.Gilroy_Medium,
+    fontSize: size.text_12,
+    fontFamily: family.Poppin_Medium,
     color: colors.g3,
   },
   forgotText: {
     color: colors.red,
     fontFamily: family.Poppin_Medium,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     marginBottom: 50,
     marginTop: -18,
     marginHorizontal: WP('5'),
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.b3,
     fontFamily: family.Poppin_Medium,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     marginVertical: WP('7'),
   },
   btnCon: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   accountStyles: {
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     color: colors.white,
     fontFamily: family.Poppin_Regular,
     textAlign: 'center',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   termStyle: {
     color: colors.bl,
     fontFamily: family.Poppin_Medium,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
   },
 
   BottomTextStyle: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     color: colors.b2,
     marginVertical: WP('2.5'),
     fontFamily: family.Poppin_Medium,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
   },
 });
 
