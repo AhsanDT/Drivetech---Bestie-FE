@@ -32,7 +32,7 @@ const Splash = ({navigation}) => {
         title={'Get Started'}
         style={styles.btnContainer}
         onPress={() => {
-          navigation.replace('Auth', {screen: 'Login'});
+          navigation.replace('Auth', {screen: 'PrivacyPolicy'});
         }}
       />
       <View style={styles.accountContainer}>

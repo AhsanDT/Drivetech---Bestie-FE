@@ -8,13 +8,43 @@ import {
   WP,
   CreatePasswordVS,
   createFormFields,
+  checkConnected,
+  networkText,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {resetPassRequest} from '../../../redux/actions';
+const CreatePassword = ({navigation, route}) => {
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
 
-const CreatePassword = ({navigation}) => {
-  const onPressSignIn = e => {
-    navigation.navigate('CreatePassword');
+  const onPressSignIn = async value => {
+    const email = route?.params?.email;
+    const check = await checkConnected();
+    if (check) {
+      setloading(true);
+      const data = new FormData();
+      data.append('email', email);
+      data.append('password', value.password);
+      try {
+        const cbSuccess = response => {
+          alert('Password reset');
+          setloading(false);
+        };
+        const cbFailure = err => {
+          Alert.alert('' || err);
+          setloading(false);
+        };
+        dispatch(resetPassRequest(data, cbSuccess, cbFailure));
+      } catch (error) {
+        console.log('ERROR', error);
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+    }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
