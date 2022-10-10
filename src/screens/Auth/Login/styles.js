@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   Spacer: {
     height: 2,
-    width: WP('40'),
+    width: WP('42'),
     backgroundColor: colors.g1,
   },
   IconContainer: {
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   },
   OrTextStyle: {
     fontSize: size.text_14,
-    colors: colors.b1,
-    fontFamily: family.Poppin_Medium,
+    colors: colors.g5,
+    fontFamily: family.Poppin_SemiBold,
     textAlign: 'center',
     marginVertical: WP('-2.5'),
   },
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   fbIconStyle: {
-    height: WP('12'),
-    width: WP('12'),
+    height: WP('10'),
+    width: WP('10'),
     marginLeft: 5,
   },
   appleStyle: {
-    height: WP('12'),
-    width: WP('12'),
+    height: WP('10'),
+    width: WP('10'),
     marginLeft: 5,
   },
   btnTextStyle: {
@@ -65,14 +65,17 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Medium,
     color: colors.g3,
   },
+  forgotTextContainer: {
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    marginBottom: 35,
+    marginTop: -13,
+  },
   forgotText: {
-    color: colors.red,
+    color: colors.red1,
     fontFamily: family.Poppin_Medium,
     fontSize: size.text_12,
-    marginBottom: 50,
-    marginTop: -18,
     marginHorizontal: WP('5'),
-    textAlign: 'right',
   },
   footerText: {
     textAlign: 'center',
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.b2,
     marginVertical: WP('2.5'),
-    fontFamily: family.Poppin_Medium,
+    fontFamily: family.Poppin_Regular,
     fontSize: size.text_12,
   },
 });

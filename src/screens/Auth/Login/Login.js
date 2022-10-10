@@ -67,12 +67,15 @@ const Login = ({navigation}) => {
                 // secureTextEntry={true}
                 textEntry={true}
               />
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('forgot');
-                }}>
-                <Text style={styles.forgotText}>Forgot your password?</Text>
-              </TouchableOpacity>
+              <View style={styles.forgotTextContainer}>
+                <Text
+                  style={styles.forgotText}
+                  onPress={() => {
+                    navigation.navigate('Forgot');
+                  }}>
+                  Forgot your password?
+                </Text>
+              </View>
               <AppButton
                 width={WP('90')}
                 bgColor={colors.b1}

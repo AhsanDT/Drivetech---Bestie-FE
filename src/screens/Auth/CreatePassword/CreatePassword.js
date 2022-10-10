@@ -12,6 +12,9 @@ import {
 import {Formik} from 'formik';
 
 const CreatePassword = ({navigation}) => {
+  const onPressSignIn = e => {
+    navigation.navigate('CreatePassword');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -45,7 +48,7 @@ const CreatePassword = ({navigation}) => {
                 onChangeText={handleChange('password')}
                 value={values.password}
                 touched={touched.password}
-                error={errors.password}
+                errorMessage={errors.password}
                 secureTextEntry={true}
               />
               <AppInput
@@ -54,7 +57,7 @@ const CreatePassword = ({navigation}) => {
                 onChangeText={handleChange('confirmPassword')}
                 value={values.confirmPassword}
                 touched={touched.confirmPassword}
-                error={errors.confirmPassword}
+                errorMessage={errors.confirmPassword}
                 secureTextEntry={true}
               />
               <AppButton

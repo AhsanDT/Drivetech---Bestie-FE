@@ -13,40 +13,9 @@ import {
   Pronoun_List,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
-import {Menu, MenuItem} from 'react-native-material-menu';
 const SignUp = ({navigation}) => {
-  const data = [
-    {
-      id: 1,
-      name: 'Male',
-    },
-    {
-      id: 2,
-      name: 'Female',
-    },
-    {
-      id: 3,
-      name: 'Option',
-    },
-  ];
-  const [showMenu, setShowMenu] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const hideItemClick = val => {
-    setShowMenu(false);
-    setSelectedItem(val);
-  };
-
-  const seeAllItemClick = () => {
-    setShowMenu(false);
-    setTimeout(() => {
-      setShowModal(true);
-    }, 500);
-  };
-
   const onSubmit = e => {
-    navigation.navigate('Splash');
+    navigation.navigate('ProfileImage');
   };
 
   return (
@@ -125,15 +94,17 @@ const SignUp = ({navigation}) => {
                 touched={touched.age}
                 errorMessage={errors.age}
                 keyboardType={'number-pad'}
+                maxLength={2}
               />
 
               <DropDown
                 label={'Sex'}
-                placeholder={'Male'}
+                placeholder={'Select'}
                 containerStyle={styles.dropContainer}
                 options={Selection_List}
                 value={values.sex}
                 onChangeValue={txt => handleChange('sex', txt)}
+                searchInput={true}
               />
 
               <DropDown

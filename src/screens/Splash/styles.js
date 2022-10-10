@@ -26,16 +26,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnContainer: {
-    marginTop: WP('135'),
+    marginTop: WP('125'),
   },
 
   accountContainer: {
-    marginTop: WP('8'),
+    marginTop: WP('7'),
+    marginBottom: WP('2')
   },
 
   textStyle: {
     fontSize: size.text_22,
-    fontFamily: family.Poppin_Bold,
+    fontFamily: family.Poppin_Medium,
     color: colors.white,
     textAlign: 'center',
     marginVertical: WP('5'),
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
 
   signUpStyle: {
     fontFamily: family.Poppin_Bold,
-    fontWeight: 'bold',
   },
   termStyle: {
     textDecorationLine: 'underline',
@@ -60,8 +60,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: size.text_12,
     color: colors.white,
-    marginVertical: WP('4.5'),
     fontFamily: family.Poppin_Medium,
+  },
+  footerContainer: {
+    padding: WP('1'),
   },
 });
 

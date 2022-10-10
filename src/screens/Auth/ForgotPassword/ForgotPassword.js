@@ -16,7 +16,7 @@ import {Formik} from 'formik';
 
 const ForgotPassword = ({navigation}) => {
   const onPressSignIn = e => {
-    navigation.navigate('CreatePassword');
+    navigation.navigate('VerifyOtp');
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -51,7 +51,7 @@ const ForgotPassword = ({navigation}) => {
                 onChangeText={handleChange('email')}
                 value={values.email}
                 touched={touched.email}
-                error={errors.email}
+                errorMessage={errors.email}
               />
               <AppButton
                 width={WP('90')}

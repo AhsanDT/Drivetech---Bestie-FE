@@ -50,6 +50,7 @@ const AppInput = ({
         editable={editable}
         keyboardType={keyboardType}
         errorMessage={touched && errorMessage}
+        errorStyle={styles.errorStyle}
         renderErrorMessage={renderErrorMessage}
         autoCompleteType={undefined}
         onSubmitEditing={onSubmitEditing}
@@ -63,7 +64,7 @@ const AppInput = ({
               name={showPass ? 'eye-with-line' : 'eye'}
               type={'entypo'}
               size={22}
-              color={colors.g6}
+              color={colors.g5}
               tvParallaxProperties={undefined}
             />
           ) : (
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
   container: {},
   inputStyle: {
     fontFamily: family.Poppin_Regular,
-    fontSize: size.text_12,
+    fontSize: size.text_14,
     borderBottomWidth: 0,
     color: colors.g3,
   },
@@ -97,16 +98,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('6'),
     marginBottom: 10,
     color: colors.b1,
-    fontSize: size.text_14,
+    fontSize: size.text_16,
     fontFamily: family.Poppin_Medium,
   },
 
   errorStyle: {
-    fontSize: size.text_10,
-    color: colors.p1,
-    paddingHorizontal: 25,
-    textAlign: 'left',
-    fontFamily: family.Poppin_Regular,
-    marginVertical: WP('-5'),
+    marginHorizontal: WP('3.5'),
   },
 });

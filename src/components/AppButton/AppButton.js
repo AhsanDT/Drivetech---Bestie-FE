@@ -5,7 +5,7 @@ import {WP, size, colors, family, appIcons} from '../../shared/exporter';
 const AppButton = ({
   title,
   onPress,
-  width = '100%',
+  width = WP('100'),
   height = WP('13'),
   bgColor = colors.p2,
   textColor = colors.white,
@@ -15,13 +15,15 @@ const AppButton = ({
   borderRadius = 40,
   borderColor,
   shadowColor = colors.p1,
-  fontSize = size.large,
+  fontSize = size.text_16,
   marginVertical,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
+      disabled={disabled}
       style={[
         styles.buttonStyle(
           width,
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     return {
       color: textColor,
       fontSize: fontSize,
-      fontFamily: family.Poppin_Bold,
+      fontFamily: family.Poppin_Medium,
     };
   },
 });
