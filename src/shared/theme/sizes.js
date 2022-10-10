@@ -4,7 +4,7 @@ export const size = {
   text_14: 14,
   text_16: 16,
   text_18: 18,
-  text_12: 20,
+  text_20: 20,
   text_22: 22,
   text_24: 24,
   text_26: 26,

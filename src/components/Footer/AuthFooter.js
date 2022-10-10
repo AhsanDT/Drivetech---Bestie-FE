@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     textAlign: 'center',
     fontFamily: family.Poppin_Regular,
-    fontSize: size.tiny,
+    fontSize: size.text_12,
     color: colors.b3,
   },
   hitSlop: {

@@ -129,7 +129,7 @@ const SignUp = ({navigation}) => {
 
               <DropDown
                 label={'Sex'}
-                placeholder={'Select'}
+                placeholder={'Male'}
                 containerStyle={styles.dropContainer}
                 options={Selection_List}
                 value={values.sex}

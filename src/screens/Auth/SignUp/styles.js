@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     left: 10,
     color: colors.g3,
     marginTop: WP('4'),
-    fontSize: size.xsmall,
+    fontSize: size.text_14,
     fontFamily: family.Poppin_Regular,
   },
   dropContainer: {
