@@ -25,6 +25,8 @@ const AppInput = ({
   title,
   keyboardType,
   maxLength,
+  error,
+  textEntry
 }) => {
   const [showPass, setShowPass] = React.useState(secureTextEntry);
 
@@ -35,7 +37,7 @@ const AppInput = ({
       <Input
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
-        secureTextEntry={showPass}
+        secureTextEntry={textEntry ||showPass}
         inputContainerStyle={styles.inputContainerStyle}
         inputStyle={styles.inputStyle}
         leftIcon={leftIcon}
@@ -47,6 +49,11 @@ const AppInput = ({
         blurOnSubmit={blurOnSubmit}
         editable={editable}
         keyboardType={keyboardType}
+        errorMessage={touched && errorMessage}
+        renderErrorMessage={renderErrorMessage}
+        autoCompleteType={undefined}
+        onSubmitEditing={onSubmitEditing}
+        maxLength={maxLength}
         rightIcon={
           secureTextEntry ? (
             <Icon
@@ -63,11 +70,6 @@ const AppInput = ({
             rightIcon
           )
         }
-        errorMessage={touched && errorMessage}
-        renderErrorMessage={renderErrorMessage}
-        autoCompleteType={undefined}
-        onSubmitEditing={onSubmitEditing}
-        maxLength={maxLength}
       />
     </View>
   );
@@ -78,21 +80,35 @@ export {AppInput};
 const styles = StyleSheet.create({
   container: {},
   inputStyle: {
-    fontFamily: family.Gilroy_Medium,
+    fontFamily: family.Poppin_Regular,
     fontSize: size.tiny,
     borderBottomWidth: 0,
-    color: colors.b1,
+    color: colors.g3,
   },
   inputContainerStyle: {
-    borderRadius: 24,
-    backgroundColor: colors.g5,
+    width: WP('90'),
+    marginHorizontal: WP('2.5'),
+    borderRadius: 30,
+    backgroundColor: colors.g2,
     borderBottomWidth: 0,
-    paddingHorizontal: WP('3'),
+    paddingHorizontal: WP('5'),
   },
   textStyle: {
-    paddingHorizontal: WP('3'),
+    // marginVertical: WP('2'),
+    paddingHorizontal: WP('6'),
     marginBottom: 10,
     color: colors.b1,
-    fontFamily: family.Gilroy_Medium,
+    fontSize: size.normal,
+    fontFamily: family.Poppin_Bold,
+    fontWeight: '500',
+  },
+
+  errorStyle: {
+    fontSize: size.xxxtiny,
+    color: colors.p1,
+    paddingHorizontal: 25,
+    textAlign: 'left',
+    fontFamily: family.Poppin_Regular,
+    marginVertical: WP('-5'),
   },
 });

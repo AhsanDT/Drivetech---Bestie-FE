@@ -6,17 +6,17 @@ const AppButton = ({
   title,
   onPress,
   width = '100%',
-  height = WP('11.7'),
+  height = WP('13'),
   bgColor = colors.p2,
   textColor = colors.white,
-  style = {},
+  style,
   icon,
   textStyle,
   borderRadius = 40,
   borderColor,
   shadowColor = colors.p1,
   fontSize = size.large,
-  marginVertical = 5,
+  marginVertical,
 }) => {
   return (
     <TouchableOpacity
@@ -32,7 +32,7 @@ const AppButton = ({
           shadowColor,
           marginVertical,
         ),
-        {style},
+        style,
       ]}>
       {icon && <Image source={icon} style={[styles.imgStyle, style]} />}
       <Text style={[styles.buttonTextStyle(textColor, fontSize), textStyle]}>
@@ -61,17 +61,14 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       backgroundColor: bgColor,
-      shadowColor: shadowColor || colors.white,
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.34,
-      shadowRadius: 6.27,
+      // shadowColor: shadowColor || colors.white,
+      // shadowOffset: {
+      //   width: 0,
+      //   height: 5,
+      // },
+      // shadowOpacity: 0.34,
+      // shadowRadius: 6.27,
       elevation: 10,
-      borderWidth: 1,
-      marginVertical: marginVertical || 5,
-      borderColor: borderColor || colors.p1,
     };
   },
   imgStyle: {
@@ -81,7 +78,7 @@ const styles = StyleSheet.create({
     return {
       color: textColor,
       fontSize: fontSize,
-      fontFamily: family.Gilroy_SemiBold,
+      fontFamily: family.Poppin_Bold,
     };
   },
 });

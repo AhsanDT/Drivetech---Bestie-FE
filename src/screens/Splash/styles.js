@@ -8,9 +8,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.p1,
   },
+  logoContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+  },
   logoStyle: {
-    width: WP('51.5'),
-    height: WP('22'),
+    alignSelf: 'center',
   },
   logoTxtStyle: {
     marginTop: WP('5'),
@@ -21,6 +24,44 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
+  },
+  btnContainer: {
+    marginTop: WP('135'),
+  },
+
+  accountContainer: {
+    marginTop: WP('8'),
+  },
+
+  textStyle: {
+    fontSize: size.h6,
+    fontFamily: family.Poppin_Bold,
+    color: colors.white,
+    textAlign: 'center',
+    marginVertical: WP('5'),
+  },
+
+  accountStyles: {
+    fontSize: size.tiny,
+    color: colors.white,
+    fontFamily: family.Poppin_Regular,
+    textAlign: 'center',
+  },
+
+  signUpStyle: {
+    fontFamily: family.Poppin_Bold,
+    fontWeight: 'bold',
+  },
+  termStyle: {
+    textDecorationLine: 'underline',
+  },
+
+  BottomTextStyle: {
+    textAlign: 'center',
+    fontSize: size.tiny,
+    color: colors.white,
+    marginVertical: WP('4.5'),
+    fontFamily: family.Poppin_Medium,
   },
 });
 
