@@ -1,7 +1,7 @@
 export const family = {
-  Poppin_Light: 'Poppin-Light',
-  Poppin_SemiBold: 'Poppin-Semibold',
-  Poppin_Bold: 'Poppin-Bold',
-  Poppin_Regular: 'Poppin-Regular',
-  Poppin_Medium: 'Poppin-Medium',
+  Poppin_Light: 'Poppins-Light',
+  Poppin_SemiBold: 'Poppins-Semibold',
+  Poppin_Bold: 'Poppins-Bold',
+  Poppin_Regular: 'Poppins-Regular',
+  Poppin_Medium: 'Poppins-Medium',
 };

@@ -15,71 +15,66 @@ const image_options = {
 
 const networkText = 'Check Internet Connection';
 
-const slidesData = [
+var interestList = [
   {
     key: 1,
-    image: appImages.slider1,
+    title: 'Event Photography',
+    selected: false,
   },
   {
     key: 2,
-    image: appImages.slider2,
+    title: 'Branding',
+    selected: false,
   },
   {
     key: 3,
-    image: appImages.slider3,
-  },
-];
-
-const drawerList = [
-  {
-    icon: appIcons.homeIcon,
-    label: 'Home',
-    screen: 'Fighter',
+    title: 'Wedding Photography',
+    selected: false,
   },
   {
-    icon: appIcons.calendarSelIcon,
-    label: 'My Events',
-    screen: 'Events',
+    key: 4,
+    title: 'Stylling',
+    selected: false,
   },
   {
-    icon: appIcons.requestsIcon,
-    label: 'Friend Request',
-    screen: 'FriendRequests',
+    key: 5,
+    title: 'Travel',
+    selected: false,
   },
   {
-    icon: appIcons.aboutIcon,
-    label: 'About Us',
-    screen: 'About',
+    key: 6,
+    title: 'Food Photography',
+    selected: false,
   },
   {
-    icon: appIcons.supportIcon,
-    label: 'Support',
-    screen: 'SupportStack',
+    key: 7,
+    title: 'Ecomerece Photography',
+    selected: false,
   },
   {
-    icon: appIcons.infoIcon,
-    label: 'FAQ',
-    screen: 'FAQ',
+    key: 8,
+    title: 'Canva',
+    selected: false,
   },
   {
-    icon: appIcons.infoIcon,
-    label: 'Preferences',
-    screen: 'Preferences',
+    key: 12,
+    title: 'Canva',
+    selected: false,
   },
   {
-    icon: appIcons.infoIcon,
-    label: 'Privacy Policy',
-    screen: 'PrivacyPolicy',
+    key: 9,
+    title: 'Adobe',
+    selected: false,
   },
   {
-    icon: appIcons.infoIcon,
-    label: 'Terms & Conditions',
-    screen: 'TermsofUse',
+    key: 10,
+    title: 'Dropbox',
+    selected: false,
   },
   {
-    icon: appIcons.settingsIcon,
-    label: 'Settings',
-    screen: 'SettingsStack',
+    key: 11,
+    title: 'Merchandising',
+    selected: false,
   },
 ];
 
@@ -116,10 +111,13 @@ const Pronoun_List = [
 export {
   web_client_id,
   stripe_publishableKey,
-  slidesData,
   networkText,
   image_options,
+
+  interestList,
+
   drawerList,
   Selection_List,
   Pronoun_List
+
 };
