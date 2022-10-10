@@ -10,6 +10,7 @@ export const colors = {
 
   //Gray Color
   g1: '#E2E2E2',
+  g2: '#B3B3B3',
 
   //Green
   gr1: '#00A66C',
