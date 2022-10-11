@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {WP, colors, size, family} from '../../../shared/exporter';
+import {WP, colors, size, family, HP} from '../../../shared/exporter';
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
@@ -13,11 +13,27 @@ const styles = StyleSheet.create({
   },
   flatList: {
     alignSelf: 'center',
+    flexGrow: 0,
   },
   contentContainerStyle: {
-    // backgroundColor: 'red',
+    // backgroundColor: 'pink',
     // alignSelf: 'center',
     // alignItems: 'center',
+  },
+  showAllView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: HP('3'),
+  },
+  arrow: {
+    height: 28,
+    width: 18,
+    marginLeft: 5,
+  },
+  showText: {
+    color: colors.b1,
+    fontFamily: family.Poppin_Regular,
+    paddingLeft: WP('5'),
   },
 });
 
