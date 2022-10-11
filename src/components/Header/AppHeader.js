@@ -25,18 +25,19 @@ export const AppHeader = ({title, backIcon = false, onPressBack}) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    paddingVertical: WP('5'),
+    paddingVertical: WP('4'),
     paddingHorizontal: WP('3.85'),
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     backgroundColor: colors.white,
+    marginBottom: WP('3')
   },
   logoTxtStyle: {
     left: WP('2.3'),
     color: colors.b1,
-    fontSize: size.text_24,
-    fontFamily: family.Poppin_Bold,
+    fontSize: size.text_26,
+    fontFamily: family.Poppin_Medium,
     fontWeight: 'bold',
-    marginBottom: WP('6'),
+    // marginBottom: WP('4'),
   },
 
   ArrowIcon: {

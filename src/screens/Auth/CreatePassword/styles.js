@@ -5,9 +5,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  
   btCon: {
-    alignSelf: 'center',
-    marginVertical: WP('30'),
+    marginVertical: WP('10'),
   },
 });
 export default styles;

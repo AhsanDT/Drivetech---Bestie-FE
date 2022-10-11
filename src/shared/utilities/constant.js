@@ -7,7 +7,7 @@ const stripe_publishableKey =
   'pk_test_51Lf25xJxAUizx0q5OIWfv41879r73FiP61ItNOlcUbE6MsGY8WCmULqWC9KrYyCYz18pbUBPDM7Lbb8N3giMguHh00P7XAmQlT';
 
 const image_options = {
-  width: 300,
+  width: 400,
   height: 400,
   multiple: true,
   mediaType: 'photo',
