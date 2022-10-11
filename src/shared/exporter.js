@@ -37,6 +37,7 @@ export {
   image_options,
   Selection_List,
   Pronoun_List,
+  image_option,
 } from './utilities/constant';
 export {header, authHeader} from './utilities/headers';
 export {

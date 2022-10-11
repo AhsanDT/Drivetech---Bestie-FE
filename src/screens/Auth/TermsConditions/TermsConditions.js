@@ -1,31 +1,19 @@
 import React from 'react';
-import {Text, View, Image, ScrollView, SafeAreaView} from 'react-native';
-import {
-  AppButton,
-  AppHeader,
-  BackHeader,
-  MyStatusBar,
-  Spacer,
-} from '../../../components';
-import {appIcons, WP} from '../../../shared/exporter';
+import {View, Text, SafeAreaView} from 'react-native';
+import {AppButton, AppHeader} from '../../../components';
+import {colors, WP} from '../../../shared/exporter';
 import styles from './styles';
-
 const TermsConditions = () => {
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <MyStatusBar />
-      <AppHeader />
-      <Spacer androidVal={WP('4')} iOSVal={WP('4')} />
-      <BackHeader title="Terms & Conditions" />
-      <ScrollView
-        style={styles.scrollViewStyle}
-        showsVerticalScrollIndicator={false}>
-        <Text style={styles.quesTxtStyle}>Welcome to housibly!</Text>
-        <Text style={styles.ansTxtStyle}>
+      <AppHeader title={'Terms & Conditions'} backIcon={true} />
+      <View style={styles.textContainer}>
+        <Text style={styles.textStyle}>
+          Welcome to Bestie! {'\n'}
           These terms and conditions outline the rules and regulations for the
-          use of Housibly's Website, located at www.housibly.com. By accessing
-          this website we assume you accept these terms and conditions. Do not
-          continue to use housibly if you do not agree to take all of the terms
+          use of Bestie's Website, located at www.bestie.com. By accessing this
+          website we assume you accept these terms and conditions. Do not
+          continue to use Bestie if you do not agree to take all of the terms
           and conditions stated on this page. The following terminology applies
           to these Terms and Conditions, Privacy Statement and Disclaimer Notice
           and all Agreements: "Client", "You" and "Your" refers to you, the
@@ -38,19 +26,15 @@ const TermsConditions = () => {
           express purpose of meeting the Client’s needs in respect of provision
           of the Company’s stated services, in accordance with and subject to,
           prevailing law of Netherlands. Any use of the above terminology or
-          other words in the singular, plural, capitalization and/or he/she or
-          they, are taken.
-        </Text>
-      </ScrollView>
-      <View style={styles.rowContainer}>
-        <Image source={appIcons.box} style={styles.iconStyle} />
-        <Text style={styles.agreeTxtStyle}>
-          I agree to this Terms & Conditions
+          other words in the.
         </Text>
       </View>
-      <View style={styles.btnContainer}>
-        <AppButton title="Continue" />
-      </View>
+      <AppButton
+        bgColor={colors.b1}
+        width={WP('90')}
+        height={WP('14')}
+        title={'I Accept'}
+      />
     </SafeAreaView>
   );
 };
