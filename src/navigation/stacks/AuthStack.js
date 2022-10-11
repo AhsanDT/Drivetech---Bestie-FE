@@ -11,15 +11,18 @@ import CreatePassword from '../../screens/Auth/CreatePassword';
 import VerifyOtp from '../../screens/Auth/VerifyOtp';
 import ProfileImage from '../../screens/Auth/ProfileImage';
 
+import UploadImage from '../../screens/Auth/UploadImage';
+import TermsConditions from '../../screens/Auth/TermsConditions';
+import ImageVerification from '../../screens/Auth/ImageVerification';
 import PrivacyPolicy from '../../screens/Auth/PrivacyPolicy';
-// import TermsConditions from '../../screens/Auth/TermsConditions';
+
 
 const Stack = createNativeStackNavigator();
 
 function AuthStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="ImageVerification"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
 
@@ -31,9 +34,11 @@ function AuthStack(props) {
       <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
       <Stack.Screen name="ProfileImage" component={ProfileImage} />
 
-      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-      {/* <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-      <Stack.Screen name="TermsConditions" component={TermsConditions} /> */}
+      <Stack.Screen name="UploadImage" component={UploadImage} />
+       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} /> 
+      <Stack.Screen name="TermsConditions" component={TermsConditions} />
+      <Stack.Screen name="ImageVerification" component={ImageVerification} />
+
     </Stack.Navigator>
   );
 }

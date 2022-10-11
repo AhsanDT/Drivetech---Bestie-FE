@@ -4,9 +4,12 @@ import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
 import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
-const ProfileImage = ({navigation}) => {
+import getStoredState from 'redux-persist/es/getStoredState';
+const UploadImage = ({navigation}) => {
   const [show, setShow] = useState(false);
-  const [image, setImage] = useState('');
+  const [frontImage, setFrontImage] = useState('');
+  const [imageStatus, setImageStatus] = useState('');
+  const [backImage, setBackImage] = useState('');
 
   //Handlers
   const showGallery = () => {
@@ -15,15 +18,19 @@ const ProfileImage = ({navigation}) => {
       try {
         launchImageLibrary(image_options, response => {
           console.log('Response', response);
-          setImage(response.assets[0]);
           if (response.didCancel) {
             console.log('User cancelled image picker');
-          } else if (response.errorMessage) {
-            console.log('ImagePicker Error: ', response.errorMessage);
-          } else if (response.errorCode) {
-            console.log('User tapped custom button: ', response.errorCode);
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
           } else {
             console.log('Response---', response.assets[0]);
+          }
+          if (setImage === 'back') {
+            setImage(response.assets[0]);
+          } else {
+            setImage(response.assets[0]);
           }
         });
       } catch (error) {
@@ -38,16 +45,20 @@ const ProfileImage = ({navigation}) => {
       try {
         launchCamera(image_options, response => {
           console.log('Response = ', response);
-          setImage(response.assets[0].uri);
-
           if (response.didCancel) {
             console.log('User cancelled image picker');
           } else if (response.error) {
             console.log('ImagePicker Error: ', response.error);
           } else if (response.customButton) {
             console.log('User tapped custom button: ', response.customButton);
+            alert(response.customButton);
           } else {
             console.log('');
+          }
+          if (imageStatus == 'back') {
+            setBackImage(response.assets[0]);
+          } else {
+            setFrontImage(response.assets[0]);
           }
         });
       } catch (error) {
@@ -55,20 +66,41 @@ const ProfileImage = ({navigation}) => {
       }
     }, 400);
   };
-
   return (
     <SafeAreaView style={styles.container}>
-      <AppHeader title={'Add Your\nProfile Photo'} />
+      <AppHeader title={'Upload Your\nID Photo'} />
       <View style={styles.contentContainer}>
+        <Text style={styles.textStyle}>Front</Text>
         <TouchableOpacity
           style={styles.uploadImageContainer}
           activeOpacity={0.7}
           onPress={() => {
             setShow(true);
+            setImageStatus('front');
           }}>
           <Image
-            source={image === '' ? appIcons.camera : {uri: image}}
-            style={image ? styles.uriImageContainer : styles.cameraContainer}
+            source={frontImage === '' ? appIcons.camera : frontImage}
+            style={
+              frontImage ? styles.uriImageContainer : styles.cameraContainer
+            }
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.contentContainer}>
+        <Text style={styles.textStyle}>Back</Text>
+        <TouchableOpacity
+          style={styles.uploadImageContainer}
+          activeOpacity={0.7}
+          onPress={() => {
+            setShow(true);
+            setImageStatus('back');
+          }}>
+          <Image
+            source={backImage === '' ? appIcons.camera : backImage}
+            style={
+              backImage ? styles.uriImageContainer : styles.cameraContainer
+            }
           />
         </TouchableOpacity>
       </View>
@@ -78,12 +110,7 @@ const ProfileImage = ({navigation}) => {
         onPressCamera={() => showCamera()}
         onPressGallery={() => showGallery()}
       />
-      <View
-        style={{
-          padding: WP('3'),
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
+      <View style={styles.ButtonContainer}>
         <AppButton
           title={'Back'}
           width={WP('35')}
@@ -98,14 +125,14 @@ const ProfileImage = ({navigation}) => {
           title={'Next'}
           width={WP('35')}
           height={WP('13')}
-          bgColor={!image ? colors.g1 : colors.b1}
-          disabled={image ? false : true}
+          bgColor={!frontImage || !backImage ? colors.g1 : colors.b1}
+          disabled={frontImage || backImage ? false : true}
           //   onPress={() => {
           //     handleButtonPressed();
-          //   }}
+          // }}
         />
       </View>
     </SafeAreaView>
   );
 };
-export default ProfileImage;
+export default UploadImage;

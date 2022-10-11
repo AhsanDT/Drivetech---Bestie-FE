@@ -15,6 +15,7 @@ export const appIcons = {
   backArrow: require('../../assets/icons/backArrow.png'),
   camera: require('../../assets/icons/camera.png'),
   gallery: require('../../assets/icons/gallery.png'),
+  scan : require('../../assets/icons/scan.png')
   arrow: require('../../assets/icons/arrow.png'),
 };
 
