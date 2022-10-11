@@ -31,10 +31,10 @@ export const signUpRequest = (params, cbSuccess, cbFailure) => {
 };
 
 //Forgot Password Action
-export const forgotPassRequest = (params, cbSuccess, cbFailure) => {
+export const forgotPassRequest = (data, cbSuccess, cbFailure) => {
   return {
     type: TYPES.FORGOT_PASSWORD_REQUEST,
-    params,
+    data,
     cbSuccess,
     cbFailure,
   };
@@ -55,6 +55,14 @@ export const resendOTPRequest = (params, cbSuccess, cbFailure) => {
   return {
     type: TYPES.RESEND_OTP_REQUEST,
     params,
+    cbSuccess,
+    cbFailure,
+  };
+};
+
+export const getInterestList = (cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.GET_INTEREST_REQUEST,
     cbSuccess,
     cbFailure,
   };

@@ -8,4 +8,5 @@ export {
   resendOTPRequest,
   resetPassRequest,
   logoutRequset,
+  getInterestList,
 } from './auth-actions/auth-action';

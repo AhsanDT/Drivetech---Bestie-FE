@@ -25,6 +25,10 @@ export const colors = {
   g9: '#EDEDED',
   g10: '#6D6D6D',
 
+  g6: '#A2A0A8',
+  g7: '#D9D9D9',
+  g8: '#EDEDED',
+  g9: ' #6D6D6D',
   //Green
   gr1: '#00A66C',
 

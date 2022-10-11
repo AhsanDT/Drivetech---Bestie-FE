@@ -10,6 +10,7 @@ import {
   resendOTP,
   resetPassword,
   logoutUser,
+  showInterestService,
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -25,8 +26,8 @@ function* login(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      console.log(res);
-      AsyncStorage.setItem('usertoken', res?.user?.auth_token);
+      console.log('ASYC==>', res?.auth_token);
+      AsyncStorage.setItem('usertoken', res?.auth_token);
       params?.cbSuccess(res);
     }
   } catch (error) {
@@ -36,6 +37,7 @@ function* login(params) {
       payload: null,
     });
     let msg = responseValidator(error?.response?.status, error?.response?.data);
+    console.log('ERROR  message', msg);
     params?.cbFailure(msg);
   }
 }
@@ -102,8 +104,9 @@ export function* forgotPassRequest() {
   yield takeLatest(types.FORGOT_PASSWORD_REQUEST, forgot);
 }
 function* forgot(params) {
+  console.log('PARMAS SAGA==> ', params);
   try {
-    const res = yield forgotPassword(params?.route, params?.params);
+    const res = yield forgotPassword(params?.params);
     if (res) {
       yield put({
         type: types.FORGOT_PASSWORD_SUCCESS,
@@ -143,6 +146,23 @@ function* verifyOTP(params) {
       type: types.OTP_VERIFY_FAILURE,
       payload: null,
     });
+    let msg = responseValidator(error?.response?.status, error?.response?.data);
+    params?.cbFailure(msg);
+  }
+}
+
+// Show Interest
+
+export function* showInterestSaga() {
+  yield takeLatest(types.GET_INTEREST_REQUEST, getInterestList);
+}
+function* getInterestList(params) {
+  try {
+    const res = yield showInterestService(params);
+    if (res) {
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
     let msg = responseValidator(error?.response?.status, error?.response?.data);
     params?.cbFailure(msg);
   }

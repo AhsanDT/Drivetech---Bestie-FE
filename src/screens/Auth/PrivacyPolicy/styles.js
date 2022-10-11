@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     fontSize: size.normal,
     fontFamily: family.Gilroy_SemiBold,
   },
+  policyText: {
+    fontFamily: family.Poppin_Regular,
+    fontSize: size.text_12,
+    color: colors.b1,
+    lineHeight: 25,
+  },
 });
 
 export default styles;
