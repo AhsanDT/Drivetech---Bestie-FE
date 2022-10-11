@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
       data.append('user[password]', value.password);
       try {
         const cbSuccess = response => {
-          alert('Logged in Successfuly');
+          Alert.alert('Logged in Successfuly');
           setloading(false);
         };
         const cbFailure = err => {
