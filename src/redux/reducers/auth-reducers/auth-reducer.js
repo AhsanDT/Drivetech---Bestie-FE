@@ -9,6 +9,22 @@ const initialState = {
   resetPassRes: null,
   otp_verify: null,
   resendData: null,
+  signupObject: {
+    firstName: null,
+    lastName: null,
+    phoneNumber: null,
+    country: null,
+    city: null,
+    age: null,
+    sex: null,
+    pronoun: null,
+    profilePhoto: null,
+    interestList: [],
+    idCardfront: null,
+    idCardBack: null,
+    selfie: null,
+    profileType: null,
+  },
 };
 
 const authReducer = (state = initialState, actions) => {
@@ -47,6 +63,8 @@ const authReducer = (state = initialState, actions) => {
         userInfo: null,
       };
     case TYPES.SIGNUP_SUCCESS_REQUEST:
+      // state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
+
       return {
         ...state,
         loading: false,
@@ -62,6 +80,9 @@ const authReducer = (state = initialState, actions) => {
         isFailure: true,
         userInfo: null,
       };
+    case TYPES.UPDATE_SIGNUP_OBJECT:
+      state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
+      return state;
     case TYPES.FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
