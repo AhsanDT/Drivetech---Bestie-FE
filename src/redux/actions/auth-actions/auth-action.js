@@ -29,6 +29,12 @@ export const signUpRequest = (params, cbSuccess, cbFailure) => {
     cbFailure,
   };
 };
+export const updateSignupObject = params => {
+  return {
+    type: TYPES.UPDATE_SIGNUP_OBJECT,
+    params,
+  };
+};
 
 //Forgot Password Action
 export const forgotPassRequest = (data, cbSuccess, cbFailure) => {

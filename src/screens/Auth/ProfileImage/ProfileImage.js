@@ -16,7 +16,6 @@ const ProfileImage = ({navigation}) => {
       try {
         launchImageLibrary(image_options, response => {
           console.log('Response', response);
-          setImage(response.assets[0]);
           if (response.didCancel) {
             console.log('User cancelled image picker');
           } else if (response.errorMessage) {
@@ -25,6 +24,9 @@ const ProfileImage = ({navigation}) => {
             console.log('User tapped custom button: ', response.errorCode);
           } else {
             console.log('Response---', response.assets[0]);
+            if (response.assets) {
+              setImage(response.assets[0]);
+            }
           }
         });
       } catch (error) {
@@ -43,12 +45,15 @@ const ProfileImage = ({navigation}) => {
 
           if (response.didCancel) {
             console.log('User cancelled image picker');
-          } else if (response.errorMessage) {
-            console.log('ImagePicker Error: ', response.errorMessage);
-          } else if (response.errorCode) {
-            console.log('User tapped custom button: ', response.errorMessagess);
+          } else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          } else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
           } else {
             console.log('');
+            if (response.assets) {
+              setImage(response.assets[0]);
+            }
           }
         });
       } catch (error) {
@@ -68,7 +73,7 @@ const ProfileImage = ({navigation}) => {
             setShow(true);
           }}>
           <Image
-            source={image === '' ? appIcons.camera : {uri: image}}
+            source={image === '' ? appIcons.camera : image}
             style={image ? styles.uriImageContainer : styles.cameraContainer}
           />
         </TouchableOpacity>
