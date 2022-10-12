@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {AppButton, AppHeader, AppInput} from '../../../components';
+import {AppButton, AppHeader, AppInput, AppLoader} from '../../../components';
 import {
   colors,
   WP,
@@ -11,13 +11,40 @@ import {
   size,
   family,
   appIcons,
+  networkText,
+  checkConnected,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
+import {forgotPassRequest} from '../../../redux/actions';
 
 const ForgotPassword = ({navigation}) => {
-  const onPressSignIn = e => {
-    navigation.navigate('VerifyOtp');
+  const [loading, setloading] = useState(false);
+
+  const onPressVerifyAccount = async value => {
+    const check = await checkConnected();
+    if (check) {
+      setloading(true);
+      const data = new FormData();
+      data.append('email', value.email);
+      try {
+        const cbSuccess = response => {
+          navigation.navigate('CreatePassword', {email: value.email});
+          setloading(false);
+        };
+        const cbFailure = err => {
+          Alert.alert('' || err);
+          setloading(false);
+        };
+        dispatch(forgotPassRequest(data, cbSuccess, cbFailure));
+      } catch (error) {
+        console.log('ERROR', error);
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+    }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -31,7 +58,7 @@ const ForgotPassword = ({navigation}) => {
         <Formik
           initialValues={forgotFormFields}
           onSubmit={values => {
-            onPressSignIn(values);
+            onPressVerifyAccount(values);
           }}
           validationSchema={ForgotPasswordVS}>
           {({
@@ -42,7 +69,6 @@ const ForgotPassword = ({navigation}) => {
             touched,
             isValid,
             handleSubmit,
-            handleReset,
           }) => (
             <View>
               <AppInput
@@ -51,7 +77,8 @@ const ForgotPassword = ({navigation}) => {
                 onChangeText={handleChange('email')}
                 value={values.email}
                 touched={touched.email}
-                errorMessage={errors.email}
+                error={errors.email}
+                autoCapitalize="none"
               />
               <AppButton
                 width={WP('90')}
@@ -66,6 +93,7 @@ const ForgotPassword = ({navigation}) => {
             </View>
           )}
         </Formik>
+        <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

@@ -5,9 +5,11 @@ import {GetToken} from '../utilities/headers';
 //Authentication Requests
 
 export const loginUser = async params => {
-  const res = await axios.post(`${BASE_URL}${ENDPOINTS.LOGIN}.json`, params, {
+  console.log('SERVICE PARAMS ', params);
+  const res = await axios.post(`${BASE_URL}${ENDPOINTS.LOGIN}`, params, {
     headers: {
       'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
   });
   return res.data;
@@ -32,15 +34,13 @@ export const registerUser = async params => {
 };
 
 export const forgotPassword = async (route, params) => {
-  const res = await axios.post(
-    `${BASE_URL}${ENDPOINTS.FORGOT_PASS}/${route}`,
-    params,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+  console.log('forgot pass PARAMS services ==>', params);
+  const res = await axios.post(`${BASE_URL}${ENDPOINTS.FORGOT_PASS}`, params, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
-  );
+  });
   return res.data;
 };
 
@@ -61,6 +61,16 @@ export const resendOTP = async params => {
   const res = await axios.post(`${BASE_URL}${ENDPOINTS.RESEND_OTP}`, params, {
     headers: {
       'Content-Type': 'multipart/form-data',
+    },
+  });
+  return res.data;
+};
+
+export const showInterestService = async params => {
+  const res = await axios.get(`${BASE_URL}${ENDPOINTS.GET_INTERESTS}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
   });
   return res.data;

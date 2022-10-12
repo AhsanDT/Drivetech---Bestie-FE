@@ -19,7 +19,7 @@ export const AppLoader = ({loading, tagline = '', showTagLine = false}) => {
       <View style={showTagLine ? styles.alertWithTagline : styles.alert}>
         <ActivityIndicator
           size={'large'}
-          color={colors.p1}
+          color={colors.b1}
           animating={loading}
         />
         {showTagLine ? <Text style={styles.tagline}>{tagline}</Text> : null}

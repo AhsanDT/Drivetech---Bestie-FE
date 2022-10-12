@@ -1,8 +1,21 @@
-import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  Alert,
+} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {AppButton, AppHeader, AppInput, AuthFooter} from '../../../components';
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  AuthFooter,
+  AppLoader,
+} from '../../../components';
 import {
   colors,
   WP,
@@ -11,12 +24,41 @@ import {
   size,
   family,
   appIcons,
+  checkConnected,
+  networkText,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
+import {loginRequest} from '../../../redux/actions';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Login = ({navigation}) => {
-  const onPressSignIn = e => {
-    navigation.navigate('Splash');
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
+
+  const onPressSignIn = async value => {
+    const check = await checkConnected();
+    if (check) {
+      setloading(true);
+      const data = new FormData();
+      data.append('user[email]', value.email);
+      data.append('user[password]', value.password);
+      try {
+        const cbSuccess = response => {
+          Alert.alert('Logged in Successfuly');
+          setloading(false);
+        };
+        const cbFailure = err => {
+          Alert.alert('' || err);
+          setloading(false);
+        };
+        dispatch(loginRequest(data, cbSuccess, cbFailure));
+      } catch (error) {
+        console.log('ERROR', error);
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+    }
   };
 
   return (
@@ -55,6 +97,7 @@ const Login = ({navigation}) => {
                 value={values.email}
                 touched={touched.email}
                 errorMessage={errors.email}
+                autoCapitalize="none"
               />
               <AppInput
                 title={'Password'}
@@ -131,6 +174,7 @@ const Login = ({navigation}) => {
             navigation.navigate('Auth', {screen: 'SignUp'});
           }}
         />
+        <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
