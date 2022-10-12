@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,6 +6,8 @@ import {
   View,
   Image,
   Alert,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -30,10 +32,15 @@ import {
 import {Formik} from 'formik';
 import {loginRequest} from '../../../redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
+import Geolocation from 'react-native-geolocation-service';
 
 const Login = ({navigation}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // askForPermissions();
+  }, []);
 
   const onPressSignIn = async value => {
     const check = await checkConnected();
@@ -58,6 +65,30 @@ const Login = ({navigation}) => {
       }
     } else {
       Alert.alert('Error', networkText);
+    }
+  };
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      getLocation();
+    } else {
+      askForPermissions();
+    }
+  }, []);
+
+  const askForPermissions = async () => {
+    if (Platform.OS === 'android') {
+      await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      ]);
+      getLocation();
+    }
+  };
+
+  const getLocation = () => {
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization('always');
     }
   };
 
