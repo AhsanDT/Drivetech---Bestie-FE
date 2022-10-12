@@ -7,8 +7,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   contentContainer: {
+    width: WP('30'),
+    height: WP('30'),
     padding: WP('2'),
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red',
   },
   uploadImageContainer: {
     width: WP('40'),
@@ -27,9 +31,10 @@ const styles = StyleSheet.create({
     marginVertical: WP('3'),
   },
   uriImageContainer: {
-    height: WP('45'),
-    width: WP('45'),
-    borderRadius: WP('45'),
+    height: WP('50'),
+    width: WP('50'),
+    borderRadius: WP('50'),
+    marginVertical: WP('4'),
   },
   headerTextContainer: {
     padding: WP('1'),
@@ -39,6 +44,7 @@ const styles = StyleSheet.create({
     padding: WP('5'),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: WP('45'),
   },
   faceTextStyle: {
     fontFamily: family.Poppin_Medium,

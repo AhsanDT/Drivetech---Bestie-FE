@@ -75,9 +75,10 @@ const ForgotPassword = ({navigation}) => {
                 title={'Email Address'}
                 placeholder={'Enter your email address'}
                 onChangeText={handleChange('email')}
+                placeholderTextColor={colors.g3}
                 value={values.email}
                 touched={touched.email}
-                error={errors.email}
+                errorMessage={errors.email}
                 autoCapitalize="none"
               />
               <AppButton

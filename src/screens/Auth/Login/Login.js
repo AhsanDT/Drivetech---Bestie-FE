@@ -184,7 +184,7 @@ const Login = ({navigation}) => {
           <Text
             style={styles.termStyle}
             onPress={() => {
-              navigation.replace('Auth', {screen: 'Login'});
+              navigation.replace('Auth', {screen: 'PrivacyPolicy'});
             }}>
             {' '}
             Privacy & Policy

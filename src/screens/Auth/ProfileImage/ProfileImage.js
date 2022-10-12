@@ -105,9 +105,9 @@ const ProfileImage = ({navigation}) => {
           height={WP('13')}
           bgColor={!image ? colors.g1 : colors.b1}
           disabled={image ? false : true}
-          //   onPress={() => {
-          //     handleButtonPressed();
-          //   }}
+          onPress={() => {
+            navigation.navigate('UploadImage');
+          }}
         />
       </View>
     </SafeAreaView>

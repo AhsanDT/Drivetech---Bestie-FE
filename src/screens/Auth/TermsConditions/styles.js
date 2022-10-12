@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_12,
     color: colors.b1,
-    lineHeight: 24,
+    lineHeight: 30,
     // textAlign: 'center'
   },
 });

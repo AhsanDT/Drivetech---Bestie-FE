@@ -76,6 +76,7 @@ const CreatePassword = ({navigation, route}) => {
                 title={'New Password'}
                 placeholder={'Type here'}
                 onChangeText={handleChange('password')}
+                placeholderTextColor={colors.g3}
                 value={values.password}
                 touched={touched.password}
                 errorMessage={errors.password}
@@ -85,6 +86,7 @@ const CreatePassword = ({navigation, route}) => {
                 title={'Re-type Password'}
                 placeholder={'Type here'}
                 onChangeText={handleChange('confirmPassword')}
+                placeholderTextColor={colors.g3}
                 value={values.confirmPassword}
                 touched={touched.confirmPassword}
                 errorMessage={errors.confirmPassword}

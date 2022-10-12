@@ -19,16 +19,11 @@ export const colors = {
   g3: '#9B9B9B',
   g4: '#C4C4C4',
   g5: '#A2A0A8',
-  g6: '#D9D9D9',
-  g7: '#ECECEC',
-  g8: '#D8D8D8',
-  g9: '#EDEDED',
-  g10: '#6D6D6D',
-
   g6: '#A2A0A8',
   g7: '#D9D9D9',
   g8: '#EDEDED',
-  g9: ' #6D6D6D',
+  g9: '#6D6D6D',
+  g10: '#ECECEC',
   //Green
   gr1: '#00A66C',
 
