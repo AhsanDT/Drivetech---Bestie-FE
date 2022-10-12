@@ -64,9 +64,10 @@ const Login = ({navigation}) => {
                 value={values.password}
                 touched={touched.password}
                 errorMessage={errors.password}
-                // secureTextEntry={true}
+                renderErrorMessage={errors.password}
                 textEntry={true}
               />
+
               <View style={styles.forgotTextContainer}>
                 <Text
                   style={styles.forgotText}
@@ -118,17 +119,16 @@ const Login = ({navigation}) => {
           <Text
             style={styles.termStyle}
             onPress={() => {
-              navigation.replace('Auth', {screen: 'Login'});
+              navigation.navigate('Auth', {screen: 'TermsConditions'});
             }}>
             Terms & Conditions.
           </Text>
         </Text>
-
         <AuthFooter
           title={'Dont have an account?'}
           subtitle={' Sign Up'}
           onPress={() => {
-            navigation.replace('Auth', {screen: 'SignUp'});
+            navigation.navigate('Auth', {screen: 'SignUp'});
           }}
         />
       </KeyboardAwareScrollView>

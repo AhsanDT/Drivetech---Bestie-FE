@@ -32,15 +32,15 @@ const ImageVerification = ({navigation}) => {
       <View style={{
         flex: 1
       }} >
-      {/* <Camera
+      <Camera
         // ref={camera}
         style={{flex: 1}}
         device={device}
-        isActive={true}
+        isActive={false}
         // photo={true}
         frameProcessorFps={'auto'}
         // frameProcessor={frameProcessor}
-      /> */}
+      />
       </View>
     );
   };

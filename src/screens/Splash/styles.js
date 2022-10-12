@@ -63,7 +63,10 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Medium,
   },
   footerContainer: {
-    padding: WP('1'),
+    padding: WP('5'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: WP(-20)
   },
 });
 
