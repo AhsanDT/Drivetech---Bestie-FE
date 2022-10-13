@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 function AuthStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="ImageVerification"
+      initialRouteName="Login"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
 
