@@ -4,7 +4,6 @@ import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
 import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
-import getStoredState from 'redux-persist/es/getStoredState';
 const UploadImage = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [frontImage, setFrontImage] = useState('');
@@ -127,9 +126,9 @@ const UploadImage = ({navigation}) => {
           height={WP('13')}
           bgColor={!frontImage || !backImage ? colors.g1 : colors.b1}
           disabled={frontImage || backImage ? false : true}
-          //   onPress={() => {
-          //     handleButtonPressed();
-          // }}
+          onPress={() => {
+            navigation.navigate('ImageVerification');
+          }}
         />
       </View>
     </SafeAreaView>

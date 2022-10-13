@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('3.85'),
     // justifyContent: 'space-between',
     backgroundColor: colors.white,
-    marginBottom: WP('3')
+    marginBottom: WP('3'),
   },
   logoTxtStyle: {
     left: WP('2.3'),
     color: colors.b1,
     fontSize: size.text_26,
     fontFamily: family.Poppin_Medium,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     // marginBottom: WP('4'),
   },
 

@@ -6,24 +6,25 @@ const web_client_id =
 const stripe_publishableKey =
   'pk_test_51Lf25xJxAUizx0q5OIWfv41879r73FiP61ItNOlcUbE6MsGY8WCmULqWC9KrYyCYz18pbUBPDM7Lbb8N3giMguHh00P7XAmQlT';
 
-  const image_options = {
-    title: 'Load Photo',
-    customButtons: [
-      { name: 'button_id_1', title: 'CustomButton 1' },
-      { name: 'button_id_2', title: 'CustomButton 2' }
-    ],
-    storageOptions: {
-      skipBackup: true,
-      path: 'images',
-    },
-  };
+const image_options = {
+  title: 'Load Photo',
+  cameraType: 'front',
+  customButtons: [
+    {name: 'button_id_1', title: 'CustomButton 1'},
+    {name: 'button_id_2', title: 'CustomButton 2'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
 
-  const image_option = {
-    width: 400,
-    height: 400,
-    multiple: true,
-    mediaType: 'photo',
-  };
+const image_option = {
+  width: 400,
+  height: 400,
+  multiple: true,
+  mediaType: 'photo',
+};
 
 const networkText = 'Check Internet Connection';
 

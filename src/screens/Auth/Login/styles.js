@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     marginBottom: 35,
-    marginTop: -13,
+    marginTop: -4,
   },
   forgotText: {
     color: colors.red1,

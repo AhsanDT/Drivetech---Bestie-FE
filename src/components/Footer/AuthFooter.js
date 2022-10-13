@@ -6,7 +6,7 @@ export const AuthFooter = ({onPress, title, subtitle}) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      hitSlop={styles.hitSlop}
+      // hitSlop={styles.hitSlop}
       activeOpacity={0.9}
       onPress={onPress}>
       <Text style={styles.footerText}>
@@ -23,11 +23,12 @@ export const AuthFooter = ({onPress, title, subtitle}) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
+    width: WP('100'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: WP('35'),
   },
   footerText: {
-    justifyContent: 'flex-end',
-    alignSelf: 'flex-end',
     textAlign: 'center',
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_12,

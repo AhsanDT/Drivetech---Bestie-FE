@@ -3,10 +3,16 @@ import {View, Text, SafeAreaView} from 'react-native';
 import {AppButton, AppHeader} from '../../../components';
 import {colors, WP} from '../../../shared/exporter';
 import styles from './styles';
-const TermsConditions = () => {
+const TermsConditions = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <AppHeader title={'Terms & Conditions'} backIcon={true} />
+      <AppHeader
+        title={'Terms & Conditions'}
+        backIcon={true}
+        onPressBack={() => {
+          navigation.goBack();
+        }}
+      />
       <View style={styles.textContainer}>
         <Text style={styles.textStyle}>
           Welcome to Bestie! {'\n'}

@@ -10,7 +10,6 @@ import ForgotPassword from '../../screens/Auth/ForgotPassword';
 import CreatePassword from '../../screens/Auth/CreatePassword';
 import VerifyOtp from '../../screens/Auth/VerifyOtp';
 import ProfileImage from '../../screens/Auth/ProfileImage';
-
 import UploadImage from '../../screens/Auth/UploadImage';
 import TermsConditions from '../../screens/Auth/TermsConditions';
 import ImageVerification from '../../screens/Auth/ImageVerification';
@@ -32,7 +31,6 @@ function AuthStack(props) {
       <Stack.Screen name="CreatePassword" component={CreatePassword} />
       <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
       <Stack.Screen name="ProfileImage" component={ProfileImage} />
-
       <Stack.Screen name="UploadImage" component={UploadImage} />
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
       <Stack.Screen name="TermsConditions" component={TermsConditions} />

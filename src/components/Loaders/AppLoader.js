@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     width: WP('20'),
     ...Platform.select({
       ios: {
-        shadowColor: colors.black,
+        shadowColor: colors.b1,
         shadowOffset: {width: 0, height: 6},
         shadowOpacity: 0.2,
       },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     width: WP('80'),
     ...Platform.select({
       ios: {
-        shadowColor: colors.black,
+        shadowColor: colors.b1,
         shadowOffset: {width: 0, height: 6},
         shadowOpacity: 0.2,
       },

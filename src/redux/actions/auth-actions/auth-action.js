@@ -47,10 +47,10 @@ export const forgotPassRequest = (data, cbSuccess, cbFailure) => {
 };
 
 //Verify OTP Action
-export const verifyOTPRequest = (params, cbSuccess, cbFailure) => {
+export const verifyOTPRequest = (data, cbSuccess, cbFailure) => {
   return {
     type: TYPES.OTP_VERIFY_REQUEST,
-    params,
+    data,
     cbSuccess,
     cbFailure,
   };
@@ -75,10 +75,9 @@ export const getInterestList = (cbSuccess, cbFailure) => {
 };
 
 //Reset Password Action
-export const resetPassRequest = (route, params, cbSuccess, cbFailure) => {
+export const resetPassRequest = (params, cbSuccess, cbFailure) => {
   return {
     type: TYPES.RESET_PASSWORD_REQUEST,
-    route,
     params,
     cbSuccess,
     cbFailure,

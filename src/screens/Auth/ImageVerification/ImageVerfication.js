@@ -1,54 +1,83 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {
   View,
   Text,
   SafeAreaView,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
-import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import styles from './styles';
+import {AppButton, AppHeader} from '../../../components';
+import {colors, WP} from '../../../shared/exporter';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
+
+import styles from './styles';
+import {useIsFocused} from '@react-navigation/native';
 const ImageVerification = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
-  const [hasPermission, setHasPermission] = useState(false);
 
+  const onCameraInitialized = useCallback(
+    () => console.log('camera initialized'),
+    [],
+  );
+  const isFocused = useIsFocused();
   const camera = useRef(null);
   const devices = useCameraDevices('wide-angle-camera');
-  const device = devices;
+  const device = devices.front;
+  // const photo = async () =>
+  //   await camera.current.takePhoto({
+  //     flash: 'on',
+  //   });
 
-  const renderCamera =  () => {
-    console.log('DEVICES==> ', device);
-    if (device == null || undefined) {
-      return <ActivityIndicator size={20} color={'red'} />;
-    }
+  const snapshot = async () => await camera.current.takeSnapshot();
 
+  const onPressButton = async () => {
+    console.log(camera.current);
+    console.log(123);
+    const photo = await camera.current.takeSnapshot({
+      quality: 85,
+      skipMetadata: true,
+    });
+
+    console.log('photo', photo);
+  };
+
+  // const photo = async () =>
+  //   await camera.current.takeSnapshot({
+  //     quality: 85,
+  //     skipMetadata: true,
+  //   });
+
+  const cameraPermission = async () => await Camera.requestCameraPermission();
+
+  useEffect(() => {
+    cameraPermission();
+  }, []);
+
+  const renderCamera = () => {
+    if (device == null) return <ActivityIndicator />;
     return (
-      <View style={{
-        flex: 1
-      }} >
-      {/* <Camera
-        // ref={camera}
-        style={{flex: 1}}
+      <Camera
+        ref={camera}
+        style={{
+          height: WP('20'),
+          width: WP('20'),
+          borderRadius: WP('40'),
+        }}
         device={device}
-        isActive={true}
-        // photo={true}
-        frameProcessorFps={'auto'}
-        // frameProcessor={frameProcessor}
-      /> */}
-      </View>
+        isActive={isFocused}
+        photo={true}
+        // preset={'photo'}
+        // fps={240}
+        // onTouchEndCapture={'true'}
+        onTouchEndCapture={snapshot()}
+      />
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {renderCamera()}
-      {/* <AppHeader title={'Selfie\nVerification'} backIcon={true} />
+      <AppHeader title={'Selfie\nVerification'} backIcon={true} />
       {image ? (
         <View style={styles.headerTextContainer}>
           <Text style={styles.faceTextStyle}>Scan your face{'\n'}</Text>
@@ -66,46 +95,29 @@ const ImageVerification = ({navigation}) => {
         </View>
       )}
 
-      <View style={styles.contentContainer}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => {
-            setShow(true);
-          }}>
-          <Image
-            source={image === '' ? appIcons.scan : {uri: image}}
-            style={image ? styles.uriImageContainer : styles.cameraContainer}
-          />
-        </TouchableOpacity>
-      </View>
-      <ImagePickerModal
-        show={show}
-        onPressHide={() => setShow(false)}
-        onPressCamera={() => showCamera()}
-        onPressGallery={() => showGallery()}
-      />
+      <View style={styles.contentContainer}>{renderCamera()}</View>
       <View style={styles.buttonContainer}>
         <AppButton
           title={'Back'}
           width={WP('35')}
           height={WP('13')}
-          bgColor={colors.g9}
-          textColor={colors.g10}
+          bgColor={colors.g8}
+          textColor={colors.g9}
           onPress={() => {
-            navigation.goBack();
+            onPressButton();
           }}
         />
         <AppButton
           title={'Next'}
           width={WP('35')}
           height={WP('13')}
-          bgColor={!image ? colors.g1 : colors.b1}
+          bgColor={!image ? colors.g4 : colors.b1}
           disabled={image ? false : true}
           //   onPress={() => {
           //     handleButtonPressed();
           //   }}
         />
-      </View> */}
+      </View>
     </SafeAreaView>
   );
 };

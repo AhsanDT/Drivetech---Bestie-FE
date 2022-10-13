@@ -6,9 +6,9 @@ const ENDPOINTS = {
   SOCIAL_LOGIN: 'social_login.json',
   REGISTER: 'signup',
   FORGOT_PASS: 'authentication/forgot_password',
-  VERIFY_OTP: 'verify_otp',
+  VERIFY_OTP: 'authentication/verify_token',
   RESEND_OTP: 'verify_otp/email_resend_otp',
-  RESET_PASS: 'reset_password',
+  RESET_PASS: 'authentication/reset_password',
   LOGOUT: 'logout',
   GET_INTERESTS: 'authentication/get_interests',
 };

@@ -105,8 +105,8 @@ const authReducer = (state = initialState, actions) => {
         loading: false,
         isSuccess: true,
         isFailure: false,
-        otp_verify: payload,
-        userInfo: payload,
+        otp_verify: payload?.otp,
+        // userInfo: payload,
       };
     case TYPES.OTP_VERIFY_FAILURE:
       return {
@@ -115,7 +115,7 @@ const authReducer = (state = initialState, actions) => {
         isSuccess: false,
         isFailure: true,
         otp_verify: null,
-        userInfo: null,
+        // userInfo: null,
       };
     case TYPES.RESEND_OTP_SUCCESS:
       return {

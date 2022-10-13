@@ -106,13 +106,14 @@ export function* forgotPassRequest() {
 function* forgot(params) {
   console.log('PARMAS SAGA==> ', params);
   try {
-    const res = yield forgotPassword(params?.params);
+    const res = yield forgotPassword(params?.data);
     if (res) {
       yield put({
         type: types.FORGOT_PASSWORD_SUCCESS,
         payload: res,
       });
       params?.cbSuccess(res);
+      console.log('res', res);
     }
   } catch (error) {
     yield put({
@@ -129,15 +130,15 @@ export function* OTPVerifyRequest() {
   yield takeLatest(types.OTP_VERIFY_REQUEST, verifyOTP);
 }
 function* verifyOTP(params) {
+  console.log('params', params);
   try {
-    const res = yield OTPVerify(params?.params);
+    const res = yield OTPVerify(params?.data);
     if (res) {
       yield put({
         type: types.OTP_VERIFY_SUCCESS,
         payload: res,
       });
       console.log(res);
-      AsyncStorage.setItem('usertoken', res?.user?.auth_token);
       params?.cbSuccess(res);
     }
   } catch (error) {
@@ -197,8 +198,9 @@ export function* resetPassRequest() {
   yield takeLatest(types.RESET_PASSWORD_REQUEST, resetPass);
 }
 function* resetPass(params) {
+  console.log('params', params?.params);
   try {
-    const res = yield resetPassword(params?.route, params?.params);
+    const res = yield resetPassword(params?.params);
     if (res) {
       yield put({
         type: types.RESET_PASSWORD_SUCCESS,

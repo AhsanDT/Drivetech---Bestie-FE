@@ -16,7 +16,7 @@ import {
 } from '../../../shared/exporter';
 import styles from './styles';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState('');
 
@@ -24,7 +24,13 @@ const PrivacyPolicy = () => {
     <SafeAreaView style={styles.rootContainer}>
       {/* <AppLoader loading={loading} /> */}
       {/* <MyStatusBar /> */}
-      <AppHeader backIcon title={'Privacy Policy'} />
+      <AppHeader
+        backIcon
+        title={'Privacy Policy'}
+        onPressBack={() => {
+          navigation.navigate('Login');
+        }}
+      />
       <Spacer androidVal={WP('4')} iOSVal={WP('4')} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.contentContainer}>
