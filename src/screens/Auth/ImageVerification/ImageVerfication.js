@@ -3,17 +3,15 @@ import {
   View,
   Text,
   SafeAreaView,
-  Image,
-  TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
-import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
-import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {AppButton, AppHeader} from '../../../components';
+import {colors, WP} from '../../../shared/exporter';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
 
 import styles from './styles';
+import {useIsFocused} from '@react-navigation/native';
 const ImageVerification = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
@@ -22,21 +20,38 @@ const ImageVerification = ({navigation}) => {
     () => console.log('camera initialized'),
     [],
   );
-
+  const isFocused = useIsFocused();
   const camera = useRef(null);
   const devices = useCameraDevices('wide-angle-camera');
-  const device = devices.back;
-  const photo = async () =>
-    await camera.current.takePhoto({
-      flash: 'on',
+  const device = devices.front;
+  // const photo = async () =>
+  //   await camera.current.takePhoto({
+  //     flash: 'on',
+  //   });
+
+  const snapshot = async () => await camera.current.takeSnapshot();
+
+  const onPressButton = async () => {
+    console.log(camera.current);
+    console.log(123);
+    const photo = await camera.current.takeSnapshot({
+      quality: 85,
+      skipMetadata: true,
     });
 
-  const cameraPermission = async () => await Camera.getCameraPermissionStatus();
+    console.log('photo', photo);
+  };
+
+  // const photo = async () =>
+  //   await camera.current.takeSnapshot({
+  //     quality: 85,
+  //     skipMetadata: true,
+  //   });
+
+  const cameraPermission = async () => await Camera.requestCameraPermission();
 
   useEffect(() => {
-    return () => {
-      cameraPermission;
-    };
+    cameraPermission();
   }, []);
 
   const renderCamera = () => {
@@ -44,12 +59,18 @@ const ImageVerification = ({navigation}) => {
     return (
       <Camera
         ref={camera}
-        style={StyleSheet.absoluteFill}
+        style={{
+          height: WP('20'),
+          width: WP('20'),
+          borderRadius: WP('40'),
+        }}
         device={device}
-        isActive={true}
-        photo={photo}
-        preset={'photo'}
+        isActive={isFocused}
+        photo={true}
+        // preset={'photo'}
         // fps={240}
+        // onTouchEndCapture={'true'}
+        onTouchEndCapture={snapshot()}
       />
     );
   };
@@ -83,7 +104,7 @@ const ImageVerification = ({navigation}) => {
           bgColor={colors.g8}
           textColor={colors.g9}
           onPress={() => {
-            navigation.goBack();
+            onPressButton();
           }}
         />
         <AppButton

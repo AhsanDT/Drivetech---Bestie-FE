@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     width: WP('30'),
     height: WP('30'),
     padding: WP('2'),
+    borderRadius: WP('30'),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'red',
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
   uploadImageContainer: {
     width: WP('40'),
     height: WP('40'),
-    borderRadius: 20,
+    borderRadius: WP('30'),
     backgroundColor: colors.g2,
     alignItems: 'center',
     justifyContent: 'center',

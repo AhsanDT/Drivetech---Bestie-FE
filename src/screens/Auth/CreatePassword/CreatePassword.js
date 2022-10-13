@@ -1,8 +1,8 @@
-import React from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {View, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {AppButton, AppHeader, AppInput} from '../../../components';
+import {AppButton, AppHeader, AppInput, AppLoader} from '../../../components';
 import {
   colors,
   WP,
@@ -12,7 +12,7 @@ import {
   networkText,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {resetPassRequest} from '../../../redux/actions';
 const CreatePassword = ({navigation, route}) => {
   const [loading, setloading] = useState(false);
@@ -30,6 +30,7 @@ const CreatePassword = ({navigation, route}) => {
         const cbSuccess = response => {
           alert('Password reset');
           setloading(false);
+          navigation?.navigate('Login');
         };
         const cbFailure = err => {
           Alert.alert('' || err);
@@ -105,6 +106,7 @@ const CreatePassword = ({navigation, route}) => {
             </View>
           )}
         </Formik>
+        <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

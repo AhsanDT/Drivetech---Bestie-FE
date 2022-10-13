@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView, Alert} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {AppButton, AppHeader, AppInput, AppLoader} from '../../../components';
@@ -8,17 +8,17 @@ import {
   WP,
   ForgotPasswordVS,
   forgotFormFields,
-  size,
-  family,
-  appIcons,
   networkText,
   checkConnected,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 import {forgotPassRequest} from '../../../redux/actions';
 
 const ForgotPassword = ({navigation}) => {
   const [loading, setloading] = useState(false);
+
+  const dispatch = useDispatch(null);
 
   const onPressVerifyAccount = async value => {
     const check = await checkConnected();
@@ -28,8 +28,12 @@ const ForgotPassword = ({navigation}) => {
       data.append('email', value.email);
       try {
         const cbSuccess = response => {
-          navigation.navigate('CreatePassword', {email: value.email});
+          navigation.navigate('VerifyOtp', {
+            email: value.email,
+            userId: response?.data?.id,
+          });
           setloading(false);
+          console.log('data id', response?.data?.id);
         };
         const cbFailure = err => {
           Alert.alert('' || err);
@@ -80,6 +84,7 @@ const ForgotPassword = ({navigation}) => {
                 touched={touched.email}
                 errorMessage={errors.email}
                 autoCapitalize="none"
+                keyboardType={'email-address'}
               />
               <AppButton
                 width={WP('90')}
@@ -87,6 +92,7 @@ const ForgotPassword = ({navigation}) => {
                 title={'Verify Account'}
                 height={WP('14')}
                 onPress={() => {
+                  setloading(true);
                   handleSubmit();
                 }}
                 style={styles.btCon}

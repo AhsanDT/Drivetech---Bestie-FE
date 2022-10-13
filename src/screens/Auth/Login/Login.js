@@ -23,15 +23,13 @@ import {
   WP,
   LoginVS,
   loginFormFields,
-  size,
-  family,
   appIcons,
   checkConnected,
   networkText,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
 import {loginRequest} from '../../../redux/actions';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Geolocation from 'react-native-geolocation-service';
 
 const Login = ({navigation}) => {

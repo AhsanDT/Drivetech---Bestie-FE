@@ -33,7 +33,7 @@ export const registerUser = async params => {
   return res.data;
 };
 
-export const forgotPassword = async (route, params) => {
+export const forgotPassword = async params => {
   console.log('forgot pass PARAMS services ==>', params);
   const res = await axios.post(`${BASE_URL}${ENDPOINTS.FORGOT_PASS}`, params, {
     headers: {
@@ -41,19 +41,18 @@ export const forgotPassword = async (route, params) => {
       Accept: 'application/json',
     },
   });
+
   return res.data;
 };
 
 export const OTPVerify = async params => {
-  const res = await axios.post(
-    `${BASE_URL}${ENDPOINTS.VERIFY_OTP}.json`,
-    params,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+  console.log('verify pass PARAMS services ==>', params);
+  const res = await axios.post(`${BASE_URL}${ENDPOINTS.VERIFY_OTP}`, params, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
-  );
+  });
   return res.data;
 };
 
@@ -76,16 +75,14 @@ export const showInterestService = async params => {
   return res.data;
 };
 
-export const resetPassword = async (route, params) => {
-  const res = await axios.post(
-    `${BASE_URL}${ENDPOINTS.RESET_PASS}/${route}`,
-    params,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+export const resetPassword = async ( params) => {
+  // console.log('params', params);
+  const res = await axios.post(`${BASE_URL}${ENDPOINTS.RESET_PASS}`, params, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
-  );
+  });
   return res.data;
 };
 
