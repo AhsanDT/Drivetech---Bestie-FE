@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       backgroundColor: bgColor,
-      // shadowColor: shadowColor || colors.white,
+      // shadowColor: shadowColor || colors.b1,
       // shadowOffset: {
       //   width: 0,
       //   height: 5,

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     padding: WP('4'),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: WP('33'),
   },
 });
 export {styles};

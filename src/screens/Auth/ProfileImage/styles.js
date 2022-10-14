@@ -30,5 +30,17 @@ const styles = StyleSheet.create({
     width: WP('39'),
     borderRadius: WP('39'),
   },
+  buttonContainer: {
+    padding: WP('3'),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: WP('100'),
+  },
+  buttonContainer2: {
+    padding: WP('3'),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: WP('120'),
+  },
 });
 export {styles};
