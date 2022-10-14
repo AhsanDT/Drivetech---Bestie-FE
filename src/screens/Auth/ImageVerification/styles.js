@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     padding: WP('5'),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: WP('45'),
+    alignItems: 'center',
+    marginTop: WP('10'),
   },
   faceTextStyle: {
     fontFamily: family.Poppin_Medium,
@@ -56,6 +57,33 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_12,
     color: colors.b1,
+  },
+  renderCameraContainer: {
+    borderRadius: WP('60'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    height: WP('60'),
+    width: WP('60'),
+    alignSelf: 'center',
+    marginVertical: WP('20'),
+  },
+  CameraContainer: {
+    height: WP('60'),
+    width: WP('60'),
+  },
+  ImageContainer: {
+    height: WP('60'),
+    width: WP('60'),
+    borderRadius: WP('60'),
+    alignSelf: 'center',
+    marginVertical: WP('22.2'),
+  },
+  buttonContainer2: {
+    padding: WP('5'),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: WP('5'),
   },
 });
 

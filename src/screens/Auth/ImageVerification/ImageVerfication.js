@@ -4,32 +4,26 @@ import {
   Text,
   SafeAreaView,
   ActivityIndicator,
-  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {AppButton, AppHeader} from '../../../components';
 import {colors, WP} from '../../../shared/exporter';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
 
 import styles from './styles';
-import {useIsFocused} from '@react-navigation/native';
 const ImageVerification = ({navigation}) => {
-  const [show, setShow] = useState(false);
-  const [image, setImage] = useState('');
+  const [showPhoto, setShowPhoto] = useState();
+  const [isCameraInitialized, setIsCameraInitialized] = useState(false);
 
-  const onCameraInitialized = useCallback(
-    () => console.log('camera initialized'),
-    [],
-  );
-  const isFocused = useIsFocused();
   const camera = useRef(null);
   const devices = useCameraDevices('wide-angle-camera');
   const device = devices.front;
-  // const photo = async () =>
-  //   await camera.current.takePhoto({
-  //     flash: 'on',
-  //   });
 
-  const snapshot = async () => await camera.current.takeSnapshot();
+  useEffect(() => {
+    cameraPermission();
+  }, []);
 
   const onPressButton = async () => {
     console.log(camera.current);
@@ -38,86 +32,105 @@ const ImageVerification = ({navigation}) => {
       quality: 85,
       skipMetadata: true,
     });
-
-    console.log('photo', photo);
+    setShowPhoto(photo?.path);
   };
 
-  // const photo = async () =>
-  //   await camera.current.takeSnapshot({
-  //     quality: 85,
-  //     skipMetadata: true,
-  //   });
-
-  const cameraPermission = async () => await Camera.requestCameraPermission();
-
-  useEffect(() => {
-    cameraPermission();
+  const onCameraInitialized = useCallback(() => {
+    setIsCameraInitialized(true);
   }, []);
+  const cameraPermission = async () => await Camera.requestCameraPermission();
 
   const renderCamera = () => {
     if (device == null) return <ActivityIndicator />;
     return (
       <Camera
         ref={camera}
-        style={{
-          height: WP('20'),
-          width: WP('20'),
-          borderRadius: WP('40'),
-        }}
+        style={styles.CameraContainer}
         device={device}
-        isActive={isFocused}
-        photo={true}
-        // preset={'photo'}
-        // fps={240}
-        // onTouchEndCapture={'true'}
-        onTouchEndCapture={snapshot()}
+        isActive={showPhoto ? false : true}
+        photo={false}
+        onTouchEndCapture={() => {
+          onPressButton();
+        }}
+        onInitialized={onCameraInitialized}
       />
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <AppHeader title={'Selfie\nVerification'} backIcon={true} />
-      {image ? (
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.faceTextStyle}>Scan your face{'\n'}</Text>
-          <Text style={styles.pictureTextStyle}>Please blink</Text>
-        </View>
-      ) : (
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.faceTextStyle}>
-            Prepare to scan your face{'\n'}
-          </Text>
-          <Text style={styles.pictureTextStyle}>
-            Make sure you are in a well-lit room and hold the{'\n'}phone as
-            shwon in the picture
-          </Text>
-        </View>
-      )}
+      <ScrollView>
+        <View style={styles.container}>
+          <AppHeader
+            title={'Selfie\nVerification'}
+            backIcon={true}
+            onPressBack={() => {
+              navigation.goBack();
+            }}
+          />
+          {showPhoto ? (
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.faceTextStyle}>Scan your face{'\n'}</Text>
+              <Text style={styles.pictureTextStyle}>Please blink</Text>
+            </View>
+          ) : (
+            <View style={styles.headerTextContainer}>
+              <Text style={styles.faceTextStyle}>
+                Prepare to scan your face{'\n'}
+              </Text>
+              <Text style={styles.pictureTextStyle}>
+                Make sure you are in a well-lit room and hold the{'\n'}phone as
+                shwon in the picture
+              </Text>
+            </View>
+          )}
 
-      <View style={styles.contentContainer}>{renderCamera()}</View>
-      <View style={styles.buttonContainer}>
-        <AppButton
-          title={'Back'}
-          width={WP('35')}
-          height={WP('13')}
-          bgColor={colors.g8}
-          textColor={colors.g9}
-          onPress={() => {
-            onPressButton();
-          }}
-        />
-        <AppButton
-          title={'Next'}
-          width={WP('35')}
-          height={WP('13')}
-          bgColor={!image ? colors.g4 : colors.b1}
-          disabled={image ? false : true}
-          //   onPress={() => {
-          //     handleButtonPressed();
-          //   }}
-        />
-      </View>
+          {!showPhoto ? (
+            <View style={styles.renderCameraContainer}>{renderCamera()}</View>
+          ) : (
+            <TouchableOpacity>
+              <Image
+                source={{uri: `file://${showPhoto}`}}
+                style={styles.ImageContainer}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.buttonContainer}>
+          <AppButton
+            title={'Back'}
+            width={WP('35')}
+            height={WP('13')}
+            bgColor={colors.g8}
+            textColor={colors.g9}
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+
+          {showPhoto ? (
+            <AppButton
+              title={'Next'}
+              width={WP('35')}
+              height={WP('13')}
+              bgColor={colors.b1}
+              // onPress={() => {
+              //   onPressButton();
+              // }}
+            />
+          ) : (
+            <AppButton
+              title={'Capture'}
+              width={WP('35')}
+              height={WP('13')}
+              bgColor={colors.b1}
+              onPress={() => {
+                onPressButton();
+              }}
+            />
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
