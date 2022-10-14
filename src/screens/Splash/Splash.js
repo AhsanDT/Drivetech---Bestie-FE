@@ -11,11 +11,11 @@ const Splash = ({navigation}) => {
       source={appImages.introBackground}
       style={styles.backgroundImage}
       resizeMode="cover">
-      {/* <StatusBar
+      <StatusBar
         translucent={true}
         barStyle={'light-content'}
         backgroundColor={'transparent'}
-      /> */}
+      />
       <View style={styles.logoContainer}>
         <Image
           source={appLogo.BestieTextLogo}
@@ -32,7 +32,7 @@ const Splash = ({navigation}) => {
         title={'Get Started'}
         style={styles.btnContainer}
         onPress={() => {
-          navigation.replace('Auth', {screen: 'Login'});
+          navigation.replace('Auth', {screen: 'UploadImage'});
         }}
       />
       <View style={styles.accountContainer}>
@@ -47,7 +47,7 @@ const Splash = ({navigation}) => {
           </Text>
         </Text>
       </View>
-      <View style={styles.footerContainer}>
+      {/* <View style={styles.footerContainer}>
         <Text style={styles.BottomTextStyle}>
           By signing in to you account, you agree to our {'\n'}
           <Text
@@ -66,7 +66,7 @@ const Splash = ({navigation}) => {
             Terms & Conditions.
           </Text>
         </Text>
-      </View>
+      </View> */}
     </ImageBackground>
   );
 };
