@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Platform,
+  PermissionsAndroid,
+} from 'react-native';
 import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
 import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -24,12 +32,12 @@ const UploadImage = ({navigation}) => {
           } else if (response.customButton) {
             console.log('User tapped custom button: ', response.customButton);
           } else {
-            console.log('Response---', response.assets[0]);
+            console.log('Response---', response?.assets[0]);
           }
-          if (setImage === 'back') {
-            setImage(response.assets[0]);
+          if (imageStatus == 'back') {
+            setBackImage(response?.assets[0]);
           } else {
-            setImage(response.assets[0]);
+            setFrontImage(response?.assets[0]);
           }
         });
       } catch (error) {
@@ -37,27 +45,26 @@ const UploadImage = ({navigation}) => {
       }
     }, 400);
   };
-  //Open Camera
+  // Open Camera
   const showCamera = () => {
+    if (Platform.OS === 'android') {
+      requestCameraPermission();
+    }
     setShow(false);
     setTimeout(() => {
       try {
         launchCamera(image_options, response => {
-          console.log('Response = ', response);
+          console.log('Response', response);
           if (response.didCancel) {
-            console.log('User cancelled image picker');
           } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
           } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-            alert(response.customButton);
           } else {
-            console.log('');
           }
           if (imageStatus == 'back') {
-            setBackImage(response.assets[0]);
+            console.log('response?.assets[0]', response?.assets[0]);
+            setBackImage(response?.assets[0]);
           } else {
-            setFrontImage(response.assets[0]);
+            setFrontImage(response?.assets[0]);
           }
         });
       } catch (error) {
@@ -65,6 +72,31 @@ const UploadImage = ({navigation}) => {
       }
     }, 400);
   };
+
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'ID Camera Permission',
+          message:
+            'ID App needs access to your camera ' +
+            'so you can take awesome pictures.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the camera');
+      } else {
+        console.log('Camera permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <AppHeader title={'Upload Your\nID Photo'} />
@@ -79,6 +111,7 @@ const UploadImage = ({navigation}) => {
           }}>
           <Image
             source={frontImage === '' ? appIcons.camera : frontImage}
+            resizeMode="cover"
             style={
               frontImage ? styles.uriImageContainer : styles.cameraContainer
             }
@@ -97,6 +130,7 @@ const UploadImage = ({navigation}) => {
           }}>
           <Image
             source={backImage === '' ? appIcons.camera : backImage}
+            resizeMode="cover"
             style={
               backImage ? styles.uriImageContainer : styles.cameraContainer
             }

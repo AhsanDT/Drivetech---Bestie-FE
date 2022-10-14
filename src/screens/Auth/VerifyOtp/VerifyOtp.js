@@ -48,7 +48,7 @@ const VerifyOtp = ({navigation, route}) => {
           };
           const cbFailure = err => {
             console.log('error', err);
-            Alert.alert('hamad' || err);
+            Alert.alert('' || err);
             setloading(false);
           };
           dispatch(verifyOTPRequest(data, cbSuccess, cbFailure));

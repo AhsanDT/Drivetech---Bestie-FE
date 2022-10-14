@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Alert} from 'react-native';
+import {View, SafeAreaView, Alert, StatusBar} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {AppButton, AppHeader, AppInput, AppLoader} from '../../../components';
@@ -38,14 +38,17 @@ const ForgotPassword = ({navigation}) => {
         const cbFailure = err => {
           Alert.alert('' || err);
           setloading(false);
+          console.log('1');
         };
         dispatch(forgotPassRequest(data, cbSuccess, cbFailure));
       } catch (error) {
         console.log('ERROR', error);
         setloading(false);
+        console.log('3');
       }
     } else {
       Alert.alert('Error', networkText);
+      console.log('2');
     }
   };
 
@@ -92,7 +95,6 @@ const ForgotPassword = ({navigation}) => {
                 title={'Verify Account'}
                 height={WP('14')}
                 onPress={() => {
-                  setloading(true);
                   handleSubmit();
                 }}
                 style={styles.btCon}

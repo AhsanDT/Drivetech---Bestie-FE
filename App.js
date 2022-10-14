@@ -26,7 +26,7 @@ const App = () => {
     <Provider store={store}>
       <StatusBar
         translucent={false}
-        // backgroundColor={colors.s1}
+        backgroundColor={colors.white}
         barStyle={'dark-content'}
       />
       {/* <StripeProvider publishableKey={stripe_publishableKey}> */}
