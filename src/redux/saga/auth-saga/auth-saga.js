@@ -11,6 +11,7 @@ import {
   resetPassword,
   logoutUser,
   showInterestService,
+  updateSocialLogin,
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -26,7 +27,6 @@ function* login(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      console.log('ASYC==>', res?.auth_token);
       AsyncStorage.setItem('usertoken', res?.auth_token);
       params?.cbSuccess(res);
     }
@@ -48,7 +48,7 @@ export function* socialLoginRequest() {
 }
 function* socialLoginUser(params) {
   try {
-    const res = yield socialLogin(params?.params);
+    const res = yield socialLogin(params?.data);
     if (res) {
       yield put({
         type: types.SOCIAL_LOGIN_REQUEST_SUCCESS,
@@ -58,7 +58,6 @@ function* socialLoginUser(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      console.log(res);
       AsyncStorage.setItem('usertoken', res?.user?.auth_token);
       params?.cbSuccess(res);
     } else {
@@ -81,20 +80,70 @@ function* socialLoginUser(params) {
     params?.cbFailure(msg);
   }
 }
+export function* updateSocialLoginData() {
+  yield takeLatest(types.UPDATE_SOCIAL_LOGIN_REQUEST, updateSocialLoginUser);
+}
+function* updateSocialLoginUser(params) {
+  console.log('PARAMS== saga >', params);
+  try {
+    const res = yield updateSocialLogin(params?.data, params?.email);
+    if (res) {
+      console.log('update SOCIAL LOGIn response saga', res);
+      yield put({
+        type: types.UPDATE_SOCIAL_LOGIN_SUCCESS,
+        payload: res,
+      });
+      yield put({
+        type: types.LOGIN_REQUEST_SUCCESS,
+        payload: res,
+      });
+      console.log('update SOCIAL SIGNIN ==>', res);
+      AsyncStorage.setItem('usertoken', res?.user?.auth_token);
+      params?.cbSuccess(res);
+    } else {
+      yield put({
+        type: types.UPDATE_SOCIAL_LOGIN_FAILURE,
+        payload: null,
+      });
+      yield put({
+        type: types.LOGIN_REQUEST_FAILURE,
+        payload: res,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: types.SOCIAL_LOGIN_REQUEST_FAILURE,
+      payload: null,
+    });
+    let msg = responseValidator(error?.response?.status);
+    params?.cbFailure(msg);
+  }
+}
 
 // ************* Sign Up Saga **************
 export function* signUpRequest() {
-  yield takeLatest(types.SIGNUP_REQUEST_REQUEST, signUp);
+  yield takeLatest(types.SIGNUP_REQUEST, signUp);
 }
 function* signUp(params) {
   try {
-    const res = yield registerUser(params?.params);
+    const res = yield registerUser(params?.data);
     if (res) {
-      console.log(res);
+      console.log('SIGNUP_SUCCESS_REQUEST==>', res);
+      AsyncStorage.setItem('usertoken', res?.auth_token);
+      yield put({
+        type: types.SIGNUP_SUCCESS_REQUEST,
+        payload: res,
+      });
       params?.cbSuccess(res);
     }
   } catch (error) {
-    let msg = responseValidator(error?.response?.status, error?.response?.data);
+    console.log('SAGA ERROR==> ', error?.response?.status);
+    console.log('SAGA ERROR==>2 ', error?.response?.data?.error);
+    let msg = responseValidator(
+      error?.response?.status,
+      error?.response?.data?.error,
+    );
     params?.cbFailure(msg);
   }
 }

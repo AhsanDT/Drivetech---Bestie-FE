@@ -27,6 +27,7 @@ const AppInput = ({
   maxLength,
   error,
   textEntry,
+  disabled,
 }) => {
   const [showPass, setShowPass] = React.useState(secureTextEntry);
 
@@ -55,6 +56,7 @@ const AppInput = ({
         autoCompleteType={undefined}
         onSubmitEditing={onSubmitEditing}
         maxLength={maxLength}
+        disabled={disabled}
         rightIcon={
           secureTextEntry ? (
             <Icon

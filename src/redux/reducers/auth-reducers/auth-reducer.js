@@ -12,6 +12,8 @@ const initialState = {
   signupObject: {
     firstName: null,
     lastName: null,
+    password: null,
+    email: null,
     phoneNumber: null,
     country: null,
     city: null,
@@ -24,11 +26,12 @@ const initialState = {
     idCardBack: null,
     selfie: null,
     profileType: null,
+    login_type: null,
   },
 };
 
-const authReducer = (state = initialState, actions) => {
-  const {type, payload} = actions;
+const authReducer = (state = initialState, action = {}) => {
+  const {type, payload} = action;
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
       return {
@@ -63,8 +66,7 @@ const authReducer = (state = initialState, actions) => {
         userInfo: null,
       };
     case TYPES.SIGNUP_SUCCESS_REQUEST:
-      // state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
-
+      console.log('TYPES.SIGNUP_SUCCESS_REQUEST==>', payload);
       return {
         ...state,
         loading: false,
@@ -83,6 +85,15 @@ const authReducer = (state = initialState, actions) => {
     case TYPES.UPDATE_SIGNUP_OBJECT:
       state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
       return state;
+
+    // state.signupObject[Object.keys(actions.payload)[0]] = Object.values(
+    //   actions.payload,
+    // )[0];
+    // return {
+    //   ...state,
+    //   signupObject: payload,
+    // };
+
     case TYPES.FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,

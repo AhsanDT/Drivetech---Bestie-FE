@@ -7,20 +7,22 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import store, {persistor} from './src/redux/store';
 import {colors, stripe_publishableKey} from './src/shared/exporter';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-
+import {Settings} from 'react-native-fbsdk-next';
 const App = () => {
   // ignore warnings
   LogBox.ignoreAllLogs();
   LogBox.ignoreLogs([
     "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
-
-    // useEffect(() => {
-    //   GoogleSignin.configure({
-    //     webClientId:
-    //       '859276342696-gm0lnsee2kjh5pvpj85gcm5enrkdgfr2.apps.googleusercontent.com',
-    //   });
-    // }, []),
   ]);
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '253853545750-1ho34hm78c7gmlv9mfkul2q7bopdopuq.apps.googleusercontent.com',
+    });
+  }, []),
+    Settings.initializeSDK();
+  Settings.setAppID('639427440890710');
 
   return (
     <Provider store={store}>

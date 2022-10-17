@@ -28,7 +28,7 @@ const PrivacyPolicy = ({navigation}) => {
         backIcon
         title={'Privacy Policy'}
         onPressBack={() => {
-          navigation.navigate('Login');
+          navigation.goBack();
         }}
       />
       <Spacer androidVal={WP('4')} iOSVal={WP('4')} />

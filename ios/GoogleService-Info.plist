@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>253853545750-aihv7c0o5nkp0p10un68v3m4iqso2skq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.253853545750-aihv7c0o5nkp0p10un68v3m4iqso2skq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>253853545750-ajt616dd2jgiula6j45ifv63teuoivsk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCJxUGbaYJcU80I4I8JBPsdVyJaNJSteRQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>253853545750</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.convrtx.Bestie</string>
+	<key>PROJECT_ID</key>
+	<string>bestie-a40fb</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bestie-a40fb.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:253853545750:ios:11a2aa868e782fad22cc37</string>
+</dict>
+</plist>

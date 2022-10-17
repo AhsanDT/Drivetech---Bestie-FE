@@ -1,13 +1,28 @@
-import React, {useState} from 'react';
-import {View, Text, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+  PermissionsAndroid,
+  Platform,
+} from 'react-native';
 import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
 import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useDispatch, useSelector} from 'react-redux';
+import * as types from '../../../redux/actions/types/auth_types';
+import {updateSignupObject} from '../../../redux/actions';
+
 const ProfileImage = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
+  const {signupObject} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   //Handlers
   const showGallery = () => {
@@ -28,8 +43,12 @@ const ProfileImage = ({navigation}) => {
       });
     } catch (error) {}
   };
+
   //Open Camera
   const showCamera = () => {
+    if (Platform.OS === 'android') {
+      requestCameraPermission();
+    }
     setShow(false);
     try {
       launchCamera(image_options, response => {
@@ -38,7 +57,6 @@ const ProfileImage = ({navigation}) => {
         } else if (response.error) {
         } else if (response.customButton) {
         } else {
-          console.log('');
           if (response.assets) {
             setImage(response.assets[0]);
           }
@@ -47,9 +65,44 @@ const ProfileImage = ({navigation}) => {
     } catch (error) {}
   };
 
+  const handleNavigation = () => {
+    dispatch(updateSignupObject({profilePhoto: image}));
+
+    navigation.navigate('ShowInterest');
+  };
+
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'ID Camera Permission',
+          message:
+            'ID App needs access to your camera ' +
+            'so you can take awesome pictures.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the camera');
+      } else {
+        console.log('Camera permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView>
+        <StatusBar
+          backgroundColor={'#fff'}
+          translucent={false}
+          barStyle={'dark-content'}
+        />
         <AppHeader title={'Add Your\nProfile Photo'} />
         <View style={styles.contentContainer}>
           <TouchableOpacity
@@ -61,6 +114,7 @@ const ProfileImage = ({navigation}) => {
             <Image
               source={image === '' ? appIcons.camera : image}
               style={image ? styles.uriImageContainer : styles.cameraContainer}
+              resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
@@ -87,9 +141,7 @@ const ProfileImage = ({navigation}) => {
             height={WP('13')}
             bgColor={!image ? colors.g5 : colors.b1}
             disabled={image ? false : true}
-            onPress={() => {
-              navigation.navigate('UploadImage');
-            }}
+            onPress={() => handleNavigation()}
           />
         </View>
       </KeyboardAwareScrollView>

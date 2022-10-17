@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "272922021176",
-    "project_id": "bestie-364712",
-    "storage_bucket": "bestie-364712.appspot.com"
+    "project_number": "253853545750",
+    "project_id": "bestie-a40fb",
+    "storage_bucket": "bestie-a40fb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:272922021176:android:fe4f4dc66103d7913ac5cd",
+        "mobilesdk_app_id": "1:253853545750:android:c896bfe51e2758b922cc37",
         "android_client_info": {
           "package_name": "com.bestie"
         }
       },
       "oauth_client": [
         {
-          "client_id": "272922021176-293p63j2csvds7gcmnllqi0uhtl4i3k2.apps.googleusercontent.com",
+          "client_id": "253853545750-ajt616dd2jgiula6j45ifv63teuoivsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bestie",
+            "certificate_hash": "2cc40164a92f2a5c3d88601a9bbfc4454fd8691a"
+          }
+        },
+        {
+          "client_id": "253853545750-1ho34hm78c7gmlv9mfkul2q7bopdopuq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkDrmiSMIZerr0pkZwJVW4TvzC2MxdOG4"
+          "current_key": "AIzaSyD0u49qyaeCd-0xr3p3LcbADeJMplhUP1Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "272922021176-293p63j2csvds7gcmnllqi0uhtl4i3k2.apps.googleusercontent.com",
+              "client_id": "253853545750-1ho34hm78c7gmlv9mfkul2q7bopdopuq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

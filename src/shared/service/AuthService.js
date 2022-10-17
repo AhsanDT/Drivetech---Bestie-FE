@@ -19,8 +19,30 @@ export const socialLogin = async params => {
   const res = await axios.post(`${BASE_URL}${ENDPOINTS.SOCIAL_LOGIN}`, params, {
     headers: {
       'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
   });
+  return res.data;
+};
+export const updateSocialLogin = async (params, email) => {
+  console.log('SOCIAL UPDATE LOGIN==> ', params);
+  console.log('SOCIAL UPDATE LOGIN email==> ', email);
+
+  console.log(
+    'SOCIAL UPDATE LOGIN==>1 ',
+    `${BASE_URL}${ENDPOINTS.UPDATE_SOCIAL_LOGIN}=${email}`,
+  );
+
+  const res = await axios.put(
+    `${BASE_URL}${ENDPOINTS.UPDATE_SOCIAL_LOGIN}=${email}`,
+    params,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Accept: 'application/json',
+      },
+    },
+  );
   return res.data;
 };
 
@@ -28,6 +50,7 @@ export const registerUser = async params => {
   const res = await axios.post(`${BASE_URL}${ENDPOINTS.REGISTER}`, params, {
     headers: {
       'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
   });
   return res.data;
@@ -75,7 +98,7 @@ export const showInterestService = async params => {
   return res.data;
 };
 
-export const resetPassword = async ( params) => {
+export const resetPassword = async params => {
   // console.log('params', params);
   const res = await axios.post(`${BASE_URL}${ENDPOINTS.RESET_PASS}`, params, {
     headers: {
