@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Input, IconProps, Icon} from 'react-native-elements';
-import {useStore} from 'react-redux';
+import {Input, Icon} from 'react-native-elements';
 import {family, size, colors, WP} from '../../shared/exporter';
 
 const AppInput = ({
@@ -27,6 +26,8 @@ const AppInput = ({
   maxLength,
   error,
   textEntry,
+  inputContainerStyle,
+  icon,
 }) => {
   const [showPass, setShowPass] = React.useState(secureTextEntry);
 
@@ -38,9 +39,11 @@ const AppInput = ({
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         secureTextEntry={textEntry || showPass}
-        inputContainerStyle={styles.inputContainerStyle}
+        inputContainerStyle={[
+          styles.inputContainerStyle,
+          {...inputContainerStyle},
+        ]}
         inputStyle={styles.inputStyle}
-        leftIcon={leftIcon}
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
@@ -71,6 +74,7 @@ const AppInput = ({
             rightIcon
           )
         }
+        leftIcon={leftIcon}
       />
     </View>
   );

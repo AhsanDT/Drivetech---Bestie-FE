@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {WP, size, colors, family, appIcons} from '../../shared/exporter';
+import {WP, size, colors, family} from '../../shared/exporter';
 
 const AppButton = ({
   title,

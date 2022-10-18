@@ -36,10 +36,6 @@ const Login = ({navigation}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // askForPermissions();
-  }, []);
-
   const onPressSignIn = async value => {
     const check = await checkConnected();
     if (check) {

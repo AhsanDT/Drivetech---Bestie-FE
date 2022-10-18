@@ -20,6 +20,8 @@ export {
   forgotFormFields,
   createFormFields,
   CreatePasswordVS,
+  RegisterFields,
+  RegisterVS,
 } from './utilities/validations';
 
 export {
@@ -38,6 +40,8 @@ export {
   Selection_List,
   Pronoun_List,
   image_option,
+  Equipment_List,
+  Camera_List,
 } from './utilities/constant';
 export {header, authHeader} from './utilities/headers';
 export {

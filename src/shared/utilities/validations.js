@@ -2,14 +2,14 @@ import * as yup from 'yup';
 
 import {emailRegex} from './constant';
 
-export const CustomerRegisterStep1Fields = {
-  address: '',
-  street: '',
-  postCode: '',
-  province: '',
-  barangay: '',
-  city: '',
-  country: '',
+export const RegisterFields = {
+  fullName: '',
+  lastName: '',
+  phone: '',
+  // location: '',
+  // experience: 'him/he',
+  age: '',
+  // gender: 'Male',
 };
 
 export const CustomerRegisterStep2Fields = {
@@ -21,7 +21,7 @@ export const CustomerRegisterStep2Fields = {
   password: '',
 };
 
-export const SPRegisterStep1Fields = {
+export const SPRegisterFields = {
   city: '',
   country: '',
 };
@@ -81,18 +81,15 @@ export const SignUpVS = yup.object().shape({
   age: yup.string().required('Age Requried'),
 });
 
-// export const CustomerRegisterStep2VS = yup.object().shape({
-//   firstName: yup.string().required('First Name Required').label('firstName'),
-//   lastName: yup.string().required('Last Name Required').label('lastName'),
-//   email: yup
-//     .string()
-//     .email('please Enter Valid Email')
-//     .required('Email Address Required')
-//     .label('email'),
-//   phone: yup.string().required('Phone Number Required').label('phone'),
-//   govtID: yup.string().required('Govt ID Required').label('govtID'),
-//   password: yup.string().required('Password Required').label('password'),
-// });
+export const RegisterVS = yup.object().shape({
+  fullName: yup.string().required('First Name Required'),
+  lastName: yup.string().required('Last Name Required'),
+  phone: yup.string().required('Phone Number Required'),
+  // location: yup.string().required('Location Required'),
+  // experience: yup.string().required('Experience Required'),
+  age: yup.string().required('Age Requried'),
+  // gender: yup.string().required('Gender Requried'),
+});
 
 // export const SPRegisterStep1VS = yup.object().shape({
 //   city: yup.string().required('City Name Required').label('city'),

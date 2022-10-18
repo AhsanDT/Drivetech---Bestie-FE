@@ -33,7 +33,6 @@ const ProfileImage = ({navigation}) => {
     setShow(false);
     try {
       launchCamera(image_options, response => {
-        // setImage(response.assets[0].uri);
         if (response.didCancel) {
         } else if (response.error) {
         } else if (response.customButton) {

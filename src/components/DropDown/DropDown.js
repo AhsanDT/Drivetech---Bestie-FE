@@ -2,8 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {colors, family, size, WP, scrWidth} from '../../shared/exporter';
 import {Dropdown} from 'react-native-element-dropdown';
-import {Divider, Icon} from 'react-native-elements';
-import {AppInput} from '../Inputs/AppInput';
+import {Icon} from 'react-native-elements';
 
 export const DropDown = ({
   options,
@@ -47,13 +46,19 @@ export const DropDown = ({
           />
         )}
         style={styles.dropStyle}
-        fontFamily={family.Poppin_SemiBold}
         renderItem={item => renderItem(item)}
+        // errorMessage={touched && errorMessage}
+        // errorStyle={styles.errorStyle}
+        // renderErrorMessage={renderErrorMessage}
         // inputSearchStyle={styles.inputSearchStyle}
         // search
         // searchPlaceholder="Specify here"
       />
-
+      {touched && error && (
+        <View>
+          <Text style={styles.errorStyle}>{error}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -96,12 +101,12 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   errorStyle: {
-    fontSize: size.text_10,
-    color: colors.p1,
-    paddingHorizontal: 25,
+    fontSize: size.text_12,
+    color: colors.red,
+    paddingHorizontal: 13,
     textAlign: 'left',
     fontFamily: family.Poppin_Regular,
-    marginVertical: WP('-5'),
+    marginTop: WP('2'),
   },
   inputSearchStyle: {
     height: 40,

@@ -1,29 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {Text, View, Alert, ScrollView, SafeAreaView} from 'react-native';
-import {
-  Spacer,
-  AppHeader,
-  AppLoader,
-  BackHeader,
-  MyStatusBar,
-} from '../../../components';
-// import RenderHtml from 'react-native-render-html';
-import {
-  WP,
-  scrWidth,
-  networkText,
-  checkConnected,
-} from '../../../shared/exporter';
+import React, {useState} from 'react';
+import {Text, View, ScrollView, SafeAreaView} from 'react-native';
+import {Spacer, AppHeader} from '../../../components';
+import {WP} from '../../../shared/exporter';
 import styles from './styles';
 
 const PrivacyPolicy = ({navigation}) => {
-  const [loading, setLoading] = useState(false);
-  const [privacyPolicy, setPrivacyPolicy] = useState('');
-
   return (
     <SafeAreaView style={styles.rootContainer}>
-      {/* <AppLoader loading={loading} /> */}
-      {/* <MyStatusBar /> */}
       <AppHeader
         backIcon
         title={'Privacy Policy'}

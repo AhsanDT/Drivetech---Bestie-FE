@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {AppButton, AppHeader, AppInput, DropDown} from '../../../components';
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  DropDown,
+  LocationInput,
+} from '../../../components';
+import {Icon} from 'react-native-elements';
 import styles from './styles';
 import {
   colors,
@@ -10,9 +17,11 @@ import {
   SignUpVS,
   Selection_List,
   Pronoun_List,
+  RegisterVS,
+  RegisterFields,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
-const SignUp = ({navigation}) => {
+const Register = ({navigation}) => {
   const onSubmit = e => {
     navigation.navigate('ProfileImage');
   };
@@ -22,11 +31,11 @@ const SignUp = ({navigation}) => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <AppHeader title={'Create Your\nAccount'} />
         <Formik
-          initialValues={SignUPFormFields}
+          initialValues={RegisterFields}
           onSubmit={values => {
             onSubmit(values);
           }}
-          validationSchema={SignUpVS}>
+          validationSchema={RegisterVS}>
           {({
             values,
             handleChange,
@@ -39,13 +48,13 @@ const SignUp = ({navigation}) => {
           }) => (
             <View>
               <AppInput
-                title={'First Name'}
-                placeholder={'Enter your first name'}
+                title={'Full Name'}
+                placeholder={'Enter your Full name'}
                 placeholderTextColor={colors.g3}
-                onChangeText={handleChange('firstName')}
-                value={values.firstName}
-                touched={touched.firstName}
-                errorMessage={errors.firstName}
+                onChangeText={handleChange('fullName')}
+                value={values.fullName}
+                touched={touched.fullName}
+                errorMessage={errors.fullName}
               />
               <AppInput
                 title={'Last Name'}
@@ -66,23 +75,26 @@ const SignUp = ({navigation}) => {
                 errorMessage={errors.phone}
                 keyboardType={'number-pad'}
               />
-              <AppInput
-                title={'Country'}
-                placeholder={'Select'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('country')}
-                value={values.country}
-                touched={touched.country}
-                errorMessage={errors.country}
+
+              <LocationInput
+                title={'Location'}
+                placeholder={'Set your location'}
+                // error={errors.location}
+                // touched={touched.location}
+                onChangeText={value => {
+                  console.log('value', value);
+                  handleChange('location', value);
+                }}
               />
-              <AppInput
-                title={'City'}
+              <DropDown
+                label={'Experience'}
                 placeholder={'Select'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('city')}
-                value={values.city}
-                touched={touched.city}
-                errorMessage={errors.city}
+                containerStyle={styles.dropContainer}
+                options={Pronoun_List}
+                value={values.experience}
+                // touched={touched.experience}
+                // error={errors.experience}
+                onChangeValue={txt => handleChange('experience', txt)}
               />
               <AppInput
                 title={'Age'}
@@ -95,24 +107,16 @@ const SignUp = ({navigation}) => {
                 keyboardType={'number-pad'}
                 maxLength={2}
               />
-
               <DropDown
                 label={'Sex'}
                 placeholder={'Select'}
                 containerStyle={styles.dropContainer}
                 options={Selection_List}
-                value={values.sex}
-                onChangeValue={txt => handleChange('sex', txt)}
+                value={values.gender}
+                // touched={touched.gender}
+                // error={errors.gender}
+                onChangeValue={txt => handleChange('gender', txt)}
                 searchInput={true}
-              />
-
-              <DropDown
-                label={'Pronoun'}
-                placeholder={'Select'}
-                containerStyle={styles.dropContainer}
-                options={Pronoun_List}
-                value={values.pronoun}
-                onChangeValue={txt => handleChange('pronoun', txt)}
               />
 
               <AppButton
@@ -133,4 +137,4 @@ const SignUp = ({navigation}) => {
   );
 };
 
-export default SignUp;
+export default Register;

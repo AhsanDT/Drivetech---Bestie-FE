@@ -1,5 +1,6 @@
 //Header
 export * from './Header/AppHeader';
+export * from './Header/Header';
 
 //Button
 export * from './AppButton/AppButton';
@@ -13,6 +14,7 @@ export * from './Loaders/AppLoader';
 
 //Inputs
 export * from './Inputs/AppInput';
+export * from './Inputs/LocationInput';
 
 //Modals
 export * from './Modal/DeleteModal';
@@ -34,3 +36,13 @@ export * from './Footer/AuthFooter';
 
 // Drop Down
 export * from './DropDown/DropDown';
+
+//Home
+export * from './Home/ImageCard';
+export * from './Home/GrayWrapper';
+
+// Camera
+export * from './Camera/Camera';
+
+// List
+export * from './List/TalentList';

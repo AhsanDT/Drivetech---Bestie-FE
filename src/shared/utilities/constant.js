@@ -121,6 +121,58 @@ const Pronoun_List = [
   },
 ];
 
+const Camera_List = [
+  {
+    id: 0,
+    title: 'iPhone',
+    icon: appIcons.phone,
+  },
+  {
+    id: 1,
+    title: 'Digital Camera',
+    icon: appIcons.camera2,
+  },
+  {
+    id: 2,
+    title: 'Film Camera',
+    icon: appIcons.filmCamera,
+  },
+  {
+    id: 3,
+    title: '8mm',
+    icon: appIcons.pixel,
+  },
+  {
+    id: 4,
+    title: 'Polaroid',
+    icon: appIcons.polaroid,
+  },
+  {
+    id: 5,
+    title: 'Camcorder',
+    icon: appIcons.camCorder,
+  },
+];
+
+const Equipment_List = [
+  {
+    id: 0,
+    title: 'Prime Ienses',
+  },
+  {
+    id: 1,
+    title: 'Tripod',
+  },
+  {
+    id: 2,
+    title: 'Reflector',
+  },
+  {
+    id: 3,
+    title: 'Carrying gear',
+  },
+];
+
 export {
   web_client_id,
   stripe_publishableKey,
@@ -130,4 +182,6 @@ export {
   Selection_List,
   Pronoun_List,
   image_option,
+  Camera_List,
+  Equipment_List,
 };
