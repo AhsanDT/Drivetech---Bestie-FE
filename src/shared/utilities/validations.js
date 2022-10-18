@@ -92,7 +92,7 @@ export const CreatePasswordVS = yup.object().shape({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .required('Confirm New Password Required')
-    .oneOf([yup.ref('password'), null], 'New Passwords do not match'),
+    .oneOf([yup.ref('password'), null], ' Password does not match'),
 });
 
 export const ForgotPasswordVS = yup.object().shape({

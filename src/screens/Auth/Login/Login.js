@@ -9,6 +9,7 @@ import {
   PermissionsAndroid,
   Platform,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -61,7 +62,7 @@ const Login = ({navigation}) => {
           ref.current.resetForm();
         };
         const cbFailure = err => {
-          Alert.alert('' || err);
+          Alert.alert('' || 'Error', err);
           setloading(false);
           console.log('ERROR', err);
         };
@@ -200,6 +201,11 @@ const Login = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar
+          backgroundColor={'#fff'}
+          translucent={false}
+          barStyle={'dark-content'}
+        />
         <ScrollView>
           <AppHeader
             title={'Hi, Welcome Back! '}
@@ -254,6 +260,7 @@ const Login = ({navigation}) => {
                     style={styles.forgotText}
                     onPress={() => {
                       navigation.navigate('Forgot');
+                      ref.current.resetForm();
                     }}>
                     Forgot your password?
                   </Text>
@@ -297,7 +304,7 @@ const Login = ({navigation}) => {
             <Text
               style={styles.termStyle}
               onPress={() => {
-                navigation.replace('Auth', {screen: 'PrivacyPolicy'});
+                navigation.navigate('Auth', {screen: 'PrivacyPolicy'});
               }}>
               {' '}
               Privacy & Policy
