@@ -38,7 +38,6 @@ const CreatePassword = ({navigation, route}) => {
         };
         dispatch(resetPassRequest(data, cbSuccess, cbFailure));
       } catch (error) {
-        console.log('ERROR', error);
         setloading(false);
       }
     } else {

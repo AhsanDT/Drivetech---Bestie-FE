@@ -66,7 +66,6 @@ const authReducer = (state = initialState, action = {}) => {
         userInfo: null,
       };
     case TYPES.SIGNUP_SUCCESS_REQUEST:
-      console.log('TYPES.SIGNUP_SUCCESS_REQUEST==>', payload);
       return {
         ...state,
         loading: false,
@@ -85,14 +84,6 @@ const authReducer = (state = initialState, action = {}) => {
     case TYPES.UPDATE_SIGNUP_OBJECT:
       state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
       return state;
-
-    // state.signupObject[Object.keys(actions.payload)[0]] = Object.values(
-    //   actions.payload,
-    // )[0];
-    // return {
-    //   ...state,
-    //   signupObject: payload,
-    // };
 
     case TYPES.FORGOT_PASSWORD_SUCCESS:
       return {
