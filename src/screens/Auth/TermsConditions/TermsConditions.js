@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {AppButton, AppHeader} from '../../../components';
 import {colors, HP, WP} from '../../../shared/exporter';
@@ -13,6 +13,11 @@ const TermsConditions = ({navigation}) => {
         onPressBack={() => {
           navigation.goBack();
         }}
+      />
+      <StatusBar
+        translucent={false}
+        barStyle={'light-content'}
+        backgroundColor={'#fff'}
       />
       <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={styles.textContainer}>
