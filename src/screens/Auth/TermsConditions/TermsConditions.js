@@ -43,6 +43,7 @@ const TermsConditions = ({navigation}) => {
             width={WP('90')}
             height={WP('14')}
             title={'I Accept'}
+            onPress={() => navigation.goBack()}
           />
         </View>
       </ScrollView>

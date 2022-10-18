@@ -43,7 +43,7 @@ export {ShowInterestButton};
 
 const styles = StyleSheet.create({
   mainView: {
-    height: platformOrientedCode(HP('5'), HP('5')),
+    height: platformOrientedCode(HP('5.5'), HP('5.5')),
     borderColor: colors.g2,
     borderWidth: 1,
     borderRadius: 25,

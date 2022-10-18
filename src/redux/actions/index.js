@@ -9,4 +9,6 @@ export {
   resetPassRequest,
   logoutRequset,
   getInterestList,
+  updateSignupObject,
+  updateSocialLoginRequest,
 } from './auth-actions/auth-action';

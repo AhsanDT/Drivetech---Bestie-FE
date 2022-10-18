@@ -11,28 +11,37 @@ export const loginRequest = (params, cbSuccess, cbFailure) => {
 };
 
 //Social Login Action
-export const socialLoginRequest = (params, cbSuccess, cbFailure) => {
+export const socialLoginRequest = (data, cbSuccess, cbFailure) => {
   return {
     type: TYPES.SOCIAL_LOGIN_REQUEST,
-    params,
+    data,
+    cbSuccess,
+    cbFailure,
+  };
+};
+export const updateSocialLoginRequest = (data, email, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.UPDATE_SOCIAL_LOGIN_REQUEST,
+    data,
+    email,
     cbSuccess,
     cbFailure,
   };
 };
 
 //Sign up obj Action
-export const signUpRequest = (params, cbSuccess, cbFailure) => {
+export const signUpRequest = (data, cbSuccess, cbFailure) => {
   return {
-    type: TYPES.SIGNUP_REQUEST_REQUEST,
-    params,
+    type: TYPES.SIGNUP_REQUEST,
+    data,
     cbSuccess,
     cbFailure,
   };
 };
-export const updateSignupObject = params => {
+export const updateSignupObject = payload => {
   return {
     type: TYPES.UPDATE_SIGNUP_OBJECT,
-    params,
+    payload,
   };
 };
 

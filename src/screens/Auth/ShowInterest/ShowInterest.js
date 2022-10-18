@@ -7,18 +7,22 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {ShowInterestButton, AppHeader, AppButton} from '../../../components';
 import styles from './styles';
-import {useDispatch, useSelector} from 'react-redux';
-import {getInterestList} from '../../../redux/actions';
+import {getInterestList, updateSignupObject} from '../../../redux/actions';
 import {appIcons, WP, HP, colors} from '../../../shared/exporter';
+import {useDispatch, useSelector} from 'react-redux';
+import * as types from '../../../redux/actions/types/auth_types';
 let count = 0;
-const ShowInterest = navigation => {
+const ShowInterest = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
+  const {signupObject} = useSelector(state => state.auth);
+
   useEffect(() => {
     getInterests();
   }, []);
@@ -53,6 +57,35 @@ const ShowInterest = navigation => {
     } else {
     }
   };
+
+  const handleNavigation = () => {
+    if (count < 1) {
+      Alert.alert('Alert', 'Please select your interests.');
+    } else {
+      // dispatch({
+      //   type: types.UPDATE_SIGNUP_OBJECT,
+      //   payload: {
+      //     interestList: list.filter(obj => obj.selected),
+      //   },
+      // });
+      dispatch(
+        updateSignupObject({interestList: list.filter(obj => obj.selected)}),
+      );
+
+      console.log('interest list==> ', signupObject);
+
+      navigation.navigate('UploadImage');
+    }
+
+    // dispatch({
+    //   type: types.UPDATE_SIGNUP_OBJECT,
+    //   payload: {
+    //     interestList: list.filter(obj => obj.selected),
+    //   },
+    // });
+    // navigation.navigate('UploadImage');
+  };
+
   const footer = () => {
     return (
       <View style={{paddingBottom: 15}}>
@@ -93,7 +126,7 @@ const ShowInterest = navigation => {
             bgColor={colors.b1}
             title={'Next'}
             height={WP('14')}
-            onPress={() => handleNext()}
+            onPress={() => handleNavigation()}
           />
         </View>
       </View>
@@ -114,24 +147,28 @@ const ShowInterest = navigation => {
         Don't be shy, the more you add the better the algorithm will match you
         with your ideal bestie
       </Text>
-      <FlatList
-        data={showLess ? list : list.slice(0, 6)}
-        numColumns={3}
-        horizontal={false}
-        ListFooterComponent={() => footer()}
-        columnWrapperStyle={{
-          flexWrap: 'wrap',
-        }}
-        style={styles.flatList}
-        contentContainerStyle={styles.contentContainerStyle}
-        key={(item, index) => item + index.toString()}
-        renderItem={({item, index}) => (
-          <ShowInterestButton
-            item={item}
-            onPress={() => itemPressed(item, index)}
-          />
-        )}
-      />
+      {list?.length > 0 ? (
+        <FlatList
+          data={showLess ? list : list.slice(0, 6)}
+          numColumns={3}
+          horizontal={false}
+          ListFooterComponent={() => footer()}
+          columnWrapperStyle={{
+            flexWrap: 'wrap',
+          }}
+          style={styles.flatList}
+          contentContainerStyle={styles.contentContainerStyle}
+          key={(item, index) => item + index.toString()}
+          renderItem={({item, index}) => (
+            <ShowInterestButton
+              item={item}
+              onPress={() => itemPressed(item, index)}
+            />
+          )}
+        />
+      ) : (
+        <ActivityIndicator color={'#000'} />
+      )}
       {/* <TouchableOpacity onPress={() => setshowLess(!showLess)}>
         <View style={styles.showAllView}>
           <Text style={styles.showText}>

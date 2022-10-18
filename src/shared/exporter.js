@@ -20,6 +20,8 @@ export {
   forgotFormFields,
   createFormFields,
   CreatePasswordVS,
+  SocailSignUpVS,
+  SocialSignUPFormFields,
 } from './utilities/validations';
 
 export {

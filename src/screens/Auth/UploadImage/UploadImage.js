@@ -12,11 +12,17 @@ import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
 import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
+import {ScrollView} from 'react-native-gesture-handler';
+import * as types from '../../../redux/actions/types/auth_types';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateSignupObject} from '../../../redux/actions';
 const UploadImage = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [frontImage, setFrontImage] = useState('');
   const [imageStatus, setImageStatus] = useState('');
   const [backImage, setBackImage] = useState('');
+  const dispatch = useDispatch();
+  const {signupObject} = useSelector(state => state.auth);
 
   //Handlers
   const showGallery = () => {
@@ -34,10 +40,15 @@ const UploadImage = ({navigation}) => {
           } else {
             console.log('Response---', response?.assets[0]);
           }
-          if (imageStatus == 'back') {
-            setBackImage(response?.assets[0]);
-          } else {
-            setFrontImage(response?.assets[0]);
+          if (response?.assets) {
+            if (imageStatus == 'back') {
+              setBackImage(response?.assets[0]);
+              // updateSignupObject({idCardBack: response?.assets[0]});
+              // updateSignupObject({idCardBack: backImage});
+            } else {
+              setFrontImage(response?.assets[0]);
+              // updateSignupObject({idCardfront: response?.assets[0]});
+            }
           }
         });
       } catch (error) {
@@ -60,11 +71,14 @@ const UploadImage = ({navigation}) => {
           } else if (response.customButton) {
           } else {
           }
-          if (imageStatus == 'back') {
-            console.log('response?.assets[0]', response?.assets[0]);
-            setBackImage(response?.assets[0]);
-          } else {
-            setFrontImage(response?.assets[0]);
+          if (response?.assets) {
+            if (imageStatus == 'back') {
+              setBackImage(response?.assets[0]);
+              // updateSignupObject({idCardBack: backImage});
+            } else {
+              setFrontImage(response?.assets[0]);
+              // updateSignupObject({idCardfront: response?.assets[0]});
+            }
           }
         });
       } catch (error) {
@@ -96,75 +110,84 @@ const UploadImage = ({navigation}) => {
       console.warn(err);
     }
   };
+  const handleNavigation = () => {
+    dispatch(updateSignupObject({idCardfront: frontImage}));
+    dispatch(updateSignupObject({idCardBack: backImage}));
+    setTimeout(() => {
+      navigation.navigate('ImageVerification');
+    }, 300);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <AppHeader title={'Upload Your\nID Photo'} />
-      <View style={styles.contentContainer}>
-        <Text style={styles.textStyle}>Front</Text>
-        <TouchableOpacity
-          style={styles.uploadImageContainer}
-          activeOpacity={0.7}
-          onPress={() => {
-            setShow(true);
-            setImageStatus('front');
-          }}>
-          <Image
-            source={frontImage === '' ? appIcons.camera : frontImage}
-            resizeMode="cover"
-            style={
-              frontImage ? styles.uriImageContainer : styles.cameraContainer
-            }
-          />
-        </TouchableOpacity>
-      </View>
+      <ScrollView>
+        <View style={styles.contentContainer}>
+          <Text style={styles.textStyle}>Front</Text>
+          <TouchableOpacity
+            style={styles.uploadImageContainer}
+            activeOpacity={0.7}
+            onPress={() => {
+              setShow(true);
+              setImageStatus('front');
+            }}>
+            <Image
+              source={frontImage === '' ? appIcons.camera : frontImage}
+              resizeMode="contain"
+              style={
+                frontImage ? styles.uriImageContainer : styles.cameraContainer
+              }
+            />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.contentContainer}>
-        <Text style={styles.textStyle}>Back</Text>
-        <TouchableOpacity
-          style={styles.uploadImageContainer}
-          activeOpacity={0.7}
-          onPress={() => {
-            setShow(true);
-            setImageStatus('back');
-          }}>
-          <Image
-            source={backImage === '' ? appIcons.camera : backImage}
-            resizeMode="cover"
-            style={
-              backImage ? styles.uriImageContainer : styles.cameraContainer
-            }
+        <View style={styles.contentContainer}>
+          <Text style={styles.textStyle}>Back</Text>
+          <TouchableOpacity
+            style={styles.uploadImageContainer}
+            activeOpacity={0.7}
+            onPress={() => {
+              setShow(true);
+              setImageStatus('back');
+            }}>
+            <Image
+              source={backImage === '' ? appIcons.camera : backImage}
+              resizeMode="contain"
+              style={
+                backImage ? styles.uriImageContainer : styles.cameraContainer
+              }
+            />
+          </TouchableOpacity>
+        </View>
+        <ImagePickerModal
+          show={show}
+          onPressHide={() => setShow(false)}
+          onPressCamera={() => showCamera()}
+          onPressGallery={() => showGallery()}
+        />
+        <View style={styles.ButtonContainer}>
+          <AppButton
+            title={'Back'}
+            width={WP('35')}
+            height={WP('13')}
+            bgColor={colors.g9}
+            textColor={colors.g10}
+            onPress={() => {
+              navigation.goBack();
+            }}
           />
-        </TouchableOpacity>
-      </View>
-      <ImagePickerModal
-        show={show}
-        onPressHide={() => setShow(false)}
-        onPressCamera={() => showCamera()}
-        onPressGallery={() => showGallery()}
-      />
-      <View style={styles.ButtonContainer}>
-        <AppButton
-          title={'Back'}
-          width={WP('35')}
-          height={WP('13')}
-          bgColor={colors.g9}
-          textColor={colors.g10}
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
-        <AppButton
-          title={'Next'}
-          width={WP('35')}
-          height={WP('13')}
-          bgColor={!frontImage || !backImage ? colors.g1 : colors.b1}
-          disabled={frontImage || backImage ? false : true}
-          onPress={() => {
-            navigation.navigate('ImageVerification');
-          }}
-        />
-      </View>
+          <AppButton
+            title={'Next'}
+            width={WP('35')}
+            height={WP('13')}
+            bgColor={!frontImage || !backImage ? colors.g1 : colors.b1}
+            disabled={frontImage && backImage ? false : true}
+            onPress={() => {
+              handleNavigation();
+            }}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

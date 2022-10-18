@@ -23,6 +23,11 @@ target 'Bestie' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'FirebaseCoreInternal', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+
   target 'BestieTests' do
     inherit! :complete
     # Pods for testing
@@ -38,6 +43,7 @@ target 'Bestie' do
         config.build_settings['HEADER_SEARCH_PATHS'] << '"$(PODS_CONFIGURATION_BUILD_DIR)/React-bridging/react_bridging.framework/Headers" '
       end
     end
+    
 #              ===============
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)

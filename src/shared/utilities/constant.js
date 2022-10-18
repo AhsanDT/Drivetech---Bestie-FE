@@ -6,20 +6,20 @@ const web_client_id =
 const stripe_publishableKey =
   'pk_test_51Lf25xJxAUizx0q5OIWfv41879r73FiP61ItNOlcUbE6MsGY8WCmULqWC9KrYyCYz18pbUBPDM7Lbb8N3giMguHh00P7XAmQlT';
 
-const image_options = {
-  title: 'Load Photo',
-  cameraType: 'front',
-  customButtons: [
-    {name: 'button_id_1', title: 'CustomButton 1'},
-    {name: 'button_id_2', title: 'CustomButton 2'},
-  ],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-};
+// const image_options = {
+//   title: 'Load Photo',
+//   cameraType: 'front',
+//   customButtons: [
+//     {name: 'button_id_1', title: 'CustomButton 1'},
+//     {name: 'button_id_2', title: 'CustomButton 2'},
+//   ],
+//   storageOptions: {
+//     skipBackup: true,
+//     path: 'images',
+//   },
+// };
 
-const image_option = {
+const image_options = {
   width: 400,
   height: 400,
   multiple: true,
@@ -112,8 +112,8 @@ const Pronoun_List = [
     value: 'she/her',
   },
   {
-    title: 'him/he',
-    value: 'him/he',
+    title: 'he/him',
+    value: 'he/him',
   },
   {
     title: 'they/them',
@@ -129,5 +129,5 @@ export {
   interestList,
   Selection_List,
   Pronoun_List,
-  image_option,
+  // image_option,
 };

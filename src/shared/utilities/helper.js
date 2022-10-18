@@ -55,8 +55,9 @@ export const responseValidator = (response, errorMsg) => {
       return 'Something went wrong!';
     }
   } else if (errorCode == 422) {
+    console.log('errorMsg', errorMsg);
     if (errorMsg) {
-      const msg = errorMsg?.message;
+      const msg = errorMsg[0] || errorMsg?.message;
       return msg;
     } else {
       return 'Something went wrong!';
