@@ -44,10 +44,8 @@ const VerifyOtp = ({navigation, route}) => {
               email: email,
             });
             setloading(false);
-            console.log('res', response);
           };
           const cbFailure = err => {
-            console.log('error', err);
             Alert.alert('' || err);
             setloading(false);
           };

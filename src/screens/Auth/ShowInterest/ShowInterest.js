@@ -15,7 +15,6 @@ import styles from './styles';
 import {getInterestList, updateSignupObject} from '../../../redux/actions';
 import {appIcons, WP, HP, colors} from '../../../shared/exporter';
 import {useDispatch, useSelector} from 'react-redux';
-import * as types from '../../../redux/actions/types/auth_types';
 let count = 0;
 const ShowInterest = ({navigation}) => {
   const [list, setlist] = useState([]);
@@ -62,12 +61,6 @@ const ShowInterest = ({navigation}) => {
     if (count < 1) {
       Alert.alert('Alert', 'Please select your interests.');
     } else {
-      // dispatch({
-      //   type: types.UPDATE_SIGNUP_OBJECT,
-      //   payload: {
-      //     interestList: list.filter(obj => obj.selected),
-      //   },
-      // });
       dispatch(
         updateSignupObject({interestList: list.filter(obj => obj.selected)}),
       );
@@ -76,14 +69,6 @@ const ShowInterest = ({navigation}) => {
 
       navigation.navigate('UploadImage');
     }
-
-    // dispatch({
-    //   type: types.UPDATE_SIGNUP_OBJECT,
-    //   payload: {
-    //     interestList: list.filter(obj => obj.selected),
-    //   },
-    // });
-    // navigation.navigate('UploadImage');
   };
 
   const footer = () => {
@@ -169,44 +154,6 @@ const ShowInterest = ({navigation}) => {
       ) : (
         <ActivityIndicator color={'#000'} />
       )}
-      {/* <TouchableOpacity onPress={() => setshowLess(!showLess)}>
-        <View style={styles.showAllView}>
-          <Text style={styles.showText}>
-            {showLess ? 'Show less' : 'Show all'}
-          </Text>
-          <Image
-            source={appIcons.arrow}
-            style={[
-              styles.arrow,
-              {transform: [{rotate: showLess ? '180 deg' : '0 deg'}]},
-            ]}
-            resizeMode="contain"
-          />
-        </View>
-      </TouchableOpacity> */}
-      {/* <View
-        style={{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          width: WP('90'),
-          alignSelf: 'center',
-        }}>
-        <AppButton
-          width={WP('30')}
-          bgColor={colors.g8}
-          title={'Back'}
-          height={WP('14')}
-          onPress={() => navigation.goBack()}
-          textColor={colors.g9}
-        />
-        <AppButton
-          width={WP('30')}
-          bgColor={colors.b1}
-          title={'Next'}
-          height={WP('14')}
-          onPress={() => handleNext()}
-        />
-      </View> */}
     </SafeAreaView>
   );
 };
