@@ -2,9 +2,7 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import Login from '../../screens/Auth/Login';
-
 import ShowInterest from '../../screens/Auth/ShowInterest';
-
 import SignUp from '../../screens/Auth/SignUp/SignUp';
 import ForgotPassword from '../../screens/Auth/ForgotPassword';
 import CreatePassword from '../../screens/Auth/CreatePassword';
@@ -25,7 +23,7 @@ const Stack = createNativeStackNavigator();
 function AuthStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Test"
+      initialRouteName="Login"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="ShowInterest" component={ShowInterest} />

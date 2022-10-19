@@ -1,19 +1,45 @@
-import React, {useState} from 'react';
-import {Text, View, ScrollView, SafeAreaView} from 'react-native';
-import {Spacer, AppHeader} from '../../../components';
-import {WP} from '../../../shared/exporter';
+import React, {useState, useEffect} from 'react';
+import {
+  Text,
+  View,
+  Alert,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import {
+  Spacer,
+  AppHeader,
+  AppLoader,
+  BackHeader,
+  MyStatusBar,
+} from '../../../components';
+// import RenderHtml from 'react-native-render-html';
+import {
+  WP,
+  scrWidth,
+  networkText,
+  checkConnected,
+} from '../../../shared/exporter';
 import styles from './styles';
 
 const PrivacyPolicy = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
+      {/* <AppLoader loading={loading} /> */}
+      <StatusBar
+        backgroundColor={'#fff'}
+        translucent={false}
+        barStyle={'dark-content'}
+      />
       <AppHeader
         backIcon
         title={'Privacy Policy'}
         onPressBack={() => {
-          navigation.navigate('Login');
+          navigation.goBack();
         }}
       />
+
       <Spacer androidVal={WP('4')} iOSVal={WP('4')} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.contentContainer}>
@@ -35,7 +61,7 @@ const PrivacyPolicy = ({navigation}) => {
             kept up to date. Disclaimer To the maximum extent permitted by
             applicable law, we exclude all representations, warranties and
             conditions relating to our website and the use of this website.
-            Nothing in this disclaimer will:
+            Nothing in this disclaimer will.
           </Text>
         </View>
       </ScrollView>

@@ -35,39 +35,39 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>NSCameraUsageDescription</key>
-	<string>Bestie wants to access your camera to take your id card</string>
-<key>NSCameraUsageDescription</key>
-<string>Bestie needs access to your Camera.</string>
-
-<!-- optionally, if you want to record audio: -->
-<key>NSMicrophoneUsageDescription</key>
-<string>Bestie needs access to your Microphone.</string>
-
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
+		<key>NSCameraUsageDescription</key>
+		<string>Bestie needs access to your Camera.</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>Application requires user’s location for better user experience.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Application requires user’s location for better user experience.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Application requires user’s location for better user experience.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Bestie needs access to your Microphone.</string>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+			 	<key>CFBundleURLSchemes</key>
+				<string>Editor</string>
+			 	<key>CFBundleURLSchemes</key>
+				<array>
+				    <string>fb639427440890710</string>
+				 	<string>com.googleusercontent.apps.253853545750-aihv7c0o5nkp0p10un68v3m4iqso2skq</string>
+			  </array>
+		    </dict>
+ 		</array>
+	<key>FacebookAppID</key>
+	<string>639427440890710</string>
+	<key>FacebookClientToken</key>
+	<string>49b20ba2d03b176e8c3ffb7569e6e7b9</string>
+	<key>FacebookDisplayName</key>
+	<string>Bestie</string>
+     <key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>armv7</string>
+	<string>fbapi</string>
+	<string>fb-messenger-share-api</string>
 	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>Application requires user’s location for better user experience.</string>
-
-<key>NSLocationAlwaysUsageDescription</key>
-<string>Application requires user’s location for better user experience.</string>
-
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>Application requires user’s location for better user experience.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -93,5 +93,19 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -22,6 +22,8 @@ export {
   CreatePasswordVS,
   RegisterFields,
   RegisterVS,
+  SocailSignUpVS,
+  SocialSignUPFormFields,
 } from './utilities/validations';
 
 export {

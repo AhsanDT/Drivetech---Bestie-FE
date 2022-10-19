@@ -27,7 +27,7 @@ export const DropDown = ({
     <View style={[styles.container, {...containerStyle}]}>
       {label && <Text style={styles.textStyle}>{label}</Text>}
       <Dropdown
-        dropdownPosition={'bottom'}
+        dropdownPosition={'auto'}
         containerStyle={styles.menuStyle}
         data={options || []}
         placeholder={placeholder}
@@ -36,6 +36,7 @@ export const DropDown = ({
         value={value}
         onChange={onChangeValue}
         valueField="value"
+        autoScroll
         labelField="title"
         renderRightIcon={() => (
           <Icon
@@ -68,9 +69,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('2'),
   },
   menuStyle: {
-    borderRadius: 15,
-    height: WP('35'),
+    borderRadius: 10,
+    // height: WP('35'),
     width: scrWidth / 1.1,
+    // backgroundColor: 'red',
   },
   dropStyle: {
     width: WP('90'),

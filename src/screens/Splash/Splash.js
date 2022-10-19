@@ -32,7 +32,7 @@ const Splash = ({navigation}) => {
         title={'Get Started'}
         style={styles.btnContainer}
         onPress={() => {
-          navigation.replace('Auth', {screen: 'UploadImage'});
+          navigation.navigate('Auth', {screen: 'Login'});
         }}
       />
       <View style={styles.accountContainer}>
@@ -47,13 +47,13 @@ const Splash = ({navigation}) => {
           </Text>
         </Text>
       </View>
-      {/* <View style={styles.footerContainer}>
+      <View style={styles.footerContainer}>
         <Text style={styles.BottomTextStyle}>
           By signing in to you account, you agree to our {'\n'}
           <Text
             style={styles.termStyle}
             onPress={() => {
-              navigation.replace('Auth', {screen: 'Login'});
+              navigation.navigate('Auth', {screen: 'PrivacyPolicy'});
             }}>
             Privacy & Policy
           </Text>
@@ -61,12 +61,12 @@ const Splash = ({navigation}) => {
           <Text
             style={styles.termStyle}
             onPress={() => {
-              navigation.replace('Auth', {screen: 'Login'});
+              navigation.navigate('Auth', {screen: 'TermsConditions'});
             }}>
             Terms & Conditions.
           </Text>
         </Text>
-      </View> */}
+      </View>
     </ImageBackground>
   );
 };

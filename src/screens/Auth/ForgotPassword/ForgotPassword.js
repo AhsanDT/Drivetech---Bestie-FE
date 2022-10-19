@@ -21,9 +21,9 @@ const ForgotPassword = ({navigation}) => {
   const dispatch = useDispatch(null);
 
   const onPressVerifyAccount = async value => {
+    setloading(true);
     const check = await checkConnected();
     if (check) {
-      setloading(true);
       const data = new FormData();
       data.append('email', value.email);
       try {
@@ -36,19 +36,18 @@ const ForgotPassword = ({navigation}) => {
           console.log('data id', response?.data?.id);
         };
         const cbFailure = err => {
-          Alert.alert('' || err);
           setloading(false);
-          console.log('1');
+          Alert.alert('' || err);
         };
         dispatch(forgotPassRequest(data, cbSuccess, cbFailure));
       } catch (error) {
         console.log('ERROR', error);
         setloading(false);
-        console.log('3');
       }
     } else {
+      setloading(false);
+
       Alert.alert('Error', networkText);
-      console.log('2');
     }
   };
 
