@@ -12,6 +12,7 @@ export const colors = {
   b3: '#363636',
   b4: '#4F4F4F',
   b5: '#262626',
+  b6: '#202020',
 
   //Gray Color
   g1: '#E2E2E2',
@@ -27,6 +28,7 @@ export const colors = {
   g9: '#6D6D6D',
   g10: '#ECECEC',
   g11: '#4A4A4A',
+  g12: '#A0A0A0',
   //Green
   gr1: '#00A66C',
   gr2: '#34A853',
@@ -34,6 +36,7 @@ export const colors = {
 
   //White colors
   white: '#ffffff',
+  white2: '#F6F7FB',
 
   // red
   red: 'red',
@@ -51,6 +54,8 @@ export const colors = {
   org: '#E58200',
   org1: '#FF6933',
 
+  //yellow
+
   //******************- Gradients -*******************/
 
   p_gradient: ['#FF8F8E', '#E79069'],
@@ -58,4 +63,6 @@ export const colors = {
   gray: 'rgba(0, 0, 0, 0.15)',
 
   ornage: 'rgba(235, 45, 37, 0.2)',
+
+  yellow: 'rgba(247, 208, 112, 0.56)',
 };

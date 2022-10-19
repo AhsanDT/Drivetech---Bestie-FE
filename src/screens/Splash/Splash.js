@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, Image, StatusBar, ImageBackground} from 'react-native';
 import {AppButton} from '../../components/AppButton/AppButton';
-import {colors, family, size, WP} from '../../shared/exporter';
+import {colors, WP} from '../../shared/exporter';
 import {appImages, appLogo} from '../../shared/theme/assets';
 import styles from './styles';
 

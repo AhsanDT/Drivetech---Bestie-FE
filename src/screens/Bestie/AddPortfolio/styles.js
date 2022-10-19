@@ -1,46 +1,47 @@
 import {StyleSheet} from 'react-native';
-import {WP, colors, size, family} from '../../../shared/exporter';
+import {WP, colors, family, size} from '../../../shared/exporter';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
   },
+  textStyle: {
+    paddingHorizontal: WP('6'),
+    marginBottom: 10,
+    color: colors.b1,
+    fontSize: size.text_16,
+    fontFamily: family.Poppin_Medium,
+  },
   contentContainer: {
-    padding: WP('3'),
     alignItems: 'center',
   },
   uploadImageContainer: {
-    width: WP('40'),
-    height: WP('40'),
+    width: WP('29'),
+    height: WP('29'),
     borderRadius: 20,
     backgroundColor: colors.g2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: colors.g7,
     borderStyle: 'dashed',
+    margin: 4,
   },
   cameraContainer: {
     height: 28,
     width: 28,
   },
   uriImageContainer: {
-    height: WP('39'),
-    width: WP('39'),
-    borderRadius: WP('39'),
+    height: WP('29'),
+    width: WP('29'),
+    borderRadius: 20,
   },
-  buttonContainer: {
-    padding: WP('3'),
+  ButtonContainer: {
+    padding: WP('4'),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: WP('100'),
-  },
-  buttonContainer2: {
-    padding: WP('3'),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: WP('120'),
   },
 });
+
 export {styles};

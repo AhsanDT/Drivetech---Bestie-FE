@@ -126,7 +126,7 @@ const SignUp = ({navigation, route}) => {
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('firstName')}
                     value={
-                      data?.first_name ? data?.first_name : values.firstName
+                      data?.first_name ? data?.first_name : values?.firstName
                     }
                     touched={touched.firstName}
                     errorMessage={errors.firstName}
@@ -137,7 +137,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Enter your last name'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('lastName')}
-                    value={data?.last_name ? data?.last_name : values.lastName}
+                    value={data?.last_name ? data?.last_name : values?.lastName}
                     // value={data?.last_name ? data?.last_name : values.lastName}
 
                     touched={touched.lastName}
@@ -149,7 +149,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Email'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('email')}
-                    value={data?.email ? data?.email : values.email}
+                    value={data?.email ? data?.email : values?.email}
                     touched={touched.email}
                     errorMessage={errors.email}
                     keyboardType={'email-address'}
@@ -161,7 +161,7 @@ const SignUp = ({navigation, route}) => {
                       placeholder={'Password'}
                       placeholderTextColor={colors.g3}
                       onChangeText={handleChange('password')}
-                      value={values.password}
+                      value={values?.password}
                       touched={touched.password}
                       errorMessage={errors.password}
                       secureTextEntry={true}
@@ -172,7 +172,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Type here'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('phone')}
-                    value={values.phone}
+                    value={values?.phone}
                     touched={touched.phone}
                     errorMessage={errors.phone}
                     keyboardType={'number-pad'}
@@ -182,7 +182,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Type here'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('country')}
-                    value={values.country}
+                    value={values?.country}
                     touched={touched.country}
                     errorMessage={errors.country}
                   />
@@ -191,7 +191,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Type here'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('city')}
-                    value={values.city}
+                    value={values?.city}
                     touched={touched.city}
                     errorMessage={errors.city}
                   />
@@ -200,7 +200,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={'Type here'}
                     placeholderTextColor={colors.g3}
                     onChangeText={handleChange('age')}
-                    value={values.age}
+                    value={values?.age}
                     touched={touched.age}
                     errorMessage={errors.age}
                     keyboardType={'number-pad'}
@@ -211,7 +211,7 @@ const SignUp = ({navigation, route}) => {
                     placeholder={sex}
                     containerStyle={styles.dropContainer}
                     options={Selection_List}
-                    value={values.pronoun}
+                    value={values?.pronoun}
                     onChangeValue={text => {
                       setsex(text.value);
                     }}

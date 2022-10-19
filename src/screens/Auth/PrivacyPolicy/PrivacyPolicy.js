@@ -24,9 +24,6 @@ import {
 import styles from './styles';
 
 const PrivacyPolicy = ({navigation}) => {
-  const [loading, setLoading] = useState(false);
-  const [privacyPolicy, setPrivacyPolicy] = useState('');
-
   return (
     <SafeAreaView style={styles.rootContainer}>
       {/* <AppLoader loading={loading} /> */}

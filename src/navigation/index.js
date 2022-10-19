@@ -11,7 +11,7 @@ const MainAppNav = () => {
   return (
     <NavigationContainer>
       <AppStack.Navigator
-        initialRouteName="Splash"
+        initialRouteName="Auth"
         screenOptions={{headerShown: false}}>
         <AppStack.Screen name={'Splash'} component={Splash} />
         <AppStack.Screen name={'Auth'} component={AuthStack} />
