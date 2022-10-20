@@ -44,16 +44,16 @@ const SignUp = ({navigation, route}) => {
     //     email: value.email,
     //   },
     // });
-    dispatch(updateSignupObject({firstName: value.firstName}));
-    dispatch(updateSignupObject({lastName: value.lastName}));
-    dispatch(updateSignupObject({password: value.password || ''}));
-    dispatch(updateSignupObject({email: value.email}));
-    dispatch(updateSignupObject({city: value.city}));
+    dispatch(updateSignupObject({firstName: value?.firstName}));
+    dispatch(updateSignupObject({lastName: value?.lastName}));
+    dispatch(updateSignupObject({password: value?.password || ''}));
+    dispatch(updateSignupObject({email: value?.email}));
+    dispatch(updateSignupObject({city: value?.city}));
     dispatch(updateSignupObject({sex: sex}));
     dispatch(updateSignupObject({pronoun: pronoun}));
-    dispatch(updateSignupObject({age: value.age}));
-    dispatch(updateSignupObject({country: value.country}));
-    dispatch(updateSignupObject({phoneNumber: value.phone}));
+    dispatch(updateSignupObject({age: value?.age}));
+    dispatch(updateSignupObject({country: value?.country}));
+    dispatch(updateSignupObject({phoneNumber: value?.phone}));
     dispatch(
       updateSignupObject({profileType: data ? data?.profile_type : 'user'}),
     );
@@ -102,13 +102,13 @@ const SignUp = ({navigation, route}) => {
                 setFieldValue(
                   'firstName',
                   data?.login_type == 'social login'
-                    ? data.first_name
+                    ? data?.first_name
                     : values?.firstName,
                 );
                 setFieldValue(
                   'lastName',
                   data?.login_type == 'social login'
-                    ? data.last_name
+                    ? data?.last_name
                     : values?.lastName,
                 );
                 setFieldValue(
