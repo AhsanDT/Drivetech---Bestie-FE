@@ -9,14 +9,48 @@ import {
   FlatList,
   PermissionsAndroid,
 } from 'react-native';
-import {AppButton, AppHeader, ImagePickerModal} from '../../../components';
-import {appIcons, colors, image_options, WP} from '../../../shared/exporter';
+import {AppButton, AppHeader, ImagePickerModal} from '../../../../components';
+import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
-
-const AddPortfolio = () => {
+let count = 0;
+const AddPortfolio = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
+  const [currentItemClicked, setCurrentItemClicked] = useState(null);
+
+  const [picsArray, setPicsArray] = useState([
+    {
+      id: 1,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 2,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 3,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 4,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 5,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 6,
+      image: null,
+      loading: false,
+    },
+  ]);
 
   //Handlers
   const showGallery = () => {
@@ -34,7 +68,8 @@ const AddPortfolio = () => {
         } else {
           console.log('Response---', response.assets[0]);
           if (response.assets) {
-            setImage(response.assets[0]);
+            // setImage(response.assets[0]);
+            updatePictureArray(response.assets[0]);
           }
         }
       });
@@ -54,7 +89,8 @@ const AddPortfolio = () => {
         } else {
           console.log('');
           if (response.assets) {
-            setImage(response.assets[0]);
+            // setImage(response.assets[0]);
+            updatePictureArray(response.assets[0]);
           }
         }
       });
@@ -85,21 +121,46 @@ const AddPortfolio = () => {
     }
   };
 
+  const onAddImage = item => {
+    setCurrentItemClicked(item);
+    setShow(true);
+  };
+
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
+        key={index}
         style={styles.uploadImageContainer}
         activeOpacity={0.7}
         onPress={() => {
-          setShow(true);
+          onAddImage(item);
         }}>
         <Image
-          source={image === '' ? appIcons.camera : image}
-          style={image ? styles.uriImageContainer : styles.cameraContainer}
+          source={item.image == null ? appIcons.camera : item?.image}
+          style={
+            item.image == null
+              ? styles.cameraContainer
+              : styles.uriImageContainer
+          }
         />
       </TouchableOpacity>
     );
   };
+  const updatePictureArray = picture => {
+    setPicsArray(
+      picsArray?.map(item => {
+        if (item === currentItemClicked) {
+          return {
+            ...item,
+            loading: true,
+            image: picture,
+          };
+        }
+        return item;
+      }),
+    );
+  };
+  count = picsArray?.filter(obj => obj?.image).length;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -109,7 +170,7 @@ const AddPortfolio = () => {
 
       <View style={styles.contentContainer}>
         <FlatList
-          data={[1, 2, 3, 4, 5, 6]}
+          data={picsArray || []}
           renderItem={renderItem}
           numColumns={3}
         />
@@ -135,8 +196,8 @@ const AddPortfolio = () => {
           title={'Next'}
           width={WP('35')}
           height={WP('13')}
-          bgColor={!image ? colors.g1 : colors.b1}
-          disabled={image ? false : true}
+          bgColor={count < 6 ? colors.g1 : colors.b1}
+          disabled={count < 6 ? true : false}
           //   onPress={() => {
           //     navigation.navigate('ImageVerification');
           //   }}

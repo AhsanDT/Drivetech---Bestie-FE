@@ -25,9 +25,9 @@ const SignUp = ({navigation, route}) => {
   const [sex, setsex] = useState('Male');
   const [pronoun, setPronoun] = useState('he/him');
   const [data, setdata] = useState(route?.params?.data);
-
+  const {signupObject} = useSelector(state => state.auth);
+  console.log('SIGNUP obj ', signupObject?.profileType);
   const onSubmit = value => {
-    console.log('VALUES ', value);
     // return;
     // dispatch({
     //   type: types.UPDATE_SIGNUP_OBJECT,
@@ -99,24 +99,24 @@ const SignUp = ({navigation, route}) => {
               setFieldValue,
             }) => {
               useEffect(() => {
-                setFieldValue(
-                  'firstName',
-                  data?.login_type == 'social login'
-                    ? data.first_name
-                    : values?.firstName,
-                );
-                setFieldValue(
-                  'lastName',
-                  data?.login_type == 'social login'
-                    ? data.last_name
-                    : values?.lastName,
-                );
-                setFieldValue(
-                  'email',
-                  data?.login_type == 'social login'
-                    ? data?.email
-                    : values?.email,
-                );
+                // setFieldValue(
+                //   'firstName',
+                //   data?.login_type == 'social login'
+                //     ? data.first_name
+                //     : values?.firstName,
+                // );
+                // setFieldValue(
+                //   'lastName',
+                //   data?.login_type == 'social login'
+                //     ? data.last_name
+                //     : values?.lastName,
+                // );
+                // setFieldValue(
+                //   'email',
+                //   data?.login_type == 'social login'
+                //     ? data?.email
+                //     : values?.email,
+                // );
               }, []);
               return (
                 <View>

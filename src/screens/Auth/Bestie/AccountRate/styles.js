@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {WP, family, colors, size} from '../../../shared/exporter';
+import {WP, family, colors, size} from '../../../../shared/exporter';
 
 const styles = StyleSheet.create({
   mainContainer: {
