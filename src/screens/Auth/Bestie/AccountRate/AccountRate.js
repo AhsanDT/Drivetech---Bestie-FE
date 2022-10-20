@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, Text, View, Image, ScrollView} from 'react-native';
-import {AppButton, AppHeader, AppInput} from '../../../components';
-import {appIcons, colors, WP} from '../../../shared/exporter';
+import {AppButton, AppHeader, AppInput} from '../../../../components';
+import {appIcons, colors, WP} from '../../../../shared/exporter';
 import {styles} from './styles';
 
 const AccountRate = ({navigation}) => {

@@ -7,7 +7,7 @@ import {
   AppInput,
   DropDown,
   LocationInput,
-} from '../../../components';
+} from '../../../../components';
 import {Icon} from 'react-native-elements';
 import styles from './styles';
 import {
@@ -19,9 +19,12 @@ import {
   Pronoun_List,
   RegisterVS,
   RegisterFields,
-} from '../../../shared/exporter';
+} from '../../../../shared/exporter';
 import {Formik} from 'formik';
+import {updateSignupObject} from '../../../redux/actions';
+import {useSelector, useDispatch} from 'react-redux';
 const Register = ({navigation}) => {
+  const {signupObject} = useSelector(state => state.auth);
   const onSubmit = e => {
     navigation.navigate('ProfileImage');
   };
