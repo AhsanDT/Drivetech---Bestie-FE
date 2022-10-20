@@ -32,7 +32,7 @@ const Splash = ({navigation}) => {
         title={'Get Started'}
         style={styles.btnContainer}
         onPress={() => {
-          navigation.navigate('Auth', {screen: 'Login'});
+          navigation.navigate('SelectRole');
         }}
       />
       <View style={styles.accountContainer}>
@@ -41,7 +41,7 @@ const Splash = ({navigation}) => {
           <Text
             style={styles.signUpStyle}
             onPress={() => {
-              navigation.navigate('Auth', {screen: 'SignUp'});
+              navigation.navigate('SelectRole');
             }}>
             Sign Up
           </Text>
