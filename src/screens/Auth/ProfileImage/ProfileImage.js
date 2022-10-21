@@ -97,7 +97,7 @@ const ProfileImage = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <StatusBar
           backgroundColor={'#fff'}
           translucent={false}
@@ -106,7 +106,16 @@ const ProfileImage = ({navigation}) => {
         <AppHeader title={'Add Your\nProfile Photo'} />
         <View style={styles.contentContainer}>
           <TouchableOpacity
-            style={styles.uploadImageContainer}
+            style={[
+              styles.uploadImageContainer,
+              {
+                height: image ? WP('45') : WP('40'),
+                width: image ? WP('45') : WP('40'),
+                borderStyle: image ? null : 'dashed',
+                borderWidth: image ? 0 : 2,
+                borderColor: image ? null : colors.g7,
+              },
+            ]}
             activeOpacity={0.7}
             onPress={() => {
               setShow(true);
@@ -114,7 +123,7 @@ const ProfileImage = ({navigation}) => {
             <Image
               source={image === '' ? appIcons.camera : image}
               style={image ? styles.uriImageContainer : styles.cameraContainer}
-              resizeMode="contain"
+              // resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
@@ -123,6 +132,7 @@ const ProfileImage = ({navigation}) => {
           onPressHide={() => setShow(false)}
           onPressCamera={() => showCamera()}
           onPressGallery={() => showGallery()}
+          onPressCancel={() => setShow(false)}
         />
         <View style={styles.buttonContainer}>
           <AppButton

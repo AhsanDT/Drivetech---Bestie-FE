@@ -133,7 +133,7 @@ const UploadImage = ({navigation}) => {
             }}>
             <Image
               source={frontImage === '' ? appIcons.camera : frontImage}
-              resizeMode="contain"
+              resizeMode="cover"
               style={
                 frontImage ? styles.uriImageContainer : styles.cameraContainer
               }
@@ -152,7 +152,7 @@ const UploadImage = ({navigation}) => {
             }}>
             <Image
               source={backImage === '' ? appIcons.camera : backImage}
-              resizeMode="contain"
+              resizeMode="cover"
               style={
                 backImage ? styles.uriImageContainer : styles.cameraContainer
               }
@@ -164,6 +164,7 @@ const UploadImage = ({navigation}) => {
           onPressHide={() => setShow(false)}
           onPressCamera={() => showCamera()}
           onPressGallery={() => showGallery()}
+          onPressCancel={() => setShow(false)}
         />
         <View style={styles.ButtonContainer}>
           <AppButton

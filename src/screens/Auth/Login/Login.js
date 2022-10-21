@@ -53,7 +53,7 @@ const Login = ({navigation}) => {
     const check = await checkConnected();
     if (check) {
       const data = new FormData();
-      data.append('user[email]', value.email);
+      data.append('user[email]', value.email?.toLowerCase());
       data.append('user[password]', value.password);
       try {
         const cbSuccess = response => {
@@ -130,6 +130,10 @@ const Login = ({navigation}) => {
     }
   };
 
+  const googleSignOut = async () => {
+    GoogleSignin.signOut();
+  };
+
   const facebookSignin = async () => {
     try {
       //signOutFacebook();
@@ -159,6 +163,14 @@ const Login = ({navigation}) => {
       console.log('[facebook err]', err);
     }
   };
+
+  const signOutFacebook = async () => {
+    try {
+      LoginManager.logOut();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleSocialLogin = (token, type) => {
     setloading(true);
     if (token) {
@@ -173,6 +185,8 @@ const Login = ({navigation}) => {
           if (res?.data?.profile_completed) {
             console.log('1');
             Alert.alert('Congrats', 'Login Successfully');
+            signOutFacebook();
+            googleSignOut();
           } else {
             console.log('2');
 
@@ -321,7 +335,7 @@ const Login = ({navigation}) => {
           <AppLoader loading={loading} />
 
           <AuthFooter
-            title={'Dont have an account?'}
+            title={'Don’t have an account?'}
             subtitle={' Sign Up'}
             onPress={() => {
               navigation.navigate('Auth', {screen: 'SignUp'});

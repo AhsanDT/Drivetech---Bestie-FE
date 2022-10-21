@@ -16,9 +16,10 @@ export const appIcons = {
   camera: require('../../assets/icons/camera.png'),
   gallery: require('../../assets/icons/gallery.png'),
 
-  scan : require('../../assets/icons/scan.png'),
+  scan: require('../../assets/icons/scan.png'),
   // scan:  require('../../assets/icons/scan.png'),
   arrow: require('../../assets/icons/arrow.png'),
+  cancel: require('../../assets/icons/cancel.png'),
 };
 
 export const appSvgs = {

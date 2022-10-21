@@ -89,31 +89,6 @@ const ShowInterest = ({navigation}) => {
             />
           </View>
         </TouchableOpacity>
-
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            width: WP('90'),
-            alignSelf: 'center',
-            marginTop: 5,
-          }}>
-          <AppButton
-            width={WP('30')}
-            bgColor={colors.g8}
-            title={'Back'}
-            height={WP('14')}
-            onPress={() => navigation.goBack()}
-            textColor={colors.g9}
-          />
-          <AppButton
-            width={WP('30')}
-            bgColor={colors.b1}
-            title={'Next'}
-            height={WP('14')}
-            onPress={() => handleNavigation()}
-          />
-        </View>
       </View>
     );
   };
@@ -154,6 +129,30 @@ const ShowInterest = ({navigation}) => {
       ) : (
         <ActivityIndicator color={'#000'} />
       )}
+      <View
+        style={{
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          width: WP('90'),
+          alignSelf: 'center',
+          marginTop: 5,
+        }}>
+        <AppButton
+          width={WP('30')}
+          bgColor={colors.g8}
+          title={'Back'}
+          height={WP('14')}
+          onPress={() => navigation.goBack()}
+          textColor={colors.g9}
+        />
+        <AppButton
+          width={WP('30')}
+          bgColor={colors.b1}
+          title={'Next'}
+          height={WP('14')}
+          onPress={() => handleNavigation()}
+        />
+      </View>
     </SafeAreaView>
   );
 };
