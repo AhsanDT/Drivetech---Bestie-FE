@@ -11,6 +11,7 @@ import {
   logoutRequestSaga,
   showInterestSaga,
   updateSocialLoginData,
+  validateEmailSaga,
 } from './auth-saga/auth-saga';
 
 export function* rootSaga() {
@@ -24,4 +25,5 @@ export function* rootSaga() {
   yield fork(logoutRequestSaga);
   yield fork(showInterestSaga);
   yield fork(updateSocialLoginData);
+  yield fork(validateEmailSaga);
 }

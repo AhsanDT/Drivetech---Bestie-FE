@@ -126,7 +126,11 @@ const ImageVerification = ({navigation}) => {
       const cbSuccess = res => {
         setloading(false);
         Alert.alert('Congrats', 'Signup Successfully');
-        navigation.navigate('Login');
+        // navigation.replace('Login');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
       };
       const cbFailure = err => {
         console.log('Err..', err);

@@ -12,6 +12,7 @@ import {
   logoutUser,
   showInterestService,
   updateSocialLogin,
+  validateEmailService,
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -264,6 +265,24 @@ function* resetPass(params) {
     });
     let msg = responseValidator(error?.response?.status, error?.response?.data);
     params?.cbFailure(msg);
+  }
+}
+
+export function* validateEmailSaga() {
+  yield takeLatest(types.VALIDATE_EMAIL_REQUEST, validateEmail);
+}
+function* validateEmail(params) {
+  // console.log('\n\nparams', params);
+  try {
+    const res = yield validateEmailService(params?.params);
+    if (res) {
+      // console.log('VALIDATE EMAIL SAGA==>res ', res);
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    // console.log('VALIDATE EMAIL SAGA==>err ', error?.response?.data?.error);
+
+    params?.cbFailure(error?.response?.data);
   }
 }
 

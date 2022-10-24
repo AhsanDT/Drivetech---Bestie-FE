@@ -92,6 +92,14 @@ export const resetPassRequest = (params, cbSuccess, cbFailure) => {
     cbFailure,
   };
 };
+export const validateEmailAction = (params, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.VALIDATE_EMAIL_REQUEST,
+    params,
+    cbSuccess,
+    cbFailure,
+  };
+};
 
 //logout request
 export const logoutRequset = (params, callBack) => {

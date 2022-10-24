@@ -108,6 +108,20 @@ export const resetPassword = async params => {
   });
   return res.data;
 };
+export const validateEmailService = async params => {
+  // console.log('params', params);
+  const res = await axios.post(
+    `${BASE_URL}${ENDPOINTS.VALIDATE_EMAIL}`,
+    params,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Accept: 'application/json',
+      },
+    },
+  );
+  return res.data;
+};
 
 export const logoutUser = async params => {
   const res = await axios.post(`${BASE_URL}conversations/logout`, params, {
