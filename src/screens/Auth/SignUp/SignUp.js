@@ -97,9 +97,9 @@ const SignUp = ({navigation, route}) => {
     dispatch(updateSignupObject({city: value.city}));
     dispatch(updateSignupObject({sex: sex}));
     dispatch(updateSignupObject({pronoun: pronoun}));
-    dispatch(updateSignupObject({age: value.age}));
-    dispatch(updateSignupObject({country: value.country}));
-    dispatch(updateSignupObject({phoneNumber: value.phone}));
+    dispatch(updateSignupObject({age: value?.age}));
+    dispatch(updateSignupObject({country: value?.country}));
+    dispatch(updateSignupObject({phoneNumber: value?.phone}));
     dispatch(
       updateSignupObject({profileType: data ? data?.profile_type : 'user'}),
     );

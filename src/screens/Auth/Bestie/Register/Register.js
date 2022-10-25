@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   AppButton,
@@ -24,6 +24,10 @@ import {Formik} from 'formik';
 import {updateSignupObject} from '../../../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 const Register = ({navigation}) => {
+  const [sex, setsex] = useState('Male');
+  const [experience, setExperience] = useState('');
+  const [location, setlocation] = useState('');
+
   const {signupObject} = useSelector(state => state.auth);
   const onSubmit = e => {
     navigation.navigate('ProfileImage');
@@ -32,6 +36,11 @@ const Register = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+        <StatusBar
+          backgroundColor={'#fff'}
+          translucent={false}
+          barStyle={'dark-content'}
+        />
         <AppHeader title={'Create Your\nAccount'} />
         <Formik
           initialValues={RegisterFields}
@@ -82,22 +91,14 @@ const Register = ({navigation}) => {
               <LocationInput
                 title={'Location'}
                 placeholder={'Set your location'}
-                // error={errors.location}
-                // touched={touched.location}
-                onChangeText={value => {
-                  console.log('value', value);
-                  handleChange('location', value);
-                }}
               />
               <DropDown
                 label={'Experience'}
                 placeholder={'Select'}
                 containerStyle={styles.dropContainer}
                 options={Pronoun_List}
-                value={values.experience}
-                // touched={touched.experience}
-                // error={errors.experience}
-                onChangeValue={txt => handleChange('experience', txt)}
+                value={experience}
+                onChangeValue={txt => setExperience(txt.value)}
               />
               <AppInput
                 title={'Age'}
@@ -115,10 +116,8 @@ const Register = ({navigation}) => {
                 placeholder={'Select'}
                 containerStyle={styles.dropContainer}
                 options={Selection_List}
-                value={values.gender}
-                // touched={touched.gender}
-                // error={errors.gender}
-                onChangeValue={txt => handleChange('gender', txt)}
+                value={sex}
+                onChangeValue={txt => setsex(txt.value)}
                 searchInput={true}
               />
 

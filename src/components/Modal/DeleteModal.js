@@ -1,202 +1,125 @@
 import React from 'react';
-import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import Modal from 'react-native-modal';
 import {
-  colors,
-  WP,
-  family,
-  size,
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import {
   appIcons,
-  property_image,
+  colors,
+  family,
+  scrHeight,
+  size,
+  WP,
 } from '../../shared/exporter';
+import {AppButton} from '../AppButton/AppButton';
 
-export const DeleteModal = ({
-  item,
-  show,
-  onPressHide,
-  isBookMark = false,
-  deleteFromBookmarks,
-}) => {
+const DeleteModal = ({tabRef, onPressCancel, onPressDelete}) => {
   return (
-    <Modal onBackdropPress={onPressHide} isVisible={show}>
-      <View style={styles.modalContainer}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.crossIconView}
-          onPress={() => onPressHide()}>
-          <Image
-            resizeMode="contain"
-            source={appIcons.crossIcon}
-            style={styles.crossIconStyle}
-          />
-        </TouchableOpacity>
-        <Image
-          source={
-            isBookMark
-              ? {uri: (item?.image && item?.image[0]?.url) || property_image}
-              : item?.img
-          }
-          style={styles.imgStyle}
-        />
-        <Text style={styles.nameTxtStyle}>
-          {isBookMark ? item?.title : item?.name}
-        </Text>
-        <View style={styles.rowContainer}>
-          <Text style={styles.smallTxtStyle}>
-            {isBookMark ? `$${item?.price} | ` : '$25,000'}
-          </Text>
-          <Image
-            resizeMode="contain"
-            source={appIcons.bedIcon}
-            style={styles.bedIconStyle}
-          />
-          <Text style={styles.smallTxtStyle}>
-            {isBookMark ? item?.bed_rooms || '0' : '4'}
-          </Text>
-          <Image source={appIcons.bathIcon} style={styles.bathIconStyle} />
-          <Text resizeMode="contain" style={styles.smallTxtStyle}>
-            {isBookMark ? item?.bath_rooms || '0' : '3.5'}
-          </Text>
+    <SafeAreaView>
+      <RBSheet
+        ref={tabRef}
+        height={scrHeight / 1.2}
+        openDuration={250}
+        customStyles={{
+          container: styles.inputContentContainer,
+        }}>
+        <View style={styles.borderStyle} />
+        <View style={styles.contentContainer}>
+          <Image source={appIcons.cross} style={styles.crossIconStyle} />
+          <Text style={styles.cardNumberStyle}>*** *** *** *** 3456</Text>
+          <Text style={styles.expiresStyle}>Expires 03/27</Text>
         </View>
-        {isBookMark ? (
-          <View style={styles.simpleRow}>
-            <Image source={appIcons.heartIcon} style={styles.heartIconStyle} />
-            <Text style={styles.heartTxtStyle}>90% match</Text>
-          </View>
-        ) : null}
-        <Text style={styles.removeTxtStyle}>
-          {isBookMark ? 'Remove From Bookmark?' : 'Remove From Property List?'}
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttonStyle}
-          onPress={() => {
-            isBookMark ? deleteFromBookmarks(item) : onPressHide();
-          }}>
-          <Text style={styles.btnTxtStyle}>Remove</Text>
-        </TouchableOpacity>
-      </View>
-    </Modal>
+        <View style={styles.spacer} />
+        <View style={styles.secondContentContainer}>
+          <Text style={styles.cardTextStyle}>
+            Are you sure you want to delete{'\n'}this card?
+          </Text>
+          <AppButton
+            bgColor={colors.red5}
+            width={WP('75')}
+            title={'Delete'}
+            onPress={onPressDelete}
+          />
+          <TouchableOpacity onPress={onPressCancel} activeOpacity={0.7}>
+            <Text style={styles.cancelTextStyle}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      </RBSheet>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    borderRadius: 8,
-    paddingTop: WP('3.5'),
-    backgroundColor: 'white',
-    marginHorizontal: WP('5'),
-    paddingHorizontal: WP('3.5'),
+  inputContentContainer: {
+    flex: 1.2,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    backgroundColor: colors.white2,
+    paddingHorizontal: WP('4'),
+    alignItems: 'center',
+    alignSelf: 'center',
   },
-  crossIconView: {
-    width: WP('5'),
-    height: WP('5'),
-    alignSelf: 'flex-end',
+  borderStyle: {
+    borderWidth: 1.5,
+    borderColor: colors.g20,
+    alignSelf: 'center',
+    width: 36,
+    marginTop: 5,
+  },
+  contentContainer: {
+    paddingVertical: WP('5'),
   },
   crossIconStyle: {
-    width: WP('2'),
-    height: WP('4'),
-    alignSelf: 'flex-end',
+    width: 89,
+    height: 83,
   },
-  iconContainer: {
-    width: WP('25'),
-    height: WP('25'),
-    borderRadius: 15,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.g11,
-  },
-  imgStyle: {
-    width: WP('25'),
-    height: WP('25'),
-    borderRadius: 15,
-    alignSelf: 'center',
-  },
-  nameTxtStyle: {
+  cardNumberStyle: {
+    fontFamily: family.Poppin_Regular,
+    fontSize: size.text_14,
     color: colors.b1,
-    fontSize: size.h6,
-    alignSelf: 'center',
-    paddingTop: WP('4'),
-    fontFamily: family.Gilroy_SemiBold,
+    paddingTop: 10,
+    textAlign: 'center',
   },
-  companyTxtStyle: {
+  expiresStyle: {
+    fontSize: size.text_12,
+    fontFamily: family.Poppin_Regular,
+    color: colors.b1,
+    alignSelf: 'center',
+    lineHeight: 20,
+    paddingTop: 8,
+  },
+
+  spacer: {
+    width: WP('90'),
+    borderWidth: 1,
+    borderColor: colors.black,
+    marginTop: 5,
+  },
+  secondContentContainer: {
+    paddingVertical: WP('6'),
+  },
+
+  cardTextStyle: {
+    fontFamily: family.Poppin_Regular,
+    fontSize: size.text_14,
     color: colors.b1,
     textAlign: 'center',
-    alignSelf: 'center',
-    fontSize: size.tiny,
-    paddingTop: WP('1.5'),
-    fontFamily: family.Gilroy_SemiBold,
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: WP('2.5'),
-    justifyContent: 'center',
-  },
-  smallTxtStyle: {
-    color: colors.g23,
-    fontSize: size.tiny,
-    fontFamily: family.Gilroy_Medium,
-  },
-  bedIconStyle: {
-    width: 14,
-    height: 9,
-    marginRight: 3,
-  },
-  bathIconStyle: {
-    width: 11,
-    height: 11,
-    marginLeft: 8,
-    marginRight: 4,
-  },
-  starIconStyle: {
-    width: WP('3'),
-    height: WP('3'),
-  },
-  ratingTxtStyle: {
-    top: 1.2,
-    paddingLeft: 5,
-    color: colors.g17,
-    fontSize: size.tiny,
-    fontFamily: family.Gilroy_Medium,
-  },
-  simpleRow: {
-    marginTop: WP('2'),
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  heartIconStyle: {
-    width: 13,
-    height: 11,
-    marginRight: 5,
-  },
-  heartTxtStyle: {
-    color: colors.r2,
-    fontSize: size.tiny,
-    fontFamily: family.Gilroy_Medium,
-  },
-  removeTxtStyle: {
-    color: colors.b1,
-    paddingTop: WP('6'),
-    alignSelf: 'center',
-    fontSize: size.tiny,
-    fontFamily: family.Gilroy_Regular,
-  },
-  buttonStyle: {
-    borderRadius: 15,
-    width: WP('28.7'),
-    height: WP('7.8'),
-    alignSelf: 'center',
-    alignItems: 'center',
-    marginTop: WP('3.3'),
     marginBottom: WP('6'),
-    justifyContent: 'center',
-    backgroundColor: colors.r2,
   },
-  btnTxtStyle: {
-    color: colors.white,
-    fontSize: size.xsmall,
-    fontFamily: family.Gilroy_SemiBold,
+
+  cancelTextStyle: {
+    fontFamily: family.Poppin_Medium,
+    color: colors.red5,
+    textAlign: 'center',
+    fontSize: size.text_14,
+    lineHeight: 24,
+    padding: WP('8'),
   },
 });
+
+export {DeleteModal};

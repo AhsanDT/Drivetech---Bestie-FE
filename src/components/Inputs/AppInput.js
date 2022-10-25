@@ -28,7 +28,10 @@ const AppInput = ({
   textEntry,
   inputContainerStyle,
   icon,
+  inputStyle,
   disabled,
+  numberOfLines,
+  multiline,
 }) => {
   const [showPass, setShowPass] = React.useState(secureTextEntry);
 
@@ -37,6 +40,8 @@ const AppInput = ({
       {title && <Text style={styles.textStyle}>{title}</Text>}
 
       <Input
+        multiline={multiline}
+        numberOfLines={numberOfLines}
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         secureTextEntry={textEntry || showPass}
@@ -44,7 +49,7 @@ const AppInput = ({
           styles.inputContainerStyle,
           {...inputContainerStyle},
         ]}
-        inputStyle={styles.inputStyle}
+        inputStyle={[styles.inputStyle, {...inputStyle}]}
         onChangeText={onChangeText}
         onBlur={onBlur}
         value={value}
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     paddingHorizontal: WP('6'),
-    marginBottom: 10,
+    marginBottom: 8,
     color: colors.b1,
     fontSize: size.text_16,
     fontFamily: family.Poppin_Medium,

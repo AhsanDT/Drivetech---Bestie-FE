@@ -13,7 +13,6 @@ export const DropDown = ({
   containerStyle,
   touched,
   error,
-  searchInput,
 }) => {
   const renderItem = item => {
     return (
@@ -48,6 +47,8 @@ export const DropDown = ({
         )}
         style={styles.dropStyle}
         renderItem={item => renderItem(item)}
+        // onBlur={onBlur}
+        // onFocus={onFocus}
         // errorMessage={touched && errorMessage}
         // errorStyle={styles.errorStyle}
         // renderErrorMessage={renderErrorMessage}
