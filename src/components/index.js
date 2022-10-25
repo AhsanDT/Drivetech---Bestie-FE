@@ -1,6 +1,7 @@
 //Header
 export * from './Header/AppHeader';
 export * from './Header/Header';
+export * from './Header/HomeHeader';
 
 //Button
 export * from './AppButton/AppButton';
@@ -15,10 +16,13 @@ export * from './Loaders/AppLoader';
 //Inputs
 export * from './Inputs/AppInput';
 export * from './Inputs/LocationInput';
+export * from './Inputs/ChatInput';
+export * from './Inputs/PaymentInput';
 
 //Modals
 export * from './Modal/DeleteModal';
 export * from './Modal/ImagePickerModal';
+export * from './Modal/DiscardModal';
 
 //TextFields
 export * from './TextFields/ProfileField';
@@ -46,3 +50,14 @@ export * from './Camera/Camera';
 
 // List
 export * from './List/TalentList';
+
+//Tabs
+export * from './Tabs/BottomTabs';
+export * from './Tabs/TopTabs';
+
+//Card
+export * from './Cards/SupportCard';
+export * from './Cards/ChatCard';
+export * from './Cards/AddCard';
+export * from './Cards/EditCard';
+export * from './Cards/CreditCard';

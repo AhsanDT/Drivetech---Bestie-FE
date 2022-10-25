@@ -173,6 +173,50 @@ const Equipment_List = [
   },
 ];
 
+const Tab_List = [
+  {
+    id: 0,
+    route: 'Home',
+    name: 'Home',
+  },
+  {
+    id: 1,
+    route: 'Jobs',
+    name: 'Jobs',
+  },
+  {
+    id: 2,
+    route: 'Calendar',
+    name: 'Calendar',
+  },
+  {
+    id: 3,
+    route: 'Chat',
+    name: 'Chat',
+  },
+];
+
+const Card_List = [
+  {
+    id: 0,
+    title: 'Credit/Debit Card',
+    subTitle: 'Credit/Debit Card',
+    selected: false,
+  },
+  {
+    id: 0,
+    title: 'PayPal',
+    subTitle: 'PayPal',
+    selected: false,
+  },
+  {
+    id: 0,
+    title: 'Apple Pay',
+    subTitle: 'Apple Pay',
+    selected: false,
+  },
+];
+
 export {
   web_client_id,
   stripe_publishableKey,
@@ -183,5 +227,7 @@ export {
   Pronoun_List,
   Camera_List,
   Equipment_List,
-  // image_option,
+  // image_option
+  Tab_List,
+  Card_List,
 };

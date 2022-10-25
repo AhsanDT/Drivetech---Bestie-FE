@@ -13,6 +13,7 @@ export const colors = {
   b4: '#4F4F4F',
   b5: '#262626',
   b6: '#202020',
+  b7: '#050505',
 
   //Gray Color
   g1: '#E2E2E2',
@@ -29,6 +30,15 @@ export const colors = {
   g10: '#ECECEC',
   g11: '#4A4A4A',
   g12: '#A0A0A0',
+  g13: '#B0B0B0',
+  g14: '#F1F1F1',
+  g15: '#C6C6C6',
+  g16: '#BCBCBC',
+  g17: '#D1D1D1',
+  g18: '#F4F4F4',
+  g19: '#999999',
+  g20: '#C7C7C7',
+  g21: '#7D7D7D',
   //Green
   gr1: '#00A66C',
   gr2: '#34A853',
@@ -37,6 +47,7 @@ export const colors = {
   //White colors
   white: '#ffffff',
   white2: '#F6F7FB',
+  white3: '#FAFAFA',
 
   // red
   red: 'red',
@@ -49,6 +60,8 @@ export const colors = {
 
   //Blue
   bl: '#145DA0',
+  bl2: '#004A97',
+  bl3: '#007AFF',
 
   //orange
   org: '#E58200',
@@ -61,8 +74,12 @@ export const colors = {
   p_gradient: ['#FF8F8E', '#E79069'],
 
   gray: 'rgba(0, 0, 0, 0.15)',
+  gray2: 'rgba(99, 99, 99, 0.18)',
+  gray3: 'rgba(32, 32, 32, 0.46)',
 
   ornage: 'rgba(235, 45, 37, 0.2)',
 
   yellow: 'rgba(247, 208, 112, 0.56)',
+
+  black: 'rgba(0, 0, 0, 0.06)',
 };

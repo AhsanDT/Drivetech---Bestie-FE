@@ -31,6 +31,19 @@ export const appIcons = {
   cancel: require('../../assets/icons/cancelIcon.png'),
   dollar: require('../../assets/icons/dollar.png'),
   dropback: require('../../assets/icons/dropback.png'),
+  calendar: require('../../assets/icons/calendar.png'),
+  chat: require('../../assets/icons/chat.png'),
+  home: require('../../assets/icons/home.png'),
+  job: require('../../assets/icons/job.png'),
+  notification: require('../../assets/icons/notification.png'),
+  appIcon: require('../../assets/icons/appIcon.png'),
+  proof: require('../../assets/icons/proof.png'),
+  attach: require('../../assets/icons/attach.png'),
+  send: require('../../assets/icons/send.png'),
+  card: require('../../assets/icons/card.png'),
+  edit: require('../../assets/icons/edit.png'),
+  delete: require('../../assets/icons/delete.png'),
+  cross: require('../../assets/icons/cross.png'),
 };
 
 export const appSvgs = {

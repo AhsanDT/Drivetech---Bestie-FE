@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('3.85'),
     backgroundColor: colors.white,
     marginBottom: WP('3'),
+    borderBottomColor: colors.g14,
+    borderBottomWidth: 0.9,
   },
   logoTxtStyle: {
     left: WP('7'),
