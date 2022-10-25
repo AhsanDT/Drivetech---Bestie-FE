@@ -27,6 +27,18 @@ const initialState = {
     selfie: null,
     profileType: null,
     login_type: null,
+    experience: null,
+    location: null,
+    portfolio: [],
+    talentList: [],
+    model: null,
+    cameraType: null,
+    otherEquipments: [],
+    rate: null,
+    instagramLink: null,
+    tiktokLink: null,
+    pinterestLink: null,
+    linkedinLink: null,
   },
 };
 
