@@ -12,8 +12,10 @@ import {
   logoutUser,
   showInterestService,
   updateSocialLogin,
+  showTalentService,
   validateEmailService,
   validatePhoneService,
+
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -86,7 +88,6 @@ export function* updateSocialLoginData() {
   yield takeLatest(types.UPDATE_SOCIAL_LOGIN_REQUEST, updateSocialLoginUser);
 }
 function* updateSocialLoginUser(params) {
-  console.log('PARAMS== saga >', params);
   try {
     const res = yield updateSocialLogin(params?.data, params?.email);
     if (res) {
@@ -99,7 +100,6 @@ function* updateSocialLoginUser(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      console.log('update SOCIAL SIGNIN ==>', res);
       AsyncStorage.setItem('usertoken', res?.user?.auth_token);
       params?.cbSuccess(res);
     } else {
@@ -131,7 +131,6 @@ function* signUp(params) {
   try {
     const res = yield registerUser(params?.data);
     if (res) {
-      console.log('SIGNUP_SUCCESS_REQUEST==>', res);
       AsyncStorage.setItem('usertoken', res?.auth_token);
       yield put({
         type: types.SIGNUP_SUCCESS_REQUEST,
@@ -140,8 +139,6 @@ function* signUp(params) {
       params?.cbSuccess(res);
     }
   } catch (error) {
-    console.log('SAGA ERROR==> ', error?.response?.status);
-    console.log('SAGA ERROR==>2 ', error?.response?.data?.error);
     let msg = responseValidator(
       error?.response?.status,
       error?.response?.data?.error,
@@ -155,7 +152,6 @@ export function* forgotPassRequest() {
   yield takeLatest(types.FORGOT_PASSWORD_REQUEST, forgot);
 }
 function* forgot(params) {
-  console.log('PARMAS SAGA==> ', params);
   try {
     const res = yield forgotPassword(params?.data);
     if (res) {
@@ -164,7 +160,6 @@ function* forgot(params) {
         payload: res,
       });
       params?.cbSuccess(res);
-      console.log('res', res);
     }
   } catch (error) {
     yield put({
@@ -181,7 +176,6 @@ export function* OTPVerifyRequest() {
   yield takeLatest(types.OTP_VERIFY_REQUEST, verifyOTP);
 }
 function* verifyOTP(params) {
-  console.log('params', params);
   try {
     const res = yield OTPVerify(params?.data);
     if (res) {
@@ -207,10 +201,23 @@ function* verifyOTP(params) {
 
 export function* showInterestSaga() {
   yield takeLatest(types.GET_INTEREST_REQUEST, getInterestList);
+  yield takeLatest(types.GET_TALENT_REQUEST, getTalentList);
 }
 function* getInterestList(params) {
   try {
     const res = yield showInterestService(params);
+    if (res) {
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    let msg = responseValidator(error?.response?.status, error?.response?.data);
+    params?.cbFailure(msg);
+  }
+}
+
+function* getTalentList(params) {
+  try {
+    const res = yield showTalentService(params);
     if (res) {
       params?.cbSuccess(res);
     }
@@ -249,7 +256,6 @@ export function* resetPassRequest() {
   yield takeLatest(types.RESET_PASSWORD_REQUEST, resetPass);
 }
 function* resetPass(params) {
-  console.log('params', params?.params);
   try {
     const res = yield resetPassword(params?.params);
     if (res) {

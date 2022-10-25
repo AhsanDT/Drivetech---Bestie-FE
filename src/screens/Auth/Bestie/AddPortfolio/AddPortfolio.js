@@ -8,6 +8,7 @@ import {
   Platform,
   FlatList,
   PermissionsAndroid,
+  StatusBar,
 } from 'react-native';
 import {AppButton, AppHeader, ImagePickerModal} from '../../../../components';
 import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
@@ -165,6 +166,11 @@ const AddPortfolio = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <AppHeader title={'Add\nPortfolio'} />
+      <StatusBar
+        backgroundColor={colors.white}
+        translucent={false}
+        barStyle={'dark-content'}
+      />
 
       <Text style={styles.textStyle}>Add Portfolio</Text>
 

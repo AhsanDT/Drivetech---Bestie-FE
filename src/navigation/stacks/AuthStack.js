@@ -17,6 +17,7 @@ import AddPortfolio from '../../screens/Auth/Bestie/AddPortfolio';
 import RegisterBestie from '../../screens/Auth/Bestie/Register';
 import AccountRate from '../../screens/Auth/Bestie/AccountRate';
 import Test from '../../screens/Auth/Test/Test';
+import ShowTalent from '../../screens/Auth/Bestie/ShowTalent';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ function AuthStack(props) {
       <Stack.Screen name="RegisterBestie" component={RegisterBestie} />
       <Stack.Screen name="AccountRate" component={AccountRate} />
       <Stack.Screen name="Test" component={Test} />
+      <Stack.Screen name="ShowTalent" component={ShowTalent} />
     </Stack.Navigator>
   );
 }

@@ -97,6 +97,15 @@ export const showInterestService = async params => {
   });
   return res.data;
 };
+export const showTalentService = async params => {
+  const res = await axios.get(`${BASE_URL}${ENDPOINTS.GET_TALENTS}`, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
+    },
+  });
+  return res.data;
+};
 
 export const resetPassword = async params => {
   // console.log('params', params);
