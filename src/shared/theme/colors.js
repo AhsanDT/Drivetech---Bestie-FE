@@ -48,6 +48,7 @@ export const colors = {
   white: '#ffffff',
   white2: '#F6F7FB',
   white3: '#FAFAFA',
+  white4: '#E5E5E5',
 
   // red
   red: 'red',
@@ -82,4 +83,5 @@ export const colors = {
   yellow: 'rgba(247, 208, 112, 0.56)',
 
   black: 'rgba(0, 0, 0, 0.06)',
+  black2: 'rgba(32, 32, 32, 0.5)',
 };

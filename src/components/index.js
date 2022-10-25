@@ -61,3 +61,4 @@ export * from './Cards/ChatCard';
 export * from './Cards/AddCard';
 export * from './Cards/EditCard';
 export * from './Cards/CreditCard';
+export * from './Cards/SettingCard';

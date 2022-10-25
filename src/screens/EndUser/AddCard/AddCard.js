@@ -6,21 +6,14 @@ import {Card_List, colors, WP} from '../../../shared/exporter';
 import {styles} from './styles';
 
 const AddCard = ({navigation}) => {
-  const [show, setShow] = useState(Card_List);
+  const [show, setShow] = useState(false);
   const renderItem = ({item, index}) => (
     <CreditCard
-      show
+      show={show}
       title={item.title}
       subTitle={item.subTitle}
       onPress={() => {
-        setShow(
-          show.map(obj =>
-            obj.id == item.id
-              ? {...obj, selected: true}
-              : {...obj, selected: false},
-          ),
-        );
-        console.log('selected', item.selected);
+        setShow(!show);
       }}
     />
   );
@@ -37,7 +30,7 @@ const AddCard = ({navigation}) => {
 
         <Text style={styles.textStyle}>Card Info</Text>
         <FlatList
-          data={show}
+          data={Card_List}
           renderItem={renderItem}
           keyExtractor={(item, index) => item.key}
         />

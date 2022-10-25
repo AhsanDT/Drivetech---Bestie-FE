@@ -44,6 +44,7 @@ export const appIcons = {
   edit: require('../../assets/icons/edit.png'),
   delete: require('../../assets/icons/delete.png'),
   cross: require('../../assets/icons/cross.png'),
+  rightarrow: require('../../assets/icons/rightarrow.png'),
 };
 
 export const appSvgs = {

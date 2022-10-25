@@ -15,7 +15,7 @@ const EditCard = ({navigation}) => {
   const [show, setShow] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <KeyboardAwareScrollView style={{flexGrow: 0.9}}>
+      <KeyboardAwareScrollView style={{flexGrow: 0.97}}>
         <Header
           title={'Edit Card'}
           backIcon={true}

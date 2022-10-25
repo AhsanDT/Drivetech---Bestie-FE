@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 
   keyboardContainer: {
-    flexGrow: 0.9,
+    flexGrow: 0.97,
   },
 });
 
