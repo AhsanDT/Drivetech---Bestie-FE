@@ -25,7 +25,7 @@ const ForgotPassword = ({navigation}) => {
     const check = await checkConnected();
     if (check) {
       const data = new FormData();
-      data.append('email', value.email);
+      data.append('email', value.email?.toLowerCase());
       try {
         const cbSuccess = response => {
           navigation.navigate('VerifyOtp', {

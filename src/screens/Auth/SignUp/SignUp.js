@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, StatusBar} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar, Alert} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {AppButton, AppHeader, AppInput, DropDown} from '../../../components';
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  DropDown,
+  AppLoader,
+} from '../../../components';
 import styles from './styles';
 import {
   colors,
@@ -13,6 +19,11 @@ import {
   SocailSignUpVS,
   SocialSignUPFormFields,
 } from '../../../shared/exporter';
+import {
+  validateEmailAction,
+  validateSocialPhoneAction,
+} from '../../../redux/actions';
+
 import {Formik} from 'formik';
 useSelector;
 import {updateSignupObject} from '../../../redux/actions';
@@ -25,25 +36,60 @@ const SignUp = ({navigation, route}) => {
   const [sex, setsex] = useState('Male');
   const [pronoun, setPronoun] = useState('he/him');
   const [data, setdata] = useState(route?.params?.data);
+
+  const [loading, setloading] = useState(false);
+
+  const validateEmail = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[email]', value.email.toLowerCase());
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        console.log('VALIDATE==> email', res);
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        console.log('VALIDATE=> err', err);
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      console.log('VALIDATE==> email error', error);
+      setloading(false);
+    }
+  };
+
+  const validateSocialPhone = value => {
+    console.log('WORKING social number');
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        console.log('VALIDATE==> Social phone', res);
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        console.log('VALIDATE=> err', err);
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      console.log('VALIDATE==> email error', error);
+      setloading(false);
+    }
+  };
+
   const {signupObject} = useSelector(state => state.auth);
-  console.log('SIGNUP obj ', signupObject?.profileType);
+    
   const onSubmit = value => {
-    // return;
-    // dispatch({
-    //   type: types.UPDATE_SIGNUP_OBJECT,
-    //   payload: {
-    //     lastName: value.lastName,
-    //     firstName: value.firstName,
-    //     profileType: 'user',
-    //     age: value.age,
-    //     country: value.country,
-    //     city: value.city,
-    //     sex: sex,
-    //     pronoun: pronoun,
-    //     password: value.password,
-    //     email: value.email,
-    //   },
-    // });
     dispatch(updateSignupObject({firstName: value.firstName}));
     dispatch(updateSignupObject({lastName: value.lastName}));
     dispatch(updateSignupObject({password: value.password || ''}));
@@ -60,7 +106,6 @@ const SignUp = ({navigation, route}) => {
     dispatch(
       updateSignupObject({login_type: data ? 'social login' : 'manual'}),
     );
-
     navigation.navigate('ProfileImage');
   };
 
@@ -82,7 +127,11 @@ const SignUp = ({navigation, route}) => {
                 : SignUPFormFields
             }
             onSubmit={values => {
-              onSubmit(values);
+              // onSubmit(values);
+
+              {
+                data ? validateSocialPhone(values) : validateEmail(values);
+              }
             }}
             validationSchema={
               data?.login_type == 'social login' ? SocailSignUpVS : SignUpVS
@@ -242,6 +291,7 @@ const SignUp = ({navigation, route}) => {
               );
             }}
           </Formik>
+          <AppLoader loading={loading} />
         </ScrollView>
       </KeyboardAwareScrollView>
     </SafeAreaView>

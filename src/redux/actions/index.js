@@ -11,4 +11,6 @@ export {
   getInterestList,
   updateSignupObject,
   updateSocialLoginRequest,
+  validateEmailAction,
+  validateSocialPhoneAction,
 } from './auth-actions/auth-action';

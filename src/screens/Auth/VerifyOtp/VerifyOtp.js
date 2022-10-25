@@ -35,7 +35,7 @@ const VerifyOtp = ({navigation, route}) => {
       if (value?.length == 6) {
         const data = new FormData();
         data.append('otp', value);
-        data.append('email', email);
+        data.append('email', email?.toLowerCase());
         setloading(true);
         try {
           const cbSuccess = response => {

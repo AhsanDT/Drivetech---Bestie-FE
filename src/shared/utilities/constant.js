@@ -19,11 +19,14 @@ const stripe_publishableKey =
 //   },
 // };
 
-const image_options = {
-  width: 400,
-  height: 400,
-  multiple: true,
-  mediaType: 'photo',
+let image_options = {
+  quality: 1,
+  allowsEditing: false,
+  storageOptions: {skipBackup: true, path: 'images'},
+  // width: image.size.width,
+  // height: image.size.height,
+  // multiple: true,
+  // mediaType: 'photo',
 };
 
 const networkText = 'Check Internet Connection';
