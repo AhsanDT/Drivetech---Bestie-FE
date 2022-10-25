@@ -82,6 +82,13 @@ export const getInterestList = (cbSuccess, cbFailure) => {
     cbFailure,
   };
 };
+export const getTalentList = (cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.GET_TALENT_REQUEST,
+    cbSuccess,
+    cbFailure,
+  };
+};
 
 //Reset Password Action
 export const resetPassRequest = (params, cbSuccess, cbFailure) => {

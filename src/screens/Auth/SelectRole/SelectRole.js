@@ -85,11 +85,11 @@ const Splash = ({navigation}) => {
       </TouchableOpacity>
       <View style={styles.accountContainer}>
         <Text style={styles.accountStyles}>
-          Don't have an account?{' '}
+          Already have an account?{' '}
           <Text
             style={styles.signUpStyle}
             onPress={() => {
-              navigation.navigate('Auth', {screen: 'AddPortfolio'});
+              navigation.navigate('Auth', {screen: 'ShowTalent'});
             }}>
             Sign In
           </Text>
