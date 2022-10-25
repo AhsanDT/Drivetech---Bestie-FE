@@ -13,6 +13,7 @@ import {
   showInterestService,
   updateSocialLogin,
   validateEmailService,
+  validatePhoneService,
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -275,6 +276,24 @@ function* validateEmail(params) {
   // console.log('\n\nparams', params);
   try {
     const res = yield validateEmailService(params?.params);
+    if (res) {
+      // console.log('VALIDATE EMAIL SAGA==>res ', res);
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    // console.log('VALIDATE EMAIL SAGA==>err ', error?.response?.data?.error);
+
+    params?.cbFailure(error?.response?.data);
+  }
+}
+
+export function* validatePhoneSaga() {
+  yield takeLatest(types.VALIDATE_PHONE_REQUEST, validatePhone);
+}
+function* validatePhone(params) {
+  console.log('\n\nparams', params);
+  try {
+    const res = yield validatePhoneService(params?.params);
     if (res) {
       // console.log('VALIDATE EMAIL SAGA==>res ', res);
       params?.cbSuccess(res);

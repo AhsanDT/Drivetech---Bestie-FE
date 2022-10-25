@@ -12,4 +12,5 @@ export {
   updateSignupObject,
   updateSocialLoginRequest,
   validateEmailAction,
+  validateSocialPhoneAction,
 } from './auth-actions/auth-action';

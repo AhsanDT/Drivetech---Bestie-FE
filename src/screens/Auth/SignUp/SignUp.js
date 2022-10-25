@@ -19,7 +19,10 @@ import {
   SocailSignUpVS,
   SocialSignUPFormFields,
 } from '../../../shared/exporter';
-import {validateEmailAction} from '../../../redux/actions';
+import {
+  validateEmailAction,
+  validateSocialPhoneAction,
+} from '../../../redux/actions';
 
 import {Formik} from 'formik';
 useSelector;
@@ -53,6 +56,30 @@ const SignUp = ({navigation, route}) => {
         setloading(false);
       };
       dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      console.log('VALIDATE==> email error', error);
+      setloading(false);
+    }
+  };
+
+  const validateSocialPhone = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        console.log('VALIDATE==> email', res);
+        onSubmit(value);
+        setloading(false);
+        alert('okay');
+      };
+      const cbFailure = err => {
+        console.log('VALIDATE=> err', err);
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
     } catch (error) {
       console.log('VALIDATE==> email error', error);
       setloading(false);
@@ -101,7 +128,10 @@ const SignUp = ({navigation, route}) => {
             }
             onSubmit={values => {
               // onSubmit(values);
-              validateEmail(values);
+
+              {
+                data ? validateSocialPhone(values) : validateEmail(values);
+              }
             }}
             validationSchema={
               data?.login_type == 'social login' ? SocailSignUpVS : SignUpVS
