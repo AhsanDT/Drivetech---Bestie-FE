@@ -30,17 +30,17 @@ const PrivacyPolicy = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
       {/* <AppLoader loading={loading} /> */}
-      <StatusBar
-        backgroundColor={'#fff'}
-        translucent={false}
-        barStyle={'dark-content'}
-      />
       <AppHeader
         backIcon
         title={'Privacy Policy'}
         onPressBack={() => {
           navigation.goBack();
         }}
+      />
+      <StatusBar
+        backgroundColor={'#fff'}
+        translucent={false}
+        barStyle={'dark-content'}
       />
 
       <Spacer androidVal={WP('4')} iOSVal={WP('4')} />
