@@ -63,16 +63,16 @@ const SignUp = ({navigation, route}) => {
   };
 
   const validateSocialPhone = value => {
+    console.log('WORKING social number');
     setloading(true);
     try {
       const data = new FormData();
       data.append('user[phone_number]', value.phone);
       console.log(data);
       const cbSuccess = res => {
-        console.log('VALIDATE==> email', res);
+        console.log('VALIDATE==> Social phone', res);
         onSubmit(value);
         setloading(false);
-        alert('okay');
       };
       const cbFailure = err => {
         console.log('VALIDATE=> err', err);
@@ -105,7 +105,6 @@ const SignUp = ({navigation, route}) => {
     dispatch(
       updateSignupObject({login_type: data ? 'social login' : 'manual'}),
     );
-
     navigation.navigate('ProfileImage');
   };
 

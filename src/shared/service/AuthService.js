@@ -109,7 +109,6 @@ export const resetPassword = async params => {
   return res.data;
 };
 export const validateEmailService = async params => {
-  // console.log('params', params);
   const res = await axios.post(
     `${BASE_URL}${ENDPOINTS.VALIDATE_EMAIL}`,
     params,
@@ -124,7 +123,7 @@ export const validateEmailService = async params => {
 };
 
 export const validatePhoneService = async params => {
-  // console.log('params', params);
+  console.log('params services', params);
   const res = await axios.post(
     `${BASE_URL}${ENDPOINTS.VALIDATE_PHONE}`,
     params,

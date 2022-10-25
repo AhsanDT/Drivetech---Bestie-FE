@@ -291,16 +291,17 @@ export function* validatePhoneSaga() {
   yield takeLatest(types.VALIDATE_PHONE_REQUEST, validatePhone);
 }
 function* validatePhone(params) {
-  console.log('\n\nparams', params);
+  console.log('PARAMS SAGA==> ', params);
   try {
     const res = yield validatePhoneService(params?.params);
     if (res) {
       // console.log('VALIDATE EMAIL SAGA==>res ', res);
       params?.cbSuccess(res);
+      console.log('Eres', res);
     }
   } catch (error) {
     // console.log('VALIDATE EMAIL SAGA==>err ', error?.response?.data?.error);
-
+    console.log('ERROR 12', error);
     params?.cbFailure(error?.response?.data);
   }
 }

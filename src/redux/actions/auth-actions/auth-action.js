@@ -103,6 +103,7 @@ export const validateEmailAction = (params, cbSuccess, cbFailure) => {
 };
 
 export const validateSocialPhoneAction = (params, cbSuccess, cbFailure) => {
+  console.log('PARAMS action', params);
   return {
     type: TYPES.VALIDATE_PHONE_REQUEST,
     params,
