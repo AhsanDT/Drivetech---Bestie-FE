@@ -20,6 +20,9 @@ export const appIcons = {
   scan: require('../../assets/icons/scan.png'),
   // scan:  require('../../assets/icons/scan.png'),
   arrow: require('../../assets/icons/arrow.png'),
+
+  cancel: require('../../assets/icons/cancel.png'),
+
   diamond: require('../../assets/icons/diamondIcon.png'),
   checkbox: require('../../assets/icons/checkbox.png'),
   camera2: require('../../assets/icons/camera2.png'),
@@ -48,6 +51,7 @@ export const appIcons = {
   logout: require('../../assets/icons/logout.png'),
   checked: require('../../assets/icons/checked.png'),
   unChecked: require('../../assets/icons/unchecked.png'),
+
 };
 
 export const appSvgs = {

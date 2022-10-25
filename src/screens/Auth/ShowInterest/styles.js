@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     alignSelf: 'center',
-    flexGrow: 0,
+    flexGrow: 0.9,
   },
   contentContainerStyle: {
     // backgroundColor: 'pink',
