@@ -15,14 +15,14 @@ const EditCard = ({navigation}) => {
   const [show, setShow] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <Header
+        title={'Edit Card'}
+        backIcon={true}
+        onPressBack={() => {
+          setShow(true);
+        }}
+      />
       <KeyboardAwareScrollView style={{flexGrow: 0.97}}>
-        <Header
-          title={'Edit Card'}
-          backIcon={true}
-          onPressBack={() => {
-            setShow(true);
-          }}
-        />
         <DiscardModal
           show={show}
           onPressHide={() => setShow(false)}

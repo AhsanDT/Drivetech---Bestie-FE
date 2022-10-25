@@ -45,6 +45,9 @@ export const appIcons = {
   delete: require('../../assets/icons/delete.png'),
   cross: require('../../assets/icons/cross.png'),
   rightarrow: require('../../assets/icons/rightarrow.png'),
+  logout: require('../../assets/icons/logout.png'),
+  checked: require('../../assets/icons/checked.png'),
+  unChecked: require('../../assets/icons/unchecked.png'),
 };
 
 export const appSvgs = {

@@ -15,10 +15,8 @@ const CreditCard = ({title, subTitle, show, onPress}) => {
       {show ? (
         <TouchableOpacity style={styles.mainContainer2} onPress={onPress}>
           <View style={styles.contentContainer}>
-            <Text style={styles.creditCardText}>{subTitle}</Text>
-            <Text style={styles.visaCardStyle}>
-              Visa, MasterCard, American Express
-            </Text>
+            <Text style={styles.creditCardText}>{title}</Text>
+            <Text style={styles.visaCardStyle}>{subTitle}</Text>
           </View>
           <View style={styles.tickIconContainer}>
             <Image source={appIcons.tick} style={styles.tickIconStyle} />

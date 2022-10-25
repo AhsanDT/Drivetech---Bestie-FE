@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 function EndUserMain(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Setting"
+      initialRouteName="AddCard"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="PaymentMethod" component={PaymentMethod} />
       <Stack.Screen name="AddCard" component={AddCard} />

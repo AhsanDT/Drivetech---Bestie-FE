@@ -39,6 +39,7 @@ export const colors = {
   g19: '#999999',
   g20: '#C7C7C7',
   g21: '#7D7D7D',
+  g22: '#D3D3D3',
   //Green
   gr1: '#00A66C',
   gr2: '#34A853',
@@ -78,7 +79,7 @@ export const colors = {
   gray2: 'rgba(99, 99, 99, 0.18)',
   gray3: 'rgba(32, 32, 32, 0.46)',
 
-  ornage: 'rgba(235, 45, 37, 0.2)',
+  orange: 'rgba(235, 45, 37, 0.2)',
 
   yellow: 'rgba(247, 208, 112, 0.56)',
 

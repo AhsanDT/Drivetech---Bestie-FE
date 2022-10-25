@@ -200,7 +200,7 @@ const Card_List = [
   {
     id: 0,
     title: 'Credit/Debit Card',
-    subTitle: 'Credit/Debit Card',
+    subTitle: 'Visa, MasterCard, American Express',
     selected: false,
   },
   {
@@ -217,6 +217,54 @@ const Card_List = [
   },
 ];
 
+const Setting_List = [
+  {
+    id: 0,
+    title: 'Review Pendings',
+    route: '',
+  },
+  {
+    id: 1,
+    title: 'Payment Method ',
+    route: '',
+  },
+  {
+    id: 2,
+    title: 'FAQ',
+    route: '',
+  },
+  {
+    id: 3,
+    title: 'Terms & Conditions',
+    route: 'TermsConditions',
+  },
+  {
+    id: 4,
+    title: 'Privacy Policy',
+    route: 'PrivacyPolicy',
+  },
+  {
+    id: 5,
+    title: 'Appointment Notification',
+    selected: true,
+  },
+  {
+    id: 6,
+    title: 'Support',
+    route: '',
+  },
+  {
+    id: 7,
+    title: 'Switch to Bestie',
+    selected: true,
+  },
+  {
+    id: 8,
+    title: 'Block List',
+    route: '',
+  },
+];
+
 export {
   web_client_id,
   stripe_publishableKey,
@@ -230,4 +278,5 @@ export {
   // image_option
   Tab_List,
   Card_List,
+  Setting_List,
 };

@@ -6,28 +6,27 @@ import {Card_List, colors, WP} from '../../../shared/exporter';
 import {styles} from './styles';
 
 const AddCard = ({navigation}) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(null);
   const renderItem = ({item, index}) => (
     <CreditCard
-      show={show}
+      show={index === show ? true : false}
       title={item.title}
       subTitle={item.subTitle}
       onPress={() => {
-        setShow(!show);
+        setShow(index);
       }}
     />
   );
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <Header
+        title={'Add Card'}
+        backIcon={true}
+        onPressBack={() => {
+          navigation.goBack();
+        }}
+      />
       <KeyboardAwareScrollView style={styles.keyboardContainer}>
-        <Header
-          title={'Add Card'}
-          backIcon={true}
-          onPressBack={() => {
-            navigation.goBack();
-          }}
-        />
-
         <Text style={styles.textStyle}>Card Info</Text>
         <FlatList
           data={Card_List}

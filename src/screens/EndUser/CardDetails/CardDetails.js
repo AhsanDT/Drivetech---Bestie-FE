@@ -16,14 +16,14 @@ const CardDetails = ({navigation}) => {
   const [show, setShow] = useState(false);
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <KeyboardAwareScrollView style={{flexGrow: 0.9}}>
-        <Header
-          title={'Add Card'}
-          backIcon={true}
-          onPressBack={() => {
-            setShow(true);
-          }}
-        />
+      <Header
+        title={'Add Card'}
+        backIcon={true}
+        onPressBack={() => {
+          setShow(true);
+        }}
+      />
+      <KeyboardAwareScrollView style={{flexGrow: 0.95}}>
         <DiscardModal
           show={show}
           onPressHide={() => setShow(false)}
