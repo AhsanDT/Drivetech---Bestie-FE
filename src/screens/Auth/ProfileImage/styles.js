@@ -17,18 +17,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.g2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: colors.g7,
-    borderStyle: 'dashed',
   },
   cameraContainer: {
     height: 28,
     width: 28,
   },
   uriImageContainer: {
-    height: WP('39'),
-    width: WP('39'),
-    borderRadius: WP('39'),
+    height: WP('44'),
+    width: WP('44'),
+    borderRadius: WP('44'),
+    backgroundColor: colors.g2,
   },
   buttonContainer: {
     padding: WP('3'),

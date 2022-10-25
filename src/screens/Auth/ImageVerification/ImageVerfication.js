@@ -86,7 +86,7 @@ const ImageVerification = ({navigation}) => {
       } = signupObject;
       const data = new FormData();
       data.append('user[first_name]', firstName),
-        data.append('user[email]', email),
+        data.append('user[email]', email?.toLowerCase()),
         data.append('user[last_name]', lastName);
       if (login_type == 'manual') {
         data.append('user[password]', password);
@@ -126,7 +126,11 @@ const ImageVerification = ({navigation}) => {
       const cbSuccess = res => {
         setloading(false);
         Alert.alert('Congrats', 'Signup Successfully');
-        navigation.navigate('Login');
+        // navigation.replace('Login');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
       };
       const cbFailure = err => {
         console.log('Err..', err);

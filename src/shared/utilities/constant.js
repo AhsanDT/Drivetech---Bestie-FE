@@ -19,11 +19,14 @@ const stripe_publishableKey =
 //   },
 // };
 
-const image_options = {
-  width: 400,
-  height: 400,
-  multiple: true,
-  mediaType: 'photo',
+let image_options = {
+  quality: 1,
+  allowsEditing: false,
+  storageOptions: {skipBackup: true, path: 'images'},
+  // width: image.size.width,
+  // height: image.size.height,
+  // multiple: true,
+  // mediaType: 'photo',
 };
 
 const networkText = 'Check Internet Connection';
@@ -173,6 +176,98 @@ const Equipment_List = [
   },
 ];
 
+const Tab_List = [
+  {
+    id: 0,
+    route: 'Home',
+    name: 'Home',
+  },
+  {
+    id: 1,
+    route: 'Jobs',
+    name: 'Jobs',
+  },
+  {
+    id: 2,
+    route: 'Calendar',
+    name: 'Calendar',
+  },
+  {
+    id: 3,
+    route: 'Chat',
+    name: 'Chat',
+  },
+];
+
+const Card_List = [
+  {
+    id: 0,
+    title: 'Credit/Debit Card',
+    subTitle: 'Visa, MasterCard, American Express',
+    selected: false,
+  },
+  {
+    id: 0,
+    title: 'PayPal',
+    subTitle: 'PayPal',
+    selected: false,
+  },
+  {
+    id: 0,
+    title: 'Apple Pay',
+    subTitle: 'Apple Pay',
+    selected: false,
+  },
+];
+
+const Setting_List = [
+  {
+    id: 0,
+    title: 'Review Pendings',
+    route: '',
+  },
+  {
+    id: 1,
+    title: 'Payment Method ',
+    route: '',
+  },
+  {
+    id: 2,
+    title: 'FAQ',
+    route: '',
+  },
+  {
+    id: 3,
+    title: 'Terms & Conditions',
+    route: 'TermsConditions',
+  },
+  {
+    id: 4,
+    title: 'Privacy Policy',
+    route: 'PrivacyPolicy',
+  },
+  {
+    id: 5,
+    title: 'Appointment Notification',
+    selected: true,
+  },
+  {
+    id: 6,
+    title: 'Support',
+    route: '',
+  },
+  {
+    id: 7,
+    title: 'Switch to Bestie',
+    selected: true,
+  },
+  {
+    id: 8,
+    title: 'Block List',
+    route: '',
+  },
+];
+
 export {
   web_client_id,
   stripe_publishableKey,
@@ -183,5 +278,8 @@ export {
   Pronoun_List,
   Camera_List,
   Equipment_List,
-  // image_option,
+  // image_option
+  Tab_List,
+  Card_List,
+  Setting_List,
 };

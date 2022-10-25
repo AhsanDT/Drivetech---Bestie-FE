@@ -13,6 +13,8 @@ const ENDPOINTS = {
   GET_INTERESTS: 'authentication/get_interests',
   GET_TALENTS: 'authentication/get_talents',
   UPDATE_SOCIAL_LOGIN: 'authentication/update_social_login?email',
+  VALIDATE_EMAIL: 'authentication/uniq_email_and_phone',
+  VALIDATE_PHONE: 'authentication/uniq_phone_number',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};

@@ -12,4 +12,7 @@ export {
   updateSignupObject,
   updateSocialLoginRequest,
   getTalentList,
+  validateEmailAction,
+  validateSocialPhoneAction,
+
 } from './auth-actions/auth-action';

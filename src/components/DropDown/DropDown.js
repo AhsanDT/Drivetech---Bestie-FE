@@ -13,7 +13,6 @@ export const DropDown = ({
   containerStyle,
   touched,
   error,
-  searchInput,
 }) => {
   const renderItem = item => {
     return (
@@ -48,6 +47,8 @@ export const DropDown = ({
         )}
         style={styles.dropStyle}
         renderItem={item => renderItem(item)}
+        // onBlur={onBlur}
+        // onFocus={onFocus}
         // errorMessage={touched && errorMessage}
         // errorStyle={styles.errorStyle}
         // renderErrorMessage={renderErrorMessage}
@@ -69,10 +70,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('2'),
   },
   menuStyle: {
-    borderRadius: 10,
-    // height: WP('35'),
+    borderRadius: 15,
+    height: WP('35'),
     width: scrWidth / 1.1,
-    // backgroundColor: 'red',
+    elevation: 2,
+    overflow: 'hidden',
   },
   dropStyle: {
     width: WP('90'),

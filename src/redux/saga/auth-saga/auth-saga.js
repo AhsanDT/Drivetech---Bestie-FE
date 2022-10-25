@@ -13,6 +13,9 @@ import {
   showInterestService,
   updateSocialLogin,
   showTalentService,
+  validateEmailService,
+  validatePhoneService,
+
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -269,6 +272,43 @@ function* resetPass(params) {
     });
     let msg = responseValidator(error?.response?.status, error?.response?.data);
     params?.cbFailure(msg);
+  }
+}
+
+export function* validateEmailSaga() {
+  yield takeLatest(types.VALIDATE_EMAIL_REQUEST, validateEmail);
+}
+function* validateEmail(params) {
+  // console.log('\n\nparams', params);
+  try {
+    const res = yield validateEmailService(params?.params);
+    if (res) {
+      // console.log('VALIDATE EMAIL SAGA==>res ', res);
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    // console.log('VALIDATE EMAIL SAGA==>err ', error?.response?.data?.error);
+
+    params?.cbFailure(error?.response?.data);
+  }
+}
+
+export function* validatePhoneSaga() {
+  yield takeLatest(types.VALIDATE_PHONE_REQUEST, validatePhone);
+}
+function* validatePhone(params) {
+  console.log('PARAMS SAGA==> ', params);
+  try {
+    const res = yield validatePhoneService(params?.params);
+    if (res) {
+      // console.log('VALIDATE EMAIL SAGA==>res ', res);
+      params?.cbSuccess(res);
+      console.log('Eres', res);
+    }
+  } catch (error) {
+    // console.log('VALIDATE EMAIL SAGA==>err ', error?.response?.data?.error);
+    console.log('ERROR 12', error);
+    params?.cbFailure(error?.response?.data);
   }
 }
 

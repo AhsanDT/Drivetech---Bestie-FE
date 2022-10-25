@@ -16,7 +16,7 @@ const TermsConditions = ({navigation}) => {
       />
       <StatusBar
         translucent={false}
-        barStyle={'light-content'}
+        barStyle={'dark-content'}
         backgroundColor={'#fff'}
       />
       <ScrollView style={{backgroundColor: '#fff'}}>

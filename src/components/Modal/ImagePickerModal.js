@@ -18,6 +18,7 @@ export const ImagePickerModal = ({
   onPressHide,
   onPressGallery,
   onPressCamera,
+  onPressCancel,
 }) => {
   return (
     <View style={styles.container}>
@@ -42,6 +43,23 @@ export const ImagePickerModal = ({
 
             <View style={styles.textContainer}>
               <Text style={styles.btnText}>Pick Image from Gallery</Text>
+            </View>
+          </TouchableOpacity>
+
+          <View style={styles.separator} />
+          <TouchableOpacity onPress={onPressCancel} style={styles.btn}>
+            <View style={styles.leftContainer}>
+              <Image
+                source={appIcons.cancel}
+                style={[
+                  styles.imageStyle,
+                  {tintColor: colors.gray, height: 20, width: 20},
+                ]}
+              />
+            </View>
+
+            <View style={styles.textContainer}>
+              <Text style={styles.btnText}>Cancel</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -85,8 +103,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   imageStyle: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     resizeMode: 'contain',
   },
   textContainer: {

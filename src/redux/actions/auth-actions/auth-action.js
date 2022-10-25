@@ -19,6 +19,7 @@ export const socialLoginRequest = (data, cbSuccess, cbFailure) => {
     cbFailure,
   };
 };
+
 export const updateSocialLoginRequest = (data, email, cbSuccess, cbFailure) => {
   return {
     type: TYPES.UPDATE_SOCIAL_LOGIN_REQUEST,
@@ -94,6 +95,24 @@ export const getTalentList = (cbSuccess, cbFailure) => {
 export const resetPassRequest = (params, cbSuccess, cbFailure) => {
   return {
     type: TYPES.RESET_PASSWORD_REQUEST,
+    params,
+    cbSuccess,
+    cbFailure,
+  };
+};
+export const validateEmailAction = (params, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.VALIDATE_EMAIL_REQUEST,
+    params,
+    cbSuccess,
+    cbFailure,
+  };
+};
+
+export const validateSocialPhoneAction = (params, cbSuccess, cbFailure) => {
+  console.log('PARAMS action', params);
+  return {
+    type: TYPES.VALIDATE_PHONE_REQUEST,
     params,
     cbSuccess,
     cbFailure,

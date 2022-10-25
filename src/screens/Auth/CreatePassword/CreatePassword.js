@@ -24,7 +24,7 @@ const CreatePassword = ({navigation, route}) => {
     if (check) {
       setloading(true);
       const data = new FormData();
-      data.append('email', email);
+      data.append('email', email?.toLowerCase());
       data.append('password', value.password);
       try {
         const cbSuccess = response => {

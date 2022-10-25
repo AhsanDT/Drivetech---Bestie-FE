@@ -57,6 +57,11 @@ export const codeFormFields = {
   code: '',
 };
 
+export const cardFormField ={
+  fullName:'',
+  country:'',
+}
+
 export const LoginVS = yup.object().shape({
   email: yup
     .string()
@@ -125,3 +130,16 @@ export const ForgotPasswordVS = yup.object().shape({
     .required('Email Required')
     .email('Please provide a valid email address'),
 });
+
+export const cardVS = yup.object().shape({
+  fullname:  yup
+  .string()
+  .required('Full Name Required'),
+  country:  yup
+  .string()
+  .required('Country Required'),
+  cardNumber:  yup
+  .string()
+  .required('Card Number Required'), 
+
+})

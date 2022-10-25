@@ -2,7 +2,14 @@ import React, {useEffect, useRef} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {colors, family, size, WP} from '../../shared/exporter';
-const LocationInput = ({title, error, touched, placeholder, onChangeText}) => {
+const LocationInput = ({
+  title,
+  error,
+  touched,
+  placeholder,
+  onChangeText,
+  value,
+}) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -20,7 +27,9 @@ const LocationInput = ({title, error, touched, placeholder, onChangeText}) => {
         fetchDetails={true}
         textInputProps={{
           placeholderTextColor: colors.g3,
-          onChangeText: onChangeText,
+          onChangeText: value => {
+            value;
+          },
         }}
         styles={{
           textInput: styles.inputContainerStyle,
@@ -68,10 +77,10 @@ const styles = StyleSheet.create({
     marginHorizontal: WP('2.5'),
     borderRadius: 30,
     backgroundColor: colors.g2,
-    borderBottomWidth: 0,
+    // borderBottomWidth: 0,
     paddingHorizontal: WP('5'),
     flex: 1,
-    marginBottom: 10,
+    marginBottom: 25,
     color: colors.g3,
     fontSize: size.text_14,
     fontFamily: family.Poppin_Regular,
@@ -91,9 +100,10 @@ const styles = StyleSheet.create({
   errorStyle: {
     fontSize: size.text_12,
     color: colors.red,
-    paddingHorizontal: 13,
+    paddingHorizontal: 25,
     textAlign: 'left',
     fontFamily: family.Poppin_Regular,
-    marginTop: WP('2'),
+    // marginTop: WP('-2'),
+    top: -18,
   },
 });
