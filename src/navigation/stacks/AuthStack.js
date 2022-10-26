@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Login from '../../screens/Auth/Login';
 import ShowInterest from '../../screens/Auth/ShowInterest';
 import SignUp from '../../screens/Auth/SignUp/SignUp';
 import ForgotPassword from '../../screens/Auth/ForgotPassword';
@@ -18,6 +17,7 @@ import RegisterBestie from '../../screens/Auth/Bestie/Register';
 import AccountRate from '../../screens/Auth/Bestie/AccountRate';
 import Test from '../../screens/Auth/Test/Test';
 import ShowTalent from '../../screens/Auth/Bestie/ShowTalent';
+import Login from '../../screens/Auth/Login';
 
 const Stack = createNativeStackNavigator();
 
