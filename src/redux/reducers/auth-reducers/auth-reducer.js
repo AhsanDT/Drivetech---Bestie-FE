@@ -1,6 +1,7 @@
 import * as TYPES from '../../actions/types/auth_types';
 
 const initialState = {
+  isLoggedIn: false,
   loading: false,
   isSuccess: false,
   isFailure: false,
@@ -44,6 +45,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action = {}) => {
   const {type, payload} = action;
+  console.log(' payload?.profileType', payload?.data?.profile_type);
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
       return {
@@ -52,6 +54,8 @@ const authReducer = (state = initialState, action = {}) => {
         isSuccess: true,
         isFailure: false,
         userInfo: payload,
+        profileType: payload?.data?.profile_type,
+        isLoggedIn: true,
       };
     case TYPES.LOGIN_REQUEST_FAILURE:
       return {
@@ -60,6 +64,7 @@ const authReducer = (state = initialState, action = {}) => {
         isSuccess: false,
         isFailure: true,
         userInfo: null,
+        isLoggedIn: false,
       };
     case TYPES.SOCIAL_LOGIN_REQUEST_SUCCESS:
       return {
