@@ -25,7 +25,6 @@ import {
 } from '../../../redux/actions';
 
 import {Formik} from 'formik';
-useSelector;
 import {updateSignupObject} from '../../../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -88,7 +87,7 @@ const SignUp = ({navigation, route}) => {
   };
 
   const {signupObject} = useSelector(state => state.auth);
-    
+
   const onSubmit = value => {
     dispatch(updateSignupObject({firstName: value.firstName}));
     dispatch(updateSignupObject({lastName: value.lastName}));
@@ -127,8 +126,6 @@ const SignUp = ({navigation, route}) => {
                 : SignUPFormFields
             }
             onSubmit={values => {
-              // onSubmit(values);
-
               {
                 data ? validateSocialPhone(values) : validateEmail(values);
               }
@@ -148,24 +145,24 @@ const SignUp = ({navigation, route}) => {
               setFieldValue,
             }) => {
               useEffect(() => {
-                // setFieldValue(
-                //   'firstName',
-                //   data?.login_type == 'social login'
-                //     ? data.first_name
-                //     : values?.firstName,
-                // );
-                // setFieldValue(
-                //   'lastName',
-                //   data?.login_type == 'social login'
-                //     ? data.last_name
-                //     : values?.lastName,
-                // );
-                // setFieldValue(
-                //   'email',
-                //   data?.login_type == 'social login'
-                //     ? data?.email
-                //     : values?.email,
-                // );
+                setFieldValue(
+                  'firstName',
+                  data?.login_type == 'social login'
+                    ? data.first_name
+                    : values?.firstName,
+                );
+                setFieldValue(
+                  'lastName',
+                  data?.login_type == 'social login'
+                    ? data.last_name
+                    : values?.lastName,
+                );
+                setFieldValue(
+                  'email',
+                  data?.login_type == 'social login'
+                    ? data?.email
+                    : values?.email,
+                );
               }, []);
               return (
                 <View>
