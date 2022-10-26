@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
@@ -19,18 +19,80 @@ import {
   Pronoun_List,
   RegisterVS,
   RegisterFields,
+  ExperienceList,
 } from '../../../../shared/exporter';
 import {Formik} from 'formik';
-import {updateSignupObject} from '../../../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
-const Register = ({navigation}) => {
+import {
+  validateEmailAction,
+  validateSocialPhoneAction,
+  updateSignupObject,
+} from '../../../../redux/actions';
+const Register = ({navigation, route}) => {
   const [sex, setsex] = useState('Male');
-  const [experience, setExperience] = useState('');
+  const [experience, setExperience] = useState('1 Year');
+  const [data, setdata] = useState(route?.params?.data);
   const [location, setlocation] = useState('');
 
   const {signupObject} = useSelector(state => state.auth);
-  const onSubmit = e => {
-    navigation.navigate('ProfileImage');
+
+  const validateEmail = value => {
+    console.log('BESTIE WORKING', value);
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[email]', value.email.toLowerCase());
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        console.log('VALIDATE==> email', res);
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        console.log('VALIDATE=> err', err);
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      console.log('VALIDATE=> err', error);
+      setloading(false);
+    }
+  };
+
+  const validateSocialPhone = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
+  };
+
+  const onSubmit = value => {
+    console.log('VALUES BESTIE==> ', value);
+    dispatch(updateSignupObject({firstName: value.firstName}));
+    dispatch(updateSignupObject({lastName: value.lastName}));
+    dispatch(updateSignupObject({password: value.password || ''}));
+    dispatch(updateSignupObject({email: value.email}));
+    dispatch(updateSignupObject({city: value.city}));
+    dispatch(updateSignupObject({sex: sex}));
+    dispatch(updateSignupObject({age: value?.age}));
+    dispatch(updateSignupObject({country: value?.country}));
+    dispatch(updateSignupObject({phoneNumber: value?.phone}));
+    // navigation.navigate('ProfileImage');
   };
 
   return (
@@ -45,7 +107,9 @@ const Register = ({navigation}) => {
         <Formik
           initialValues={RegisterFields}
           onSubmit={values => {
-            onSubmit(values);
+            {
+              data ? validateSocialPhone(values) : validateEmail(values);
+            }
           }}
           validationSchema={RegisterVS}>
           {({
@@ -57,82 +121,136 @@ const Register = ({navigation}) => {
             isValid,
             handleSubmit,
             handleReset,
-          }) => (
-            <View>
-              <AppInput
-                title={'Full Name'}
-                placeholder={'Enter your Full name'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('fullName')}
-                value={values.fullName}
-                touched={touched.fullName}
-                errorMessage={errors.fullName}
-              />
-              <AppInput
-                title={'Last Name'}
-                placeholder={'Enter your last name'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('lastName')}
-                value={values.lastName}
-                touched={touched.lastName}
-                errorMessage={errors.lastName}
-              />
-              <AppInput
-                title={'Phone Number'}
-                placeholder={'Type her'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('phone')}
-                value={values.phone}
-                touched={touched.phone}
-                errorMessage={errors.phone}
-                keyboardType={'number-pad'}
-              />
-
-              <LocationInput
+            setFieldValue,
+          }) => {
+            useEffect(() => {
+              setFieldValue(
+                'firstName',
+                data?.login_type == 'social login'
+                  ? data.first_name
+                  : values?.firstName,
+              );
+              setFieldValue(
+                'lastName',
+                data?.login_type == 'social login'
+                  ? data.last_name
+                  : values?.lastName,
+              );
+              setFieldValue(
+                'email',
+                data?.login_type == 'social login'
+                  ? data?.email
+                  : values?.email,
+              );
+            }, []);
+            return (
+              <View>
+                <AppInput
+                  title={'First Name'}
+                  placeholder={'Enter your first name'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('firstName')}
+                  value={values.firstName}
+                  touched={touched.firstName}
+                  errorMessage={errors.firstName}
+                />
+                <AppInput
+                  title={'Last Name'}
+                  placeholder={'Enter your last name'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('lastName')}
+                  value={values.lastName}
+                  touched={touched.lastName}
+                  errorMessage={errors.lastName}
+                />
+                <AppInput
+                  title={'Email'}
+                  placeholder={'Email'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('email')}
+                  value={data?.email ? data?.email : values?.email}
+                  touched={touched.email}
+                  errorMessage={errors.email}
+                  keyboardType={'email-address'}
+                  editable={data?.email ? false : true}
+                />
+                <AppInput
+                  title={'Password'}
+                  placeholder={'Password'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('password')}
+                  value={values?.password}
+                  touched={touched.password}
+                  errorMessage={errors.password}
+                  secureTextEntry={true}
+                />
+                <AppInput
+                  title={'Phone Number'}
+                  placeholder={'Type here'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('phone')}
+                  value={values.phone}
+                  touched={touched.phone}
+                  errorMessage={errors.phone}
+                  keyboardType={'number-pad'}
+                />
+                <AppInput
+                  title={'Location'}
+                  placeholder={'Type here'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('location')}
+                  value={values.location}
+                  touched={touched.location}
+                  errorMessage={errors.location}
+                />
+                <AppInput
+                  title={'Age'}
+                  placeholder={'Type here'}
+                  placeholderTextColor={colors.g3}
+                  onChangeText={handleChange('age')}
+                  value={values.age}
+                  touched={touched.age}
+                  errorMessage={errors.age}
+                  keyboardType={'number-pad'}
+                  maxLength={2}
+                />
+                {/* we will use it later if need */}
+                {/* <LocationInput
                 title={'Location'}
                 placeholder={'Set your location'}
-              />
-              <DropDown
-                label={'Experience'}
-                placeholder={'Select'}
-                containerStyle={styles.dropContainer}
-                options={Pronoun_List}
-                value={experience}
-                onChangeValue={txt => setExperience(txt.value)}
-              />
-              <AppInput
-                title={'Age'}
-                placeholder={'Type here'}
-                placeholderTextColor={colors.g3}
-                onChangeText={handleChange('age')}
-                value={values.age}
-                touched={touched.age}
-                errorMessage={errors.age}
-                keyboardType={'number-pad'}
-                maxLength={2}
-              />
-              <DropDown
-                label={'Sex'}
-                placeholder={'Select'}
-                containerStyle={styles.dropContainer}
-                options={Selection_List}
-                value={sex}
-                onChangeValue={txt => setsex(txt.value)}
-                searchInput={true}
-              />
+              /> */}
+                <DropDown
+                  label={'Experience'}
+                  placeholder={'Select'}
+                  containerStyle={styles.dropContainer}
+                  options={ExperienceList}
+                  value={experience}
+                  onChangeValue={txt => setExperience(txt.value)}
+                />
 
-              <AppButton
-                width={WP('40')}
-                bgColor={colors.b1}
-                title={'Next'}
-                height={WP('10')}
-                style={styles.btnContainer}
-                onPress={() => {
-                  handleSubmit();
-                }}
-              />
-            </View>
-          )}
+                <DropDown
+                  label={'Sex'}
+                  placeholder={'Select'}
+                  containerStyle={styles.dropContainer}
+                  options={Selection_List}
+                  value={sex}
+                  onChangeValue={txt => setsex(txt.value)}
+                  searchInput={true}
+                />
+
+                <AppButton
+                  width={WP('40')}
+                  bgColor={colors.b1}
+                  title={'Next'}
+                  height={WP('10')}
+                  style={styles.btnContainer}
+                  onPress={() => {
+                    handleSubmit();
+                  }}
+                />
+              </View>
+            );
+          }}
         </Formik>
       </KeyboardAwareScrollView>
     </SafeAreaView>

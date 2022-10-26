@@ -101,6 +101,9 @@ export const resetPassRequest = (params, cbSuccess, cbFailure) => {
   };
 };
 export const validateEmailAction = (params, cbSuccess, cbFailure) => {
+  {
+    console.log('ACTION==> ', params);
+  }
   return {
     type: TYPES.VALIDATE_EMAIL_REQUEST,
     params,

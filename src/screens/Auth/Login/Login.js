@@ -186,7 +186,7 @@ const Login = ({navigation}) => {
           } else {
             console.log('2');
 
-            navigation.navigate('SignUp', {data: res?.data});
+            navigation.navigate('SelectRole', {data: res?.data});
           }
 
           setloading(false);

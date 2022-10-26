@@ -123,6 +123,24 @@ const Pronoun_List = [
     value: 'they/them',
   },
 ];
+const ExperienceList = [
+  {
+    title: '1 Year',
+    value: '1 Year',
+  },
+  {
+    title: '2 Year',
+    value: '2 Year',
+  },
+  {
+    title: '3 Year',
+    value: '3 Year',
+  },
+  {
+    title: '4 Year',
+    value: '4 Year',
+  },
+];
 
 const Camera_List = [
   {
@@ -282,4 +300,5 @@ export {
   Tab_List,
   Card_List,
   Setting_List,
+  ExperienceList,
 };
