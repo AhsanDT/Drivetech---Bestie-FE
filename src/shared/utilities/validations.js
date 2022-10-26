@@ -3,13 +3,18 @@ import * as yup from 'yup';
 import {emailRegex} from './constant';
 
 export const RegisterFields = {
-  fullName: '',
+  firstName: '',
   lastName: '',
   phone: '',
-  // location: '',
-  // experience: 'him/he',
+  location: '',
+  email: '',
+  password: '',
   age: '',
-  // gender: 'Male',
+};
+export const SocialRegisterFields = {
+  phone: '',
+  location: '',
+  age: '',
 };
 
 export const CustomerRegisterStep2Fields = {
@@ -57,10 +62,10 @@ export const codeFormFields = {
   code: '',
 };
 
-export const cardFormField ={
-  fullName:'',
-  country:'',
-}
+export const cardFormField = {
+  fullName: '',
+  country: '',
+};
 
 export const LoginVS = yup.object().shape({
   email: yup
@@ -86,13 +91,25 @@ export const SignUpVS = yup.object().shape({
 });
 
 export const RegisterVS = yup.object().shape({
-  fullName: yup.string().required('First Name Required'),
+  firstName: yup.string().required('First Name Required'),
   lastName: yup.string().required('Last Name Required'),
   phone: yup.string().required('Phone Number Required'),
-  // location: yup.string().required('Location Required'),
-  // experience: yup.string().required('Experience Required'),
+  location: yup.string().required('Location Required'),
+  email: yup
+    .string()
+    .required('Email Required')
+    .email('Please provide a valid email address'),
   age: yup.string().required('Age Requried'),
-  // gender: yup.string().required('Gender Requried'),
+  password: yup
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password Required'),
+});
+
+export const SocialRegisterVS = yup.object().shape({
+  phone: yup.string().required('Phone Number Required'),
+  location: yup.string().required('Location Required'),
+  age: yup.string().required('Age Requried'),
 });
 
 export const SPRegisterStep1VS = yup.object().shape({
@@ -132,14 +149,7 @@ export const ForgotPasswordVS = yup.object().shape({
 });
 
 export const cardVS = yup.object().shape({
-  fullname:  yup
-  .string()
-  .required('Full Name Required'),
-  country:  yup
-  .string()
-  .required('Country Required'),
-  cardNumber:  yup
-  .string()
-  .required('Card Number Required'), 
-
-})
+  fullname: yup.string().required('Full Name Required'),
+  country: yup.string().required('Country Required'),
+  cardNumber: yup.string().required('Card Number Required'),
+});

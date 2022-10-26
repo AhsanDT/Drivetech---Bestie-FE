@@ -24,6 +24,8 @@ export {
   RegisterVS,
   SocailSignUpVS,
   SocialSignUPFormFields,
+  SocialRegisterFields,
+  SocialRegisterVS,
 } from './utilities/validations';
 
 export {
@@ -49,6 +51,7 @@ export {
   Setting_List,
   cardFormField,
   cardVS,
+  ExperienceList,
 } from './utilities/constant';
 export {header, authHeader} from './utilities/headers';
 export {

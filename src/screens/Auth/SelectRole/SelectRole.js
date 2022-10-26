@@ -13,23 +13,26 @@ import styles from './styles';
 import {updateSignupObject} from '../../../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
 
-const Splash = ({navigation}) => {
+const Splash = ({navigation, route}) => {
   const [role, setrole] = useState('');
   const dispatch = useDispatch();
+  const [data, setdata] = useState(route?.params?.data);
+
   const handleButton = (index, type) => {
-    console.log('TYPE==> ', type);
     if (index == 1) {
       setrole('user');
       dispatch(updateSignupObject({profileType: type}));
-      console.log('role==> ', role);
-
-      navigation.navigate('Auth', {screen: 'SignUp'});
+      navigation.navigate('Auth', {
+        screen: 'SignUp',
+        params: {data: data ? data : ''},
+      });
     } else if (index == 2) {
       setrole('bestie');
       dispatch(updateSignupObject({profileType: type}));
-      console.log('role==>2 ', role);
-
-      navigation.navigate('Auth', {screen: 'RegisterBestie'});
+      navigation.navigate('Auth', {
+        screen: 'RegisterBestie',
+        params: {data: data ? data : ''},
+      });
     }
   };
 
@@ -56,13 +59,13 @@ const Splash = ({navigation}) => {
           style={[
             styles.splashButton,
             {
-              backgroundColor: role == 'user' ? '#000' : '#fff',
+              backgroundColor: role == 'user' ? colors.b1 : colors.white,
             },
           ]}>
           <Text
             style={[
               styles.splashButtonText,
-              {color: role == 'user' ? '#fff' : '#000'},
+              {color: role == 'user' ? colors.white : colors.b1},
             ]}>
             Find a Bestie
           </Text>
@@ -89,7 +92,7 @@ const Splash = ({navigation}) => {
           <Text
             style={styles.signUpStyle}
             onPress={() => {
-              navigation.navigate('Auth', {screen: 'ShowTalent'});
+              navigation.navigate('Auth', {screen: 'Login'});
             }}>
             Sign In
           </Text>
