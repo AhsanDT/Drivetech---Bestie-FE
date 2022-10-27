@@ -65,9 +65,13 @@ export const BestieRate = {
   bestieRate: '',
 };
 
-export const cardFormField = {
-  fullName: '',
+export const payment_CardFormField = {
+  fullname: '',
   country: '',
+  // cardNumber: '',
+};
+export const account_RateFormField = {
+  rate: '',
 };
 
 export const LoginVS = yup.object().shape({
@@ -155,8 +159,12 @@ export const ForgotPasswordVS = yup.object().shape({
     .email('Please provide a valid email address'),
 });
 
-export const cardVS = yup.object().shape({
+export const payment_CardVS = yup.object().shape({
   fullname: yup.string().required('Full Name Required'),
   country: yup.string().required('Country Required'),
-  cardNumber: yup.string().required('Card Number Required'),
+  // cardNumber: yup.string().required('Card Number Required'),
+});
+
+export const account_RateVS = yup.object().shape({
+  rate: yup.string().required('Rate Required'),
 });

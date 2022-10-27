@@ -15,7 +15,6 @@ import {
   showTalentService,
   validateEmailService,
   validatePhoneService,
-
 } from '../../../shared/service/AuthService';
 import * as types from '../../actions/types/auth_types';
 
@@ -31,6 +30,7 @@ function* login(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
+      console.log('res.auth_token', res?.auth_token);
       AsyncStorage.setItem('usertoken', res?.auth_token);
       params?.cbSuccess(res);
     }

@@ -14,5 +14,12 @@ export {
   getTalentList,
   validateEmailAction,
   validateSocialPhoneAction,
-
 } from './auth-actions/auth-action';
+
+// Payment actions
+export {
+  addCardRequest,
+  getPaymentCard,
+  deletePaymentCard,
+  updatePaymentCard,
+} from './payment-actions/payment-actions';

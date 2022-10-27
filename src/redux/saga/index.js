@@ -14,6 +14,13 @@ import {
   validateEmailSaga,
   validatePhoneSaga,
 } from './auth-saga/auth-saga';
+import {
+  addCardRequest,
+  deletePaymentCardSaga,
+  getPaymentCardRequest,
+  showPaymentCardSaga,
+  updatePaymentCardSaga,
+} from './payment-saga/payment-saga';
 
 export function* rootSaga() {
   yield fork(loginRequest);
@@ -28,4 +35,8 @@ export function* rootSaga() {
   yield fork(updateSocialLoginData);
   yield fork(validateEmailSaga);
   yield fork(validatePhoneSaga);
+  yield fork(addCardRequest);
+  yield fork(showPaymentCardSaga);
+  yield fork(deletePaymentCardSaga);
+  yield fork(updatePaymentCardSaga);
 }

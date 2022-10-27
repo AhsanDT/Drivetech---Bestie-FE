@@ -9,6 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 const BestieTopTab = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Opportunities"
       screenOptions={{headerShown: false}}
       sceneContainerStyle={{backgroundColor: 'white'}}
       tabBar={props => <TopTabs {...props} />}

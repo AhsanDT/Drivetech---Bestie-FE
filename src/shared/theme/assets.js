@@ -51,7 +51,7 @@ export const appIcons = {
   logout: require('../../assets/icons/logout.png'),
   checked: require('../../assets/icons/checked.png'),
   unChecked: require('../../assets/icons/unchecked.png'),
-
+  visa: require('../../assets/icons/visa.png'),
 };
 
 export const appSvgs = {

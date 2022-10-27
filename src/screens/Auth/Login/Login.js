@@ -53,9 +53,10 @@ const Login = ({navigation}) => {
       data.append('user[password]', value.password);
       try {
         const cbSuccess = response => {
-          Alert.alert('Alert', 'Log in successfully.');
+          // Alert.alert('Alert', 'Log in successfully.');
           setloading(false);
           ref.current.resetForm();
+          navigation.replace('MainStack');
         };
         const cbFailure = err => {
           Alert.alert('' || 'Error', err);

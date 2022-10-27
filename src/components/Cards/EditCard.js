@@ -9,14 +9,29 @@ import {
 } from 'react-native';
 import {appIcons, colors, family, size, WP} from '../../shared/exporter';
 
-const EditCard = ({onPressDelete, onPressEdit}) => {
+const EditCard = ({
+  onPressDelete,
+  onPressEdit,
+  month,
+  year,
+  number,
+  source,
+}) => {
   return (
     <View style={styles.cardContainer}>
-      <Image source={appIcons.card} style={styles.cardImage} />
+      <Image
+        source={source || appIcons.card}
+        style={styles.cardImage}
+        resizeMode={'contain'}
+      />
       <View style={styles.contentContainer}>
-        <Text style={styles.numberTextStyle}>*** *** *** *** 3456</Text>
+        <Text style={styles.numberTextStyle}>
+          {'*** *** *** ***' + '3456' || number}
+        </Text>
 
-        <Text style={styles.expiresTextStyle}>Expires 03/27</Text>
+        <Text style={styles.expiresTextStyle}>
+          Expires {month + '/' + year}
+        </Text>
       </View>
       <TouchableOpacity onPress={onPressEdit}>
         <Image source={appIcons.edit} style={styles.editIcon} />

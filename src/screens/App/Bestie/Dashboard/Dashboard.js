@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import {HomeHeader} from '../../../../components';
 import {BestieTopTab} from '../../../../navigation/TopTab/BestieTopTab';
 import {EndUserTopTab} from '../../../../navigation/TopTab/EndUserTopTab';
-import Login from '../../../Auth/Login';
-import Setting from '../../Setting';
 import {styles} from './styles';
 
 const Dashboard = ({navigation}) => {
@@ -12,6 +10,11 @@ const Dashboard = ({navigation}) => {
   console.log('value', tab);
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar
+        translucent={false}
+        barStyle={'dark-content'}
+        backgroundColor={'#fff'}
+      />
       <HomeHeader
         onPressImage={() => {
           navigation.navigate('Bestietack', {screen: 'Setting'});

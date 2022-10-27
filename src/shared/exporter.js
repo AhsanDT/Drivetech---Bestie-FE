@@ -26,8 +26,13 @@ export {
   SocialSignUPFormFields,
   SocialRegisterFields,
   SocialRegisterVS,
+  payment_CardFormField,
+  payment_CardVS,
+  account_RateFormField,
+  account_RateVS,
   BestieRate,
   BestieRateVs,
+
 } from './utilities/validations';
 
 export {
