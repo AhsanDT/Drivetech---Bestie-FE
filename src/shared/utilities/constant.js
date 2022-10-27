@@ -4,7 +4,7 @@ const web_client_id =
   '396667718237-b5871eer19sabub7jg8qhneksq75d443.apps.googleusercontent.com';
 
 const stripe_publishableKey =
-  'pk_test_51Lf25xJxAUizx0q5OIWfv41879r73FiP61ItNOlcUbE6MsGY8WCmULqWC9KrYyCYz18pbUBPDM7Lbb8N3giMguHh00P7XAmQlT';
+  'pk_test_51LxAJ3DiNzNaLXAE4aOveJ8mhEXmspcb2hKN7hvuI4LclexnbETMI5zto8h5o0wpmiU16WCe0VHqHr0E4frj3ubI00kaqVZvrR';
 
 // const image_options = {
 //   title: 'Load Photo',
@@ -247,7 +247,7 @@ const Setting_List = [
   {
     id: 1,
     title: 'Payment Method ',
-    route: '',
+    route: 'PaymentMethod',
   },
   {
     id: 2,

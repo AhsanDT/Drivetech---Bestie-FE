@@ -45,7 +45,6 @@ const initialState = {
 
 const authReducer = (state = initialState, action = {}) => {
   const {type, payload} = action;
-  console.log(' payload?.profileType', payload?.data?.profile_type);
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
       return {

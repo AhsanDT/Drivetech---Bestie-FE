@@ -8,6 +8,7 @@ import store, {persistor} from './src/redux/store';
 import {colors, stripe_publishableKey} from './src/shared/exporter';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Settings} from 'react-native-fbsdk-next';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 // Ignore Warnings
 LogBox.ignoreAllLogs();
@@ -32,11 +33,11 @@ const App = () => {
         backgroundColor={colors.white}
         barStyle={'dark-content'}
       />
-      {/* <StripeProvider publishableKey={stripe_publishableKey}> */}
+      <StripeProvider publishableKey={stripe_publishableKey}>
       <PersistGate persistor={persistor}>
         <MainNavigation />
       </PersistGate>
-      {/* </StripeProvider> */}
+      </StripeProvider>
     </Provider>
   );
 };

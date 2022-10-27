@@ -25,7 +25,7 @@ const Setting = ({navigation}) => {
       title={item.title}
       toggle={item?.selected}
       onPress={() => {
-        navigation.navigate('Auth', {screen: item?.route});
+        navigation.navigate(item?.route);
       }}
     />
   );

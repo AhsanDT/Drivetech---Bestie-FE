@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {Item} from 'react-native-paper/lib/typescript/components/List/List';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {
   appIcons,
@@ -18,7 +19,7 @@ import {
 } from '../../shared/exporter';
 import {AppButton} from '../AppButton/AppButton';
 
-const DeleteModal = ({tabRef, onPressCancel, onPressDelete}) => {
+const DeleteModal = ({tabRef, onPressCancel, onPressDelete, item}) => {
   return (
     <SafeAreaView>
       <RBSheet

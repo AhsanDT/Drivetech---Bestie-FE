@@ -15,6 +15,10 @@ const ENDPOINTS = {
   UPDATE_SOCIAL_LOGIN: 'authentication/update_social_login?email',
   VALIDATE_EMAIL: 'authentication/uniq_email_and_phone',
   VALIDATE_PHONE: 'authentication/uniq_phone_number',
+  ADD_CARD: 'cards',
+  GET_CARD: 'cards',
+  DELETE_CARD: 'cards/',
+  UPDATE_CARD: 'cards/',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};

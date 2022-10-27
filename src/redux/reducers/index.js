@@ -2,10 +2,12 @@ import {combineReducers} from 'redux';
 import authReducer from './auth-reducers/auth-reducer';
 
 import * as types from '../actions/types/auth_types';
+import paymentReducer from './payment-reducers/payment-reducers';
 
 const root_reducer = combineReducers({
   /* your app’s top-level reducers */
   auth: authReducer,
+  payment: paymentReducer,
 });
 
 const rootReducer = (state, action) => {
