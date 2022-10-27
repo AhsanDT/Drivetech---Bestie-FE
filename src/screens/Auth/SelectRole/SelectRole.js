@@ -30,7 +30,7 @@ const Splash = ({navigation, route}) => {
       setrole('bestie');
       dispatch(updateSignupObject({profileType: type}));
       navigation.navigate('Auth', {
-        screen: 'RegisterBestie',
+        screen: 'CameraDetails',
         params: {data: data ? data : ''},
       });
     }

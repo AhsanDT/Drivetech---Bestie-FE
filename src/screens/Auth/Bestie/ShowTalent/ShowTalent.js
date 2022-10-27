@@ -20,6 +20,7 @@ const showTalent = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
+  const {signupObject} = useSelector(state => state.auth);
   useEffect(() => {
     getTalent();
   }, []);
@@ -39,6 +40,15 @@ const showTalent = ({navigation}) => {
       const cbSuccess = response => {
         response?.data.forEach(element => {
           element.selected = false;
+        });
+        response?.data?.forEach(element => {
+          if (
+            signupObject?.talentList?.find(
+              item => item?.title == element?.title,
+            )
+          ) {
+            element.selected = true;
+          }
         });
         setlist(response?.data);
       };
@@ -63,7 +73,7 @@ const showTalent = ({navigation}) => {
         updateSignupObject({talentList: list.filter(obj => obj.selected)}),
       );
 
-      navigation.navigate('UploadImage');
+      navigation.goBack();
     }
   };
 

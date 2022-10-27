@@ -142,55 +142,65 @@ const ExperienceList = [
   },
 ];
 
-const Camera_List = [
+var Camera_List = [
   {
     id: 0,
     title: 'iPhone',
     icon: appIcons.phone,
+    selected: false,
   },
   {
     id: 1,
     title: 'Digital Camera',
     icon: appIcons.camera2,
+    selected: false,
   },
   {
     id: 2,
     title: 'Film Camera',
     icon: appIcons.filmCamera,
+    selected: false,
   },
   {
     id: 3,
     title: '8mm',
     icon: appIcons.pixel,
+    selected: false,
   },
   {
     id: 4,
     title: 'Polaroid',
     icon: appIcons.polaroid,
+    selected: false,
   },
   {
     id: 5,
     title: 'Camcorder',
     icon: appIcons.camCorder,
+    selected: false,
   },
 ];
 
-const Equipment_List = [
+var Equipment_List = [
   {
     id: 0,
     title: 'Prime Ienses',
+    selected: false,
   },
   {
     id: 1,
     title: 'Tripod',
+    selected: false,
   },
   {
     id: 2,
     title: 'Reflector',
+    selected: false,
   },
   {
     id: 3,
     title: 'Carrying gear',
+    selected: false,
   },
 ];
 

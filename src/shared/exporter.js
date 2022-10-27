@@ -30,6 +30,9 @@ export {
   payment_CardVS,
   account_RateFormField,
   account_RateVS,
+  BestieRate,
+  BestieRateVs,
+
 } from './utilities/validations';
 
 export {
