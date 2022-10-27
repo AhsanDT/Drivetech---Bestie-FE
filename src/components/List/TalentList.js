@@ -10,7 +10,7 @@ import {
   appIcons,
 } from '../../shared/exporter';
 
-const TalentList = ({onPress}) => {
+const TalentList = ({onPress, item}) => {
   return (
     <TouchableOpacity style={styles.mainView} onPress={onPress}>
       <Image
@@ -26,7 +26,7 @@ const TalentList = ({onPress}) => {
             paddingLeft: WP('2'),
           },
         ]}>
-        Wedding Photography
+        {item.title}
       </Text>
     </TouchableOpacity>
   );

@@ -61,6 +61,9 @@ export const forgotFormFields = {
 export const codeFormFields = {
   code: '',
 };
+export const BestieRate = {
+  bestieRate: '',
+};
 
 export const cardFormField = {
   fullName: '',
@@ -88,6 +91,10 @@ export const SignUpVS = yup.object().shape({
   country: yup.string().required('Country Name Required'),
   city: yup.string().required('City Name Required'),
   age: yup.string().required('Age Requried'),
+});
+
+export const BestieRateVs = yup.object().shape({
+  bestieRate: yup.string().required('Rate Required'),
 });
 
 export const RegisterVS = yup.object().shape({

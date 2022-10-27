@@ -31,6 +31,7 @@ const initialState = {
     location: null,
     portfolio: [],
     talentList: [],
+    otherInputEquipment: null,
     model: null,
     cameraType: null,
     otherEquipments: [],
@@ -94,8 +95,15 @@ const authReducer = (state = initialState, action = {}) => {
         userInfo: null,
       };
     case TYPES.UPDATE_SIGNUP_OBJECT:
-      state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
-      return state;
+      let keys = Object.keys(payload);
+      keys.map(x => {
+        state.signupObject[x] = payload[x];
+      });
+      // console.log('REDUX STATE==> ', payload);
+      // state.signupObject[Object.keys(payload)[0]] = Object.values(payload)[0];
+      return {
+        ...state,
+      };
 
     case TYPES.FORGOT_PASSWORD_SUCCESS:
       return {

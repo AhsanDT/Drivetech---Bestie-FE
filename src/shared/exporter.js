@@ -26,6 +26,8 @@ export {
   SocialSignUPFormFields,
   SocialRegisterFields,
   SocialRegisterVS,
+  BestieRate,
+  BestieRateVs,
 } from './utilities/validations';
 
 export {

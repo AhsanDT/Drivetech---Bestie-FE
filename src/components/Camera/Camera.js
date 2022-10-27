@@ -2,19 +2,19 @@ import * as React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {appIcons, colors, family, size, WP} from '../../shared/exporter';
 
-const Camera = ({source, title}) => {
-  const [isCheck, setIsCheck] = React.useState(false);
+const Camera = ({source, onPress, item}) => {
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.7}
-      onPress={() => {
-        setIsCheck(!isCheck);
-      }}>
+      onPress={onPress}>
       <View style={[styles.checkBoxIconContainer, {marginHorizontal: WP('3')}]}>
         <Image
           source={appIcons.checkbox}
-          style={[styles.checkBoxIcon, {tintColor: isCheck ? colors.bl : null}]}
+          style={[
+            styles.checkBoxIcon,
+            {tintColor: item?.selected ? colors.bl : null},
+          ]}
         />
       </View>
       {source && (
@@ -23,7 +23,7 @@ const Camera = ({source, title}) => {
           resizeMode={'contain'}
           style={[
             styles.iconStyle,
-            {tintColor: isCheck ? colors.b1 : colors.g3},
+            {tintColor: item?.selected ? colors.b1 : colors.g3},
           ]}
         />
       )}
@@ -31,13 +31,13 @@ const Camera = ({source, title}) => {
       <Text
         style={[
           styles.titleStyle,
-          {color: isCheck ? colors.b1 : colors.g3},
+          {color: item?.selected ? colors.b1 : colors.g3},
           {
             marginTop: WP('2'),
             marginHorizontal: source ? WP('2') : 0,
           },
         ]}>
-        {title}
+        {item?.title}
       </Text>
     </TouchableOpacity>
   );
