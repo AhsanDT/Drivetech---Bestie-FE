@@ -28,7 +28,7 @@ import {styles} from './styles';
 import {useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 
-const PaymentMethod = ({navigation}) => {
+const GetPaymentList = ({navigation}) => {
   const tabRef = useRef(null);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
@@ -43,7 +43,6 @@ const PaymentMethod = ({navigation}) => {
   }, [isFocus]);
 
   const renderItem = ({item, index}) => (
-
     <EditCard
       onPressDelete={() => {
         setData(item);
@@ -70,7 +69,7 @@ const PaymentMethod = ({navigation}) => {
         const cbSuccess = response => {
           setloading(false);
           setList(response?.data);
-          console.log(list)
+          console.log(list);
         };
         const cbFailure = err => {
           Alert.alert('' || 'Error', err || 'Something went wrong');
@@ -132,7 +131,7 @@ const PaymentMethod = ({navigation}) => {
 
         <AddCard
           onPressCard={() => {
-            navigation.navigate('AddCard');
+            navigation.navigate('SelectPaymentMethod');
           }}
         />
         <DeleteModal
@@ -150,4 +149,4 @@ const PaymentMethod = ({navigation}) => {
   );
 };
 
-export default PaymentMethod;
+export default GetPaymentList;
