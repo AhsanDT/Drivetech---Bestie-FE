@@ -7,20 +7,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   textStyle: {
-    paddingHorizontal: WP('6'),
-    marginBottom: 15,
+    paddingHorizontal: WP('8'),
+    marginBottom: 10,
     color: colors.b1,
     fontSize: size.text_16,
-    fontFamily: family.Poppin_SemiBold,
+    fontFamily: family.Poppin_Medium,
   },
-  inputContainerStyle: {
-    width: WP('40'),
-  },
-  bottonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: WP('100'),
+
+  keyboardContainer: {
+    flexGrow: 0.95,
   },
 });
 

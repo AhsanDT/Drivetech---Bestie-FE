@@ -247,7 +247,7 @@ const Setting_List = [
   {
     id: 1,
     title: 'Payment Method ',
-    route: 'PaymentMethod',
+    route: 'GetPaymentList',
   },
   {
     id: 2,
