@@ -37,59 +37,51 @@ const Register = ({navigation, route}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
-  const validateEmail = value => {
-    setloading(true);
-    try {
-      const data = new FormData();
-      data.append('user[email]', value.email.toLowerCase());
-      data.append('user[phone_number]', value.phone);
-      console.log(data);
-      const cbSuccess = res => {
-        onSubmit(value);
-        setloading(false);
-      };
-      const cbFailure = err => {
-        Alert.alert('ALert', err?.error);
-        setloading(false);
-      };
-      dispatch(validateEmailAction(data, cbSuccess, cbFailure));
-    } catch (error) {
-      setloading(false);
-    }
-  };
+  // const validateEmail = value => {
+  //   setloading(true);
+  //   try {
+  //     const data = new FormData();
+  //     data.append('user[email]', value.email.toLowerCase());
+  //     data.append('user[phone_number]', value.phone);
+  //     console.log(data);
+  //     const cbSuccess = res => {
+  //       onSubmit(value);
+  //       setloading(false);
+  //     };
+  //     const cbFailure = err => {
+  //       Alert.alert('ALert', err?.error);
+  //       setloading(false);
+  //     };
+  //     dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+  //   } catch (error) {
+  //     setloading(false);
+  //   }
+  // };
 
-  const validateSocialPhone = value => {
-    setloading(true);
-    try {
-      const data = new FormData();
-      data.append('user[phone_number]', value.phone);
-      console.log(data);
-      const cbSuccess = res => {
-        onSubmit(value);
-        setloading(false);
-      };
-      const cbFailure = err => {
-        Alert.alert('ALert', err?.error);
-        setloading(false);
-        console.log('ERRor', err);
-      };
-      dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
-    } catch (error) {
-      setloading(false);
-      console.log('ERRor', error);
-    }
-  };
+  // const validateSocialPhone = value => {
+  //   setloading(true);
+  //   try {
+  //     const data = new FormData();
+  //     data.append('user[phone_number]', value.phone);
+  //     console.log(data);
+  //     const cbSuccess = res => {
+  //       onSubmit(value);
+  //       setloading(false);
+  //     };
+  //     const cbFailure = err => {
+  //       Alert.alert('ALert', err?.error);
+  //       setloading(false);
+  //       console.log('ERRor', err);
+  //     };
+  //     dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
+  //   } catch (error) {
+  //     setloading(false);
+  //     console.log('ERRor', error);
+  //   }
+  // };
 
   const onSubmit = value => {
-    // dispatch(updateSignupObject({firstName: value.firstName}));
-    // dispatch(updateSignupObject({lastName: value.lastName}));
-    // dispatch(updateSignupObject({password: value.password || ''}));
-    // dispatch(updateSignupObject({email: value.email}));
-    // dispatch(updateSignupObject({sex: sex}));
-    // dispatch(updateSignupObject({age: value?.age}));
-    // dispatch(updateSignupObject({phoneNumber: value?.phone}));
-    // dispatch(updateSignupObject({experience: experience}));
-    // dispatch(updateSignupObject({location: value?.location}));
+    console.log('WORKING1');
     dispatch({
       type: TYPES.UPDATE_SIGNUP_OBJECT,
       payload: {
@@ -105,6 +97,7 @@ const Register = ({navigation, route}) => {
         experience: experience,
       },
     });
+    console.log('WORKING');
     navigation.navigate('ProfileImage');
   };
 
@@ -119,12 +112,7 @@ const Register = ({navigation, route}) => {
         <AppHeader title={'Create Your\nAccount'} />
         <Formik
           initialValues={RegisterFields}
-          onSubmit={values => {
-            {
-              // data ? validateSocialPhone(values) : validateEmail(values);
-              onSubmit(values);
-            }
-          }}
+          onSubmit={values => onSubmit(values)}
           validationSchema={RegisterVS}>
           {({
             values,

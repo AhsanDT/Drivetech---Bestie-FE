@@ -73,6 +73,19 @@ export const payment_CardFormField = {
 export const account_RateFormField = {
   rate: '',
 };
+export const socialMediaLinks = {
+  instagram: '',
+  tiktok: '',
+  linkedIn: '',
+  pinterest: '',
+};
+
+export const SocialLinks = yup.object().shape({
+  instagram: yup.string().required('Instagram Link Required'),
+  tiktok: yup.string().required('Tiktok Link Required'),
+  linkedIn: yup.string().required('Linkedin Link Required'),
+  pinterest: yup.string().required('Pinterest Link Required'),
+});
 
 export const LoginVS = yup.object().shape({
   email: yup

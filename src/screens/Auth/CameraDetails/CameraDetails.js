@@ -90,7 +90,7 @@ const CameraDetails = ({navigation}) => {
       type: TYPES.UPDATE_SIGNUP_OBJECT,
       payload: {
         cameraType: list,
-        otherEquipments: otherequipmentList,
+        otherEquipments: otherequipmentList.filter(obj => obj.selected),
         otherInputEquipment: fields,
         model: cameraModel,
       },

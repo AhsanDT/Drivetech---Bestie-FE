@@ -32,7 +32,8 @@ export {
   account_RateVS,
   BestieRate,
   BestieRateVs,
-
+  SocialLinks,
+  socialMediaLinks,
 } from './utilities/validations';
 
 export {

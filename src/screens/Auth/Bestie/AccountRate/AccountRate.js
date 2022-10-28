@@ -8,6 +8,7 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppButton, AppHeader, AppInput} from '../../../../components';
 import {
   account_RateFormField,
@@ -17,11 +18,16 @@ import {
   WP,
 } from '../../../../shared/exporter';
 import {styles} from './styles';
+import * as TYPES from '../../../../redux/actions/types/auth_types';
 
 const AccountRate = ({navigation}) => {
+  const {signupObject} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
   const ref = useRef();
-  const onPressNext = values => {
-    navigation.navigate('PaymentMethod');
+  const handleSubmit = values => {
+    dispatch({type: TYPES.UPDATE_SIGNUP_OBJECT, payload: {rate: values.rate}});
+    navigation.navigate('AddSocialMediaLinks');
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -35,7 +41,7 @@ const AccountRate = ({navigation}) => {
         innerRef={ref}
         initialValues={account_RateFormField}
         onSubmit={values => {
-          onPressNext(values);
+          handleSubmit(values);
         }}
         validationSchema={account_RateVS}>
         {({
