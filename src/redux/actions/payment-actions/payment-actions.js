@@ -27,12 +27,12 @@ export const deletePaymentCard = (params, cbSuccess, cbFailure) => {
   };
 };
 
-export const updatePaymentCard = (params, userId, cbSuccess, cbFailure) => {
+export const updatePaymentCard = (params, cardId, cbSuccess, cbFailure) => {
   console.log('paramUUUUUUUUUU+++++++++', params);
   return {
     type: TYPES.UPDATE_PAYMENT_CARD_REQUEST,
     params,
-    userId,
+    cardId,
     cbSuccess,
     cbFailure,
   };

@@ -19,7 +19,14 @@ import {
 } from '../../shared/exporter';
 import {AppButton} from '../AppButton/AppButton';
 
-const DeleteModal = ({tabRef, onPressCancel, onPressDelete, item}) => {
+const DeleteModal = ({
+  tabRef,
+  onPressCancel,
+  onPressDelete,
+  item,
+  month,
+  year,
+}) => {
   return (
     <SafeAreaView>
       <RBSheet
@@ -33,7 +40,7 @@ const DeleteModal = ({tabRef, onPressCancel, onPressDelete, item}) => {
         <View style={styles.contentContainer}>
           <Image source={appIcons.cross} style={styles.crossIconStyle} />
           <Text style={styles.cardNumberStyle}>*** *** *** *** 3456</Text>
-          <Text style={styles.expiresStyle}>Expires 03/27</Text>
+          <Text style={styles.expiresStyle}> Expires {month + '/' + year}</Text>
         </View>
         <View style={styles.spacer} />
         <View style={styles.secondContentContainer}>

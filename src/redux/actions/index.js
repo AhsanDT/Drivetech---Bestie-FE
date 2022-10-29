@@ -23,3 +23,9 @@ export {
   deletePaymentCard,
   updatePaymentCard,
 } from './payment-actions/payment-actions';
+
+//Support actions
+export {
+  getAllSupportTicket,
+  addSupportTicketRequest,
+} from './support-actions/support-action';

@@ -30,6 +30,8 @@ export {
   payment_CardVS,
   account_RateFormField,
   account_RateVS,
+  support_MessageVS,
+  support_MessageFormField,
 } from './utilities/validations';
 
 export {

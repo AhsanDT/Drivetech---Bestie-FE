@@ -1,8 +1,22 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {appIcons, colors, family, size, WP} from '../../shared/exporter';
+import {
+  appIcons,
+  appImages,
+  colors,
+  family,
+  size,
+  WP,
+} from '../../shared/exporter';
 
-const SupportCard = ({date, status, token, message, onPress}) => {
+const SupportCard = ({
+  date,
+  status,
+  ticketnumber,
+  description,
+  onPress,
+  source = false,
+}) => {
   return (
     <TouchableOpacity
       style={styles.mainContainer}
@@ -19,13 +33,27 @@ const SupportCard = ({date, status, token, message, onPress}) => {
           <Text style={styles.dateTextStyle}>{date}</Text>
           <Text style={styles.pendingTextStyle}>{status}</Text>
         </View>
-        <Text style={styles.tokenTextStyle}>{token}</Text>
+        <Text style={styles.tokenTextStyle}>{ticketnumber}</Text>
         <Text
           ellipsizeMode="tail"
           numberOfLines={3}
           style={styles.logTextStyle}>
-          {message}
+          {description}
         </Text>
+        {source && (
+          <Image
+            source={source}
+            resizeMode={'cover'}
+            style={{
+              height: WP('40'),
+              width: WP('80'),
+              marginTop: WP('6'),
+              borderRadius: WP('4'),
+              overflow: 'hidden',
+              marginLeft: WP('-15'),
+            }}
+          />
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -34,7 +62,7 @@ const SupportCard = ({date, status, token, message, onPress}) => {
 const styles = StyleSheet.create({
   mainContainer: {
     padding: WP('4'),
-    backgroundColor: colors.g2,
+    backgroundColor: colors.white2,
     width: WP('90'),
     borderRadius: 10,
     marginHorizontal: WP('5'),

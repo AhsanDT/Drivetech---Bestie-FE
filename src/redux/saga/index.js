@@ -21,6 +21,10 @@ import {
   showPaymentCardSaga,
   updatePaymentCardSaga,
 } from './payment-saga/payment-saga';
+import {
+  addSupportTicketSaga,
+  showSupportTicketSaga,
+} from './support-saga/support-saga';
 
 export function* rootSaga() {
   yield fork(loginRequest);
@@ -39,4 +43,6 @@ export function* rootSaga() {
   yield fork(showPaymentCardSaga);
   yield fork(deletePaymentCardSaga);
   yield fork(updatePaymentCardSaga);
+  yield fork(showSupportTicketSaga);
+  yield fork(addSupportTicketSaga);
 }

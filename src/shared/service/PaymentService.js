@@ -42,7 +42,7 @@ export const deletePaymentCardService = async params => {
 export const updateCardDetail = async params => {
   console.log('token', params?.params);
   const res = await axios.put(
-    `${BASE_URL}${ENDPOINTS.UPDATE_CARD}${params?.userId}`,
+    `${BASE_URL}${ENDPOINTS.UPDATE_CARD}${params?.cardId}`,
     params?.params,
     {
       headers: {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,22 +7,41 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
+  Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   AppButton,
   AppInput,
+  AppLoader,
   Header,
   ImagePickerModal,
 } from '../../../components';
-import {appIcons, colors, family, size, WP} from '../../../shared/exporter';
+import {
+  appIcons,
+  checkConnected,
+  colors,
+  family,
+  networkText,
+  size,
+  support_MessageFormField,
+  support_MessageVS,
+  WP,
+} from '../../../shared/exporter';
 import {styles} from './styles';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {image_options} from '../../../shared/exporter';
+import {addSupportTicketRequest} from '../../../redux/actions';
+import {useDispatch} from 'react-redux';
+import {Formik} from 'formik';
 
-const SupportMessage = () => {
+const SupportMessage = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setloading] = useState(false);
+  const ref = useRef();
+  const dispatch = useDispatch();
 
   //Handlers
   const showGallery = () => {
@@ -87,10 +106,50 @@ const SupportMessage = () => {
       console.warn(err);
     }
   };
+
+  const onPressSaveCard = async values => {
+    const check = await checkConnected();
+    if (check) {
+      try {
+        setloading(true);
+        const data = new FormData();
+        data.append('support[description]', message);
+        data.append('support[image]', {
+          uri: image?.uri,
+          name: image?.fileName,
+          type: image?.type,
+        });
+
+        const onSuccess = res => {
+          setloading(false);
+          setMessage('');
+          setImage('');
+          console.log('On Add Card Success', res);
+          navigation.goBack();
+        };
+        const onFailure = error => {
+          setloading(false);
+          Alert.alert('Failed', 'Something went wrong!' || error);
+        };
+        dispatch(addSupportTicketRequest(data, onSuccess, onFailure));
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <KeyboardAwareScrollView contentContainerStyle={{flexGrow: 0.78}}>
-        <Header title={'Message'} backIcon={true} />
+      <Header
+        title={'Message'}
+        backIcon={true}
+        onPressBack={() => {
+          navigation?.goBack();
+        }}
+      />
+      <KeyboardAwareScrollView contentContainerStyle={{flexGrow:0.8}} >
         <AppInput
           multiline={true}
           inputContainerStyle={styles.inputContainerStyle}
@@ -98,6 +157,8 @@ const SupportMessage = () => {
           placeholder={'Type here'}
           placeholderTextColor={colors.g3}
           inputStyle={styles.inputStyle}
+          value={message}
+          onChangeText={text => setMessage(text)}
         />
 
         {image ? (
@@ -124,9 +185,9 @@ const SupportMessage = () => {
                 resizeMode={'contain'}
               />
             </TouchableOpacity>
-            <Text style={styles.proofTextStyle}>Attach Image or Proof</Text>
           </View>
         )}
+        <Text style={styles.proofTextStyle}>Attach Image or Proof</Text>
 
         <ImagePickerModal
           show={show}
@@ -137,10 +198,17 @@ const SupportMessage = () => {
         />
         <AppButton
           title={'Send Message'}
-          bgColor={colors.b1}
+          bgColor={message && image ? colors.b1 : colors?.g20}
           width={WP('90')}
+          height={WP('14')}
+          onPress={() => {
+            onPressSaveCard();
+          }}
+          disabled={message && image ? false : true}
         />
       </KeyboardAwareScrollView>
+
+      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

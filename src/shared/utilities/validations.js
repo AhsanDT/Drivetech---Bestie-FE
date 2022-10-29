@@ -71,6 +71,10 @@ export const account_RateFormField = {
   rate: '',
 };
 
+export const support_MessageFormField = {
+  message: '',
+};
+
 export const LoginVS = yup.object().shape({
   email: yup
     .string()
@@ -160,4 +164,8 @@ export const payment_CardVS = yup.object().shape({
 
 export const account_RateVS = yup.object().shape({
   rate: yup.string().required('Rate Required'),
+});
+
+export const support_MessageVS = yup.object().shape({
+  message: yup.string().required('Message Required'),
 });

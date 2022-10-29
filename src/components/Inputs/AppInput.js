@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     width: WP('90'),
     marginHorizontal: WP('2.5'),
     borderRadius: 30,
-    backgroundColor: colors.g2,
+    backgroundColor: colors.white2,
     borderBottomWidth: 0,
     paddingHorizontal: WP('5'),
   },

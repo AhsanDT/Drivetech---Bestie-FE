@@ -19,6 +19,8 @@ const ENDPOINTS = {
   GET_CARD: 'cards',
   DELETE_CARD: 'cards/',
   UPDATE_CARD: 'cards/',
+  GET_TICKETS: 'supports',
+  ADD_TICKETS: 'supports',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};
