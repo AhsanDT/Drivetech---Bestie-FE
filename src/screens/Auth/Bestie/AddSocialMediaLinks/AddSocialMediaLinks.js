@@ -7,12 +7,17 @@ import {
   Image,
   StatusBar,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppButton, AppHeader, AppInput} from '../../../../components';
 import {
-  account_RateFormField,
-  account_RateVS,
+  AppButton,
+  AppHeader,
+  AppInput,
+  AppLoader,
+} from '../../../../components';
+import {signUpRequest, clearSignupObject} from '../../../../redux/actions';
+import {
   appIcons,
   colors,
   WP,
@@ -20,25 +25,19 @@ import {
   socialMediaLinks,
 } from '../../../../shared/exporter';
 import {styles} from './styles';
-import * as TYPES from '../../../../redux/actions/types/auth_types';
 const AccountRate = ({navigation}) => {
   const dispatch = useDispatch();
   const ref = useRef();
   const {signupObject} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
 
-  console.log('SIGNUP obj==> ', signupObject);
-
   const handleSubmit = values => {
-    let arrayLinks = [];
-    let arrayTitle = ['instagram', 'tiktok', 'pinterest', 'linkedin'];
-    arrayLinks.push(
-      values.instagram,
-      values.tiktok,
-      values.pinterest,
-      values.linkedIn,
-    );
-
+    var newArr = [
+      {title: 'instagram', link: values?.instagram},
+      {title: 'tiktok', link: values?.tiktok},
+      {title: 'linkedin', link: values.linkedIn},
+      {title: 'pinterest', link: values.pinterest},
+    ];
     setloading(true);
     try {
       const {
@@ -46,12 +45,9 @@ const AccountRate = ({navigation}) => {
         lastName,
         email,
         password,
-        country,
-        city,
         phoneNumber,
         age,
         sex,
-        pronoun,
         profilePhoto,
         interestList,
         idCardfront,
@@ -80,25 +76,26 @@ const AccountRate = ({navigation}) => {
         data.append('user[sex]', sex),
         data.append('user[profile_type]', profileType);
       data.append('user[rate]', rate);
-      data.append('user[camera_detail_attributes]camera_type', cameraType),
-        data.append(
-          'user[camera_detail_attributes]equipment[]',
-          otherEquipments,
-        ),
-        talentList.forEach(obj => {
-          data.append('user[user_talents_attributes][]talent_id', obj.id);
+      data.append(
+        'user[camera_detail_attributes]camera_type',
+        cameraType[0]?.title,
+      ),
+        otherEquipments?.forEach(obj => {
+          data.append('user[camera_detail_attributes]equipment[]', obj?.title);
         });
 
-      data.append(
-        'user[camera_detail_attributes]others[]',
-        otherInputEquipment,
-      ),
-        //
-        // data.append('user[selfie]', {
-        //   uri: `file://${showPhoto}`,
-        //   name: showPhoto,
-        //   type: 'image/jpeg',
-        // }),
+      talentList?.forEach(obj => {
+        data.append('user[user_talents_attributes][]talent_id', obj.id);
+      });
+      otherInputEquipment?.forEach(obj => {
+        data.append('user[camera_detail_attributes]others[]', obj?.value);
+      });
+
+      data.append('user[selfie]', {
+        uri: selfie?.uri,
+        name: selfie?.name,
+        type: 'image/jpeg',
+      }),
         data.append('user[id_front_image]', {
           uri: idCardfront?.uri,
           name: idCardfront?.fileName,
@@ -115,9 +112,9 @@ const AccountRate = ({navigation}) => {
 
       portfolio.forEach(obj => {
         data.append('user[portfolio][]', {
-          uri: obj.uri,
-          name: obj.name,
-          type: obj.type,
+          uri: obj?.image.uri,
+          name: obj?.image.fileName,
+          type: obj?.image.type,
         });
       });
 
@@ -126,31 +123,30 @@ const AccountRate = ({navigation}) => {
         name: profilePhoto?.fileName,
         type: profilePhoto?.type,
       });
+      data.append('user[social_media_attributes][]', newArr);
 
       const cbSuccess = res => {
         setloading(false);
         Alert.alert('Congrats', 'Signup Successfully');
-        // navigation.replace('Login');
+        navigation.replace('Login');
+
+        dispatch(clearSignupObject());
         navigation.reset({
           index: 0,
           routes: [{name: 'Login'}],
         });
       };
       const cbFailure = err => {
-        console.log('Err..', err);
-        Alert.alert('Error', err);
         setloading(false);
+        console.log('Err.. bestie', err);
+        Alert.alert('Error', err);
       };
-      // dispatch(signUpRequest(data, cbSuccess, cbFailure));
-      console.log('FINAL FORM DATA==> ', data);
+      console.log('data==>', data);
+      dispatch(signUpRequest(data, cbSuccess, cbFailure));
     } catch (error) {
-      console.log('ERROR=> ', error);
-
       setloading(false);
+      console.log('ERROR=> ', error);
     }
-
-    // dispatch({type: TYPES.UPDATE_SIGNUP_OBJECT, payload: {rate: values.rate}});
-    // navigation.navigate('PaymentMethod');
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -244,6 +240,7 @@ const AccountRate = ({navigation}) => {
             </View>
           )}
         </Formik>
+        <AppLoader loading={loading} />
       </ScrollView>
     </SafeAreaView>
   );

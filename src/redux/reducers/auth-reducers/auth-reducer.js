@@ -48,6 +48,8 @@ const authReducer = (state = initialState, action = {}) => {
   const {type, payload} = action;
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
+     
+
       return {
         ...state,
         loading: false,
@@ -175,21 +177,60 @@ const authReducer = (state = initialState, action = {}) => {
         isFailure: true,
         resetPassRes: null,
       };
-    case TYPES.LOGOUT_REQUEST_SUCCESS:
+    case TYPES.CLEAR_SIGNUP_OBJECT:
       return {
         ...state,
+        signupObject: {
+          firstName: null,
+          lastName: null,
+          password: null,
+          email: null,
+          phoneNumber: null,
+          country: null,
+          city: null,
+          age: null,
+          sex: null,
+          pronoun: null,
+          profilePhoto: null,
+          interestList: [],
+          idCardfront: null,
+          idCardBack: null,
+          selfie: null,
+          profileType: null,
+          login_type: null,
+          experience: null,
+          location: null,
+          portfolio: [],
+          talentList: [],
+          otherInputEquipment: null,
+          model: null,
+          cameraType: null,
+          otherEquipments: [],
+          rate: null,
+          instagramLink: null,
+          tiktokLink: null,
+          pinterestLink: null,
+          linkedinLink: null,
+        },
+      };
+    case TYPES.LOGOUT_REQUEST:
+      return {
+        // ...state,
         loading: false,
         isSuccess: true,
         isFailure: false,
         userInfo: null,
+        isLoggedIn: false,
+        ...initialState,
       };
     case TYPES.LOGOUT_REQUEST_FAILURE:
       return {
         ...state,
         loading: false,
         isSuccess: false,
-        isFailure: true,
-        userInfo: state?.userInfo,
+        userInfo: null,
+        profileType: null,
+        isLoggedIn: false,
       };
     default:
       return state;

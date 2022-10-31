@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: WP('18'),
+    marginTop: WP('10'),
+    bottom:10
   },
   listContainer: {
     width: WP('95'),

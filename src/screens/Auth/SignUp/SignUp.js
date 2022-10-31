@@ -36,7 +36,6 @@ const SignUp = ({navigation, route}) => {
   const [pronoun, setPronoun] = useState('he/him');
   const [data, setdata] = useState(route?.params?.data);
   const [loading, setloading] = useState(false);
-
   const validateEmail = value => {
     setloading(true);
     try {

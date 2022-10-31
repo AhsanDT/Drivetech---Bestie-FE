@@ -130,6 +130,7 @@ export const RegisterVS = yup.object().shape({
     .required('Password Required'),
 });
 
+
 export const SocialRegisterVS = yup.object().shape({
   phone: yup.string().required('Phone Number Required'),
   location: yup.string().required('Location Required'),

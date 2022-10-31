@@ -14,6 +14,7 @@ export {
   getTalentList,
   validateEmailAction,
   validateSocialPhoneAction,
+  clearSignupObject,
 } from './auth-actions/auth-action';
 
 // Payment actions

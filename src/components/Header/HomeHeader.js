@@ -11,14 +11,14 @@ import {
 import {MyStatusBar} from '..';
 import SwitchSelector from 'react-native-switch-selector';
 
-export const HomeHeader = ({onPressImage, onPress}) => {
+export const HomeHeader = ({onPressImage, onPress, userImage}) => {
   const [selected, setSelected] = useState(false);
   return (
     <>
       {/* <MyStatusBar /> */}
       <View style={styles.mainContainer}>
         <TouchableOpacity onPress={onPressImage}>
-          <Image source={appImages.user} style={styles.userStyle} />
+          <Image source={userImage} style={styles.userStyle} />
         </TouchableOpacity>
         <SwitchSelector
           style={styles.switchContainer}
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     height: 35,
     width: 35,
     borderRadius: 35,
+    backgroundColor: '#ccc',
   },
   switchContainer: {
     // height: 35,

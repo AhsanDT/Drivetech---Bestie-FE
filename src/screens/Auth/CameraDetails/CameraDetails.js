@@ -6,6 +6,8 @@ import {
   StatusBar,
   FlatList,
   ScrollView,
+  Alert,
+  TouchableOpacity,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {
@@ -36,6 +38,7 @@ const CameraDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const {signupObject} = useSelector(state => state.auth);
   const [data, setData] = useState(signupObject.talentList);
+  const [check, setcheck] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -82,21 +85,26 @@ const CameraDetails = ({navigation}) => {
   };
 
   const handleNextButton = () => {
-    // dispatch(updateSignupObject({cameraType: list}));
-    // dispatch(updateSignupObject({otherEquipments: otherequipmentList}));
-    // dispatch(updateSignupObject({otherInputEquipment: fields}));
+    if (
+      list?.filter(obj => obj.selected)?.length > 0 &&
+      otherequipmentList?.filter(obj => obj.selected)?.length > 0 &&
+      cameraModel &&
+      data.filter(obj => obj.selected)?.length > 0
+    ) {
+      dispatch({
+        type: TYPES.UPDATE_SIGNUP_OBJECT,
+        payload: {
+          cameraType: list.filter(obj => obj.selected),
+          otherEquipments: otherequipmentList.filter(obj => obj.selected),
+          otherInputEquipment: fields.filter(obj => obj.value),
+          model: cameraModel,
+        },
+      });
+      navigation.navigate('AccountRate');
+    } else {
+      Alert.alert('ALert', 'Please fill all the required items ');
+    }
 
-    dispatch({
-      type: TYPES.UPDATE_SIGNUP_OBJECT,
-      payload: {
-        cameraType: list,
-        otherEquipments: otherequipmentList.filter(obj => obj.selected),
-        otherInputEquipment: fields,
-        model: cameraModel,
-      },
-    });
-
-    navigation.navigate('AccountRate');
     // dispatch(updateSignupObject({talentList: }));
   };
 
@@ -124,24 +132,29 @@ const CameraDetails = ({navigation}) => {
           }}
         />
         <View>
-          <AppInput
-            inputContainerStyle={styles.inputContainerStyle}
-            placeholder={'Select talent'}
-            placeholderTextColor={colors.g3}
-            title={'Talent'}
-            editable={false}
-            rightIcon={
-              <Icon
-                name="arrow-right"
-                type="MaterialIcons"
-                size={25}
-                color={colors.g4}
-                onPress={() => {
-                  navigation.navigate('ShowTalent');
-                }}
-              />
-            }
-          />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ShowTalent');
+            }}>
+            <AppInput
+              inputContainerStyle={styles.inputContainerStyle}
+              placeholder={'Select talent'}
+              placeholderTextColor={colors.g3}
+              title={'Talent'}
+              editable={false}
+              rightIcon={
+                <Icon
+                  name="arrow-right"
+                  type="MaterialIcons"
+                  size={25}
+                  color={colors.g4}
+                  onPress={() => {
+                    navigation.navigate('ShowTalent');
+                  }}
+                />
+              }
+            />
+          </TouchableOpacity>
           <FlatList
             data={data}
             renderItem={({item, index}) => (
@@ -226,6 +239,7 @@ const CameraDetails = ({navigation}) => {
             onPress={() => {
               handleNextButton();
             }}
+            // disabled={check? false :true}
           />
         </View>
       </ScrollView>

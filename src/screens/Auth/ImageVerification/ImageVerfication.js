@@ -74,10 +74,10 @@ const ImageVerification = ({navigation}) => {
           },
         }),
       );
-
       navigation.navigate('AddPortfolio');
+    } else {
+      handleButton();
     }
-    handleButton();
   };
 
   // signupObject.profileType

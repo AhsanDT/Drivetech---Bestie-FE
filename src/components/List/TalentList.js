@@ -12,12 +12,14 @@ import {
 
 const TalentList = ({onPress, item}) => {
   return (
-    <TouchableOpacity style={styles.mainView} onPress={onPress}>
-      <Image
-        source={appIcons.cancel}
-        style={styles.tickIcon}
-        resizeMode="contain"
-      />
+    <View style={styles.mainView} onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          source={appIcons.cancel}
+          style={styles.tickIcon}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
       <Text
         style={[
           styles.btnText,
@@ -28,7 +30,7 @@ const TalentList = ({onPress, item}) => {
         ]}>
         {item.title}
       </Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

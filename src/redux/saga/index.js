@@ -8,7 +8,7 @@ import {
   OTPVerifyRequest,
   resendOTPRequestSaga,
   resetPassRequest,
-  logoutRequestSaga,
+  // logoutRequestSaga,
   showInterestSaga,
   updateSocialLoginData,
   validateEmailSaga,
@@ -30,7 +30,7 @@ export function* rootSaga() {
   yield fork(OTPVerifyRequest);
   yield fork(resendOTPRequestSaga);
   yield fork(resetPassRequest);
-  yield fork(logoutRequestSaga);
+  // yield fork(logoutRequestSaga);
   yield fork(showInterestSaga);
   yield fork(updateSocialLoginData);
   yield fork(validateEmailSaga);

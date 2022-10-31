@@ -101,9 +101,6 @@ export const resetPassRequest = (params, cbSuccess, cbFailure) => {
   };
 };
 export const validateEmailAction = (params, cbSuccess, cbFailure) => {
-  {
-    console.log('ACTION==> ', params);
-  }
   return {
     type: TYPES.VALIDATE_EMAIL_REQUEST,
     params,
@@ -113,7 +110,6 @@ export const validateEmailAction = (params, cbSuccess, cbFailure) => {
 };
 
 export const validateSocialPhoneAction = (params, cbSuccess, cbFailure) => {
-  console.log('PARAMS action', params);
   return {
     type: TYPES.VALIDATE_PHONE_REQUEST,
     params,
@@ -122,11 +118,17 @@ export const validateSocialPhoneAction = (params, cbSuccess, cbFailure) => {
   };
 };
 
-//logout request
-export const logoutRequset = (params, callBack) => {
+export const clearSignupObject = params => {
   return {
-    type: TYPES.LOGOUT_REQUEST_REQUEST,
-    params,
-    callBack,
+    type: TYPES.CLEAR_SIGNUP_OBJECT,
+  };
+};
+
+//logout request
+export const logoutRequset = () => {
+  return {
+    type: TYPES.LOGOUT_REQUEST,
+    // params,
+    // callBack,
   };
 };

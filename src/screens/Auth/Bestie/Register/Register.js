@@ -21,6 +21,8 @@ import {
   RegisterVS,
   RegisterFields,
   ExperienceList,
+  SocialRegisterVS,
+  SocialRegisterFields,
 } from '../../../../shared/exporter';
 import {Formik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
@@ -37,51 +39,50 @@ const Register = ({navigation, route}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
-  // const validateEmail = value => {
-  //   setloading(true);
-  //   try {
-  //     const data = new FormData();
-  //     data.append('user[email]', value.email.toLowerCase());
-  //     data.append('user[phone_number]', value.phone);
-  //     console.log(data);
-  //     const cbSuccess = res => {
-  //       onSubmit(value);
-  //       setloading(false);
-  //     };
-  //     const cbFailure = err => {
-  //       Alert.alert('ALert', err?.error);
-  //       setloading(false);
-  //     };
-  //     dispatch(validateEmailAction(data, cbSuccess, cbFailure));
-  //   } catch (error) {
-  //     setloading(false);
-  //   }
-  // };
+  const validateEmail = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[email]', value.email.toLowerCase());
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+      };
+      dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
+  };
 
-  // const validateSocialPhone = value => {
-  //   setloading(true);
-  //   try {
-  //     const data = new FormData();
-  //     data.append('user[phone_number]', value.phone);
-  //     console.log(data);
-  //     const cbSuccess = res => {
-  //       onSubmit(value);
-  //       setloading(false);
-  //     };
-  //     const cbFailure = err => {
-  //       Alert.alert('ALert', err?.error);
-  //       setloading(false);
-  //       console.log('ERRor', err);
-  //     };
-  //     dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
-  //   } catch (error) {
-  //     setloading(false);
-  //     console.log('ERRor', error);
-  //   }
-  // };
+  const validateSocialPhone = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+      data.append('user[phone_number]', value.phone);
+      console.log(data);
+      const cbSuccess = res => {
+        onSubmit(value);
+        setloading(false);
+      };
+      const cbFailure = err => {
+        Alert.alert('ALert', err?.error);
+        setloading(false);
+        console.log('ERRor', err);
+      };
+      dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+      console.log('ERRor', error);
+    }
+  };
 
   const onSubmit = value => {
-    console.log('WORKING1');
     dispatch({
       type: TYPES.UPDATE_SIGNUP_OBJECT,
       payload: {
@@ -91,13 +92,11 @@ const Register = ({navigation, route}) => {
         lastName: value.lastName,
         phoneNumber: value?.phone,
         location: value?.location,
-        phoneNumber: value.phoneNumber,
         age: value.age,
         sex: sex,
         experience: experience,
       },
     });
-    console.log('WORKING');
     navigation.navigate('ProfileImage');
   };
 
@@ -111,9 +110,17 @@ const Register = ({navigation, route}) => {
         />
         <AppHeader title={'Create Your\nAccount'} />
         <Formik
-          initialValues={RegisterFields}
-          onSubmit={values => onSubmit(values)}
-          validationSchema={RegisterVS}>
+          initialValues={
+            data?.login_type == 'social login'
+              ? SocialRegisterFields
+              : RegisterFields
+          }
+          onSubmit={values => validateEmail(values)}
+          validationSchema={
+            data?.login_type == 'social login' ? SocialRegisterVS : RegisterVS
+          }
+          // data?.login_type == 'social login' ? SocailSignUpVS : SignUpVS
+        >
           {({
             values,
             handleChange,

@@ -56,8 +56,6 @@ const AddPortfolio = ({navigation}) => {
       loading: false,
     },
   ]);
-  console.log('ADD PORTFOLIO SC==> ', signupObject);
-  //Handlers
   const showGallery = () => {
     setShow(false);
     try {
@@ -157,7 +155,7 @@ const AddPortfolio = ({navigation}) => {
         if (item === currentItemClicked) {
           return {
             ...item,
-            loading: true,
+            // loading: true,
             image: picture,
           };
         }
