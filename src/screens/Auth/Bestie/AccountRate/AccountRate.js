@@ -64,6 +64,7 @@ const AccountRate = ({navigation}) => {
                   errorMessage={errors?.rate}
                   touched={touched?.rate}
                   renderErrorMessage={true}
+                  keyboardType="number-pad"
                   leftIcon={
                     <Image
                       source={appIcons.dollar}

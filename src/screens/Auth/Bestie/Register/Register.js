@@ -115,12 +115,15 @@ const Register = ({navigation, route}) => {
               ? SocialRegisterFields
               : RegisterFields
           }
-          onSubmit={values => validateEmail(values)}
+          onSubmit={values => {
+            {
+              data ? validateSocialPhone(values) : validateEmail(values);
+            }
+          }}
+          // onSubmit={values => validateEmail(values)}
           validationSchema={
             data?.login_type == 'social login' ? SocialRegisterVS : RegisterVS
-          }
-          // data?.login_type == 'social login' ? SocailSignUpVS : SignUpVS
-        >
+          }>
           {({
             values,
             handleChange,
@@ -133,24 +136,26 @@ const Register = ({navigation, route}) => {
             setFieldValue,
           }) => {
             useEffect(() => {
-              setFieldValue(
-                'firstName',
-                data?.login_type == 'social login'
-                  ? data.first_name
-                  : values?.firstName,
-              );
-              setFieldValue(
-                'lastName',
-                data?.login_type == 'social login'
-                  ? data.last_name
-                  : values?.lastName,
-              );
-              setFieldValue(
-                'email',
-                data?.login_type == 'social login'
-                  ? data?.email
-                  : values?.email,
-              );
+              if (data) {
+                setFieldValue(
+                  'firstName',
+                  data?.login_type == 'social login'
+                    ? data.first_name
+                    : values?.firstName,
+                );
+                setFieldValue(
+                  'lastName',
+                  data?.login_type == 'social login'
+                    ? data.last_name
+                    : values?.lastName,
+                );
+                setFieldValue(
+                  'email',
+                  data?.login_type == 'social login'
+                    ? data?.email
+                    : values?.email,
+                );
+              }
             }, []);
             return (
               <View>

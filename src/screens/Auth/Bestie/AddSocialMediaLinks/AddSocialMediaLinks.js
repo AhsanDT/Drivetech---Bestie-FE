@@ -185,6 +185,7 @@ const AccountRate = ({navigation}) => {
                     touched={touched?.instagram}
                     renderErrorMessage={true}
                     placeholder="Paste your instagram profile link"
+                    placeholderTextColor={colors.g3}
                   />
                   <AppInput
                     title={'Tiktok profile'}
@@ -194,6 +195,7 @@ const AccountRate = ({navigation}) => {
                     touched={touched?.tiktok}
                     renderErrorMessage={true}
                     placeholder="Paste your tiktok profile link"
+                    placeholderTextColor={colors.g3}
                   />
                   <AppInput
                     title={'Pinterest profile'}
@@ -203,6 +205,7 @@ const AccountRate = ({navigation}) => {
                     touched={touched?.pinterest}
                     renderErrorMessage={true}
                     placeholder="Paste your pinterest profile link"
+                    placeholderTextColor={colors.g3}
                   />
                   <AppInput
                     title={'Linkedin profile'}
@@ -212,6 +215,7 @@ const AccountRate = ({navigation}) => {
                     touched={touched?.linkedIn}
                     renderErrorMessage={true}
                     placeholder="Paste your linkedin profile link"
+                    placeholderTextColor={colors.g3}
                   />
                 </View>
               </ScrollView>

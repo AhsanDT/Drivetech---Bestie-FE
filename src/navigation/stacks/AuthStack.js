@@ -27,7 +27,7 @@ const Stack = createNativeStackNavigator();
 function AuthStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="CameraDetails"
+      initialRouteName="Walkthrough"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="ShowInterest" component={ShowInterest} />
