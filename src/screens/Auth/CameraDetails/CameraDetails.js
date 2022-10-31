@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   StatusBar,
   FlatList,
   ScrollView,
+  Alert,
+  TouchableOpacity,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {
@@ -22,12 +24,30 @@ import {
   WP,
 } from '../../../shared/exporter';
 import {styles} from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateSignupObject} from '../../../redux/actions';
+import {useFocusEffect} from '@react-navigation/native';
+import * as TYPES from '../../../redux/actions/types/auth_types';
 
+var count = 0;
 const CameraDetails = ({navigation}) => {
-  const [fields, setFields] = useState([{value: null}]);
+  const [fields, setFields] = useState([{value: ''}]);
+  const [list, setlist] = useState(Camera_List);
+  const [otherequipmentList, setotherequipmentList] = useState(Equipment_List);
+  const [cameraModel, setcameraModel] = useState('');
+  const dispatch = useDispatch();
+  const {signupObject} = useSelector(state => state.auth);
+  const [data, setData] = useState(signupObject.talentList);
+  const [check, setcheck] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = setData(signupObject.talentList);
+      return () => unsubscribe;
+    }, [signupObject]),
+  );
 
   const handleChange = (i, event) => {
-    console.log(event);
     const values = [...fields];
     values[i].value = event;
     setFields(values);
@@ -36,17 +56,73 @@ const CameraDetails = ({navigation}) => {
   const handleAdd = () => {
     const values = [...fields];
     if (values) {
-      values.push({value: null});
+      values.push({value: ''});
       setFields(values);
       console.log('value', values);
     } else {
-      alert(`Add Input`);
+      // alert(`Add Input`);
     }
   };
+  const handleCameraEquipment = (item, index) => {
+    list.forEach(element => {
+      element.selected = false;
+    });
+    list[index].selected = true;
+
+    setlist([...list]);
+  };
+  const handleOtherEquipment = (item, index) => {
+    otherequipmentList[index].selected = !otherequipmentList[index].selected;
+    otherequipmentList?.map(i => {
+      if (i?.id === item?.id) {
+        return {
+          selected: !item.selected,
+        };
+      }
+      return item;
+    });
+    setotherequipmentList([...otherequipmentList]);
+  };
+
+  const handleNextButton = () => {
+    if (
+      list?.filter(obj => obj.selected)?.length > 0 &&
+      otherequipmentList?.filter(obj => obj.selected)?.length > 0 &&
+      cameraModel &&
+      data.filter(obj => obj.selected)?.length > 0
+    ) {
+      dispatch({
+        type: TYPES.UPDATE_SIGNUP_OBJECT,
+        payload: {
+          cameraType: list.filter(obj => obj.selected),
+          otherEquipments: otherequipmentList.filter(obj => obj.selected),
+          otherInputEquipment: fields.filter(obj => obj.value),
+          model: cameraModel,
+        },
+      });
+      navigation.navigate('AccountRate');
+    } else {
+      Alert.alert('ALert', 'Please fill all the required items ');
+    }
+
+    // dispatch(updateSignupObject({talentList: }));
+  };
+
+  const onPressDelete = index => {
+    data.splice(index, 1);
+    setData([...data]);
+    dispatch(updateSignupObject({talentList: data}));
+  };
+
+  console.log(signupObject.talentList);
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor={'#fff'} translucent={false} />
+      <StatusBar
+        backgroundColor={colors.white}
+        translucent={false}
+        barStyle={'dark-content'}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppHeader
           title={`Add Your\nCamera Details`}
@@ -56,25 +132,35 @@ const CameraDetails = ({navigation}) => {
           }}
         />
         <View>
-          <AppInput
-            inputContainerStyle={styles.inputContainerStyle}
-            placeholder={'Select talent'}
-            placeholderTextColor={colors.g3}
-            title={'Talent'}
-            editable={false}
-            rightIcon={
-              <Icon
-                name="arrow-right"
-                type="MaterialIcons"
-                size={25}
-                color={colors.g4}
-                onPress={() => {
-                  navigation.navigate('ShowInterest');
-                }}
-              />
-            }
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ShowTalent');
+            }}>
+            <AppInput
+              inputContainerStyle={styles.inputContainerStyle}
+              placeholder={'Select talent'}
+              placeholderTextColor={colors.g3}
+              title={'Talent'}
+              editable={false}
+              rightIcon={
+                <Icon
+                  name="arrow-right"
+                  type="MaterialIcons"
+                  size={25}
+                  color={colors.g4}
+                  onPress={() => {
+                    navigation.navigate('ShowTalent');
+                  }}
+                />
+              }
+            />
+          </TouchableOpacity>
+          <FlatList
+            data={data}
+            renderItem={({item, index}) => (
+              <TalentList item={item} onPress={() => onPressDelete(index)} />
+            )}
           />
-          <FlatList data={[1, 2, 3, 4]} renderItem={() => <TalentList />} />
         </View>
         <View style={styles.TextContainer}>
           <Text style={styles.cameraTextStyle}>Camera and Equipment</Text>
@@ -82,23 +168,34 @@ const CameraDetails = ({navigation}) => {
           <AppInput
             placeholder={'Input specs'}
             placeholderTextColor={colors.g3}
+            value={cameraModel}
+            onChangeText={text => setcameraModel(text)}
           />
         </View>
 
         <View style={styles.contentContainer}>
           <Text style={styles.modelTextStyle}>Type of camera</Text>
           <FlatList
-            data={Camera_List}
+            data={list || []}
             renderItem={({item, index}) => (
-              <Camera source={item.icon} title={item.title} />
+              <Camera
+                source={item.icon}
+                onPress={() => handleCameraEquipment(item, index)}
+                item={item}
+              />
             )}
           />
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.modelTextStyle}>Other Equipment</Text>
           <FlatList
-            data={Equipment_List}
-            renderItem={({item, index}) => <Camera title={item.title} />}
+            data={otherequipmentList || []}
+            renderItem={({item, index}) => (
+              <Camera
+                onPress={() => handleOtherEquipment(item, index)}
+                item={item}
+              />
+            )}
           />
         </View>
         <View>
@@ -139,9 +236,10 @@ const CameraDetails = ({navigation}) => {
             width={WP('35')}
             height={WP('13')}
             bgColor={colors.b1}
-            // onPress={() => {
-            //   onPressButton();
-            // }}
+            onPress={() => {
+              handleNextButton();
+            }}
+            // disabled={check? false :true}
           />
         </View>
       </ScrollView>

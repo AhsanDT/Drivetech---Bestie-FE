@@ -15,7 +15,11 @@ import {Camera, useCameraDevices} from 'react-native-vision-camera';
 import {useDispatch, useSelector} from 'react-redux';
 import * as types from '../../../redux/actions/types/auth_types';
 import styles from './styles';
-import {signUpRequest, updateSocialLoginRequest} from '../../../redux/actions';
+import {
+  signUpRequest,
+  updateSocialLoginRequest,
+  updateSignupObject,
+} from '../../../redux/actions';
 
 const ImageVerification = ({navigation}) => {
   const [showPhoto, setShowPhoto] = useState();
@@ -32,8 +36,6 @@ const ImageVerification = ({navigation}) => {
   }, []);
 
   const onPressButton = async () => {
-    console.log(camera.current);
-    console.log(123);
     const photo = await camera.current.takeSnapshot({
       quality: 85,
       skipMetadata: true,
@@ -45,7 +47,6 @@ const ImageVerification = ({navigation}) => {
     setIsCameraInitialized(true);
   }, []);
   const cameraPermission = async () => await Camera.requestCameraPermission();
-
   const renderCamera = () => {
     if (device == null) return <ActivityIndicator />;
     return (
@@ -62,6 +63,24 @@ const ImageVerification = ({navigation}) => {
       />
     );
   };
+  const handleNavigation = () => {
+    if (signupObject?.profileType == 'bestie') {
+      dispatch(
+        updateSignupObject({
+          selfie: {
+            uri: `file://${showPhoto}`,
+            name: showPhoto,
+            type: 'image/jpeg',
+          },
+        }),
+      );
+      navigation.navigate('AddPortfolio');
+    } else {
+      handleButton();
+    }
+  };
+
+  // signupObject.profileType
   const handleButton = () => {
     setloading(true);
     try {
@@ -206,7 +225,7 @@ const ImageVerification = ({navigation}) => {
               width={WP('35')}
               height={WP('13')}
               bgColor={colors.b1}
-              onPress={() => handleButton()}
+              onPress={() => handleNavigation()}
             />
           ) : (
             <AppButton

@@ -14,11 +14,15 @@ import {AppButton, AppHeader, ImagePickerModal} from '../../../../components';
 import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateSignupObject} from '../../../../redux/actions';
 let count = 0;
 const AddPortfolio = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
   const [currentItemClicked, setCurrentItemClicked] = useState(null);
+  const dispatch = useDispatch();
+  const {signupObject} = useSelector(state => state.auth);
 
   const [picsArray, setPicsArray] = useState([
     {
@@ -52,8 +56,6 @@ const AddPortfolio = ({navigation}) => {
       loading: false,
     },
   ]);
-
-  //Handlers
   const showGallery = () => {
     setShow(false);
     try {
@@ -153,7 +155,7 @@ const AddPortfolio = ({navigation}) => {
         if (item === currentItemClicked) {
           return {
             ...item,
-            loading: true,
+            // loading: true,
             image: picture,
           };
         }
@@ -161,6 +163,11 @@ const AddPortfolio = ({navigation}) => {
       }),
     );
   };
+  const handleButton = () => {
+    dispatch(updateSignupObject({portfolio: picsArray}));
+    navigation.navigate('CameraDetails');
+  };
+
   count = picsArray?.filter(obj => obj?.image).length;
 
   return (
@@ -204,9 +211,10 @@ const AddPortfolio = ({navigation}) => {
           height={WP('13')}
           bgColor={count < 6 ? colors.g1 : colors.b1}
           disabled={count < 6 ? true : false}
-          //   onPress={() => {
-          //     navigation.navigate('ImageVerification');
-          //   }}
+          onPress={() => {
+            // navigation.navigate('ImageVerification');
+            handleButton();
+          }}
         />
       </View>
     </SafeAreaView>

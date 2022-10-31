@@ -17,18 +17,17 @@ import RegisterBestie from '../../screens/Auth/Bestie/Register';
 import AccountRate from '../../screens/Auth/Bestie/AccountRate';
 import Test from '../../screens/Auth/Test/Test';
 import ShowTalent from '../../screens/Auth/Bestie/ShowTalent';
-
 import Login from '../../screens/Auth/Login';
-
 import SelectRole from '../../screens/Auth/SelectRole';
-
+import AddSocialMediaLinks from '../../screens/Auth/Bestie/AddSocialMediaLinks';
+import Walkthrough from '../../screens/Walkthrough';
 
 const Stack = createNativeStackNavigator();
 
 function AuthStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="SelectRole"
+      initialRouteName="CameraDetails"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="ShowInterest" component={ShowInterest} />
@@ -48,6 +47,11 @@ function AuthStack(props) {
       <Stack.Screen name="Test" component={Test} />
       <Stack.Screen name="ShowTalent" component={ShowTalent} />
       <Stack.Screen name="SelectRole" component={SelectRole} />
+      <Stack.Screen
+        name="AddSocialMediaLinks"
+        component={AddSocialMediaLinks}
+      />
+      <Stack.Screen name="Walkthrough" component={Walkthrough} />
     </Stack.Navigator>
   );
 }

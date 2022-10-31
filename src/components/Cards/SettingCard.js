@@ -17,7 +17,15 @@ import {
   WP,
 } from '../../shared/exporter';
 
-const SettingCard = ({onPress, icon, subtitle, title, source, toggle}) => {
+const SettingCard = ({
+  onPress,
+  icon,
+  subtitle,
+  title,
+  source,
+  toggle,
+  userImage,
+}) => {
   const [checked, setChecked] = useState(false);
   return (
     <TouchableOpacity
@@ -30,7 +38,7 @@ const SettingCard = ({onPress, icon, subtitle, title, source, toggle}) => {
       ]}
       activeOpacity={0.7}
       onPress={onPress}>
-      {icon && <Image source={appImages.user} style={styles.userStyle} />}
+      {icon && <Image source={userImage} style={styles.userStyle} />}
 
       <View
         style={[
@@ -44,7 +52,7 @@ const SettingCard = ({onPress, icon, subtitle, title, source, toggle}) => {
               paddingTop: !subtitle ? 10 : null,
             },
           ]}>
-          {title || 'Blair McLurkin\n'}
+          {title +"\n" || 'Blair McLurkin\n'}
           {subtitle && <Text style={styles.editStyle}>Edit Profile</Text>}
         </Text>
       </View>

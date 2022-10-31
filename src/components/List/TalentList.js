@@ -10,14 +10,16 @@ import {
   appIcons,
 } from '../../shared/exporter';
 
-const TalentList = ({onPress}) => {
+const TalentList = ({onPress, item}) => {
   return (
-    <TouchableOpacity style={styles.mainView} onPress={onPress}>
-      <Image
-        source={appIcons.cancel}
-        style={styles.tickIcon}
-        resizeMode="contain"
-      />
+    <View style={styles.mainView} onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          source={appIcons.cancel}
+          style={styles.tickIcon}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
       <Text
         style={[
           styles.btnText,
@@ -26,9 +28,9 @@ const TalentList = ({onPress}) => {
             paddingLeft: WP('2'),
           },
         ]}>
-        Wedding Photography
+        {item.title}
       </Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

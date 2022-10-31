@@ -20,6 +20,7 @@ const showTalent = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
+  const {signupObject} = useSelector(state => state.auth);
   useEffect(() => {
     getTalent();
   }, []);
@@ -39,6 +40,15 @@ const showTalent = ({navigation}) => {
       const cbSuccess = response => {
         response?.data.forEach(element => {
           element.selected = false;
+        });
+        response?.data?.forEach(element => {
+          if (
+            signupObject?.talentList?.find(
+              item => item?.title == element?.title,
+            )
+          ) {
+            element.selected = true;
+          }
         });
         setlist(response?.data);
       };
@@ -63,7 +73,7 @@ const showTalent = ({navigation}) => {
         updateSignupObject({talentList: list.filter(obj => obj.selected)}),
       );
 
-      navigation.navigate('UploadImage');
+      navigation.goBack();
     }
   };
 
@@ -86,7 +96,7 @@ const showTalent = ({navigation}) => {
           </View>
         </TouchableOpacity>
 
-        <View
+        {/* <View
           style={{
             justifyContent: 'space-between',
             flexDirection: 'row',
@@ -109,7 +119,7 @@ const showTalent = ({navigation}) => {
             height={WP('14')}
             onPress={() => handleNavigation()}
           />
-        </View>
+        </View> */}
       </View>
     );
   };
@@ -150,6 +160,34 @@ const showTalent = ({navigation}) => {
       ) : (
         <ActivityIndicator color={colors.b1} />
       )}
+      <View>
+        {list?.length > 0 ? (
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              width: WP('90'),
+              alignSelf: 'center',
+              marginTop: 5,
+            }}>
+            <AppButton
+              width={WP('30')}
+              bgColor={colors.g8}
+              title={'Back'}
+              height={WP('14')}
+              onPress={() => navigation.goBack()}
+              textColor={colors.g9}
+            />
+            <AppButton
+              width={WP('30')}
+              bgColor={colors.b1}
+              title={'Next'}
+              height={WP('14')}
+              onPress={() => handleNavigation()}
+            />
+          </View>
+        ) : null}
+      </View>
     </SafeAreaView>
   );
 };

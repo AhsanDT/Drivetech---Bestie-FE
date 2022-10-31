@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, StatusBar} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar, Alert} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   AppButton,
   AppHeader,
   AppInput,
+  AppLoader,
   DropDown,
   LocationInput,
 } from '../../../../components';
-import {Icon} from 'react-native-elements';
+import * as TYPES from '../../../../redux/actions/types/auth_types';
 import styles from './styles';
 import {
   colors,
@@ -20,6 +21,8 @@ import {
   RegisterVS,
   RegisterFields,
   ExperienceList,
+  SocialRegisterVS,
+  SocialRegisterFields,
 } from '../../../../shared/exporter';
 import {Formik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
@@ -33,11 +36,10 @@ const Register = ({navigation, route}) => {
   const [experience, setExperience] = useState('1 Year');
   const [data, setdata] = useState(route?.params?.data);
   const [location, setlocation] = useState('');
-
-  const {signupObject} = useSelector(state => state.auth);
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
 
   const validateEmail = value => {
-    console.log('BESTIE WORKING', value);
     setloading(true);
     try {
       const data = new FormData();
@@ -45,18 +47,15 @@ const Register = ({navigation, route}) => {
       data.append('user[phone_number]', value.phone);
       console.log(data);
       const cbSuccess = res => {
-        console.log('VALIDATE==> email', res);
         onSubmit(value);
         setloading(false);
       };
       const cbFailure = err => {
-        console.log('VALIDATE=> err', err);
         Alert.alert('ALert', err?.error);
         setloading(false);
       };
       dispatch(validateEmailAction(data, cbSuccess, cbFailure));
     } catch (error) {
-      console.log('VALIDATE=> err', error);
       setloading(false);
     }
   };
@@ -74,25 +73,31 @@ const Register = ({navigation, route}) => {
       const cbFailure = err => {
         Alert.alert('ALert', err?.error);
         setloading(false);
+        console.log('ERRor', err);
       };
       dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
+      console.log('ERRor', error);
     }
   };
 
   const onSubmit = value => {
-    console.log('VALUES BESTIE==> ', value);
-    dispatch(updateSignupObject({firstName: value.firstName}));
-    dispatch(updateSignupObject({lastName: value.lastName}));
-    dispatch(updateSignupObject({password: value.password || ''}));
-    dispatch(updateSignupObject({email: value.email}));
-    dispatch(updateSignupObject({city: value.city}));
-    dispatch(updateSignupObject({sex: sex}));
-    dispatch(updateSignupObject({age: value?.age}));
-    dispatch(updateSignupObject({country: value?.country}));
-    dispatch(updateSignupObject({phoneNumber: value?.phone}));
-    // navigation.navigate('ProfileImage');
+    dispatch({
+      type: TYPES.UPDATE_SIGNUP_OBJECT,
+      payload: {
+        firstName: value.firstName,
+        password: value.password,
+        email: value.email,
+        lastName: value.lastName,
+        phoneNumber: value?.phone,
+        location: value?.location,
+        age: value.age,
+        sex: sex,
+        experience: experience,
+      },
+    });
+    navigation.navigate('ProfileImage');
   };
 
   return (
@@ -105,13 +110,17 @@ const Register = ({navigation, route}) => {
         />
         <AppHeader title={'Create Your\nAccount'} />
         <Formik
-          initialValues={RegisterFields}
-          onSubmit={values => {
-            {
-              data ? validateSocialPhone(values) : validateEmail(values);
-            }
-          }}
-          validationSchema={RegisterVS}>
+          initialValues={
+            data?.login_type == 'social login'
+              ? SocialRegisterFields
+              : RegisterFields
+          }
+          onSubmit={values => validateEmail(values)}
+          validationSchema={
+            data?.login_type == 'social login' ? SocialRegisterVS : RegisterVS
+          }
+          // data?.login_type == 'social login' ? SocailSignUpVS : SignUpVS
+        >
           {({
             values,
             handleChange,
@@ -252,6 +261,7 @@ const Register = ({navigation, route}) => {
             );
           }}
         </Formik>
+        <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

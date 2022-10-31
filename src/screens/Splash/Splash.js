@@ -1,11 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, Image, StatusBar, ImageBackground} from 'react-native';
 import {AppButton} from '../../components/AppButton/AppButton';
 import {colors, WP} from '../../shared/exporter';
 import {appImages, appLogo} from '../../shared/theme/assets';
 import styles from './styles';
+import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
+  const {isLoggedIn} = useSelector(state => state.auth);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("")
+      if (isLoggedIn) {
+        // props.navigation.replace('Home', {
+        //   screen: 'Home',
+        // });
+        navigation.replace('MainStack');
+      } else {
+        // dispatch(resetAllStateAction());
+        navigation.replace('Auth');
+      }
+    }, 1500);
+  }, []);
+
   return (
     <ImageBackground
       source={appImages.introBackground}
@@ -26,7 +44,7 @@ const Splash = ({navigation}) => {
           Let Us Help You Find Your{'\n'}Bestie
         </Text>
       </View>
-      <AppButton
+      {/* <AppButton
         bgColor={colors.b1}
         width={WP('90')}
         title={'Get Started'}
@@ -34,8 +52,8 @@ const Splash = ({navigation}) => {
         onPress={() => {
           navigation.navigate('SelectRole');
         }}
-      />
-      <View style={styles.accountContainer}>
+      /> */}
+      {/* <View style={styles.accountContainer}>
         <Text style={styles.accountStyles}>
           Don't have an account?{' '}
           <Text
@@ -46,8 +64,8 @@ const Splash = ({navigation}) => {
             Sign Up
           </Text>
         </Text>
-      </View>
-      <View style={styles.footerContainer}>
+      </View> */}
+      {/* <View style={styles.footerContainer}>
         <Text style={styles.BottomTextStyle}>
           By signing in to you account, you agree to our {'\n'}
           <Text
@@ -66,7 +84,7 @@ const Splash = ({navigation}) => {
             Terms & Conditions.
           </Text>
         </Text>
-      </View>
+      </View> */}
     </ImageBackground>
   );
 };

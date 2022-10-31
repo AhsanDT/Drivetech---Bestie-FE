@@ -61,6 +61,9 @@ export const forgotFormFields = {
 export const codeFormFields = {
   code: '',
 };
+export const BestieRate = {
+  bestieRate: '',
+};
 
 export const payment_CardFormField = {
   fullname: '',
@@ -70,6 +73,19 @@ export const payment_CardFormField = {
 export const account_RateFormField = {
   rate: '',
 };
+export const socialMediaLinks = {
+  instagram: '',
+  tiktok: '',
+  linkedIn: '',
+  pinterest: '',
+};
+
+export const SocialLinks = yup.object().shape({
+  instagram: yup.string().required('Instagram Link Required'),
+  tiktok: yup.string().required('Tiktok Link Required'),
+  linkedIn: yup.string().required('Linkedin Link Required'),
+  pinterest: yup.string().required('Pinterest Link Required'),
+});
 
 export const support_MessageFormField = {
   message: '',
@@ -98,6 +114,10 @@ export const SignUpVS = yup.object().shape({
   age: yup.string().required('Age Requried'),
 });
 
+export const BestieRateVs = yup.object().shape({
+  bestieRate: yup.string().required('Rate Required'),
+});
+
 export const RegisterVS = yup.object().shape({
   firstName: yup.string().required('First Name Required'),
   lastName: yup.string().required('Last Name Required'),
@@ -113,6 +133,7 @@ export const RegisterVS = yup.object().shape({
     .min(6, 'Password must be at least 6 characters')
     .required('Password Required'),
 });
+
 
 export const SocialRegisterVS = yup.object().shape({
   phone: yup.string().required('Phone Number Required'),
