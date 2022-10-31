@@ -9,7 +9,16 @@ import {
 } from 'react-native';
 import {appIcons, colors, family, size, WP} from '../../shared/exporter';
 
-const ChatCard = ({date, status, token, message, onPress, time}) => {
+const ChatCard = ({
+  date,
+  status,
+  token,
+  message,
+  onPress,
+  time,
+  source,
+  image,
+}) => {
   return (
     <TouchableOpacity
       style={styles.mainContainer}
@@ -30,9 +39,16 @@ const ChatCard = ({date, status, token, message, onPress, time}) => {
           <Text style={styles.tokenTextStyle}>{token}</Text>
         </View>
       </View>
-      <Text ellipsizeMode="tail" numberOfLines={3} style={styles.logTextStyle}>
-        {message}
-      </Text>
+      {message && (
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={3}
+          style={styles.logTextStyle}>
+          {message}
+        </Text>
+      )}
+
+      {image && <Image source={image} style={styles.imageStyle} />}
     </TouchableOpacity>
   );
 };
@@ -95,6 +111,14 @@ const styles = StyleSheet.create({
   appIconStyle: {
     height: 50,
     width: 50,
+  },
+  imageStyle: {
+    height: WP('40'),
+    width: WP('75'),
+    borderRadius: WP('4'),
+    overflow: 'hidden',
+    alignSelf: 'center',
+    marginTop: WP('1'),
   },
 });
 

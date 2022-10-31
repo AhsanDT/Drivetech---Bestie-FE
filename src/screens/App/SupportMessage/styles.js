@@ -22,13 +22,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: WP('4'),
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_14,
+    overflow: 'hidden',
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
   },
   inputStyle: {
-    alignSelf: 'flex-start',
+    width: WP('100'),
+    height: WP('100'),
+    backgroundColor: colors.g2,
+    fontFamily: family.Poppin_Regular,
+    fontSize: size.text_14,
+    marginTop: WP('-65'),
   },
   imageContainer: {
     padding: WP('2'),
-    flex: 0.7,
+    // flex: 0.5,
     alignItems: 'center',
   },
   proofIconStyle: {
@@ -37,9 +45,10 @@ const styles = StyleSheet.create({
   },
   proofTextStyle: {
     fontSize: size.text_14,
-    lineHeight: 28,
+    // lineHeight: 28,
     color: colors.g16,
     fontFamily: family.Poppin_Regular,
+    textAlign: 'center',
   },
   imageStyle: {
     height: WP('40'),

@@ -52,7 +52,7 @@ const AddCard = ({navigation}) => {
             setloading(false);
             // alert(res);
             console.log('On Add Card Success', res);
-            navigation.navigate('PaymentMethod');
+            navigation.navigate('GetPaymentList');
           };
           const onFailure = res => {
             setloading(false);

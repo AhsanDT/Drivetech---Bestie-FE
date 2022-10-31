@@ -3,11 +3,15 @@ import authReducer from './auth-reducers/auth-reducer';
 
 import * as types from '../actions/types/auth_types';
 import paymentReducer from './payment-reducers/payment-reducers';
+import supportReducer from './support-reducers/support-reducers';
+import conversationReducer from './conversation-reducers/conversation-reducers';
 
 const root_reducer = combineReducers({
   /* your app’s top-level reducers */
   auth: authReducer,
   payment: paymentReducer,
+  support: supportReducer,
+  conversation: conversationReducer,
 });
 
 const rootReducer = (state, action) => {

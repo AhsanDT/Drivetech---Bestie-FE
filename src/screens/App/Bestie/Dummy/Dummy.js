@@ -1,19 +1,24 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {HomeHeader} from '../../../../components';
-import {styles} from './styles';
+import {colors} from '../../../../shared/exporter';
+// import {styles} from './styles';
 
-const MySchedule = () => {
+const Dummy = () => {
   return (
-    <View style={styles.mainContainer}>
-      {/* <HomeHeader
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: colors.white,
+      }}>
+      <HomeHeader
       // onPressImage={() => {
       //   navigation.navigate('Bestietack', {screen: 'Setting'});
       // }}
       // onPress={() => setTab(!tab)}
-      /> */}
+      />
     </View>
   );
 };
 
-export default MySchedule;
+export default Dummy;

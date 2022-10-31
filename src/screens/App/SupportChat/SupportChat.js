@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,19 +7,111 @@ import {
   FlatList,
   Platform,
   PermissionsAndroid,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {
+  AppLoader,
   ChatCard,
   ChatInput,
   Header,
   ImagePickerModal,
 } from '../../../components';
-import {image_options} from '../../../shared/exporter';
+import {
+  appIcons,
+  appImages,
+  checkConnected,
+  HP,
+  image_options,
+  networkText,
+} from '../../../shared/exporter';
 import {styles} from './styles';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-const SupportChat = () => {
+import {useDispatch} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
+import {
+  createMessageRequest,
+  getAllConversationMessage,
+} from '../../../redux/actions';
+import moment from 'moment';
+
+const SupportChat = ({navigation, route}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
+  const [allMessages, setAllMessages] = useState([]);
+  const [text, setText] = useState('');
+  const [loading, setloading] = useState(false);
+  const [item, setItem] = useState(route?.params?.id);
+  const dispatch = useDispatch();
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    if (isFocus) {
+      getMesssgeList();
+    }
+  }, [isFocus]);
+
+  //getMessageList
+  const getMesssgeList = async () => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const data = new FormData();
+        data.append('message[support_conversation_id]', item?.id);
+        const cbSuccess = res => {
+          console.log('getres', res?.data);
+          setloading(false);
+          setAllMessages(res?.data);
+        };
+        const cbFailure = err => {
+          setloading(false);
+        };
+        dispatch(getAllConversationMessage(data, cbSuccess, cbFailure));
+      } catch (err) {
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
+
+  //Create Message
+  const createMessage = async () => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const data = new FormData();
+        data.append('message[support_conversation_id]', item?.id);
+        data.append('message[body]', text);
+        if (image) {
+          data.append('message[image]', {
+            uri: image?.uri,
+            name: image?.fileName,
+            type: image?.type,
+          });
+        }
+
+        const cbSuccess = res => {
+          console.log('create message', res);
+          setloading(false);
+          getMesssgeList();
+          setText('');
+          setImage('');
+        };
+        const cbFailure = err => {
+          setloading(false);
+        };
+        dispatch(createMessageRequest(data, cbSuccess, cbFailure));
+      } catch (err) {
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
 
   //Handlers
   const showGallery = () => {
@@ -85,38 +177,72 @@ const SupportChat = () => {
     }
   };
 
-  const renderItem = () => (
-    <ChatCard
-      date={'06/15/2022'}
-      time={' | 6:00 AM'}
-      token={'KGNV83JNFG8'}
-      message={
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium sem sit amet venenatis commodo. Nullam aliquam lacus nisl, varius luctus mauris hendrerit ut. Etiam eros lectus, commod.'
-      }
-    />
-  );
+  const renderItem = ({item, index}) => {
+    console.log('image', item?.message_image);
+    return (
+      <ChatCard
+        // token={id?.support?.ticket_number}
+        date={
+          moment(item?.message?.created_at).format('MM/DD/YYYY') +
+          ' | ' +
+          moment(item?.message?.created_at).format('hh:mm A')
+        }
+        message={item?.message?.body}
+        image={item.message_image ? {uri: item?.message_image} : null}
+      />
+    );
+  };
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <Header title={'Support'} backIcon={true} />
-      <FlatList
-        data={[1, 2, 3, 4]}
-        renderItem={renderItem}
-        key={({item, index}) => {
-          item.index + toString();
+      <Header
+        title={'Support'}
+        backIcon={true}
+        onPressBack={() => {
+          navigation?.goBack();
         }}
       />
-      <ChatInput
-        onPressProof={() => {
-          setShow(true);
-        }}
-      />
-      <ImagePickerModal
-        show={show}
-        onPressHide={() => setShow(false)}
-        onPressCamera={() => showCamera()}
-        onPressGallery={() => showGallery()}
-        onPressCancel={() => setShow(false)}
-      />
+
+      {allMessages?.length > 0 ? (
+        <FlatList
+          // inverted
+          data={allMessages}
+          // extraData={fresh}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      ) : (
+        <View style={styles.noRecordsView}>
+          <Text style={styles.noRecords}>{'No message found'}</Text>
+        </View>
+      )}
+      <KeyboardAvoidingView>
+        <ChatInput
+          onPressProof={() => {
+            setShow(true);
+          }}
+          imgStyle={image ? styles?.uriStyle : styles.imgStyle}
+          proofIcon={image === '' ? appIcons.proof : image}
+          attachIcon={image === '' ? appIcons.attach : null}
+          onChangeText={text => setText(text)}
+          value={text}
+          disabled={text || image ? false : true}
+          onPressSend={() => {
+            createMessage();
+          }}
+        />
+
+        {show && (
+          <ImagePickerModal
+            show={show}
+            onPressHide={() => setShow(false)}
+            onPressCamera={() => showCamera()}
+            onPressGallery={() => showGallery()}
+            onPressCancel={() => setShow(false)}
+          />
+        )}
+      </KeyboardAvoidingView>
+      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

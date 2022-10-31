@@ -46,18 +46,19 @@ const GetPaymentList = ({navigation}) => {
     <EditCard
       onPressDelete={() => {
         setData(item);
-        // tabRef.current.open(item);
-        handleDeleteButton(item);
+        tabRef.current.open(item);
+        // handleDeleteButton(item);
+        console.log(data);
       }}
       onPressEdit={() => {
         navigation.navigate('EditCard', {
           params: item,
         });
       }}
-      source={item?.brand === 'Visa' ? appIcons?.visa : appIcons.card}
+      source={item?.brand === 'Visa' ? appIcons?.visa : appIcons.master}
       month={item?.exp_month}
       year={item?.exp_year}
-      // number={item?.}
+      number={item?.cvc}
     />
   );
 
@@ -95,6 +96,8 @@ const GetPaymentList = ({navigation}) => {
         const cbSuccess = response => {
           console.log('response', response);
           setloading(false);
+          setData(response.data);
+          tabRef?.current?.close();
           getAllCard();
         };
         const cbFailure = err => {
@@ -102,7 +105,7 @@ const GetPaymentList = ({navigation}) => {
           setloading(false);
           console.log('ERROR', err);
         };
-        dispatch(deletePaymentCard(item.id, cbSuccess, cbFailure));
+        dispatch(deletePaymentCard(data.id, cbSuccess, cbFailure));
       } catch (error) {
         console.log('ERROR', error);
         setloading(false);
@@ -140,8 +143,11 @@ const GetPaymentList = ({navigation}) => {
             tabRef?.current?.close();
           }}
           onPressDelete={item => {
-            console.log('hhhhh', data);
+            handleDeleteButton(item);
           }}
+          month={data?.exp_month}
+          year={data?.exp_year}
+          number={data?.cvc}
         />
         <AppLoader loading={loading} />
       </ScrollView>

@@ -18,8 +18,6 @@ export const colors = {
   //Gray Color
   g1: '#E2E2E2',
 
-  g2: '#B3B3B3',
-
   g2: '#F6F7FB',
   g3: '#9B9B9B',
   g4: '#C4C4C4',
@@ -40,6 +38,7 @@ export const colors = {
   g20: '#C7C7C7',
   g21: '#7D7D7D',
   g22: '#D3D3D3',
+  g23: '#B3B3B3',
   //Green
   gr1: '#00A66C',
   gr2: '#34A853',

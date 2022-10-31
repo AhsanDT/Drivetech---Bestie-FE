@@ -282,7 +282,7 @@ const Setting_List = [
   {
     id: 6,
     title: 'Support',
-    route: '',
+    route: 'SupportList',
   },
   {
     id: 7,

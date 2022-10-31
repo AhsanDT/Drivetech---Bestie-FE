@@ -15,12 +15,21 @@ import {
   validatePhoneSaga,
 } from './auth-saga/auth-saga';
 import {
+  createConversationMessageSaga,
+  createConversationSaga,
+  showAllConversationSaga,
+} from './conversation-saga/conversation-saga';
+import {
   addCardRequest,
   deletePaymentCardSaga,
   getPaymentCardRequest,
   showPaymentCardSaga,
   updatePaymentCardSaga,
 } from './payment-saga/payment-saga';
+import {
+  addSupportTicketSaga,
+  showSupportTicketSaga,
+} from './support-saga/support-saga';
 
 export function* rootSaga() {
   yield fork(loginRequest);
@@ -39,4 +48,9 @@ export function* rootSaga() {
   yield fork(showPaymentCardSaga);
   yield fork(deletePaymentCardSaga);
   yield fork(updatePaymentCardSaga);
+  yield fork(showSupportTicketSaga);
+  yield fork(addSupportTicketSaga);
+  yield fork(showAllConversationSaga);
+  yield fork(createConversationSaga);
+  yield fork(createConversationMessageSaga);
 }

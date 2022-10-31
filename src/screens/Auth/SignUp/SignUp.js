@@ -143,24 +143,26 @@ const SignUp = ({navigation, route}) => {
               setFieldValue,
             }) => {
               useEffect(() => {
-                setFieldValue(
-                  'firstName',
-                  data?.login_type == 'social login'
-                    ? data.first_name
-                    : values?.firstName,
-                );
-                setFieldValue(
-                  'lastName',
-                  data?.login_type == 'social login'
-                    ? data.last_name
-                    : values?.lastName,
-                );
-                setFieldValue(
-                  'email',
-                  data?.login_type == 'social login'
-                    ? data?.email
-                    : values?.email,
-                );
+                if (data) {
+                  setFieldValue(
+                    'firstName',
+                    data?.login_type == 'social login'
+                      ? values?.firstName
+                      : data.first_name,
+                  );
+                  setFieldValue(
+                    'lastName',
+                    data?.login_type == 'social login'
+                      ? data.last_name
+                      : values?.lastName,
+                  );
+                  setFieldValue(
+                    'email',
+                    data?.login_type == 'social login'
+                      ? data?.email
+                      : values?.email,
+                  );
+                }
               }, []);
               return (
                 <View>
