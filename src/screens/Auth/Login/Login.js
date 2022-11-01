@@ -199,6 +199,7 @@ const Login = ({navigation}) => {
           alert(err || 'Please try with anyother account. Thanks');
           setloading(false);
         };
+
         dispatch(socialLoginRequest(data, cbSuccess, cbFailure));
       } catch (err) {
         setloading(false);
