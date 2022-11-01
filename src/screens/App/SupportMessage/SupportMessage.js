@@ -126,10 +126,11 @@ const SupportMessage = ({navigation}) => {
         }
 
         const onSuccess = res => {
+          // console.log('res', res);
           setloading(false);
           setMessage('');
           setImage('');
-          console.log('On Add Card Success', res);
+          // console.log('On Add Card Success', res);
           navigation.goBack();
         };
         const onFailure = error => {

@@ -39,7 +39,15 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Medium,
     color: colors.white,
     textAlign: 'center',
-    marginVertical: WP('5'),
+    // marginVertical: WP('5'),
+  },
+  HiBestieTextStyle: {
+    fontSize: size.text_36,
+    fontFamily: family.Poppin_Medium,
+    color: colors.white,
+    textAlign: 'center',
+    marginVertical: WP('2'),
+    marginTop: WP('20'),
   },
 
   accountStyles: {

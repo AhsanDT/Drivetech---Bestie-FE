@@ -1,6 +1,7 @@
 import {Formik} from 'formik';
+import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
-import {SafeAreaView, View, Text, Alert} from 'react-native';
+import {SafeAreaView, View, Text, Alert, ScrollView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch} from 'react-redux';
 import {
@@ -25,8 +26,10 @@ import {styles} from './styles';
 
 const EditCard = ({navigation, route}) => {
   const [show, setShow] = useState(false);
-  const [item, setItem] = useState(route?.params?.params);
+  const item = route?.params?.params;
   const [loading, setloading] = useState(false);
+
+  console.log('item', item);
 
   const ref = useRef();
 
@@ -70,6 +73,7 @@ const EditCard = ({navigation, route}) => {
           setShow(true);
         }}
       />
+
       <Formik
         innerRef={ref}
         initialValues={payment_CardFormField}
@@ -99,8 +103,11 @@ const EditCard = ({navigation, route}) => {
             );
           }, []);
           return (
-            <View style={{flexGrow: 0.97}}>
-              <KeyboardAwareScrollView style={{flexGrow: 0.97}}>
+            <SafeAreaView
+              style={{
+                flex: 0.96,
+              }}>
+              <ScrollView>
                 <DiscardModal
                   show={show}
                   onPressHide={() => setShow(false)}
@@ -132,16 +139,33 @@ const EditCard = ({navigation, route}) => {
                   placeholderTextColor={colors.g3}
                   value={values?.country}
                   onChangeText={handleChange('country')}
-                  renderErrorMessage={true}
-                  errorMessage={errors?.country}
-                  touched={touched?.country}
                 />
-                {/* <PaymentInput
-          title={'Card Number'}
-          onCardChange={() => {}}
-          onFocus={() => {}}
-        /> */}
-              </KeyboardAwareScrollView>
+                <AppInput
+                  title={'Card Number'}
+                  placeholder={'***********' + item?.cvc}
+                  placeholderTextColor={colors.g3}
+                  disableFullscreenUI={true}
+                  editable={false}
+                />
+                <View style={{flexDirection: 'row'}}>
+                  <AppInput
+                    title={'Expiry Date'}
+                    placeholder={item?.exp_month + '/' + item?.exp_year}
+                    placeholderTextColor={colors.g3}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    disableFullscreenUI={true}
+                    editable={false}
+                  />
+                  <AppInput
+                    title={'CVV'}
+                    placeholder={'100'}
+                    placeholderTextColor={colors.g3}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    disableFullscreenUI={true}
+                    editable={false}
+                  />
+                </View>
+              </ScrollView>
               <AppButton
                 width={WP('85')}
                 title={'Update Card'}
@@ -150,10 +174,11 @@ const EditCard = ({navigation, route}) => {
                   handleSubmit();
                 }}
               />
-            </View>
+            </SafeAreaView>
           );
         }}
       </Formik>
+
       <AppLoader loading={loading} />
     </SafeAreaView>
   );

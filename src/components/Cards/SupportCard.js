@@ -16,7 +16,7 @@ const SupportCard = ({
   description,
   onPress,
   source = false,
-  userImage
+  userImage,
 }) => {
   return (
     <TouchableOpacity

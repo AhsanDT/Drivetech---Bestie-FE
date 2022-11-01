@@ -35,7 +35,11 @@ const EditCard = ({
         <Image source={appIcons.edit} style={styles.editIcon} />
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressDelete}>
-        <Image source={appIcons.delete} style={styles.deleteIcon} />
+        <Image
+          source={appIcons.delete}
+          style={styles.deleteIcon}
+          resizeMode={'contain'}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -67,8 +71,8 @@ const styles = StyleSheet.create({
     width: 15,
   },
   deleteIcon: {
-    height: 15,
-    width: 15,
+    height: WP('5'),
+    width: WP('4'),
     marginHorizontal: 10,
   },
   numberTextStyle: {

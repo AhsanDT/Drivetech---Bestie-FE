@@ -40,10 +40,19 @@ export const HomeHeader = ({onPressImage, onPress, userImage}) => {
           height={38}
           valuePadding={2}
         />
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={{
+            flexDirection: 'row',
+          }}>
+          <Image
+            source={appIcons.search}
+            style={styles.searchStyle}
+            resizeMode={'contain'}
+          />
           <Image
             source={appIcons.notification}
-            style={styles.notificationStyle}
+            style={[styles.notificationStyle]}
             resizeMode={'contain'}
           />
         </TouchableOpacity>
@@ -64,8 +73,9 @@ const styles = StyleSheet.create({
   notificationStyle: {
     height: 24,
     width: 24,
+    marginHorizontal: WP('3'),
+    alignSelf: 'center',
     // justifyContent:'flex-end'
-    marginHorizontal: WP('7'),
   },
   userStyle: {
     height: 35,
@@ -76,6 +86,11 @@ const styles = StyleSheet.create({
   switchContainer: {
     // height: 35,
     width: 220,
-    marginHorizontal: WP('4'),
+    marginHorizontal: WP('5'),
+  },
+  searchStyle: {
+    height: WP('6'),
+    width: WP('6'),
+    alignSelf: 'center',
   },
 });

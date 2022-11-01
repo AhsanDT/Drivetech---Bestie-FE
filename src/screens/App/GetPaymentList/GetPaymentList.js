@@ -27,6 +27,7 @@ import {deletePaymentCard, getPaymentCard} from '../../../redux/actions';
 import {styles} from './styles';
 import {useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
+import moment from 'moment';
 
 const GetPaymentList = ({navigation}) => {
   const tabRef = useRef(null);
@@ -146,7 +147,7 @@ const GetPaymentList = ({navigation}) => {
             handleDeleteButton(item);
           }}
           month={data?.exp_month}
-          year={data?.exp_year}
+          year={String(data?.exp_year)?.slice(-2)}
           number={data?.cvc}
         />
         <AppLoader loading={loading} />

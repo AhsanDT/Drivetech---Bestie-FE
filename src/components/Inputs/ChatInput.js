@@ -16,12 +16,12 @@ const ChatInput = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPressAttach}>
+      {/* <TouchableOpacity onPress={onPressAttach}>
         <Image
           source={attachIcon}
           style={[styles.imgStyle, {marginHorizontal: WP('2')}]}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity onPress={onPressProof}>
         <Image source={proofIcon} style={imgStyle} />
       </TouchableOpacity>

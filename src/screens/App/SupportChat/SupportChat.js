@@ -33,7 +33,7 @@ import {
   getAllConversationMessage,
 } from '../../../redux/actions';
 import moment from 'moment';
-import { stat } from 'fs';
+import {stat} from 'fs';
 
 const SupportChat = ({navigation, route}) => {
   const [show, setShow] = useState(false);
@@ -41,10 +41,10 @@ const SupportChat = ({navigation, route}) => {
   const [allMessages, setAllMessages] = useState([]);
   const [text, setText] = useState('');
   const [loading, setloading] = useState(false);
-  const [item, setItem] = useState(route?.params?.id);
+  const item = route?.params?.id;
   const dispatch = useDispatch();
   const isFocus = useIsFocused();
-  const {userInfo} = useSelector(state=>state.auth)
+  const {userInfo} = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isFocus) {
@@ -96,7 +96,6 @@ const SupportChat = ({navigation, route}) => {
         }
 
         const cbSuccess = res => {
-          console.log('create message', res);
           setloading(false);
           getMesssgeList();
           setText('');
@@ -180,10 +179,9 @@ const SupportChat = ({navigation, route}) => {
   };
 
   const renderItem = ({item, index}) => {
-    console.log('image', item?.message_image);
     return (
       <ChatCard
-        // token={id?.support?.ticket_number}
+        token={item?.ticket_number}
         date={
           moment(item?.message?.created_at).format('MM/DD/YYYY') +
           ' | ' +
@@ -191,7 +189,7 @@ const SupportChat = ({navigation, route}) => {
         }
         message={item?.message?.body}
         image={item.message_image ? {uri: item?.message_image} : null}
-        userImage={{uri:userInfo?.profile_image}}
+        userImage={{uri: userInfo?.profile_image}}
       />
     );
   };
@@ -226,7 +224,7 @@ const SupportChat = ({navigation, route}) => {
           }}
           imgStyle={image ? styles?.uriStyle : styles.imgStyle}
           proofIcon={image === '' ? appIcons.proof : image}
-          attachIcon={image === '' ? appIcons.attach : null}
+          // attachIcon={image === '' ? appIcons.attach : null}
           onChangeText={text => setText(text)}
           value={text}
           disabled={text || image ? false : true}
