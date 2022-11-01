@@ -26,13 +26,14 @@ import {
 } from '../../../shared/exporter';
 import {styles} from './styles';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {
   createMessageRequest,
   getAllConversationMessage,
 } from '../../../redux/actions';
 import moment from 'moment';
+import { stat } from 'fs';
 
 const SupportChat = ({navigation, route}) => {
   const [show, setShow] = useState(false);
@@ -43,6 +44,7 @@ const SupportChat = ({navigation, route}) => {
   const [item, setItem] = useState(route?.params?.id);
   const dispatch = useDispatch();
   const isFocus = useIsFocused();
+  const {userInfo} = useSelector(state=>state.auth)
 
   useEffect(() => {
     if (isFocus) {
@@ -189,6 +191,7 @@ const SupportChat = ({navigation, route}) => {
         }
         message={item?.message?.body}
         image={item.message_image ? {uri: item?.message_image} : null}
+        userImage={{uri:userInfo?.profile_image}}
       />
     );
   };

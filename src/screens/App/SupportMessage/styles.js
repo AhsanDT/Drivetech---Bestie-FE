@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-start',
   },
   inputStyle: {
-    width: WP('100'),
-    height: WP('100'),
     backgroundColor: colors.g2,
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_14,
-    marginTop: WP('-65'),
+    textAlignVertical:"top",
+    alignSelf:"flex-start"
+    // marginTop: WP('-65'),
   },
   imageContainer: {
     padding: WP('2'),

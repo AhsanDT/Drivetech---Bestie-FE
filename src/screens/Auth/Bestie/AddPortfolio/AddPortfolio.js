@@ -192,7 +192,9 @@ const AddPortfolio = ({navigation}) => {
         show={show}
         onPressHide={() => setShow(false)}
         onPressCamera={() => showCamera()}
-        onPressGallery={() => showGallery()}
+        onPressGallery={() => showGallery()
+        }
+        onPressCancel={() => setShow(false)}
       />
       <View style={styles.ButtonContainer}>
         <AppButton

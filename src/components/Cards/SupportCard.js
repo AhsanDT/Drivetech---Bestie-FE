@@ -16,6 +16,7 @@ const SupportCard = ({
   description,
   onPress,
   source = false,
+  userImage
 }) => {
   return (
     <TouchableOpacity
@@ -23,9 +24,9 @@ const SupportCard = ({
       activeOpacity={0.7}
       onPress={onPress}>
       <Image
-        source={appIcons.appIcon}
+        source={userImage}
         style={styles.appIconStyle}
-        resizeMode={'contain'}
+        resizeMode={'cover'}
       />
 
       <View style={styles.contentContainer}>
@@ -111,8 +112,11 @@ const styles = StyleSheet.create({
   },
 
   appIconStyle: {
-    height: 50,
-    width: 50,
+    height: WP('13'),
+    width: WP('13'),
+    backgroundColor: '#ccc',
+    borderRadius: WP('13') / 2,
+    resizeMode: 'contain',
   },
 });
 

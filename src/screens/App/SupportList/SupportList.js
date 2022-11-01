@@ -21,14 +21,17 @@ import {
   createConversationRequest,
   getAllSupportTicket,
 } from '../../../redux/actions';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
+
 
 const SupportList = ({navigation}) => {
   const [list, setList] = useState([]);
   const [loading, setloading] = useState(false);
   const isFocus = useIsFocused();
   const dispatch = useDispatch();
+  const {userInfo} = useSelector(state=>state.auth)
+
 
   useEffect(() => {
     if (isFocus) {
@@ -46,6 +49,7 @@ const SupportList = ({navigation}) => {
         onPressTicket(item);
       }}
       source={item?.support_image ? {uri: item?.support_image} : false}
+      userImage={{uri:userInfo?.profile_image}}
     />
   );
 

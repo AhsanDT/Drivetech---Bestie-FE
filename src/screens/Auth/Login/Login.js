@@ -30,7 +30,11 @@ import {
   networkText,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
-import {loginRequest, socialLoginRequest} from '../../../redux/actions';
+import {
+  loginRequest,
+  socialLoginRequest,
+  clearSignupObject,
+} from '../../../redux/actions';
 import {useDispatch} from 'react-redux';
 import Geolocation from 'react-native-geolocation-service';
 import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
@@ -80,6 +84,7 @@ const Login = ({navigation}) => {
     } else {
       askForPermissions();
     }
+    dispatch(clearSignupObject());
   }, []);
 
   const askForPermissions = async () => {
@@ -181,12 +186,10 @@ const Login = ({navigation}) => {
           console.log('RES social ', res);
           if (res?.data?.profile_completed) {
             console.log('1');
-            Alert.alert('Congrats', 'Login Successfully');
+            navigation.replace('MainStack');
             signOutFacebook();
             googleSignOut();
           } else {
-            console.log('2');
-
             navigation.navigate('SelectRole', {data: res?.data});
           }
 
@@ -335,7 +338,7 @@ const Login = ({navigation}) => {
             title={'Don’t have an account?'}
             subtitle={' Sign Up'}
             onPress={() => {
-              navigation.navigate('Auth', {screen: 'SignUp'});
+              navigation.navigate('Auth', {screen: 'SelectRole'});
             }}
           />
         </ScrollView>

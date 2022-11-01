@@ -95,6 +95,7 @@ const Register = ({navigation, route}) => {
         age: value.age,
         sex: sex,
         experience: experience,
+        login_type: data?.profile_type ? 'social login' : 'manual',
       },
     });
     navigation.navigate('ProfileImage');
@@ -137,6 +138,7 @@ const Register = ({navigation, route}) => {
           }) => {
             useEffect(() => {
               if (data) {
+                console.log('INSIDE BESTIE REGIs==> ', data);
                 setFieldValue(
                   'firstName',
                   data?.login_type == 'social login'
@@ -188,16 +190,18 @@ const Register = ({navigation, route}) => {
                   keyboardType={'email-address'}
                   editable={data?.email ? false : true}
                 />
-                <AppInput
-                  title={'Password'}
-                  placeholder={'Password'}
-                  placeholderTextColor={colors.g3}
-                  onChangeText={handleChange('password')}
-                  value={values?.password}
-                  touched={touched.password}
-                  errorMessage={errors.password}
-                  secureTextEntry={true}
-                />
+                {data?.login_type ? null : (
+                  <AppInput
+                    title={'Password'}
+                    placeholder={'Password'}
+                    placeholderTextColor={colors.g3}
+                    onChangeText={handleChange('password')}
+                    value={values?.password}
+                    touched={touched.password}
+                    errorMessage={errors.password}
+                    secureTextEntry={true}
+                  />
+                )}
                 <AppInput
                   title={'Phone Number'}
                   placeholder={'Type here'}

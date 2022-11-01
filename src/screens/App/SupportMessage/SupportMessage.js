@@ -115,11 +115,15 @@ const SupportMessage = ({navigation}) => {
         setloading(true);
         const data = new FormData();
         data.append('support[description]', message);
-        data.append('support[image]', {
-          uri: image?.uri,
-          name: image?.fileName,
-          type: image?.type,
-        });
+        {
+          image
+            ? data.append('support[image]', {
+                uri: image?.uri,
+                name: image?.fileName,
+                type: image?.type,
+              })
+            : null;
+        }
 
         const onSuccess = res => {
           setloading(false);
@@ -199,13 +203,13 @@ const SupportMessage = ({navigation}) => {
       </KeyboardAwareScrollView>
       <AppButton
         title={'Send Message'}
-        bgColor={message && image ? colors.b1 : colors?.g20}
+        bgColor={message || image ? colors.b1 : colors?.g20}
         width={WP('90')}
         height={WP('14')}
         onPress={() => {
           onPressSaveCard();
         }}
-        disabled={message && image ? false : true}
+        disabled={message || image ? false : true}
       />
 
       <AppLoader loading={loading} />

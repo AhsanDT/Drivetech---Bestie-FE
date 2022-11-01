@@ -35,6 +35,17 @@ export const SPRegisterFields = {
   // sex: '',
 };
 
+export const SignUPFormFields = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  country: '',
+  city: '',
+  age: '',
+  email: '',
+  password: '',
+};
+
 export const SocialSignUPFormFields = {
   phone: '',
   country: '',
@@ -112,6 +123,14 @@ export const SignUpVS = yup.object().shape({
   country: yup.string().required('Country Name Required'),
   city: yup.string().required('City Name Required'),
   age: yup.string().required('Age Requried'),
+  email: yup
+    .string()
+    .required('Email Required')
+    .email('Please provide a valid email address'),
+  password: yup
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password Required'),
 });
 
 export const BestieRateVs = yup.object().shape({
@@ -133,7 +152,6 @@ export const RegisterVS = yup.object().shape({
     .min(6, 'Password must be at least 6 characters')
     .required('Password Required'),
 });
-
 
 export const SocialRegisterVS = yup.object().shape({
   phone: yup.string().required('Phone Number Required'),

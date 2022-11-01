@@ -35,6 +35,7 @@ const SignUp = ({navigation, route}) => {
   const [sex, setsex] = useState('Male');
   const [pronoun, setPronoun] = useState('he/him');
   const [data, setdata] = useState(route?.params?.data);
+  // console.log('DATA enduser..  ', data?.profile_type);
   const [loading, setloading] = useState(false);
   const validateEmail = value => {
     setloading(true);
@@ -85,7 +86,7 @@ const SignUp = ({navigation, route}) => {
   };
 
   const {signupObject} = useSelector(state => state.auth);
-
+  console.log('data?.profile_type', data?.profile_type);
   const onSubmit = value => {
     dispatch(updateSignupObject({firstName: value.firstName}));
     dispatch(updateSignupObject({lastName: value.lastName}));
@@ -101,7 +102,9 @@ const SignUp = ({navigation, route}) => {
       updateSignupObject({profileType: data ? data?.profile_type : 'user'}),
     );
     dispatch(
-      updateSignupObject({login_type: data ? 'social login' : 'manual'}),
+      updateSignupObject({
+        login_type: data?.profile_type ? 'social login' : 'manual',
+      }),
     );
     navigation.navigate('ProfileImage');
   };
@@ -147,8 +150,8 @@ const SignUp = ({navigation, route}) => {
                   setFieldValue(
                     'firstName',
                     data?.login_type == 'social login'
-                      ? values?.firstName
-                      : data.first_name,
+                      ? data?.first_name
+                      : values.firstName,
                   );
                   setFieldValue(
                     'lastName',

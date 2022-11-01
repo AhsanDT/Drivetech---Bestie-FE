@@ -18,6 +18,7 @@ const ChatCard = ({
   time,
   source,
   image,
+  userImage,
 }) => {
   return (
     <TouchableOpacity
@@ -26,9 +27,9 @@ const ChatCard = ({
       onPress={onPress}>
       <View style={styles.contentContainer2}>
         <Image
-          source={appIcons.appIcon}
+          source={userImage}
           style={styles.appIconStyle}
-          resizeMode={'contain'}
+          resizeMode={'cover'}
         />
 
         <View style={styles.contentContainer}>
@@ -109,8 +110,11 @@ const styles = StyleSheet.create({
   },
 
   appIconStyle: {
-    height: 50,
-    width: 50,
+    height: WP('13'),
+    width: WP('13'),
+    backgroundColor: '#ccc',
+    borderRadius:WP("13")/2,
+    resizeMode:"contain"
   },
   imageStyle: {
     height: WP('40'),

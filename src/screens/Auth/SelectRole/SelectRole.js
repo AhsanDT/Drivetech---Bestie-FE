@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,9 @@ import {useSelector, useDispatch} from 'react-redux';
 const Splash = ({navigation, route}) => {
   const [role, setrole] = useState('');
   const dispatch = useDispatch();
-  const [data, setdata] = useState(route?.params?.data);
+
+  // const [data, setdata] = useState(route?.params?.data);
+  const data = route?.params?.data;
 
   const handleButton = (index, type) => {
     if (index == 1) {

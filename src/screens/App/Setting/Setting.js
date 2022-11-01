@@ -41,16 +41,26 @@ const Setting = ({navigation}) => {
   };
 
   const handleNavigation = (item, index) => {
+    console.log('ITEM ', item);
+    if (item?.id == 1) {
+      navigation.navigate('GetPaymentList');
+    } else if (item?.id == 3) {
+      navigation.navigate('TermsConditions');
+    } else if (item?.id == 4) {
+      navigation.navigate('PrivacyPolicy');
+    } else if (item?.id == 6) {
+      navigation.navigate('SupportList');
+    }
   };
 
   const renderItem = ({item, index}) => (
     <SettingCard
       title={item.title}
       toggle={item?.selected}
-      onPress={index => {
-        // navigation.navigate(item?.route);
-        handleNavigation(index);
-      }}
+      // onPress={index => {
+      //   navigation.navigate(item?.route);
+      // }}
+      onPress={() => handleNavigation(item)}
     />
   );
   return (

@@ -92,9 +92,10 @@ const styles = StyleSheet.create({
     marginTop: WP('1.5'),
   },
   uriStyle: {
-    height: 20,
-    width: 20,
+    height: 30,
+    width: 25,
     resizeMode: 'contain',
+    borderRadius: 10,
   },
 });
 

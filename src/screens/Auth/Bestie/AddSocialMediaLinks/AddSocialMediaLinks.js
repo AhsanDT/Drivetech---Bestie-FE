@@ -67,6 +67,8 @@ const AccountRate = ({navigation}) => {
       data.append('user[first_name]', firstName),
         data.append('user[email]', email?.toLowerCase()),
         data.append('user[last_name]', lastName);
+      console.log('LOGIN TYPe==> ', login_type);
+
       if (login_type == 'manual') {
         data.append('user[password]', password);
       }

@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     paddingVertical: WP('5'),
   },
   crossIconStyle: {
-    width: 89,
+    width: 90,
     height: 83,
   },
   cardNumberStyle: {
