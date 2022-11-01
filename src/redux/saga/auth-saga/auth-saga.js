@@ -58,6 +58,8 @@ function* socialLoginUser(params) {
         type: types.SOCIAL_LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
+      AsyncStorage.setItem('usertoken', res?.auth_token);
+
       yield put({
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
@@ -100,7 +102,7 @@ function* updateSocialLoginUser(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      AsyncStorage.setItem('usertoken', res?.user?.auth_token);
+      // AsyncStorage.setItem('usertoken', res?.user?.auth_token);
       params?.cbSuccess(res);
     } else {
       yield put({
@@ -113,7 +115,8 @@ function* updateSocialLoginUser(params) {
       });
     }
   } catch (error) {
-    console.log(error);
+    console.log('update SOCIAL LOGIn error', error);
+
     yield put({
       type: types.SOCIAL_LOGIN_REQUEST_FAILURE,
       payload: null,

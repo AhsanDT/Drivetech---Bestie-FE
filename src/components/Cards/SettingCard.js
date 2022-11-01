@@ -52,7 +52,7 @@ const SettingCard = ({
               paddingTop: !subtitle ? 10 : null,
             },
           ]}>
-          {title +"\n" || 'Blair McLurkin\n'}
+          {title + '\n' || 'Blair McLurkin\n'}
           {subtitle && <Text style={styles.editStyle}>Edit Profile</Text>}
         </Text>
       </View>
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     height: 33,
     width: 33,
     borderRadius: 33,
+    backgroundColor: '#ccc',
   },
   textContainer: {
     width: WP('70'),

@@ -16,7 +16,11 @@ import {
   AppInput,
   AppLoader,
 } from '../../../../components';
-import {signUpRequest, clearSignupObject} from '../../../../redux/actions';
+import {
+  signUpRequest,
+  clearSignupObject,
+  updateSocialLoginRequest,
+} from '../../../../redux/actions';
 import {
   appIcons,
   colors,
@@ -143,8 +147,12 @@ const AccountRate = ({navigation}) => {
         console.log('Err.. bestie', err);
         Alert.alert('Error', err);
       };
-      console.log('data==>', data);
-      dispatch(signUpRequest(data, cbSuccess, cbFailure));
+      if (login_type == 'social login') {
+        console.log('DATA social ==> ', email, data);
+        dispatch(updateSocialLoginRequest(data, email, cbSuccess, cbFailure));
+      } else {
+        dispatch(signUpRequest(data, cbSuccess, cbFailure));
+      }
     } catch (error) {
       setloading(false);
       console.log('ERROR=> ', error);

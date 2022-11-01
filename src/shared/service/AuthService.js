@@ -25,14 +25,6 @@ export const socialLogin = async params => {
   return res.data;
 };
 export const updateSocialLogin = async (params, email) => {
-  console.log('SOCIAL UPDATE LOGIN==> ', params);
-  console.log('SOCIAL UPDATE LOGIN email==> ', email);
-
-  console.log(
-    'SOCIAL UPDATE LOGIN==>1 ',
-    `${BASE_URL}${ENDPOINTS.UPDATE_SOCIAL_LOGIN}=${email}`,
-  );
-
   const res = await axios.put(
     `${BASE_URL}${ENDPOINTS.UPDATE_SOCIAL_LOGIN}=${email}`,
     params,
