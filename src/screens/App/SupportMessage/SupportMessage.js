@@ -8,6 +8,7 @@ import {
   Platform,
   PermissionsAndroid,
   Alert,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
@@ -149,7 +150,7 @@ const SupportMessage = ({navigation}) => {
           navigation?.goBack();
         }}
       />
-      <KeyboardAwareScrollView contentContainerStyle={{flexGrow:0.8}} >
+      <KeyboardAwareScrollView style={{flexGrow: 0.92}}>
         <AppInput
           multiline={true}
           inputContainerStyle={styles.inputContainerStyle}
@@ -165,8 +166,7 @@ const SupportMessage = ({navigation}) => {
           <TouchableOpacity
             onPress={() => {
               setShow(true);
-            }}
-            style={{}}>
+            }}>
             <Image
               source={image}
               style={styles.imageStyle}
@@ -174,39 +174,39 @@ const SupportMessage = ({navigation}) => {
             />
           </TouchableOpacity>
         ) : (
-          <View style={styles.imageContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                setShow(true);
-              }}>
-              <Image
-                source={appIcons.proof}
-                style={styles.proofIconStyle}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.imageContainer}
+            onPress={() => {
+              setShow(true);
+            }}>
+            <Image
+              source={appIcons.proof}
+              style={styles.proofIconStyle}
+              resizeMode={'contain'}
+            />
+          </TouchableOpacity>
         )}
         <Text style={styles.proofTextStyle}>Attach Image or Proof</Text>
-
-        <ImagePickerModal
-          show={show}
-          onPressHide={() => setShow(false)}
-          onPressCamera={() => showCamera()}
-          onPressGallery={() => showGallery()}
-          onPressCancel={() => setShow(false)}
-        />
-        <AppButton
-          title={'Send Message'}
-          bgColor={message && image ? colors.b1 : colors?.g20}
-          width={WP('90')}
-          height={WP('14')}
-          onPress={() => {
-            onPressSaveCard();
-          }}
-          disabled={message && image ? false : true}
-        />
+        {show && (
+          <ImagePickerModal
+            show={show}
+            onPressHide={() => setShow(false)}
+            onPressCamera={() => showCamera()}
+            onPressGallery={() => showGallery()}
+            onPressCancel={() => setShow(false)}
+          />
+        )}
       </KeyboardAwareScrollView>
+      <AppButton
+        title={'Send Message'}
+        bgColor={message && image ? colors.b1 : colors?.g20}
+        width={WP('90')}
+        height={WP('14')}
+        onPress={() => {
+          onPressSaveCard();
+        }}
+        disabled={message && image ? false : true}
+      />
 
       <AppLoader loading={loading} />
     </SafeAreaView>

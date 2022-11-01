@@ -15,6 +15,11 @@ import {
   validatePhoneSaga,
 } from './auth-saga/auth-saga';
 import {
+  createConversationMessageSaga,
+  createConversationSaga,
+  showAllConversationSaga,
+} from './conversation-saga/conversation-saga';
+import {
   addCardRequest,
   deletePaymentCardSaga,
   getPaymentCardRequest,
@@ -45,4 +50,7 @@ export function* rootSaga() {
   yield fork(updatePaymentCardSaga);
   yield fork(showSupportTicketSaga);
   yield fork(addSupportTicketSaga);
+  yield fork(showAllConversationSaga);
+  yield fork(createConversationSaga);
+  yield fork(createConversationMessageSaga);
 }

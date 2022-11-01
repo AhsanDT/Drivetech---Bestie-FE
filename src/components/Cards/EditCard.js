@@ -25,9 +25,7 @@ const EditCard = ({
         resizeMode={'contain'}
       />
       <View style={styles.contentContainer}>
-        <Text style={styles.numberTextStyle}>
-          {'*** *** *** ***' + '3456' || number}
-        </Text>
+        <Text style={styles.numberTextStyle}>{'*** *** *** ***' + number}</Text>
 
         <Text style={styles.expiresTextStyle}>
           Expires {month + '/' + year}

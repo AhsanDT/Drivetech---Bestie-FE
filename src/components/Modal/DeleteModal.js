@@ -26,6 +26,7 @@ const DeleteModal = ({
   item,
   month,
   year,
+  number,
 }) => {
   return (
     <SafeAreaView>
@@ -39,7 +40,9 @@ const DeleteModal = ({
         <View style={styles.borderStyle} />
         <View style={styles.contentContainer}>
           <Image source={appIcons.cross} style={styles.crossIconStyle} />
-          <Text style={styles.cardNumberStyle}>*** *** *** *** 3456</Text>
+          <Text style={styles.cardNumberStyle}>
+            {'*** *** *** ***' + number}
+          </Text>
           <Text style={styles.expiresStyle}> Expires {month + '/' + year}</Text>
         </View>
         <View style={styles.spacer} />

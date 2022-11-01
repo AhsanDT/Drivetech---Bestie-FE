@@ -55,10 +55,10 @@ const GetPaymentList = ({navigation}) => {
           params: item,
         });
       }}
-      source={item?.brand === 'Visa' ? appIcons?.visa : appIcons.card}
+      source={item?.brand === 'Visa' ? appIcons?.visa : appIcons.master}
       month={item?.exp_month}
       year={item?.exp_year}
-      number={item?.number}
+      number={item?.cvc}
     />
   );
 
@@ -147,6 +147,7 @@ const GetPaymentList = ({navigation}) => {
           }}
           month={data?.exp_month}
           year={data?.exp_year}
+          number={data?.cvc}
         />
         <AppLoader loading={loading} />
       </ScrollView>

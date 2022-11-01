@@ -85,6 +85,17 @@ const styles = StyleSheet.create({
     fontSize: size.text_14,
     fontFamily: family.Poppin_Medium,
   },
+  imgStyle: {
+    height: 18,
+    width: 17,
+    resizeMode: 'contain',
+    marginTop: WP('1.5'),
+  },
+  uriStyle: {
+    height: 20,
+    width: 20,
+    resizeMode: 'contain',
+  },
 });
 
 export {styles};

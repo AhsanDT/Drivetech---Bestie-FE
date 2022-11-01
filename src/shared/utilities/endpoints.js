@@ -21,6 +21,9 @@ const ENDPOINTS = {
   UPDATE_CARD: 'cards/',
   GET_TICKETS: 'supports',
   ADD_TICKETS: 'supports',
+  GET_MESSAGE: 'support_conversations/get_messages',
+  CREATE_CONVERSATION: 'support_conversations',
+  CREATE_MESSAGE: 'support_conversations/create_message',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};

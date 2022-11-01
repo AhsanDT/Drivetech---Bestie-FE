@@ -11,6 +11,8 @@ const ChatInput = ({
   value,
   attachIcon,
   proofIcon,
+  disabled,
+  imgStyle,
 }) => {
   return (
     <View style={styles.container}>
@@ -21,7 +23,7 @@ const ChatInput = ({
         />
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressProof}>
-        <Image source={proofIcon} style={[styles.imgStyle]} />
+        <Image source={proofIcon} style={imgStyle} />
       </TouchableOpacity>
       <View>
         <Input
@@ -34,7 +36,7 @@ const ChatInput = ({
           value={value}
         />
       </View>
-      <TouchableOpacity onPress={onPressSend}>
+      <TouchableOpacity onPress={onPressSend} disabled={disabled}>
         <Image source={appIcons.send} style={styles.sendStyle} />
       </TouchableOpacity>
     </View>
@@ -67,17 +69,18 @@ const styles = StyleSheet.create({
     color: colors.g23,
     fontFamily: family.Poppin_Regular,
   },
-  imgStyle: {
-    height: 18,
-    width: 17,
-    resizeMode: 'contain',
-    marginTop: WP('1.5'),
-  },
+
   sendStyle: {
     height: 17,
     width: 17,
     resizeMode: 'contain',
     marginTop: WP('2'),
+  },
+  imgStyle: {
+    height: 18,
+    width: 17,
+    resizeMode: 'contain',
+    marginTop: WP('1.5'),
   },
 });
 export {ChatInput};

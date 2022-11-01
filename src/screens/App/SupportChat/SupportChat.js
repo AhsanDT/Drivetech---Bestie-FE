@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,20 +10,108 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {
+  AppLoader,
   ChatCard,
   ChatInput,
   Header,
   ImagePickerModal,
 } from '../../../components';
-import {appIcons, HP, image_options} from '../../../shared/exporter';
+import {
+  appIcons,
+  appImages,
+  checkConnected,
+  HP,
+  image_options,
+  networkText,
+} from '../../../shared/exporter';
 import {styles} from './styles';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-const SupportChat = ({navigation}) => {
+import {useDispatch} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
+import {
+  createMessageRequest,
+  getAllConversationMessage,
+} from '../../../redux/actions';
+import moment from 'moment';
+
+const SupportChat = ({navigation, route}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
   const [allMessages, setAllMessages] = useState([]);
-  const [message, setMessage] = useState('');
-  const [fresh, setFresh] = useState(true);
+  const [text, setText] = useState('');
+  const [loading, setloading] = useState(false);
+  const [item, setItem] = useState(route?.params?.id);
+  const dispatch = useDispatch();
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    if (isFocus) {
+      getMesssgeList();
+    }
+  }, [isFocus]);
+
+  //getMessageList
+  const getMesssgeList = async () => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const data = new FormData();
+        data.append('message[support_conversation_id]', item?.id);
+        const cbSuccess = res => {
+          console.log('getres', res?.data);
+          setloading(false);
+          setAllMessages(res?.data);
+        };
+        const cbFailure = err => {
+          setloading(false);
+        };
+        dispatch(getAllConversationMessage(data, cbSuccess, cbFailure));
+      } catch (err) {
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
+
+  //Create Message
+  const createMessage = async () => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const data = new FormData();
+        data.append('message[support_conversation_id]', item?.id);
+        data.append('message[body]', text);
+        if (image) {
+          data.append('message[image]', {
+            uri: image?.uri,
+            name: image?.fileName,
+            type: image?.type,
+          });
+        }
+
+        const cbSuccess = res => {
+          console.log('create message', res);
+          setloading(false);
+          getMesssgeList();
+          setText('');
+          setImage('');
+        };
+        const cbFailure = err => {
+          setloading(false);
+        };
+        dispatch(createMessageRequest(data, cbSuccess, cbFailure));
+      } catch (err) {
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
 
   //Handlers
   const showGallery = () => {
@@ -89,72 +177,19 @@ const SupportChat = ({navigation}) => {
     }
   };
 
-  // const renderItem = () => (
-  //   <ChatCard
-  //     date={'06/15/2022'}
-  //     time={' | 6:00 AM'}
-  //     token={'KGNV83JNFG8'}
-  //     message={
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium sem sit amet venenatis commodo. Nullam aliquam lacus nisl, varius luctus mauris hendrerit ut. Etiam eros lectus, commod.'
-  //     }
-  //   />
-  // );
-
   const renderItem = ({item, index}) => {
+    console.log('image', item?.message_image);
     return (
-      <View style={styles.msgContainer}>
-        {item?.id === allMessages ? (
-          // Sender Bubble
-          <View style={styles.senderBubble}>
-            <View style={styles.senderBubbleStyles}>
-              {image ? (
-                <Image
-                  source={image}
-                  style={{
-                    height: HP('15'),
-                    width: HP('20'),
-                    borderRadius: 10,
-                    paddingBottom: 5,
-                  }}
-                />
-              ) : null}
-              <Text
-                style={[
-                  styles.senderMsgStyles,
-                  {paddingTop: item?.image ? 10 : null},
-                ]}>
-                {message}
-              </Text>
-            </View>
-          </View>
-        ) : (
-          // Receiver Bubble
-          <View style={styles.receiverBubble}>
-            <View style={{width: '70%'}}>
-              <View style={styles.receiverBubbleStyles}>
-                {image ? (
-                  <Image
-                    source={image}
-                    style={{
-                      height: HP('15'),
-                      width: HP('20'),
-                      borderRadius: 10,
-                      paddingBottom: 5,
-                    }}
-                  />
-                ) : null}
-                <Text
-                  style={[
-                    styles.receiverMsgStyles,
-                    {paddingTop: item?.image ? 10 : null},
-                  ]}>
-                  {item.body}
-                </Text>
-              </View>
-            </View>
-          </View>
-        )}
-      </View>
+      <ChatCard
+        // token={id?.support?.ticket_number}
+        date={
+          moment(item?.message?.created_at).format('MM/DD/YYYY') +
+          ' | ' +
+          moment(item?.message?.created_at).format('hh:mm A')
+        }
+        message={item?.message?.body}
+        image={item.message_image ? {uri: item?.message_image} : null}
+      />
     );
   };
   return (
@@ -166,11 +201,12 @@ const SupportChat = ({navigation}) => {
           navigation?.goBack();
         }}
       />
+
       {allMessages?.length > 0 ? (
         <FlatList
-          inverted
+          // inverted
           data={allMessages}
-          extraData={fresh}
+          // extraData={fresh}
           showsVerticalScrollIndicator={false}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
@@ -180,21 +216,22 @@ const SupportChat = ({navigation}) => {
           <Text style={styles.noRecords}>{'No message found'}</Text>
         </View>
       )}
-
       <KeyboardAvoidingView>
         <ChatInput
           onPressProof={() => {
             setShow(true);
           }}
+          imgStyle={image ? styles?.uriStyle : styles.imgStyle}
           proofIcon={image === '' ? appIcons.proof : image}
-          attachIcon={appIcons.attach}
-          onChangeText={text => setMessage(text)}
-          value={message}
+          attachIcon={image === '' ? appIcons.attach : null}
+          onChangeText={text => setText(text)}
+          value={text}
+          disabled={text || image ? false : true}
           onPressSend={() => {
-            setMessage('');
-            setAllMessages(message);
+            createMessage();
           }}
         />
+
         {show && (
           <ImagePickerModal
             show={show}
@@ -205,6 +242,7 @@ const SupportChat = ({navigation}) => {
           />
         )}
       </KeyboardAvoidingView>
+      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

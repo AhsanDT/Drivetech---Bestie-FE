@@ -9,6 +9,8 @@ import SelectPaymentMethod from '../../../screens/App/SelectPaymentMethod';
 import GetPaymentList from '../../../screens/App/GetPaymentList';
 import AddCard from '../../../screens/App/AddCard';
 import SupportList from '../../../screens/App/SupportList';
+import PrivacyPolicy from '../../../screens/Auth/PrivacyPolicy';
+import TermsConditions from '../../../screens/Auth/TermsConditions';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,8 @@ function StackNavigation(props) {
       <Stack.Screen name="AddCard" component={AddCard} />
       <Stack.Screen name="EditCard" component={EditCard} />
       <Stack.Screen name="Setting" component={Setting} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="TermsConditions" component={TermsConditions} />
     </Stack.Navigator>
   );
 }
