@@ -29,15 +29,12 @@ const EditCard = ({navigation, route}) => {
   const item = route?.params?.params;
   const [loading, setloading] = useState(false);
 
-  console.log('item', item);
-
   const ref = useRef();
-
   const dispatch = useDispatch();
 
   const onPressUpdate = async values => {
-    console.log('value', values);
     setloading(true);
+    setShow(false);
     const check = await checkConnected();
     if (check) {
       const data = new FormData();
@@ -118,7 +115,8 @@ const EditCard = ({navigation, route}) => {
                     setShow(false);
                   }}
                   onPressUpdate={() => {
-                    navigation.goBack();
+                    handleSubmit();
+                    setShow(false);
                   }}
                 />
                 <Text style={styles.textStyle}>Card Info</Text>
@@ -139,15 +137,18 @@ const EditCard = ({navigation, route}) => {
                   placeholderTextColor={colors.g3}
                   value={values?.country}
                   onChangeText={handleChange('country')}
+                  renderErrorMessage={true}
+                  errorMessage={errors?.country}
+                  touched={touched?.country}
                 />
-                <AppInput
+                {/* <AppInput
                   title={'Card Number'}
                   placeholder={'***********' + item?.cvc}
                   placeholderTextColor={colors.g3}
                   disableFullscreenUI={true}
                   editable={false}
-                />
-                <View style={{flexDirection: 'row'}}>
+                /> */}
+                {/* <View style={{flexDirection: 'row'}}>
                   <AppInput
                     title={'Expiry Date'}
                     placeholder={item?.exp_month + '/' + item?.exp_year}
@@ -164,7 +165,7 @@ const EditCard = ({navigation, route}) => {
                     disableFullscreenUI={true}
                     editable={false}
                   />
-                </View>
+                </View> */}
               </ScrollView>
               <AppButton
                 width={WP('85')}

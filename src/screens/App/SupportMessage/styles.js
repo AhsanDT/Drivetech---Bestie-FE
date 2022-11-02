@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     backgroundColor: colors.g2,
+    // backgroundColor: 'red',
     fontFamily: family.Poppin_Regular,
     fontSize: size.text_14,
-    textAlignVertical:"top",
-    alignSelf:"flex-start"
+    height: WP('79'),
+    textAlignVertical: 'top',
+    alignSelf: 'flex-start',
     // marginTop: WP('-65'),
   },
   imageContainer: {

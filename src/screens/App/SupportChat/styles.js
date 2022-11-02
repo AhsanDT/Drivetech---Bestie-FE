@@ -89,16 +89,20 @@ const styles = StyleSheet.create({
     height: 18,
     width: 18,
     resizeMode: 'contain',
-    marginTop: WP('1.5'),
-    marginHorizontal: WP('5'),
+    alignSelf: 'center',
+    top: 10,
+    // marginTop: WP('1.5'),
+    // marginHorizontal: WP('5'),
   },
   uriStyle: {
     height: 30,
-    width: 25,
+    width: 35,
     resizeMode: 'contain',
     borderRadius: 10,
     alignSelf: 'center',
-    marginLeft:WP('3')
+    top: 2,
+
+    // marginLeft: WP('3'),
   },
 });
 

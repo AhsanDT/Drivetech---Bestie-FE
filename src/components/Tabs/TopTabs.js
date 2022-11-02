@@ -90,9 +90,10 @@ const styles = StyleSheet.create({
     fontSize: size.text_16,
     fontFamily: family.Poppin_Medium,
     textAlign: 'center',
+    width: WP('36'),
   },
   tabContainer2: {
-    marginTop:WP('5.2'),
+    marginTop: WP('5.2'),
     width: WP('30'),
     alignItems: 'center',
     justifyContent: 'center',

@@ -65,10 +65,11 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     paddingVertical: WP('3'),
-    paddingHorizontal: WP('3.85'),
+    // paddingHorizontal: WP('3'),
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.white,
     // justifyContent: 'space-between',
-    alignItems: 'center',
   },
   notificationStyle: {
     height: 24,
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     width: 35,
     borderRadius: 35,
     backgroundColor: '#ccc',
+    marginLeft: WP('1.5'),
   },
   switchContainer: {
     // height: 35,

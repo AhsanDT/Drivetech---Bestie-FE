@@ -40,7 +40,9 @@ const SupportList = ({navigation}) => {
   const renderItem = ({item, index}) => (
     <SupportCard
       ticketnumber={item?.support?.ticket_number}
-      status={item?.support?.status}
+      status={
+        item?.support?.status == 'pending' ? 'Pending' : item?.support?.status
+      }
       date={moment(item?.created_at).format('MM/DD/YYYY')}
       description={item?.support?.description}
       onPress={() => {

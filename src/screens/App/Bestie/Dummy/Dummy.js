@@ -11,12 +11,12 @@ const Dummy = () => {
         flex: 1,
         backgroundColor: colors.white,
       }}>
-      <HomeHeader
+      {/* <HomeHeader
       // onPressImage={() => {
       //   navigation.navigate('Bestietack', {screen: 'Setting'});
       // }}
       // onPress={() => setTab(!tab)}
-      />
+      /> */}
     </View>
   );
 };

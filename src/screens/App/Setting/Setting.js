@@ -41,7 +41,6 @@ const Setting = ({navigation}) => {
   };
 
   const handleNavigation = (item, index) => {
-    console.log('ITEM ', item);
     if (item?.id == 1) {
       navigation.navigate('GetPaymentList');
     } else if (item?.id == 3) {
@@ -74,7 +73,7 @@ const Setting = ({navigation}) => {
       />
       <KeyboardAwareScrollView>
         <SettingCard
-          title={userInfo?.data?.first_name + userInfo?.data?.last_name}
+          title={userInfo?.data?.first_name + ' ' + userInfo?.data?.last_name}
           icon={true}
           subtitle={true}
           userImage={{uri: userInfo?.profile_image}}

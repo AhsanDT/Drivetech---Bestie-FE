@@ -21,6 +21,8 @@ import {
   clearSignupObject,
   updateSocialLoginRequest,
 } from '../../../../redux/actions';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+
 import {
   appIcons,
   colors,
@@ -135,6 +137,7 @@ const AccountRate = ({navigation}) => {
         setloading(false);
         Alert.alert('Congrats', 'Signup Successfully');
         navigation.replace('Login');
+        GoogleSignin.signOut();
 
         dispatch(clearSignupObject());
         navigation.reset({

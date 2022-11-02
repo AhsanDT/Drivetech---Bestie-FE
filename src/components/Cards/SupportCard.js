@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     color: colors.bl,
     fontSize: size.text_14,
     lineHeight: 20,
+    paddingTop: 2,
   },
 
   pendingTextStyle: {
