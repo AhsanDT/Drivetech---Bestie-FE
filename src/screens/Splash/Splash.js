@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Text, Image, StatusBar, ImageBackground} from 'react-native';
 import {AppButton} from '../../components/AppButton/AppButton';
-import {colors, WP} from '../../shared/exporter';
+import {colors, family, size, WP} from '../../shared/exporter';
 import {appImages, appLogo} from '../../shared/theme/assets';
 import styles from './styles';
 import {useSelector} from 'react-redux';
@@ -11,7 +11,7 @@ const Splash = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("")
+      console.log('');
       if (isLoggedIn) {
         // props.navigation.replace('Home', {
         //   screen: 'Home',
@@ -40,8 +40,9 @@ const Splash = ({navigation}) => {
           resizeMode="contain"
           style={styles.logoStyle}
         />
+        <Text style={styles.HiBestieTextStyle}>Hi Bestie</Text>
         <Text style={styles.textStyle}>
-          Let Us Help You Find Your{'\n'}Bestie
+          Let Us Help You Find Your Bestie
         </Text>
       </View>
       {/* <AppButton

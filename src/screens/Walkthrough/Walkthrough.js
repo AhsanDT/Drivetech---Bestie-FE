@@ -25,9 +25,8 @@ const Walkthrough = ({navigation}) => {
           resizeMode="contain"
           style={styles.logoStyle}
         />
-        <Text style={styles.textStyle}>
-          Let Us Help You Find Your{'\n'}Bestie
-        </Text>
+        <Text style={styles.HiBestieTextStyle}>Hi Bestie</Text>
+        <Text style={styles.textStyle}>Let Us Help You Find Your Bestie</Text>
       </View>
       <AppButton
         bgColor={colors.b1}

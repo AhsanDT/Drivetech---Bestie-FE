@@ -53,6 +53,7 @@ export const appIcons = {
   unChecked: require('../../assets/icons/unchecked.png'),
   visa: require('../../assets/icons/visa.png'),
   master: require('../../assets/icons/masterCard.png'),
+  search: require('../../assets/icons/search.png'),
 };
 
 export const appSvgs = {

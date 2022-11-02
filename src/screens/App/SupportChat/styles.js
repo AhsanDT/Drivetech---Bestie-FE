@@ -87,15 +87,18 @@ const styles = StyleSheet.create({
   },
   imgStyle: {
     height: 18,
-    width: 17,
+    width: 18,
     resizeMode: 'contain',
     marginTop: WP('1.5'),
+    marginHorizontal: WP('5'),
   },
   uriStyle: {
     height: 30,
     width: 25,
     resizeMode: 'contain',
     borderRadius: 10,
+    alignSelf: 'center',
+    marginLeft:WP('3')
   },
 });
 

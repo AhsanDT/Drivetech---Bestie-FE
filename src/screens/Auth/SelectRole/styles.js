@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignSelf: 'center',
-    marginTop: WP('40'),
+    marginTop: WP('50'),
   },
   logoStyle: {
     alignSelf: 'center',
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_Medium,
     color: colors.white,
     textAlign: 'center',
-    marginVertical: WP('5'),
   },
 
   accountStyles: {
@@ -83,6 +82,14 @@ const styles = StyleSheet.create({
     fontFamily: family.Poppin_SemiBold,
     paddingLeft: WP(5),
     fontSize: size.text_16,
+  },
+  HiBestieTextStyle: {
+    fontSize: size.text_36,
+    fontFamily: family.Poppin_Medium,
+    color: colors.white,
+    textAlign: 'center',
+    marginVertical: WP('2'),
+    marginTop: WP('20'),
   },
 });
 

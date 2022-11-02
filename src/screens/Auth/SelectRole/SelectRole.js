@@ -12,6 +12,7 @@ import {appImages, appLogo} from '../../../shared/theme/assets';
 import styles from './styles';
 import {updateSignupObject} from '../../../redux/actions';
 import {useSelector, useDispatch} from 'react-redux';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Splash = ({navigation, route}) => {
   const [role, setrole] = useState('');
@@ -48,58 +49,64 @@ const Splash = ({navigation, route}) => {
         barStyle={'light-content'}
         backgroundColor={'transparent'}
       />
-      <View style={styles.logoContainer}>
-        <Image
-          source={appLogo.BestieTextLogo}
-          resizeMode="contain"
-          style={styles.logoStyle}
-        />
-        <Text style={styles.textStyle}>Let Us Help You Find Your Bestie</Text>
-      </View>
-      <TouchableOpacity onPress={() => handleButton(1, 'user')}>
-        <View
-          style={[
-            styles.splashButton,
-            {
-              backgroundColor: role == 'user' ? colors.b1 : colors.white,
-            },
-          ]}>
-          <Text
+      <KeyboardAwareScrollView
+        style={{
+          flexGrow: 1,
+        }}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={appLogo.BestieTextLogo}
+            resizeMode="contain"
+            style={styles.logoStyle}
+          />
+          <Text style={styles.HiBestieTextStyle}>Hi Bestie</Text>
+          <Text style={styles.textStyle}>Let Us Help You Find Your Bestie</Text>
+        </View>
+        <TouchableOpacity onPress={() => handleButton(1, 'user')}>
+          <View
             style={[
-              styles.splashButtonText,
-              {color: role == 'user' ? colors.white : colors.b1},
+              styles.splashButton,
+              {
+                backgroundColor: role == 'user' ? colors.b1 : colors.white,
+              },
             ]}>
-            Find a Bestie
+            <Text
+              style={[
+                styles.splashButtonText,
+                {color: role == 'user' ? colors.white : colors.b1},
+              ]}>
+              Find a Bestie
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleButton(2, 'bestie')}>
+          <View
+            style={[
+              styles.splashButton,
+              {backgroundColor: role == 'bestie' ? '#000' : '#fff'},
+            ]}>
+            <Text
+              style={[
+                styles.splashButtonText,
+                {color: role == 'bestie' ? '#fff' : '#000'},
+              ]}>
+              Be a Bestie
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.accountContainer}>
+          <Text style={styles.accountStyles}>
+            Already have an account?{' '}
+            <Text
+              style={styles.signUpStyle}
+              onPress={() => {
+                navigation.navigate('Auth', {screen: 'Login'});
+              }}>
+              Sign In
+            </Text>
           </Text>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleButton(2, 'bestie')}>
-        <View
-          style={[
-            styles.splashButton,
-            {backgroundColor: role == 'bestie' ? '#000' : '#fff'},
-          ]}>
-          <Text
-            style={[
-              styles.splashButtonText,
-              {color: role == 'bestie' ? '#fff' : '#000'},
-            ]}>
-            Be a Bestie
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <View style={styles.accountContainer}>
-        <Text style={styles.accountStyles}>
-          Already have an account?{' '}
-          <Text
-            style={styles.signUpStyle}
-            onPress={() => {
-              navigation.navigate('Auth', {screen: 'Login'});
-            }}>
-            Sign In
-          </Text>
-        </Text>
-      </View>
+      </KeyboardAwareScrollView>
     </ImageBackground>
   );
 };

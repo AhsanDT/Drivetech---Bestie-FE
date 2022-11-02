@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: WP('100'),
   },
+  bottonstyle: {},
 });
 
 export {styles};

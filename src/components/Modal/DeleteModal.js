@@ -39,7 +39,11 @@ const DeleteModal = ({
         }}>
         <View style={styles.borderStyle} />
         <View style={styles.contentContainer}>
-          <Image source={appIcons.cross} style={styles.crossIconStyle} />
+          <Image
+            source={appIcons.cross}
+            style={styles.crossIconStyle}
+            resizeMode={'contain'}
+          />
           <Text style={styles.cardNumberStyle}>
             {'*** *** *** ***' + number}
           </Text>
@@ -88,6 +92,7 @@ const styles = StyleSheet.create({
   crossIconStyle: {
     width: 90,
     height: 83,
+    alignSelf: 'center',
   },
   cardNumberStyle: {
     fontFamily: family.Poppin_Regular,

@@ -42,27 +42,27 @@ export const TopTabs = ({state, descriptors, navigation, position}) => {
               }
             };
             return (
-              <View style={styles.tabContainer}>
-                <TouchableOpacity
-                  onPress={onPress}
+              // <View style={styles.tabContainer}>
+              <TouchableOpacity
+                onPress={onPress}
+                style={[
+                  styles.tabContainer2,
+                  {
+                    borderBottomWidth: isFocused ? 2 : 0,
+                    borderBottomColor: isFocused ? colors.p2 : colors.g13,
+                  },
+                ]}>
+                <Text
                   style={[
-                    styles.tabContainer2,
+                    styles.tabName,
                     {
-                      borderBottomWidth: isFocused ? 2 : 0.5,
-                      borderBottomColor: isFocused ? colors.p2 : colors.g13,
+                      color: isFocused ? colors.b1 : colors.g13,
                     },
                   ]}>
-                  <Text
-                    style={[
-                      styles.tabName,
-                      {
-                        color: isFocused ? colors.b1 : colors.g13,
-                      },
-                    ]}>
-                    {label}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                  {label}
+                </Text>
+              </TouchableOpacity>
+              // </View>
             );
           }}
         />
@@ -74,26 +74,28 @@ export const TopTabs = ({state, descriptors, navigation, position}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 50,
     backgroundColor: colors.white,
+    borderBottomColor: colors.g13,
+    borderBottomWidth: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tabContainer: {
-    height: 70,
-    width: WP('50'),
+    height: 100,
+    width: WP('45'),
     alignItems: 'center',
     justifyContent: 'center',
   },
   tabName: {
     fontSize: size.text_16,
     fontFamily: family.Poppin_Medium,
+    textAlign: 'center',
   },
   tabContainer2: {
-    height: 30,
-    width: WP('50'),
-
+    marginTop:WP('5.2'),
+    width: WP('30'),
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: WP('2'),
   },
 });
