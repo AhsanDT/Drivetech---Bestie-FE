@@ -77,6 +77,7 @@ const Setting = ({navigation}) => {
           icon={true}
           subtitle={true}
           userImage={{uri: userInfo?.profile_image}}
+          onPress={() => navigation.navigate('EditProfileMenu')}
         />
         <View style={styles.listContainer}>
           <FlatList data={Setting_List} renderItem={renderItem} />

@@ -11,6 +11,11 @@ import AddCard from '../../../screens/App/AddCard';
 import SupportList from '../../../screens/App/SupportList';
 import PrivacyPolicy from '../../../screens/Auth/PrivacyPolicy';
 import TermsConditions from '../../../screens/Auth/TermsConditions';
+import EditProfileMenu from '../../../screens/App/EditProfileMenu';
+import EditPersonalInformation from '../../../screens/App/EditPersonalInformation';
+import EditPortfolio from '../../../screens/App/Bestie/EditPortfolio';
+import EditCameraDetails from '../../../screens/App/Bestie/EditCameraDetails';
+import EditTalents from '../../../screens/App/Bestie/EditTalents';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +37,14 @@ function StackNavigation(props) {
       <Stack.Screen name="Setting" component={Setting} />
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
       <Stack.Screen name="TermsConditions" component={TermsConditions} />
+      <Stack.Screen name="EditProfileMenu" component={EditProfileMenu} />
+      <Stack.Screen
+        name="EditPersonalInformation"
+        component={EditPersonalInformation}
+      />
+      <Stack.Screen name="EditPortfolio" component={EditPortfolio} />
+      <Stack.Screen name="EditCameraDetails" component={EditCameraDetails} />
+      <Stack.Screen name="EditTalents" component={EditTalents} />
     </Stack.Navigator>
   );
 }

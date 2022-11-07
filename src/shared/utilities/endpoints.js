@@ -1,5 +1,7 @@
-const BASE_URL = 'https://bestie-b.herokuapp.com/api/v1/';
-const CHAT_URL = 'ws://housibly.herokuapp.com/cable?';
+// const BASE_URL = 'https://bestie-b.herokuapp.com/api/v1/';
+const BASE_URL = 'https://bestie-staging.herokuapp.com/api/v1/';
+
+const CHAT_URL = '';
 
 const ENDPOINTS = {
   LOGIN: 'authentication/login',

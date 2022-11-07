@@ -10,6 +10,7 @@ const initialState = {
   resetPassRes: null,
   otp_verify: null,
   resendData: null,
+  userType: null,
   signupObject: {
     firstName: null,
     lastName: null,
@@ -48,8 +49,6 @@ const authReducer = (state = initialState, action = {}) => {
   const {type, payload} = action;
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
-     
-
       return {
         ...state,
         loading: false,
@@ -57,6 +56,7 @@ const authReducer = (state = initialState, action = {}) => {
         isFailure: false,
         userInfo: payload,
         profileType: payload?.data?.profile_type,
+        userType: payload?.data?.profile_type,
         isLoggedIn: true,
       };
     case TYPES.LOGIN_REQUEST_FAILURE:

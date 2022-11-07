@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: WP('2'),
+    // elevation: 1,
   },
   userStyle: {
     height: 33,
