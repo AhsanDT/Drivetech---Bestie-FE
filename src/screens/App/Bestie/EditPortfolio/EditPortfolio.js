@@ -15,6 +15,7 @@ import {
   AppHeader,
   ImagePickerModal,
   Header,
+  AppLoader,
 } from '../../../../components';
 import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -26,6 +27,8 @@ const AddPortfolio = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
   const [currentItemClicked, setCurrentItemClicked] = useState(null);
+  const [loading, setloading] = useState(false);
+
   const dispatch = useDispatch();
   const {userInfo} = useSelector(state => state.auth);
   // console.log('userInfo', userInfo);
@@ -191,6 +194,39 @@ const AddPortfolio = ({navigation}) => {
 
   count = picsArray?.filter(obj => obj?.image).length;
 
+  const onPressUpdate = value => {
+    setloading(true);
+    try {
+      const data = new FormData();
+
+      picsArray?.forEach(element => {
+        data.append(
+          'profile[portfolio][]',
+          element?.image
+            ? {
+                uri: element?.image.uri,
+                name: element?.image.fileName,
+                type: element?.image.type,
+              }
+            : element?.portfolio_url,
+        );
+      });
+
+      const cbSuccess = res => {
+        setloading(false);
+        navigation.goBack();
+      };
+      const cbFailure = err => {
+        setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
+      };
+      console.log('FORMDATA==> ', data);
+      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -230,10 +266,11 @@ const AddPortfolio = ({navigation}) => {
           // disabled={count < 6 ? true : false}
           onPress={() => {
             // navigation.navigate('ImageVerification');
-            handleButton();
+            onPressUpdate();
           }}
         />
       </View>
+      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

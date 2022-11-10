@@ -121,10 +121,13 @@ const Setting = ({navigation}) => {
             />
             <SettingCard
               title={'Camera Details'}
-              onPress={() => navigation.navigate('EditCameraDetails')}
+              onPress={() => navigation.push('EditCameraDetails')}
             />
 
-            <SettingCard title={'Rate'} />
+            <SettingCard
+              title={'Rate'}
+              onPress={() => navigation.navigate('EditAccountRate')}
+            />
           </View>
         )}
         <ImagePickerModal
@@ -134,9 +137,15 @@ const Setting = ({navigation}) => {
           onPressGallery={() => showGallery()}
           onPressCancel={() => setShow(false)}
         />
-        <SettingCard title={'Interest'} />
+        <SettingCard
+          title={'Interest'}
+          onPress={() => navigation.navigate('EditInterest')}
+        />
         <SettingCard title={'Change Password'} />
-        <SettingCard title={'Add Social Media Links'} />
+        <SettingCard
+          title={'Add Social Media Links'}
+          onPress={() => navigation.navigate('EditSocialMediaLink')}
+        />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

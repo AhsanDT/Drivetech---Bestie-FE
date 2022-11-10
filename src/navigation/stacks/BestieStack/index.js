@@ -16,7 +16,9 @@ import EditPersonalInformation from '../../../screens/App/EditPersonalInformatio
 import EditPortfolio from '../../../screens/App/Bestie/EditPortfolio';
 import EditCameraDetails from '../../../screens/App/Bestie/EditCameraDetails';
 import EditTalents from '../../../screens/App/Bestie/EditTalents';
-
+import EditAccountRate from '../../../screens/App/Bestie/EditAccountRate';
+import EditInterest from '../../../screens/App/EditInterest';
+import EditSocialMediaLink from '../../../screens/App/Bestie/EditSocialMediaLinks';
 const Stack = createStackNavigator();
 
 function StackNavigation(props) {
@@ -45,6 +47,12 @@ function StackNavigation(props) {
       <Stack.Screen name="EditPortfolio" component={EditPortfolio} />
       <Stack.Screen name="EditCameraDetails" component={EditCameraDetails} />
       <Stack.Screen name="EditTalents" component={EditTalents} />
+      <Stack.Screen name="EditAccountRate" component={EditAccountRate} />
+      <Stack.Screen name="EditInterest" component={EditInterest} />
+      <Stack.Screen
+        name="EditSocialMediaLink"
+        component={EditSocialMediaLink}
+      />
     </Stack.Navigator>
   );
 }

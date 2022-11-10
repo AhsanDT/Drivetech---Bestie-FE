@@ -49,6 +49,7 @@ const authReducer = (state = initialState, action = {}) => {
   const {type, payload} = action;
   switch (type) {
     case TYPES.LOGIN_REQUEST_SUCCESS:
+      console.log('LOGIN PAYLOAD==> ', payload);
       return {
         ...state,
         loading: false,
@@ -75,6 +76,8 @@ const authReducer = (state = initialState, action = {}) => {
         isSuccess: true,
         isFailure: false,
         userInfo: payload,
+        profileType: payload?.data?.profile_type,
+        userType: payload?.data?.profile_type,
       };
     case TYPES.SOCIAL_LOGIN_REQUEST_FAILURE:
       return {

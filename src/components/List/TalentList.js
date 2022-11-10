@@ -11,6 +11,7 @@ import {
 } from '../../shared/exporter';
 
 const TalentList = ({onPress, item}) => {
+  console.log('ITEM==> ', item);
   return (
     <View style={styles.mainView} onPress={onPress}>
       <TouchableOpacity onPress={onPress}>

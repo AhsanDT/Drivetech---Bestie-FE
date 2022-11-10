@@ -30,6 +30,7 @@ import {
   addSupportTicketSaga,
   showSupportTicketSaga,
 } from './support-saga/support-saga';
+import {editProfileSaga} from '../saga/edit-profile-saga/edit-profile-saga';
 
 export function* rootSaga() {
   yield fork(loginRequest);
@@ -53,4 +54,5 @@ export function* rootSaga() {
   yield fork(showAllConversationSaga);
   yield fork(createConversationSaga);
   yield fork(createConversationMessageSaga);
+  yield fork(editProfileSaga);
 }

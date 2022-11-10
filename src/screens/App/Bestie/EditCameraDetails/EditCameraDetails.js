@@ -38,19 +38,26 @@ const CameraDetails = ({navigation}) => {
   const [cameraModel, setcameraModel] = useState('');
   const dispatch = useDispatch();
   const {signupObject, userInfo} = useSelector(state => state.auth);
-  const [data, setData] = useState(signupObject.talentList);
+
+  const [data, setData] = useState();
   const [check, setcheck] = useState(false);
+  const [cameraType, setCameraType] = useState(
+    userInfo?.camera_detail?.camera_type,
+  );
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = setData(
-        // userInfo?.interest?.forEach
-        signupObject.talentList,
-      );
+      const updateValue = () => {
+        const userTelents =
+          signupObject?.talentList ||
+          JSON.parse(JSON.stringify(userInfo?.talent));
+        setData(userTelents);
+      };
+      const unsubscribe = updateValue();
       return () => unsubscribe;
     }, [signupObject]),
   );
-  console.log('USERINFO+++> ', userInfo);
+  console.log('USERINFO+++> ', userInfo?.talent);
   const handleChange = (i, event) => {
     const values = [...fields];
     values[i].value = event;
@@ -67,14 +74,19 @@ const CameraDetails = ({navigation}) => {
       // alert(`Add Input`);
     }
   };
-  const handleCameraEquipment = (item, index) => {
+
+  useEffect(() => {
+    function findIndex(item) {
+      return item.title === cameraType;
+    }
     list.forEach(element => {
       element.selected = false;
     });
-    list[index].selected = true;
-
+    let index = list.findIndex(findIndex);
+    if (index != -1) list[index].selected = true;
     setlist([...list]);
-  };
+  }, [cameraType]);
+
   const handleOtherEquipment = (item, index) => {
     otherequipmentList[index].selected = !otherequipmentList[index].selected;
     otherequipmentList?.map(i => {
@@ -105,7 +117,7 @@ const CameraDetails = ({navigation}) => {
   const onPressDelete = index => {
     data.splice(index, 1);
     setData([...data]);
-    dispatch(updateSignupObject({talentList: data}));
+    // dispatch(updateSignupObject({talentList: data}));
   };
 
   console.log(signupObject.talentList);
@@ -149,6 +161,7 @@ const CameraDetails = ({navigation}) => {
               }
             />
           </TouchableOpacity>
+          {console.log('DATA==> ', data)}
           <FlatList
             data={data}
             renderItem={({item, index}) => (
@@ -174,7 +187,7 @@ const CameraDetails = ({navigation}) => {
             renderItem={({item, index}) => (
               <Camera
                 source={item.icon}
-                onPress={() => handleCameraEquipment(item, index)}
+                onPress={() => setCameraType(item.title)}
                 item={item}
               />
             )}

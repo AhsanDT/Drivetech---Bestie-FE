@@ -11,6 +11,14 @@ export const RegisterFields = {
   password: '',
   age: '',
 };
+export const updateBestieInfo = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  location: '',
+  email: '',
+  age: '',
+};
 export const SocialRegisterFields = {
   phone: '',
   location: '',
@@ -44,6 +52,16 @@ export const SignUPFormFields = {
   age: '',
   email: '',
   password: '',
+};
+
+export const updateEnduserInfoFields = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  country: '',
+  city: '',
+  age: '',
+  email: '',
 };
 
 export const SocialSignUPFormFields = {
@@ -133,6 +151,22 @@ export const SignUpVS = yup.object().shape({
     .required('Password Required'),
 });
 
+export const updateEndUserInfo = yup.object().shape({
+  firstName: yup.string().required('First Name Required'),
+  lastName: yup.string().required('Last Name Required'),
+  phone: yup
+    .string()
+    .min(11, 'Phone number must be at least 11 characters')
+    .required('Phone Number Required'),
+  country: yup.string().required('Country Name Required'),
+  city: yup.string().required('City Name Required'),
+  age: yup.string().required('Age Requried'),
+  email: yup
+    .string()
+    .required('Email Required')
+    .email('Please provide a valid email address'),
+});
+
 export const BestieRateVs = yup.object().shape({
   bestieRate: yup.string().required('Rate Required'),
 });
@@ -151,6 +185,18 @@ export const RegisterVS = yup.object().shape({
     .string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password Required'),
+});
+
+export const UpdateBestieInfoSVS = yup.object().shape({
+  firstName: yup.string().required('First Name Required'),
+  lastName: yup.string().required('Last Name Required'),
+  phone: yup.string().required('Phone Number Required'),
+  location: yup.string().required('Location Required'),
+  email: yup
+    .string()
+    .required('Email Required')
+    .email('Please provide a valid email address'),
+  age: yup.string().required('Age Requried'),
 });
 
 export const SocialRegisterVS = yup.object().shape({

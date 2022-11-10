@@ -26,6 +26,7 @@ const ENDPOINTS = {
   GET_MESSAGE: 'support_conversations/get_messages',
   CREATE_CONVERSATION: 'support_conversations',
   CREATE_MESSAGE: 'support_conversations/create_message',
+  UPDATE_PROFILE: 'profile/update_profile',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};

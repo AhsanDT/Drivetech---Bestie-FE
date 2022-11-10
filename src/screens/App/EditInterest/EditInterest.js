@@ -10,24 +10,21 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {
-  ShowInterestButton,
-  AppHeader,
-  AppButton,
-  Header,
-} from '../../../../components';
+import {ShowInterestButton, Header, AppButton} from '../../../components';
 import styles from './styles';
-import {getTalentList, updateSignupObject} from '../../../../redux/actions';
-import {appIcons, WP, HP, colors} from '../../../../screens/../shared/exporter';
+import {getInterestList, updateSignupObject} from '../../../redux/actions';
+import {appIcons, WP, HP, colors} from '../../../shared/exporter';
 import {useDispatch, useSelector} from 'react-redux';
+import {userInfo} from 'os';
 let count = 0;
-const showTalent = ({navigation}) => {
+const ShowInterest = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
-  const {signupObject, userInfo} = useSelector(state => state.auth);
+  const {userInfo} = useSelector(state => state.auth);
+
   useEffect(() => {
-    getTalent();
+    getInterests();
   }, []);
 
   const itemPressed = (item, index) => {
@@ -39,24 +36,26 @@ const showTalent = ({navigation}) => {
     setlist([...list]);
     count = list.filter(obj => obj.selected).length;
   };
-
-  const getTalent = () => {
+  const getInterests = () => {
     try {
       const cbSuccess = response => {
         response?.data.forEach(element => {
           element.selected = false;
         });
+
         response?.data?.forEach(element => {
-          console.log('ELEMENT===> ', element);
-          if (userInfo?.talent?.find(item => item?.title == element?.title)) {
+          if (
+            userInfo?.interest?.find(item => item?.title === element?.title)
+          ) {
             element.selected = true;
-            count = count + 1;
+            console.log('ok');
           }
         });
+
         setlist(response?.data);
       };
       const cbFailure = err => {};
-      dispatch(getTalentList(cbSuccess, cbFailure));
+      dispatch(getInterestList(cbSuccess, cbFailure));
     } catch (error) {}
   };
 
@@ -69,26 +68,54 @@ const showTalent = ({navigation}) => {
   };
 
   const handleNavigation = () => {
-    if (count < 1) {
+    if (list.filter(obj => obj.selected).length < 1) {
       Alert.alert('Alert', 'Please select your interests.');
     } else {
-      dispatch(
-        updateSignupObject({talentList: list.filter(obj => obj.selected)}),
+      // updateSignupObject({interestList: list.filter(obj => obj.selected)}),
+
+      // console.log(
+      //   'interest list==> ',
+      //   list.filter(obj => obj.selected),
+      // );
+      console.log(
+        list.forEach(element => {
+          if (element.selected) {
+            console.log('IDS==> ', element.id);
+          }
+        }),
       );
 
-      navigation.goBack();
+      // navigation.navigate('UploadImage');
     }
   };
 
   const footer = () => {
-    return <View style={{paddingBottom: 15}}></View>;
+    return (
+      <View style={{paddingBottom: 15}}>
+        <TouchableOpacity onPress={() => setshowLess(!showLess)}>
+          <View style={styles.showAllView}>
+            <Text style={styles.showText}>
+              {showLess ? 'Show less' : 'Show all'}
+            </Text>
+            <Image
+              source={appIcons.arrow}
+              style={[
+                styles.arrow,
+                {transform: [{rotate: showLess ? '180 deg' : '0 deg'}]},
+              ]}
+              resizeMode="contain"
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <StatusBar backgroundColor={'#fff'} translucent={false} />
       <Header
-        title={'Update Your Talents'}
+        title={'Interest'}
         backIcon={true}
         onPressBack={() => {
           navigation.goBack();
@@ -100,7 +127,7 @@ const showTalent = ({navigation}) => {
           data={list}
           numColumns={3}
           horizontal={false}
-          ListFooterComponent={() => footer()}
+          // ListFooterComponent={() => footer()}
           columnWrapperStyle={{
             flexWrap: 'wrap',
           }}
@@ -115,9 +142,9 @@ const showTalent = ({navigation}) => {
           )}
         />
       ) : (
-        <ActivityIndicator color={colors.b1} />
+        <ActivityIndicator color={'#000'} />
       )}
-      <View>
+      {list?.length > 0 ? (
         <View
           style={{
             justifyContent: 'center',
@@ -126,19 +153,17 @@ const showTalent = ({navigation}) => {
             alignSelf: 'center',
             marginTop: 5,
           }}>
-          {list?.length > 0 && (
-            <AppButton
-              width={WP('30')}
-              bgColor={colors.b1}
-              title={'Next'}
-              height={WP('14')}
-              onPress={() => handleNavigation()}
-            />
-          )}
+          <AppButton
+            width={WP('30')}
+            bgColor={colors.b1}
+            title={'Update'}
+            height={WP('14')}
+            onPress={() => handleNavigation()}
+          />
         </View>
-      </View>
+      ) : null}
     </SafeAreaView>
   );
 };
 
-export default showTalent;
+export default ShowInterest;

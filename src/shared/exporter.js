@@ -30,15 +30,16 @@ export {
   payment_CardVS,
   account_RateFormField,
   account_RateVS,
-
   support_MessageVS,
   support_MessageFormField,
-
   BestieRate,
   BestieRateVs,
   SocialLinks,
   socialMediaLinks,
-
+  updateBestieInfo,
+  UpdateBestieInfoSVS,
+  updateEndUserInfo,
+  updateEnduserInfoFields,
 } from './utilities/validations';
 
 export {

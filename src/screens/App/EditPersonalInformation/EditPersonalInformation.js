@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, SafeAreaView, StatusBar, Alert} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
@@ -8,19 +8,20 @@ import {
   AppLoader,
   DropDown,
   Header,
+  Load,
 } from '../../../components';
 // import * as TYPES from '../../../../redux/actions/types/auth_types';
 import styles from './styles';
 import {
   colors,
-  SignUPFormFields,
   WP,
   Selection_List,
   Pronoun_List,
-  RegisterVS,
-  RegisterFields,
   ExperienceList,
-  SignUpVS,
+  updateBestieInfo,
+  UpdateBestieInfoSVS,
+  updateEndUserInfo,
+  updateEnduserInfoFields,
 } from '../../../shared/exporter';
 import {Formik} from 'formik';
 import {useSelector, useDispatch} from 'react-redux';
@@ -28,61 +29,63 @@ import {
   validateEmailAction,
   validateSocialPhoneAction,
   updateSignupObject,
+  updateProfileAction,
 } from '../../../redux/actions';
+import {date} from 'yup';
+import {ALL} from 'dns';
 const Register = ({navigation, route}) => {
-  const [sex, setsex] = useState('Male');
-  const [experience, setExperience] = useState('1 Year');
-  const [data, setdata] = useState(route?.params?.data);
+  const {userInfo, userType} = useSelector(state => state.auth);
+
+  // const [data, setdata] = useState(route?.params?.data);
   const [location, setlocation] = useState('');
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
-  const {userType, userInfo} = useSelector(state => state.auth);
+  const [sex, setsex] = useState('Male');
+  const [experience, setExperience] = useState('1 Year');
   const [pronoun, setPronoun] = useState('he/him');
+  const ref = useRef();
+  // const [userType, setuserType] = useState('user');
+  console.log('DATA==> ', userInfo);
+  // useEffect(() => {
+  //   setsex(userInfo?.data?.sex);
+  //   setExperience(userInfo?.data?.sex);
+  // }, []);
 
-  const validateEmail = value => {
+  const onPressUpdate = value => {
     setloading(true);
     try {
       const data = new FormData();
-      data.append('user[email]', value.email.toLowerCase());
-      data.append('user[phone_number]', value.phone);
-      console.log(data);
+      data.append('profile[first_name]', value.firstName),
+        data.append('profile[email]', value.email?.toLowerCase()),
+        data.append('profile[last_name]', value.lastName);
+      data.append('profile[age]', value.age),
+        data.append('profile[phone_number]', value.phone),
+        data.append('profile[sex]', sex);
+
+      if (userType == 'user') {
+        data.append('profile[pronoun]', pronoun);
+        data.append('profile[city]', value.city);
+        data.append('profile[country]', value.country);
+      }
+      if (userType == 'bestie') {
+        data.append('profile[location]', value.location);
+        data.append('profile[experience]', experience);
+      }
+
       const cbSuccess = res => {
-        onSubmit(value);
         setloading(false);
+        navigation.goBack();
       };
       const cbFailure = err => {
-        Alert.alert('ALert', err?.error);
         setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
       };
-      dispatch(validateEmailAction(data, cbSuccess, cbFailure));
+      console.log('FORMDATA==> ', data);
+      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
     }
   };
-
-  const validateSocialPhone = value => {
-    setloading(true);
-    try {
-      const data = new FormData();
-      data.append('user[phone_number]', value.phone);
-      console.log(data);
-      const cbSuccess = res => {
-        onSubmit(value);
-        setloading(false);
-      };
-      const cbFailure = err => {
-        Alert.alert('ALert', err?.error);
-        setloading(false);
-        console.log('ERRor', err);
-      };
-      // dispatch(validateSocialPhoneAction(data, cbSuccess, cbFailure));
-    } catch (error) {
-      setloading(false);
-      console.log('ERRor', error);
-    }
-  };
-
-  const onSubmit = value => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -99,16 +102,17 @@ const Register = ({navigation, route}) => {
             navigation.goBack();
           }}
         />
+        {console.log(':USERTYPE++>', userType)}
         <Formik
-          initialValues={RegisterFields || SignUpVS}
+          initialValues={
+            userType == 'bestie' ? updateBestieInfo : updateEnduserInfoFields
+          }
           onSubmit={values => {
-            {
-              data ? validateSocialPhone(values) : validateEmail(values);
-            }
+            onPressUpdate(values);
           }}
-          // onSubmit={values => validateEmail(values)}
+          innerRef={ref}
           validationSchema={
-            data?.login_type == 'social login' ? SocialRegisterVS : RegisterVS
+            userType == 'bestie' ? UpdateBestieInfoSVS : updateEndUserInfo
           }>
           {({
             values,
@@ -121,7 +125,22 @@ const Register = ({navigation, route}) => {
             handleReset,
             setFieldValue,
           }) => {
-            useEffect(() => {}, []);
+            useEffect(() => {
+              const {data} = userInfo;
+              setFieldValue('age', data?.age?.toString());
+              setFieldValue('firstName', data?.first_name);
+              setFieldValue('lastName', data?.last_name);
+              setFieldValue('email', data?.email);
+              setFieldValue('phone', data?.phone_number);
+
+              if (userType == 'user') {
+                setFieldValue('country', data?.country);
+                setFieldValue('city', data?.city);
+              }
+              if (userType == 'bestie') {
+                setFieldValue('location', data?.location);
+              }
+            }, []);
             return (
               <View>
                 <AppInput
@@ -147,11 +166,11 @@ const Register = ({navigation, route}) => {
                   placeholder={'Email'}
                   placeholderTextColor={colors.g3}
                   onChangeText={handleChange('email')}
-                  value={data?.email ? data?.email : values?.email}
+                  value={values?.email}
                   touched={touched.email}
                   errorMessage={errors.email}
                   keyboardType={'email-address'}
-                  editable={data?.email ? false : true}
+                  // editable={data?.email ? false : true}
                 />
 
                 <AppInput
@@ -214,7 +233,6 @@ const Register = ({navigation, route}) => {
                 title={'Location'}
                 placeholder={'Set your location'}
               /> */}
-
                 {userType == 'bestie' && (
                   <DropDown
                     label={'Experience'}
@@ -225,7 +243,6 @@ const Register = ({navigation, route}) => {
                     onChangeValue={txt => setExperience(txt.value)}
                   />
                 )}
-
                 <DropDown
                   label={'Sex'}
                   placeholder={'Select'}

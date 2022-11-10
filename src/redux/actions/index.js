@@ -37,3 +37,4 @@ export {
   createMessageRequest,
   getAllConversationMessage,
 } from './conversation-actions/conversation-actions';
+export * from './edit-profile-actions/edit-profile-actions';
