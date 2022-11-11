@@ -9,7 +9,10 @@ export const Header = ({title, backIcon = false, onPressBack}) => {
       {/* <MyStatusBar /> */}
       <View style={styles.mainContainer}>
         {backIcon && (
-          <TouchableOpacity activeOpacity={0.7} onPress={onPressBack}>
+          <TouchableOpacity
+            style={{width: WP('7')}}
+            activeOpacity={0.7}
+            onPress={onPressBack}>
             <Image
               source={appIcons.dropback}
               resizeMode={'contain'}
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.9,
   },
   logoTxtStyle: {
-    left: WP('7'),
+    left: WP('3'),
     color: colors.b1,
     fontSize: size.text_14,
     fontFamily: family.Poppin_Medium,

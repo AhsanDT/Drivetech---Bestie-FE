@@ -35,9 +35,18 @@ export const appIcons = {
   dollar: require('../../assets/icons/dollar.png'),
   dropback: require('../../assets/icons/dropback.png'),
   calendar: require('../../assets/icons/calendar.png'),
+  calendarColor: require('../../assets/icons/calendarColor.png'),
+  calendar: require('../../assets/icons/calendar.png'),
+
   chat: require('../../assets/icons/chat.png'),
+  chatColor: require('../../assets/icons/chatColor.png'),
+
   home: require('../../assets/icons/home.png'),
+  homeGray: require('../../assets/icons/homeGray.png'),
+
   job: require('../../assets/icons/job.png'),
+  jobColor: require('../../assets/icons/jobColor.png'),
+
   notification: require('../../assets/icons/notification.png'),
   appIcon: require('../../assets/icons/appIcon.png'),
   proof: require('../../assets/icons/proof.png'),

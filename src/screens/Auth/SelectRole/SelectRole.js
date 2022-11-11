@@ -68,6 +68,7 @@ const Splash = ({navigation, route}) => {
               styles.splashButton,
               {
                 backgroundColor: role == 'user' ? colors.b1 : colors.white,
+                marginTop: WP('20'),
               },
             ]}>
             <Text

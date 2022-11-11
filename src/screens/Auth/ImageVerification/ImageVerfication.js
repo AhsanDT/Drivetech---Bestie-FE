@@ -191,7 +191,7 @@ const ImageVerification = ({navigation}) => {
               </Text>
               <Text style={styles.pictureTextStyle}>
                 Make sure you are in a well-lit room and hold the{'\n'}phone as
-                shwon in the picture
+                shown in the picture
               </Text>
             </View>
           )}
