@@ -60,6 +60,15 @@ const authReducer = (state = initialState, action = {}) => {
         userType: payload?.data?.profile_type,
         isLoggedIn: true,
       };
+
+    case TYPES.USER_TYPE:
+      console.log('USER_TYPE==> ', payload);
+
+      return {
+        ...state,
+        userType: payload,
+      };
+
     case TYPES.LOGIN_REQUEST_FAILURE:
       return {
         ...state,

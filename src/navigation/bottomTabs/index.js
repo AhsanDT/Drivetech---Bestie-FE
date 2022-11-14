@@ -11,24 +11,37 @@ import EndUserHomeStack from '../stacks/EndUserStack/EndUserHomeStack';
 
 const Tab = createBottomTabNavigator();
 
+const UserStack = () => (
+  <Tab.Navigator
+    initialRouteName="Home"
+    screenOptions={{headerShown: false}}
+    sceneContainerStyle={{backgroundColor: 'white'}}
+    tabBar={props => <BottomTab {...props} />}>
+    <Tab.Screen component={EndUserHomeStack} name={'Home'} />
+    <Tab.Screen component={MapStack} name={'Map'} />
+    <Tab.Screen component={CalendarStack} name={'Calendar'} />
+    <Tab.Screen component={ChatStack} name={'Chat'} />
+  </Tab.Navigator>
+);
+
+const BestieStack = () => (
+  <Tab.Navigator
+    initialRouteName="Home"
+    screenOptions={{headerShown: false}}
+    sceneContainerStyle={{backgroundColor: 'white'}}
+    tabBar={props => <BottomTab {...props} />}>
+    <Tab.Screen component={HomeStack} name={'Home'} />
+    <Tab.Screen component={JobStack} name={'Jobs'} />
+    <Tab.Screen component={CalendarStack} name={'Calendar'} />
+    <Tab.Screen component={ChatStack} name={'Chat'} />
+  </Tab.Navigator>
+);
+
 const MainStack = () => {
-  const {signupObject} = useSelector(state => state.auth);
+  const {signupObject, userType} = useSelector(state => state.auth);
+  console.log('type in tabs', userType);
   const {profileType} = signupObject;
-  return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      screenOptions={{headerShown: false}}
-      sceneContainerStyle={{backgroundColor: 'white'}}
-      tabBar={props => <BottomTab {...props} />}>
-      <Tab.Screen
-        component={profileType == 'user' ? EndUserHomeStack : HomeStack}
-        name={'Home'}
-      />
-      <Tab.Screen component={JobStack} name={'Jobs'} />
-      <Tab.Screen component={CalendarStack} name={'Calendar'} />
-      <Tab.Screen component={ChatStack} name={'Chat'} />
-    </Tab.Navigator>
-  );
+  return userType == 'bestie' ? <BestieStack /> : <UserStack />;
 };
 
 export {MainStack};

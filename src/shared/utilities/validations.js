@@ -99,6 +99,15 @@ export const payment_CardFormField = {
   country: '',
   // cardNumber: '',
 };
+
+export const AddBankAccount = {
+  fullname: '',
+  country: '',
+  country: '',
+  bankAccNumber: '',
+  RoutingNumber: '',
+};
+
 export const account_RateFormField = {
   rate: '',
 };
@@ -246,6 +255,18 @@ export const payment_CardVS = yup.object().shape({
   country: yup.string().required('Country Required'),
   // cardNumber: yup.string().required('Card Number Required'),
 });
+
+export const addBankAccountFields = yup.object().shape({
+  fullname: yup.string().required('Full Name Required'),
+  country: yup.string().required('Country Required'),
+  bankAccNumber: yup.string().required('Bank Acc. Number Required'),
+  RoutingNumber: yup.string().required('Routing Number Required'),
+});
+
+// fullname: '',
+//   bankName:"",
+//   country:"",
+//   bankAccNumber:""
 
 export const account_RateVS = yup.object().shape({
   rate: yup.string().required('Rate Required'),

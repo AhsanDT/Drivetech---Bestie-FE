@@ -9,26 +9,29 @@ import {
   Header,
   ImagePickerModal,
   PaymentInput,
-} from '../../../components';
+  DropDown,
+} from '../../../../components';
 import {
   colors,
-  scrWidth,
   WP,
   checkConnected,
   networkText,
-  payment_CardFormField,
-  payment_CardVS,
-} from '../../../shared/exporter';
+  AddBankAccount,
+  addBankAccountFields,
+  Currency_List,
+} from '../../../../shared/exporter';
 import {createToken} from '@stripe/stripe-react-native';
 import {styles} from './styles';
 import {useDispatch} from 'react-redux';
-import {addCardRequest} from '../../../redux/actions';
+import {addBankRequest} from '../../../../redux/actions';
 import {Formik} from 'formik';
 
 const AddCard = ({navigation}) => {
   const [show, setShow] = useState(false);
 
   const [loading, setloading] = useState(false);
+  const [currency, setcurrency] = useState('USD');
+
   const dispatch = useDispatch();
   const ref = useRef();
 
@@ -38,23 +41,30 @@ const AddCard = ({navigation}) => {
       try {
         // setloading(true);
         const data = await createToken({
-          name: values?.fullname,
-          type: 'Card',
+          type: 'BankAccount',
           setupFutureUsage: 'OffSession',
+          accountHolderName: values?.fullname,
+          accountNumber: values.bankAccNumber,
+          country: values?.country,
+          currency: currency,
+          routingNumber: values.RoutingNumber,
         });
-        console.log('BANK TOEKN', data);
+        console.log('BANK TOKEN', data);
 
-        if (data?.token?.id) {
+        if (data) {
           var form = new FormData();
-          form.append('card[card_holder_name]', values?.fullname);
-          form.append('card[token]', data?.token?.id);
-          form.append('card[country]', values?.country);
+          form.append('account_holder_name', values?.fullname);
+          form.append('country', values?.country);
+          form.append('currency', currency);
+          form.append('routing_number', values?.RoutingNumber);
+          form.append('account_number', values?.bankAccNumber);
+          form.append('default', true);
 
           const onSuccess = res => {
             setloading(false);
             // alert(res);
             console.log('On Add Card Success', res);
-            navigation.navigate('GetPaymentList');
+            // navigation.navigate('GetPaymentList');
           };
           const onFailure = res => {
             setloading(false);
@@ -62,7 +72,7 @@ const AddCard = ({navigation}) => {
             console.log('On Add Card Failure', res);
           };
           console.log('BANK TOEKN', data);
-          dispatch(addCardRequest(form, onSuccess, onFailure));
+          dispatch(addBankRequest(form, onSuccess, onFailure));
         } else {
           setloading(false);
           Alert.alert('Failed', 'Unable to proceed payment!');
@@ -77,7 +87,7 @@ const AddCard = ({navigation}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header
-        title={'Add Card'}
+        title={'Add Bank'}
         backIcon={true}
         onPressBack={() => {
           setShow(true);
@@ -86,11 +96,11 @@ const AddCard = ({navigation}) => {
 
       <Formik
         innerRef={ref}
-        initialValues={payment_CardFormField}
+        initialValues={AddBankAccount}
         onSubmit={values => {
           onPressSaveCard(values);
         }}
-        validationSchema={payment_CardVS}>
+        validationSchema={addBankAccountFields}>
         {({
           values,
           handleChange,
@@ -113,8 +123,7 @@ const AddCard = ({navigation}) => {
                   setShow(false);
                 }}
               />
-              <Text style={styles.textStyle}>Card Info</Text>
-
+              <Text style={styles.textStyle}>Bank Info</Text>
               <AppInput
                 title={'Full Name'}
                 placeholder={'Type here'}
@@ -125,6 +134,16 @@ const AddCard = ({navigation}) => {
                 touched={touched.fullname}
                 renderErrorMessage={true}
               />
+              {/* <AppInput
+                title={'Bank Name'}
+                placeholder={'Type here'}
+                placeholderTextColor={colors.g3}
+                value={values?.bankName}
+                onChangeText={handleChange('bankName')}
+                errorMessage={errors.bankName}
+                touched={touched.bankName}
+                renderErrorMessage={true}
+              /> */}
               <AppInput
                 title={'Country'}
                 placeholder={'Type here'}
@@ -135,16 +154,52 @@ const AddCard = ({navigation}) => {
                 touched={touched.country}
                 renderErrorMessage={true}
               />
-              <PaymentInput title={'Card Number'} />
+              <AppInput
+                title={'Routing Number'}
+                placeholder={'Type here'}
+                placeholderTextColor={colors.g3}
+                value={values?.RoutingNumber}
+                onChangeText={handleChange('RoutingNumber')}
+                errorMessage={errors.RoutingNumber}
+                touched={touched.RoutingNumber}
+                renderErrorMessage={true}
+                keyboardType="decimal-pad"
+              />
+
+              <AppInput
+                title={'Bank Account Number'}
+                placeholder={'Type here'}
+                placeholderTextColor={colors.g3}
+                value={values?.bankAccNumber}
+                onChangeText={handleChange('bankAccNumber')}
+                errorMessage={errors.bankAccNumber}
+                touched={touched.bankAccNumber}
+                renderErrorMessage={true}
+                keyboardType="decimal-pad"
+              />
+              <DropDown
+                label={'Currency'}
+                placeholder={'Select'}
+                containerStyle={styles.dropContainer}
+                options={Currency_List}
+                value={currency}
+                onChangeValue={text => {
+                  setcurrency(text.value);
+                }}
+              />
+
+              <AppButton
+                style={{marginTop: 50}}
+                width={WP('85')}
+                title={'Save Bank'}
+                bgColor={colors.b1}
+                onPress={() => {
+                  handleSubmit();
+                }}
+              />
+              <View style={{height: 100}} />
             </KeyboardAwareScrollView>
-            <AppButton
-              width={WP('85')}
-              title={'Save Card'}
-              bgColor={colors.b1}
-              onPress={() => {
-                handleSubmit();
-              }}
-            />
+
             <AppLoader loading={loading} />
           </View>
         )}

@@ -11,6 +11,8 @@ function* updateProfile(params) {
   try {
     const res = yield editProfile(params?.params);
     if (res) {
+      console.log('EDIT PROFILE Res-==>', res);
+
       yield put({
         type: types.UPDATE_PROFILE_SUCCESS,
         payload: res,

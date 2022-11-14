@@ -19,6 +19,11 @@ import EditTalents from '../../../screens/App/Bestie/EditTalents';
 import EditAccountRate from '../../../screens/App/Bestie/EditAccountRate';
 import EditInterest from '../../../screens/App/EditInterest';
 import EditSocialMediaLink from '../../../screens/App/Bestie/EditSocialMediaLinks';
+import AddBankAccount from '../../../screens/App/Bestie/AddBankAccount';
+import ChangePassword from '../../../screens/App/ChangePassword';
+import EditPasswordEmailConfirmation from '../../../screens/App/EditPasswordEmailConfirmmation';
+import ChanePasswordVerifyOtp from '../../../screens/App/ChanePasswordVerifyOtp';
+
 const Stack = createStackNavigator();
 
 function StackNavigation(props) {
@@ -52,6 +57,17 @@ function StackNavigation(props) {
       <Stack.Screen
         name="EditSocialMediaLink"
         component={EditSocialMediaLink}
+      />
+      <Stack.Screen name="AddBankAccount" component={AddBankAccount} />
+
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen
+        name="EditPasswordEmailConfirmation"
+        component={EditPasswordEmailConfirmation}
+      />
+      <Stack.Screen
+        name="ChanePasswordVerifyOtp"
+        component={ChanePasswordVerifyOtp}
       />
     </Stack.Navigator>
   );

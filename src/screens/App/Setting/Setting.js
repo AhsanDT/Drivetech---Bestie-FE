@@ -28,6 +28,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Setting = ({navigation}) => {
   const {userInfo} = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const [checked, setChecked] = useState(false);
 
   const handleLogout = () => {
     // dispatch(logoutRequset())
@@ -52,10 +53,18 @@ const Setting = ({navigation}) => {
     }
   };
 
+  const onChangeToggle = val => {
+    setChecked(val);
+  };
+
   const renderItem = ({item, index}) => (
     <SettingCard
       title={item.title}
       toggle={item?.selected}
+      value={checked}
+      onValueChange={val => onChangeToggle(val)}
+      thumbColor={'red'}
+      trackColor={'green'}
       // onPress={index => {
       //   navigation.navigate(item?.route);
       // }}

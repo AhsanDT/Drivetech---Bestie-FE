@@ -25,6 +25,7 @@ import {
   getPaymentCardRequest,
   showPaymentCardSaga,
   updatePaymentCardSaga,
+  Bank_CRUD,
 } from './payment-saga/payment-saga';
 import {
   addSupportTicketSaga,
@@ -55,4 +56,5 @@ export function* rootSaga() {
   yield fork(createConversationSaga);
   yield fork(createConversationMessageSaga);
   yield fork(editProfileSaga);
+  yield fork(Bank_CRUD);
 }

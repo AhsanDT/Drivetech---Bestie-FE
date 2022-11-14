@@ -23,6 +23,10 @@ export {
   getPaymentCard,
   deletePaymentCard,
   updatePaymentCard,
+  updateBankInfo,
+  deleteBankCard,
+  getBankCard,
+  addBankRequest,
 } from './payment-actions/payment-actions';
 
 //Support actions

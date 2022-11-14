@@ -11,12 +11,7 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppButton, Header, AppInput, AppLoader} from '../../../../components';
-import {
-  signUpRequest,
-  clearSignupObject,
-  updateSocialLoginRequest,
-} from '../../../../redux/actions';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {updateProfileAction} from '../../../../redux/actions';
 
 import {
   appIcons,
@@ -41,8 +36,28 @@ const AccountRate = ({navigation}) => {
       {title: 'linkedin', link: values.linkedIn},
       {title: 'pinterest', link: values.pinterest},
     ];
-    console.log('neww==> ', newArr);
+
+    try {
+      setloading(true);
+      const data = new FormData();
+      data.append('profile[social_media_attributes][]', newArr);
+
+      const cbSuccess = res => {
+        console.log('RES UPDATE SOCIal==> ', res);
+        setloading(false);
+        // navigation.goBack();
+      };
+      const cbFailure = err => {
+        setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
+      };
+      console.log('SOCIAL UPDATED==> ', data);
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
   };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -77,7 +92,6 @@ const AccountRate = ({navigation}) => {
             setFieldValue,
           }) => {
             useEffect(() => {
-              console.log('USERINFO ', userInfo?.social_media[3]?.title);
               setFieldValue('pinterest', userInfo?.social_media[1]?.title);
               setFieldValue('instagram', userInfo?.social_media[0]?.title);
               setFieldValue('tiktok', userInfo?.social_media[3]?.title);

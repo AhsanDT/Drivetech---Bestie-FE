@@ -123,6 +123,26 @@ const Pronoun_List = [
     value: 'they/them',
   },
 ];
+
+const Currency_List = [
+  {
+    title: 'USD',
+    value: 'USD',
+  },
+  {
+    title: 'SEK',
+    value: 'SEK',
+  },
+  {
+    title: 'NOK',
+    value: 'DKK',
+  },
+  {
+    title: 'CHF',
+    value: 'CHF',
+  },
+];
+
 const ExperienceList = [
   {
     title: '1 Year',
@@ -274,11 +294,11 @@ const Setting_List = [
     title: 'Privacy Policy',
     route: 'PrivacyPolicy',
   },
-  {
-    id: 5,
-    title: 'Appointment Notification',
-    selected: true,
-  },
+  // {
+  //   id: 5,
+  //   title: 'Appointment Notification',
+  //   selected: true,
+  // },
   {
     id: 6,
     title: 'Support',
@@ -311,4 +331,5 @@ export {
   Card_List,
   Setting_List,
   ExperienceList,
+  Currency_List,
 };

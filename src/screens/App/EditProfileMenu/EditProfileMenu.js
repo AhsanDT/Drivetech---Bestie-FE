@@ -11,16 +11,22 @@ import {
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
-import {Header, SettingCard, ImagePickerModal} from '../../../components';
+import {
+  Header,
+  SettingCard,
+  ImagePickerModal,
+  AppLoader,
+} from '../../../components';
 import {appIcons, appImages, image_options} from '../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
 import {styles} from './styles';
+import {updateProfileAction} from '../../../redux/actions';
 const Setting = ({navigation}) => {
   const {userType, userInfo} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const [image, setImage] = useState('');
   const [show, setShow] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const showGallery = () => {
     setShow(false);
@@ -35,6 +41,7 @@ const Setting = ({navigation}) => {
           console.log('Response---', response.assets[0]);
           if (response.assets) {
             setImage(response.assets[0]);
+            onSelectImage(response.assets[0]);
           }
         }
       });
@@ -55,6 +62,7 @@ const Setting = ({navigation}) => {
         } else {
           if (response.assets) {
             setImage(response.assets[0]);
+            onSelectImage(response.assets[0]);
           }
         }
       });
@@ -83,6 +91,33 @@ const Setting = ({navigation}) => {
       console.warn(err);
     }
   };
+
+  const onSelectImage = image => {
+    setloading(true);
+    try {
+      const data = new FormData();
+
+      data.append('profile[profile_image]', {
+        uri: image?.uri,
+        name: image?.fileName,
+        type: image?.type,
+      });
+
+      const cbSuccess = res => {
+        setloading(false);
+        // navigation.goBack();
+        alert('Profile Image Updated Successfully.');
+      };
+      const cbFailure = err => {
+        setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
+      };
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header
@@ -141,11 +176,17 @@ const Setting = ({navigation}) => {
           title={'Interest'}
           onPress={() => navigation.navigate('EditInterest')}
         />
-        <SettingCard title={'Change Password'} />
         <SettingCard
-          title={'Add Social Media Links'}
-          onPress={() => navigation.navigate('EditSocialMediaLink')}
+          title={'Change Password'}
+          onPress={() => navigation.navigate('EditPasswordEmailConfirmation')}
         />
+        {userType == 'bestie' && (
+          <SettingCard
+            title={'Add Social Media Links'}
+            onPress={() => navigation.navigate('EditSocialMediaLink')}
+          />
+        )}
+        <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

@@ -20,12 +20,17 @@ import {
 import {
   appIcons,
   checkConnected,
+  colors,
   networkText,
   WP,
 } from '../../../shared/exporter';
-import {deletePaymentCard, getPaymentCard} from '../../../redux/actions';
+import {
+  deletePaymentCard,
+  getPaymentCard,
+  getBankCard,
+} from '../../../redux/actions';
 import {styles} from './styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import moment from 'moment';
 
@@ -34,12 +39,16 @@ const GetPaymentList = ({navigation}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
   const [list, setList] = useState([]);
+  const [bankList, setbankList] = useState([]);
+
   const [data, setData] = useState(null);
   const isFocus = useIsFocused();
+  const {userType} = useSelector(state => state.auth);
 
   useEffect(() => {
     if (isFocus) {
       getAllCard();
+      getAllBanks();
     }
   }, [isFocus]);
 
@@ -63,6 +72,27 @@ const GetPaymentList = ({navigation}) => {
     />
   );
 
+  const renderBankItem = ({item, index}) => (
+    console.log('BANK ITEM', item),
+    (
+      <EditCard
+        onPressDelete={() => {
+          setData(item);
+          tabRef.current.open(item);
+          // handleDeleteButton(item);
+          console.log(data);
+        }}
+        onPressEdit={() => {
+          navigation.navigate('EditCard', {
+            params: item,
+          });
+        }}
+        source={appIcons?.bankBuilding}
+        number={item?.account_number.slice(-4)}
+      />
+    )
+  );
+
   const getAllCard = async value => {
     setloading(true);
     const check = await checkConnected();
@@ -79,6 +109,32 @@ const GetPaymentList = ({navigation}) => {
           console.log('ERROR', err);
         };
         dispatch(getPaymentCard(cbSuccess, cbFailure));
+      } catch (error) {
+        console.log('ERROR', error);
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
+
+  const getAllBanks = async value => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const cbSuccess = response => {
+          console.log('RES b==> ', response);
+          setloading(false);
+          setbankList(response);
+        };
+        const cbFailure = err => {
+          Alert.alert('' || 'Error', err || 'Something went wrong');
+          setloading(false);
+          console.log('ERROR', err);
+        };
+        dispatch(getBankCard(cbSuccess, cbFailure));
       } catch (error) {
         console.log('ERROR', error);
         setloading(false);
@@ -134,10 +190,29 @@ const GetPaymentList = ({navigation}) => {
         />
 
         <AddCard
+          title={'Add Card'}
           onPressCard={() => {
             navigation.navigate('SelectPaymentMethod');
           }}
         />
+        {userType == 'bestie' && (
+          <View style={{marginTop: WP('30')}}>
+            <FlatList
+              data={bankList}
+              renderItem={renderBankItem}
+              key={(item, index) => item?.index + toString()}
+            />
+
+            <AddCard
+              title={'Add Bank'}
+              onPressCard={() => {
+                navigation.navigate('AddBankAccount');
+              }}
+              source={appIcons.bankBuilding}
+              tintColor={colors.bl}
+            />
+          </View>
+        )}
         <DeleteModal
           tabRef={tabRef}
           onPressCancel={() => {

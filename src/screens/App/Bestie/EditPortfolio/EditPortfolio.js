@@ -21,7 +21,7 @@ import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
 import {useSelector, useDispatch} from 'react-redux';
-import {updateSignupObject} from '../../../../redux/actions';
+import {updateProfileAction} from '../../../../redux/actions';
 let count = 0;
 const AddPortfolio = ({navigation}) => {
   const [show, setShow] = useState(false);
@@ -221,7 +221,7 @@ const AddPortfolio = ({navigation}) => {
         Alert.alert('Error', 'Something went wrong.');
       };
       console.log('FORMDATA==> ', data);
-      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
     }

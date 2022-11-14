@@ -1,5 +1,5 @@
 import {Formik} from 'formik';
-import React, {useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,9 +7,10 @@ import {
   Image,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppButton, Header, AppInput} from '../../../../components';
+import {AppButton, Header, AppInput, AppLoader} from '../../../../components';
 import {
   account_RateFormField,
   account_RateVS,
@@ -19,16 +20,35 @@ import {
 } from '../../../../shared/exporter';
 import {styles} from './styles';
 import * as TYPES from '../../../../redux/actions/types/auth_types';
+import {updateProfileAction} from '../../../../redux/actions';
 
 const AccountRate = ({navigation}) => {
-  const {signupObject} = useSelector(state => state.auth);
-
+  const {userInfo} = useSelector(state => state.auth);
+  const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
   const ref = useRef();
+
   const handleSubmit = values => {
-    dispatch({type: TYPES.UPDATE_SIGNUP_OBJECT, payload: {rate: values.rate}});
-    navigation.navigate('AddSocialMediaLinks');
+    try {
+      setloading(true);
+      const data = new FormData();
+      data.append('profile[rate]', values.rate);
+
+      const cbSuccess = res => {
+        setloading(false);
+        navigation.goBack();
+        11;
+      };
+      const cbFailure = err => {
+        setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
+      };
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
   };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -59,44 +79,51 @@ const AccountRate = ({navigation}) => {
           isValid,
           handleSubmit,
           handleReset,
-        }) => (
-          <View style={{flexGrow: 0.98}}>
-            <ScrollView>
-              <View style={styles.textContainer}>
-                <AppInput
-                  title={'Rate'}
-                  value={values.rate}
-                  onChangeText={handleChange('rate')}
-                  errorMessage={errors?.rate}
-                  touched={touched?.rate}
-                  renderErrorMessage={true}
-                  keyboardType="number-pad"
-                  maxLength={2}
-                  leftIcon={
-                    <Image
-                      source={appIcons.dollar}
-                      resizeMode={'contain'}
-                      style={styles.iconStyle}
-                    />
-                  }
+          setFieldValue,
+        }) => {
+          useEffect(() => {
+            setFieldValue('rate', userInfo?.data?.rate.toString());
+          }, []);
+          return (
+            <View style={{flexGrow: 0.98}}>
+              <ScrollView>
+                <View style={styles.textContainer}>
+                  <AppInput
+                    title={'Rate'}
+                    value={values.rate}
+                    onChangeText={handleChange('rate')}
+                    errorMessage={errors?.rate}
+                    touched={touched?.rate}
+                    renderErrorMessage={true}
+                    keyboardType="number-pad"
+                    maxLength={2}
+                    leftIcon={
+                      <Image
+                        source={appIcons.dollar}
+                        resizeMode={'contain'}
+                        style={styles.iconStyle}
+                      />
+                    }
+                  />
+                  <Text style={styles.textStyle}>/h</Text>
+                </View>
+              </ScrollView>
+              <View style={styles.buttonContainer}>
+                <AppButton
+                  title={'Update'}
+                  width={WP('35')}
+                  height={WP('13')}
+                  bgColor={colors.b1}
+                  //   disabled={image ? false : true}
+                  onPress={() => {
+                    handleSubmit();
+                  }}
                 />
-                <Text style={styles.textStyle}>/h</Text>
               </View>
-            </ScrollView>
-            <View style={styles.buttonContainer}>
-              <AppButton
-                title={'Update'}
-                width={WP('35')}
-                height={WP('13')}
-                bgColor={colors.b1}
-                //   disabled={image ? false : true}
-                onPress={() => {
-                  handleSubmit();
-                }}
-              />
+              <AppLoader loading={loading} />
             </View>
-          </View>
-        )}
+          );
+        }}
       </Formik>
     </SafeAreaView>
   );

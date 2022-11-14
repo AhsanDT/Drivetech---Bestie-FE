@@ -26,10 +26,11 @@ const EditCard = ({
       />
       <View style={styles.contentContainer}>
         <Text style={styles.numberTextStyle}>{'*** *** *** ***' + number}</Text>
-
-        <Text style={styles.expiresTextStyle}>
-          Expires {month + '/' + year}
-        </Text>
+        {month && (
+          <Text style={styles.expiresTextStyle}>
+            Expires {month + '/' + year}
+          </Text>
+        )}
       </View>
       <TouchableOpacity onPress={onPressEdit}>
         <Image source={appIcons.edit} style={styles.editIcon} />

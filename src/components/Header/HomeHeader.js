@@ -10,19 +10,22 @@ import {
 } from '../../shared/exporter';
 import {MyStatusBar} from '..';
 import SwitchSelector from 'react-native-switch-selector';
+import {useSelector} from 'react-redux';
 
-export const HomeHeader = ({onPressImage, onPress, userImage}) => {
+export const HomeHeader = ({onPressImage, onPress, userImage, value}) => {
   const [selected, setSelected] = useState(false);
+  const {userType} = useSelector(state => state.auth);
   return (
     <>
       {/* <MyStatusBar /> */}
+      {/* {console.log('value in child   ', value)} */}
       <View style={styles.mainContainer}>
         <TouchableOpacity onPress={onPressImage}>
           <Image source={userImage} style={styles.userStyle} />
         </TouchableOpacity>
         <SwitchSelector
           style={styles.switchContainer}
-          initial={0}
+          initial={userType == 'user' ? 0 : 1}
           onPress={onPress}
           textColor={colors.g15}
           selectedColor={colors.g14}
@@ -31,14 +34,16 @@ export const HomeHeader = ({onPressImage, onPress, userImage}) => {
           backgroundColor={colors.g14}
           hasPadding
           options={[
-            {label: 'Besties', value: '1'},
-            {label: 'Be A Bestie', value: '2'},
+            {label: 'Besties', value: '0'},
+            {label: 'Be A Bestie', value: '1'},
           ]}
           testID="gender-switch-selector"
           accessibilityLabel="gender-switch-selector"
           borderRadius={12}
           height={38}
           valuePadding={2}
+          disableValueChangeOnPress
+          // value={value}
         />
         <TouchableOpacity
           activeOpacity={0.7}

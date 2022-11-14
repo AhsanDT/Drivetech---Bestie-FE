@@ -31,8 +31,6 @@ import {
   updateSignupObject,
   updateProfileAction,
 } from '../../../redux/actions';
-import {date} from 'yup';
-import {ALL} from 'dns';
 const Register = ({navigation, route}) => {
   const {userInfo, userType} = useSelector(state => state.auth);
 
@@ -80,8 +78,7 @@ const Register = ({navigation, route}) => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
-      console.log('FORMDATA==> ', data);
-      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
     }

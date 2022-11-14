@@ -25,6 +25,11 @@ const SettingCard = ({
   source,
   toggle,
   userImage,
+  value,
+  toggleColor,
+  trackColor,
+  onValueChange,
+  thumbColor,
 }) => {
   const [checked, setChecked] = useState(false);
   return (
@@ -63,12 +68,12 @@ const SettingCard = ({
         {toggle ? (
           <View style={styles.toggleContainer}>
             <Switch
-              value={checked}
-              onValueChange={value => setChecked(value)}
+              value={value}
+              onValueChange={onValueChange}
               style={{}}
-              color={checked ? colors.org1 : colors.g22}
-              thumbColor={colors.white}
-              trackColor={{false: colors.g22, true: colors.org1}}
+              color={toggleColor}
+              thumbColor={thumbColor}
+              trackColor={trackColor}
             />
           </View>
         ) : (

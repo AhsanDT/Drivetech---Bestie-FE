@@ -9,19 +9,19 @@ import {
 } from 'react-native';
 import {appIcons, colors, family, size, WP} from '../../shared/exporter';
 
-const AddCard = ({onPressCard}) => {
+const AddCard = ({onPressCard, title, source, tintColor}) => {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
       activeOpacity={0.7}
       onPress={onPressCard}>
       <Image
-        source={appIcons.card}
-        style={styles.cardIcon}
+        source={source ? source : appIcons.card}
+        style={[styles.cardIcon, {tintColor: source ? tintColor : null}]}
         resizeMode={'contain'}
       />
 
-      <Text style={styles.cardText}>Add Card</Text>
+      <Text style={styles.cardText}>{title}</Text>
     </TouchableOpacity>
   );
 };

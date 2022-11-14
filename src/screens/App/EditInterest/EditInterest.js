@@ -10,18 +10,24 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {ShowInterestButton, Header, AppButton} from '../../../components';
+import {
+  ShowInterestButton,
+  Header,
+  AppButton,
+  AppLoader,
+} from '../../../components';
 import styles from './styles';
-import {getInterestList, updateSignupObject} from '../../../redux/actions';
+import {getInterestList, updateProfileAction} from '../../../redux/actions';
 import {appIcons, WP, HP, colors} from '../../../shared/exporter';
 import {useDispatch, useSelector} from 'react-redux';
 import {userInfo} from 'os';
 let count = 0;
-const ShowInterest = ({navigation}) => {
+const EditShowInterest = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
   const {userInfo} = useSelector(state => state.auth);
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
     getInterests();
@@ -48,7 +54,6 @@ const ShowInterest = ({navigation}) => {
             userInfo?.interest?.find(item => item?.title === element?.title)
           ) {
             element.selected = true;
-            console.log('ok');
           }
         });
 
@@ -59,57 +64,47 @@ const ShowInterest = ({navigation}) => {
     } catch (error) {}
   };
 
-  const handleNext = () => {
-    console.log('count', count);
-    if (count < 1) {
-      Alert.alert('Alert', 'Please select your interests.');
-    } else {
-    }
-  };
-
-  const handleNavigation = () => {
+  const onPressUpdate = () => {
     if (list.filter(obj => obj.selected).length < 1) {
       Alert.alert('Alert', 'Please select your interests.');
     } else {
-      // updateSignupObject({interestList: list.filter(obj => obj.selected)}),
-
-      // console.log(
-      //   'interest list==> ',
-      //   list.filter(obj => obj.selected),
-      // );
-      console.log(
+      setloading(true);
+      try {
+        const data = new FormData();
         list.forEach(element => {
           if (element.selected) {
-            console.log('IDS==> ', element.id);
+            data.append(
+              'profile[user_interests_attributes][]interest_id',
+              element.id,
+            );
           }
-        }),
-      );
-
-      // navigation.navigate('UploadImage');
+        });
+        const cbSuccess = res => {
+          console.log('RES==> ', res);
+          setloading(false);
+          // navigation.goBack();
+        };
+        const cbFailure = err => {
+          setloading(false);
+          Alert.alert('Error', 'Something went wrong.');
+        };
+        console.log('DATA FORM==> ', data);
+        dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+      } catch (error) {
+        setloading(false);
+        console.log('error', error);
+      }
     }
   };
 
-  const footer = () => {
-    return (
-      <View style={{paddingBottom: 15}}>
-        <TouchableOpacity onPress={() => setshowLess(!showLess)}>
-          <View style={styles.showAllView}>
-            <Text style={styles.showText}>
-              {showLess ? 'Show less' : 'Show all'}
-            </Text>
-            <Image
-              source={appIcons.arrow}
-              style={[
-                styles.arrow,
-                {transform: [{rotate: showLess ? '180 deg' : '0 deg'}]},
-              ]}
-              resizeMode="contain"
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  // const handleNext = () => {
+  //   console.log('count', count);
+  //   if (count < 1) {
+  //     Alert.alert('Alert', 'Please select your interests.');
+  //   } else {
+  //   }
+  // }
+  // };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -158,12 +153,13 @@ const ShowInterest = ({navigation}) => {
             bgColor={colors.b1}
             title={'Update'}
             height={WP('14')}
-            onPress={() => handleNavigation()}
+            onPress={() => onPressUpdate()}
           />
         </View>
       ) : null}
+      {/* <AppLoader loading={loading} /> */}
     </SafeAreaView>
   );
 };
 
-export default ShowInterest;
+export default EditShowInterest;

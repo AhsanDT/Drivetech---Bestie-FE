@@ -37,3 +37,38 @@ export const updatePaymentCard = (params, cardId, cbSuccess, cbFailure) => {
     cbFailure,
   };
 };
+
+export const addBankRequest = (params, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.ADD_BANK_REQUEST,
+    params,
+    cbSuccess,
+    cbFailure,
+  };
+};
+export const getBankCard = (cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.GET_BANK_LIST_REQUEST,
+    cbSuccess,
+    cbFailure,
+  };
+};
+
+export const deleteBankCard = (params, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.DELETE_BANK_REQUEST,
+    params,
+    cbSuccess,
+    cbFailure,
+  };
+};
+
+export const updateBankInfo = (params, bankId, cbSuccess, cbFailure) => {
+  return {
+    type: TYPES.UPDATE_PAYMENT_CARD_REQUEST,
+    params,
+    bankId,
+    cbSuccess,
+    cbFailure,
+  };
+};

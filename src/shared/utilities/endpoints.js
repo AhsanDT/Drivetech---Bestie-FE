@@ -27,6 +27,8 @@ const ENDPOINTS = {
   CREATE_CONVERSATION: 'support_conversations',
   CREATE_MESSAGE: 'support_conversations/create_message',
   UPDATE_PROFILE: 'profile/update_profile',
+  // CRUD(BANK)
+  BANK: 'banks',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};
