@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 
   accountContainer: {
-    marginTop: WP('20'),
+    marginTop: WP('5'),
     // bottom: WP('7'),
     // position: 'absolute',
     // alignItems: 'center',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     fontSize: size.text_16,
   },
   HiBestieTextStyle: {
-    fontSize: size.text_36,
+    fontSize: size.text_34,
     fontFamily: family.Poppin_Medium,
     color: colors.white,
     textAlign: 'center',

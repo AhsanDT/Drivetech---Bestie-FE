@@ -50,13 +50,21 @@ export const BottomTab = ({state, descriptors, navigation}) => {
                   <Image
                     source={
                       index == 0
-                        ? appIcons.home
+                        ? isFocused
+                          ? appIcons.home
+                          : appIcons.homeGray
                         : index == 1
-                        ? appIcons.job
+                        ? isFocused
+                          ? appIcons.jobColor
+                          : appIcons.job
                         : index == 2
-                        ? appIcons.calendar
+                        ? isFocused
+                          ? appIcons.calendarColor
+                          : appIcons.calendar
                         : index == 3
-                        ? appIcons.chat
+                        ? isFocused
+                          ? appIcons.chatColor
+                          : appIcons.chat
                         : null
                     }
                     style={[

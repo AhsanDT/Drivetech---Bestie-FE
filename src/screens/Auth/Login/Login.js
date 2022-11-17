@@ -337,7 +337,7 @@ const Login = ({navigation}) => {
                 navigation.navigate('Auth', {screen: 'PrivacyPolicy'});
               }}>
               {' '}
-              Privacy & Policy
+              Privacy Policy
             </Text>
             <Text> and </Text>
             <Text

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     width: WP('100'),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: WP('35'),
+    marginTop: WP('28'),
   },
   footerText: {
     textAlign: 'center',
