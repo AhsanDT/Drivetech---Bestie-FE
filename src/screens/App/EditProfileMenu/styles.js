@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     borderRadius: WP('36') / 2,
+    backgroundColor: '#ccc',
   },
   overlayImage: {
     backgroundColor: '#fff',

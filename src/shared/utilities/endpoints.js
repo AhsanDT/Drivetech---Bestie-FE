@@ -29,6 +29,11 @@ const ENDPOINTS = {
   UPDATE_PROFILE: 'profile/update_profile',
   // CRUD(BANK)
   BANK: 'banks',
+  PROFILE_TYPE: 'profile/switch_user',
+  UPDATE_SOCIALMEDIA_LINK: 'profile/update_social_media',
+  UPDATE_PORTFOLIO: 'profile/update_portfolio',
+  UPDATE_USER_INTEREST: 'profile/update_user_interests',
+  UPDATE_USER_TALENT: 'profile/update_user_talents',
 };
 
 export {BASE_URL, ENDPOINTS, CHAT_URL};

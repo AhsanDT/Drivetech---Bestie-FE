@@ -23,6 +23,12 @@ import AddBankAccount from '../../../screens/App/Bestie/AddBankAccount';
 import ChangePassword from '../../../screens/App/ChangePassword';
 import EditPasswordEmailConfirmation from '../../../screens/App/EditPasswordEmailConfirmmation';
 import ChanePasswordVerifyOtp from '../../../screens/App/ChanePasswordVerifyOtp';
+import EditBankAccount from '../../../screens/App/Bestie/EditBankAccount';
+import UpdateProfilePortfolio from '../../../screens/App/Bestie/UpdateProfilePortfolio';
+import UpdateProfileAccountRate from '../../../screens/App/Bestie/UpdateProfileAccountRate';
+import UpdateProfileCameraDeatil from '../../../screens/App/Bestie/UpdateProfileCameraDetails';
+import UpdateProfileSocialMediaLinks from '../../../screens/App/Bestie/UpdateProfileSocialMediaLinks';
+import UpdateProfileTalents from '../../../screens/App/Bestie/UpdateProfileSocialMediaLinks';
 
 const Stack = createStackNavigator();
 
@@ -68,6 +74,28 @@ function StackNavigation(props) {
       <Stack.Screen
         name="ChanePasswordVerifyOtp"
         component={ChanePasswordVerifyOtp}
+      />
+      <Stack.Screen name="EditBankAccount" component={EditBankAccount} />
+
+      <Stack.Screen
+        name="UpdateProfilePortfolio"
+        component={UpdateProfilePortfolio}
+      />
+      <Stack.Screen
+        name="UpdateProfileAccountRate"
+        component={UpdateProfileAccountRate}
+      />
+      <Stack.Screen
+        name="UpdateProfileCameraDeatil"
+        component={UpdateProfileCameraDeatil}
+      />
+      <Stack.Screen
+        name="UpdateProfileSocialMediaLinks"
+        component={UpdateProfileSocialMediaLinks}
+      />
+      <Stack.Screen
+        name="UpdateProfileTalents"
+        component={UpdateProfileTalents}
       />
     </Stack.Navigator>
   );

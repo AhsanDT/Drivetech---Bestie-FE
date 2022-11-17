@@ -27,6 +27,7 @@ const DeleteModal = ({
   month,
   year,
   number,
+  bank,
 }) => {
   return (
     <SafeAreaView>
@@ -40,22 +41,28 @@ const DeleteModal = ({
         <View style={styles.borderStyle} />
         <View style={styles.contentContainer}>
           <Image
-            source={appIcons.cross}
+            source={bank ? appIcons.buildingBank : appIcons.cross}
             style={styles.crossIconStyle}
             resizeMode={'contain'}
           />
           <Text style={styles.cardNumberStyle}>
             {'*** *** *** ***' + number}
           </Text>
-          <Text style={styles.expiresStyle}> Expires {month + '/' + year}</Text>
+          {month && (
+            <Text style={styles.expiresStyle}>
+              {' '}
+              Expires {month + '/' + year}
+            </Text>
+          )}
         </View>
         <View style={styles.spacer} />
         <View style={styles.secondContentContainer}>
           <Text style={styles.cardTextStyle}>
-            Are you sure you want to delete{'\n'}this card?
+            Are you sure you want to delete{'\n'}this{' '}
+            {bank ? 'bank info' : 'card'}?
           </Text>
           <AppButton
-            bgColor={colors.red5}
+            bgColor={colors.red2}
             width={WP('75')}
             title={'Delete'}
             onPress={onPressDelete}
@@ -74,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1.2,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    backgroundColor: colors.white2,
+    backgroundColor: colors.white,
     paddingHorizontal: WP('4'),
     alignItems: 'center',
     alignSelf: 'center',

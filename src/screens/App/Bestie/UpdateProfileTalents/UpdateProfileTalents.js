@@ -21,13 +21,11 @@ import {getTalentList, updateSignupObject} from '../../../../redux/actions';
 import {appIcons, WP, HP, colors} from '../../../../screens/../shared/exporter';
 import {useDispatch, useSelector} from 'react-redux';
 let count = 0;
-const showTalent = ({navigation, route}) => {
+const showTalent = ({navigation}) => {
   const [list, setlist] = useState([]);
   const dispatch = useDispatch();
   const [showLess, setshowLess] = useState(false);
   const {signupObject, userInfo} = useSelector(state => state.auth);
-  const [data, setdata] = useState(route?.params?.data);
-
   useEffect(() => {
     getTalent();
   }, []);
@@ -39,18 +37,18 @@ const showTalent = ({navigation, route}) => {
       list[index].selected = true;
     }
     setlist([...list]);
-    count = list?.filter(obj => obj.selected).length;
+    count = list.filter(obj => obj.selected).length;
   };
 
   const getTalent = () => {
     try {
       const cbSuccess = response => {
-        console.log('talents==> ', response);
         response?.data.forEach(element => {
           element.selected = false;
         });
         response?.data?.forEach(element => {
-          if (data.find(item => item?.title == element?.title)) {
+          console.log('ELEMENT===> ', element);
+          if (userInfo?.talent?.find(item => item?.title == element?.title)) {
             element.selected = true;
             count = count + 1;
           }
@@ -63,6 +61,7 @@ const showTalent = ({navigation, route}) => {
   };
 
   const handleNext = () => {
+    console.log('count', count);
     if (count < 1) {
       Alert.alert('Alert', 'Please select your interests.');
     } else {
@@ -95,7 +94,6 @@ const showTalent = ({navigation, route}) => {
           navigation.goBack();
         }}
       />
-      {/* {console.log('LIST==> ', list)} */}
 
       {list?.length > 0 ? (
         <FlatList

@@ -11,7 +11,10 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppButton, Header, AppInput, AppLoader} from '../../../../components';
-import {updateSocialMediaLinks} from '../../../../redux/actions';
+import {
+  updateProfileAction,
+  updateSocialMediaLinks,
+} from '../../../../redux/actions';
 
 import {
   appIcons,
@@ -26,7 +29,6 @@ const AccountRate = ({navigation}) => {
   const ref = useRef();
   const {userInfo} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
-  console.log('Userinfo', userInfo);
 
   const handleSubmit = values => {
     console.log(userInfo?.social_media);
@@ -36,28 +38,27 @@ const AccountRate = ({navigation}) => {
       {title: 'linkedin', link: values.linkedIn},
       {title: 'pinterest', link: values.pinterest},
     ];
-    // console.log('new arr', newArr);
-    // return;
     try {
       setloading(true);
       const data = new FormData();
+      // data.append('profile[social_media_attributes][]', newArr);
       data.append('social_media', JSON.stringify(newArr));
-
+      navigation.navigate('Bestietack', {
+        screen: 'UpdateProfileCameraDeatil',
+      });
       const cbSuccess = res => {
-        console.log('RES UPDATE SOCIal==> ', res);
+        console.log('RES UPDATE SOCIal switch==> ', res);
         setloading(false);
         // navigation.goBack();
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
-        console.log('error==>', err);
       };
-      console.log('SOCIAL UPDATED==> ', data);
+      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
       dispatch(updateSocialMediaLinks(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
-      console.log('error==>', error);
     }
   };
 
@@ -95,9 +96,9 @@ const AccountRate = ({navigation}) => {
             setFieldValue,
           }) => {
             useEffect(() => {
-              setFieldValue('tiktok', userInfo?.social_media[1]?.link);
+              setFieldValue('pinterest', userInfo?.social_media[1]?.link);
               setFieldValue('instagram', userInfo?.social_media[0]?.link);
-              setFieldValue('pinterest', userInfo?.social_media[3]?.link);
+              setFieldValue('tiktok', userInfo?.social_media[3]?.link);
               setFieldValue('linkedIn', userInfo?.social_media[2]?.link);
             }, []);
             return (

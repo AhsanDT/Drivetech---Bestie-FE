@@ -30,7 +30,11 @@ function* login(params) {
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      console.log('res.auth_token', res?.auth_token);
+      console.log('LOGIN USER TYPE==> saga ', res?.data?.profile_type);
+      yield put({
+        type: types.USER_TYPE,
+        payload: res?.data?.profile_type,
+      });
       AsyncStorage.setItem('usertoken', res?.auth_token);
       params?.cbSuccess(res);
     }

@@ -79,7 +79,6 @@ export function* updatePaymentCardSaga() {
 }
 
 function* updatePaymentCard(params) {
-  console.log('paramsUpdate2', params);
   try {
     const res = yield updateCardDetail(params);
     if (res) {
@@ -95,8 +94,8 @@ function* updatePaymentCard(params) {
 
 export function* Bank_CRUD() {
   yield takeLatest(types.ADD_BANK_REQUEST, addBankSaga);
-  // yield takeLatest(types.UPDATE_BANK_REQUEST, updateBankSaga);
-  // yield takeLatest(types.DELETE_BANK_REQUEST, deleteBankSaga);
+  yield takeLatest(types.UPDATE_BANK_REQUEST, updateBankSaga);
+  yield takeLatest(types.DELETE_BANK_REQUEST, deleteBankSaga);
   yield takeLatest(types.GET_BANK_LIST_REQUEST, getBanksaga);
 }
 
@@ -117,6 +116,32 @@ function* addBankSaga(params) {
 function* getBanksaga(params) {
   try {
     const res = yield showBankDetails();
+    if (res) {
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    console.log('error', error);
+    let msg = responseValidator(error?.response?.status, error?.response?.data);
+    params?.cbFailure(msg);
+  }
+}
+
+function* deleteBankSaga(params) {
+  try {
+    const res = yield deleteBankService(params);
+    if (res) {
+      params?.cbSuccess(res);
+    }
+  } catch (error) {
+    console.log('error', error);
+    let msg = responseValidator(error?.response?.status, error?.response?.data);
+    params?.cbFailure(msg);
+  }
+}
+
+function* updateBankSaga(params) {
+  try {
+    const res = yield updateBankDetail(params);
     if (res) {
       params?.cbSuccess(res);
     }

@@ -180,12 +180,12 @@ const Setting = ({navigation}) => {
           title={'Change Password'}
           onPress={() => navigation.navigate('EditPasswordEmailConfirmation')}
         />
-        {userType == 'bestie' && (
-          <SettingCard
-            title={'Add Social Media Links'}
-            onPress={() => navigation.navigate('EditSocialMediaLink')}
-          />
-        )}
+
+        <SettingCard
+          title={'Add Social Media Links'}
+          onPress={() => navigation.navigate('EditSocialMediaLink')}
+        />
+
         <AppLoader loading={loading} />
       </KeyboardAwareScrollView>
     </SafeAreaView>

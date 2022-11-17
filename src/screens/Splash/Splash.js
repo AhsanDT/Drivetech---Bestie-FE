@@ -17,6 +17,9 @@ const Splash = ({navigation}) => {
         //   screen: 'Home',
         // });
         navigation.replace('MainStack');
+        // navigation.navigate('Bestietack', {
+        //   screen: 'UpdateProfileCameraDeatil',
+        // });
       } else {
         // dispatch(resetAllStateAction());
         navigation.replace('Auth');
@@ -41,9 +44,7 @@ const Splash = ({navigation}) => {
           style={styles.logoStyle}
         />
         <Text style={styles.HiBestieTextStyle}>Hi Bestie</Text>
-        <Text style={styles.textStyle}>
-          Let Us Help You Find Your Bestie
-        </Text>
+        <Text style={styles.textStyle}>Let Us Help You Find Your Bestie</Text>
       </View>
       {/* <AppButton
         bgColor={colors.b1}

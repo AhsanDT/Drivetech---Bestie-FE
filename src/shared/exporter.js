@@ -42,6 +42,8 @@ export {
   updateEnduserInfoFields,
   addBankAccountFields,
   AddBankAccount,
+  editBankAccountFields,
+  EditBankAccount,
 } from './utilities/validations';
 
 export {

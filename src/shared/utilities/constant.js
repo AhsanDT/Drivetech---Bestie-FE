@@ -304,11 +304,11 @@ const Setting_List = [
     title: 'Support',
     route: 'SupportList',
   },
-  {
-    id: 7,
-    title: 'Switch to Bestie',
-    selected: true,
-  },
+  // {
+  //   id: 7,
+  //   title: 'Switch to Bestie',
+  //   selected: true,
+  // },
   {
     id: 8,
     title: 'Block List',

@@ -28,6 +28,7 @@ import {
   deletePaymentCard,
   getPaymentCard,
   getBankCard,
+  deleteBankCard,
 } from '../../../redux/actions';
 import {styles} from './styles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -36,12 +37,16 @@ import moment from 'moment';
 
 const GetPaymentList = ({navigation}) => {
   const tabRef = useRef(null);
+  const bankRef = useRef(null);
+
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
   const [list, setList] = useState([]);
   const [bankList, setbankList] = useState([]);
 
   const [data, setData] = useState(null);
+  const [bankData, setbankData] = useState(null);
+
   const isFocus = useIsFocused();
   const {userType} = useSelector(state => state.auth);
 
@@ -73,24 +78,19 @@ const GetPaymentList = ({navigation}) => {
   );
 
   const renderBankItem = ({item, index}) => (
-    console.log('BANK ITEM', item),
-    (
-      <EditCard
-        onPressDelete={() => {
-          setData(item);
-          tabRef.current.open(item);
-          // handleDeleteButton(item);
-          console.log(data);
-        }}
-        onPressEdit={() => {
-          navigation.navigate('EditCard', {
-            params: item,
-          });
-        }}
-        source={appIcons?.bankBuilding}
-        number={item?.account_number.slice(-4)}
-      />
-    )
+    <EditCard
+      onPressDelete={() => {
+        setbankData(item);
+        bankRef.current.open(item);
+      }}
+      onPressEdit={() => {
+        navigation.navigate('EditBankAccount', {
+          params: item,
+        });
+      }}
+      source={appIcons?.bankBuilding}
+      number={item?.account_number.slice(-4)}
+    />
   );
 
   const getAllCard = async value => {
@@ -172,6 +172,30 @@ const GetPaymentList = ({navigation}) => {
       setloading(false);
     }
   };
+  const handleBankDeleteButton = async item => {
+    setloading(true);
+    const check = await checkConnected();
+    if (check) {
+      try {
+        const cbSuccess = response => {
+          setloading(false);
+          setbankData(null);
+          bankRef?.current?.close();
+          getAllBanks();
+        };
+        const cbFailure = err => {
+          Alert.alert('' || 'Error', err || 'Something went wrong');
+          setloading(false);
+        };
+        dispatch(deleteBankCard(item, cbSuccess, cbFailure));
+      } catch (error) {
+        setloading(false);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+      setloading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -224,6 +248,17 @@ const GetPaymentList = ({navigation}) => {
           month={data?.exp_month}
           year={String(data?.exp_year)?.slice(-2)}
           number={data?.cvc}
+        />
+        <DeleteModal
+          tabRef={bankRef}
+          onPressCancel={() => {
+            bankRef?.current?.close();
+          }}
+          onPressDelete={item => {
+            handleBankDeleteButton(bankData?.id);
+          }}
+          bank
+          number={bankData?.account_number?.slice(-4)}
         />
         <AppLoader loading={loading} />
       </ScrollView>

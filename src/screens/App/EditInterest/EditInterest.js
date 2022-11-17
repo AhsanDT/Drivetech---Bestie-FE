@@ -17,7 +17,11 @@ import {
   AppLoader,
 } from '../../../components';
 import styles from './styles';
-import {getInterestList, updateProfileAction} from '../../../redux/actions';
+import {
+  getInterestList,
+  updateProfileAction,
+  updateUserInterestAction,
+} from '../../../redux/actions';
 import {appIcons, WP, HP, colors} from '../../../shared/exporter';
 import {useDispatch, useSelector} from 'react-redux';
 import {userInfo} from 'os';
@@ -73,38 +77,24 @@ const EditShowInterest = ({navigation}) => {
         const data = new FormData();
         list.forEach(element => {
           if (element.selected) {
-            data.append(
-              'profile[user_interests_attributes][]interest_id',
-              element.id,
-            );
+            data.append('interest_ids[]', element.id);
           }
         });
         const cbSuccess = res => {
-          console.log('RES==> ', res);
+          Alert.alert('Alert', 'Interest Updated Successfully.');
           setloading(false);
-          // navigation.goBack();
+          navigation.goBack();
         };
         const cbFailure = err => {
           setloading(false);
           Alert.alert('Error', 'Something went wrong.');
         };
-        console.log('DATA FORM==> ', data);
-        dispatch(updateProfileAction(data, cbSuccess, cbFailure));
+        dispatch(updateUserInterestAction(data, cbSuccess, cbFailure));
       } catch (error) {
         setloading(false);
-        console.log('error', error);
       }
     }
   };
-
-  // const handleNext = () => {
-  //   console.log('count', count);
-  //   if (count < 1) {
-  //     Alert.alert('Alert', 'Please select your interests.');
-  //   } else {
-  //   }
-  // }
-  // };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
@@ -122,7 +112,6 @@ const EditShowInterest = ({navigation}) => {
           data={list}
           numColumns={3}
           horizontal={false}
-          // ListFooterComponent={() => footer()}
           columnWrapperStyle={{
             flexWrap: 'wrap',
           }}
@@ -157,7 +146,7 @@ const EditShowInterest = ({navigation}) => {
           />
         </View>
       ) : null}
-      {/* <AppLoader loading={loading} /> */}
+      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

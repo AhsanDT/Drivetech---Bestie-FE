@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,69 +9,59 @@ import {
   FlatList,
   PermissionsAndroid,
   StatusBar,
-  Alert,
 } from 'react-native';
 import {
   AppButton,
   AppHeader,
   ImagePickerModal,
-  Header,
   AppLoader,
 } from '../../../../components';
 import {appIcons, colors, image_options, WP} from '../../../../shared/exporter';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles} from './styles';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  updateProfileAction,
-  updatePortfolioAction,
-} from '../../../../redux/actions';
+import {updateProfileAction} from '../../../../redux/actions';
 let count = 0;
 const AddPortfolio = ({navigation}) => {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
   const [currentItemClicked, setCurrentItemClicked] = useState(null);
-  const [loading, setloading] = useState(false);
-
   const dispatch = useDispatch();
   const {userInfo} = useSelector(state => state.auth);
-  // console.log('userInfo', userInfo);
-  const [picsArray, setPicsArray] = useState(
-    // {
-    //   id: 1,
-    //   image: null,
-    //   loading: false,
-    // },
-    // {
-    //   id: 2,
-    //   image: null,
-    //   loading: false,
-    // },
-    // {
-    //   id: 3,
-    //   image: null,
-    //   loading: false,
-    // },
-    // {
-    //   id: 4,
-    //   image: null,
-    //   loading: false,
-    // },
-    // {
-    //   id: 5,
-    //   image: null,
-    //   loading: false,
-    // },
-    // {
-    //   id: 6,
-    //   image: null,
-    //   loading: false,
-    // },
-    userInfo?.portfolio,
-  );
-
-  useEffect(() => {}, []);
-
+  const [loading, setloading] = useState(false);
+  console.log('userinfo', userInfo);
+  const [picsArray, setPicsArray] = useState([
+    {
+      id: 1,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 2,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 3,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 4,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 5,
+      image: null,
+      loading: false,
+    },
+    {
+      id: 6,
+      image: null,
+      loading: false,
+    },
+  ]);
   const showGallery = () => {
     setShow(false);
     try {
@@ -155,10 +145,10 @@ const AddPortfolio = ({navigation}) => {
           onAddImage(item);
         }}>
         <Image
-          source={item.image == null ? {uri: item?.portfolio_url} : item?.image}
+          source={item.image == null ? appIcons.camera : item?.image}
           style={
             item.image == null
-              ? styles.uriImageContainer
+              ? styles.cameraContainer
               : styles.uriImageContainer
           }
         />
@@ -180,75 +170,46 @@ const AddPortfolio = ({navigation}) => {
     );
   };
   const handleButton = () => {
-    // dispatch(updateSignupObject({portfolio: picsArray}));
-    picsArray?.forEach(element => {
-      console.log(
-        'ELEMENT===> ',
-        element?.image
-          ? {
-              uri: element?.image.uri,
-              name: element?.image.fileName,
-              type: element?.image.type,
-            }
-          : element?.portfolio_url,
-      );
-    });
-    // navigation.navigate('CameraDetails');
-  };
-
-  count = picsArray?.filter(obj => obj?.image).length;
-
-  const onPressUpdate = value => {
     setloading(true);
     try {
       const data = new FormData();
-
       picsArray?.forEach(element => {
-        data.append(
-          'profile[portfolio][]',
-          element?.image
-            ? {
-                uri: element?.image.uri,
-                name: element?.image.fileName,
-                type: element?.image.type,
-              }
-            : element?.portfolio_url,
-        );
+        data.append('profile[portfolio][]', {
+          uri: element?.image.uri,
+          name: element?.image.fileName,
+          type: element?.image.type,
+        });
       });
 
       const cbSuccess = res => {
-        Alert.alert('Alert', 'Portfolio Updated Successfully.');
-
         setloading(false);
-        navigation.goBack();
+        navigation.navigate('Bestietack', {
+          screen: 'UpdateProfileSocialMediaLinks',
+        });
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
-      dispatch(updatePortfolioAction(data, cbSuccess, cbFailure));
+      dispatch(updateProfileAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
-      console.log('portfolio update==> ', error);
     }
   };
 
+  count = picsArray?.filter(obj => obj?.image).length;
+
   return (
     <SafeAreaView style={styles.container}>
-      <Header
-        title={'Edit Portfolio'}
-        backIcon={true}
-        onPressBack={() => {
-          navigation.goBack();
-        }}
-      />
+      <AppHeader title={'Add\nPortfolio'} />
       <StatusBar
         backgroundColor={colors.white}
         translucent={false}
         barStyle={'dark-content'}
       />
 
-      <Text style={styles.textStyle}>Add Portfolio</Text>
+      <Text style={styles.textStyle}>Update Portfolio To Become a Bestie</Text>
+
       <View style={styles.contentContainer}>
         <FlatList
           data={picsArray || []}
@@ -268,15 +229,15 @@ const AddPortfolio = ({navigation}) => {
           title={'Update'}
           width={WP('35')}
           height={WP('13')}
-          bgColor={colors.b1}
-          // disabled={count < 6 ? true : false}
+          bgColor={count < 6 ? colors.g1 : colors.b1}
+          disabled={count < 6 ? true : false}
           onPress={() => {
             // navigation.navigate('ImageVerification');
-            onPressUpdate();
+            handleButton();
           }}
         />
+        <AppLoader loading={loading} />
       </View>
-      <AppLoader loading={loading} />
     </SafeAreaView>
   );
 };

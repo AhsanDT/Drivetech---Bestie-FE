@@ -38,16 +38,10 @@ const Register = ({navigation, route}) => {
   const [location, setlocation] = useState('');
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
-  const [sex, setsex] = useState('Male');
-  const [experience, setExperience] = useState('1 Year');
-  const [pronoun, setPronoun] = useState('he/him');
+  const [sex, setsex] = useState(userInfo?.data?.sex);
+  const [experience, setExperience] = useState(userInfo?.data?.experience);
+  const [pronoun, setPronoun] = useState(userInfo?.data?.pronoun);
   const ref = useRef();
-  // const [userType, setuserType] = useState('user');
-  console.log('DATA==> ', userInfo);
-  // useEffect(() => {
-  //   setsex(userInfo?.data?.sex);
-  //   setExperience(userInfo?.data?.sex);
-  // }, []);
 
   const onPressUpdate = value => {
     setloading(true);
@@ -129,7 +123,7 @@ const Register = ({navigation, route}) => {
               setFieldValue('lastName', data?.last_name);
               setFieldValue('email', data?.email);
               setFieldValue('phone', data?.phone_number);
-
+              console.log('person data', data);
               if (userType == 'user') {
                 setFieldValue('country', data?.country);
                 setFieldValue('city', data?.city);

@@ -19,6 +19,7 @@ import {
   WP,
 } from '../../../../shared/exporter';
 import {styles} from './styles';
+import * as TYPES from '../../../../redux/actions/types/auth_types';
 import {updateProfileAction} from '../../../../redux/actions';
 
 const AccountRate = ({navigation}) => {
@@ -32,11 +33,12 @@ const AccountRate = ({navigation}) => {
       setloading(true);
       const data = new FormData();
       data.append('profile[rate]', values.rate);
+      data.append('profile[profile_completed]', true);
 
       const cbSuccess = res => {
-        Alert.alert('Alert', 'Account Rate Updated Successfully.');
         setloading(false);
-        navigation.goBack();
+        navigation.replace('MainStack');
+        console.log('RES===<.rate', res);
       };
       const cbFailure = err => {
         setloading(false);
@@ -81,7 +83,7 @@ const AccountRate = ({navigation}) => {
           setFieldValue,
         }) => {
           useEffect(() => {
-            setFieldValue('rate', userInfo?.data?.rate.toString());
+            setFieldValue('rate', userInfo?.data?.rate?.toString());
           }, []);
           return (
             <View style={{flexGrow: 0.98}}>

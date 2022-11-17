@@ -69,9 +69,7 @@ const AddCard = ({navigation}) => {
           const onFailure = res => {
             setloading(false);
             Alert.alert('Failed', 'Unable to proceed payment!');
-            console.log('On Add Card Failure', res);
           };
-          console.log('BANK TOEKN', data);
           dispatch(addBankRequest(form, onSuccess, onFailure));
         } else {
           setloading(false);

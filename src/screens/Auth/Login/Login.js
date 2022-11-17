@@ -58,10 +58,25 @@ const Login = ({navigation}) => {
       try {
         const cbSuccess = response => {
           // Alert.alert('Alert', 'Log in successfully.');
+          console.log('LOGIN==> ', response);
           setloading(false);
           ref.current.resetForm();
-          navigation.replace('MainStack');
+
+          if (response?.data?.profile_type == 'bestie') {
+            if (response?.data?.profile_completed) {
+              navigation.replace('MainStack');
+            } else {
+              // alert('not complete');
+              navigation.navigate('Bestietack', {
+                screen: 'UpdateProfilePortfolio',
+              });
+            }
+          } else {
+            navigation.replace('MainStack');
+          }
+          // navigation.replace('MainStack');
         };
+
         const cbFailure = err => {
           Alert.alert('' || 'Error', err);
           setloading(false);

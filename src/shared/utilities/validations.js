@@ -108,6 +108,10 @@ export const AddBankAccount = {
   RoutingNumber: '',
 };
 
+export const EditBankAccount = {
+  fullname: '',
+};
+
 export const account_RateFormField = {
   rate: '',
 };
@@ -261,6 +265,9 @@ export const addBankAccountFields = yup.object().shape({
   country: yup.string().required('Country Required'),
   bankAccNumber: yup.string().required('Bank Acc. Number Required'),
   RoutingNumber: yup.string().required('Routing Number Required'),
+});
+export const editBankAccountFields = yup.object().shape({
+  fullname: yup.string().required('Full Name Required'),
 });
 
 // fullname: '',

@@ -65,7 +65,7 @@ export const deleteBankCard = (params, cbSuccess, cbFailure) => {
 
 export const updateBankInfo = (params, bankId, cbSuccess, cbFailure) => {
   return {
-    type: TYPES.UPDATE_PAYMENT_CARD_REQUEST,
+    type: TYPES.UPDATE_BANK_REQUEST,
     params,
     bankId,
     cbSuccess,

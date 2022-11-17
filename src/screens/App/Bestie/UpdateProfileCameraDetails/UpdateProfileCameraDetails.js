@@ -28,6 +28,7 @@ import {
 import {styles} from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  updateSignupObject,
   updateProfileAction,
   updateUserTalentAction,
 } from '../../../../redux/actions';
@@ -36,23 +37,19 @@ import * as TYPES from '../../../../redux/actions/types/auth_types';
 
 var count = 0;
 const CameraDetails = ({navigation}) => {
+  const [fields, setFields] = useState([{value: ''}]);
   const [list, setlist] = useState(Camera_List);
   const [otherequipmentList, setotherequipmentList] = useState(Equipment_List);
+  const [cameraModel, setcameraModel] = useState('');
   const dispatch = useDispatch();
   const {signupObject, userInfo} = useSelector(state => state.auth);
+  const [loading, setloading] = useState(false);
+
   const [talentArr, settalentArr] = useState();
   const [check, setcheck] = useState(false);
-  const [cameraModel, setcameraModel] = useState(
-    userInfo?.camera_detail?.model,
-  );
-  const [fields, setFields] = useState([
-    {value: userInfo?.camera_detail?.others[0]},
-  ]);
-
   const [cameraType, setCameraType] = useState(
     userInfo?.camera_detail?.camera_type,
   );
-  const [loading, setloading] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -94,19 +91,6 @@ const CameraDetails = ({navigation}) => {
     setlist([...list]);
   }, [cameraType]);
 
-  useEffect(() => {
-    otherequipmentList?.forEach(element => {
-      if (
-        userInfo?.camera_detail?.equipment?.forEach(
-          item => item === element?.title,
-        )
-      ) {
-        element.selected = true;
-      }
-      setotherequipmentList([...otherequipmentList]);
-    });
-  }, []);
-
   const handleOtherEquipment = (item, index) => {
     otherequipmentList[index].selected = !otherequipmentList[index].selected;
     otherequipmentList?.map(i => {
@@ -126,10 +110,6 @@ const CameraDetails = ({navigation}) => {
   };
 
   const handleSubmit = () => {
-    if (talentArr?.length < 1) {
-      alert('Please select atleast one talent');
-    }
-
     try {
       setloading(true);
       const talent = new FormData();
@@ -140,10 +120,13 @@ const CameraDetails = ({navigation}) => {
           talent.append('talent_ids[]', element.id);
         }
       });
+
       data.append('profile[camera_detail_attributes]model', cameraModel);
+
       fields?.forEach(obj => {
         data.append('profile[camera_detail_attributes]others[]', obj?.value);
       });
+
       otherequipmentList?.forEach(element => {
         if (element.selected) {
           data.append(
@@ -163,14 +146,17 @@ const CameraDetails = ({navigation}) => {
       });
 
       const cbSuccess = res => {
+        console.log('RES==> ', res);
         setloading(false);
-        Alert.alert('Alert', 'Camera details updated successfully');
-        navigation.navigate('Setting');
+        navigation.navigate('Bestietack', {
+          screen: 'UpdateProfileAccountRate',
+        });
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
+      console.log('talent', talent);
       dispatch(updateProfileAction(data, cbSuccess, cbFailure));
       dispatch(updateUserTalentAction(talent, cbSuccess, cbFailure));
     } catch (error) {
@@ -262,7 +248,7 @@ const CameraDetails = ({navigation}) => {
         </View>
         <View>
           <Text style={styles.textStyle}>Others</Text>
-          {fields?.map((field, id) => {
+          {fields.map((field, id) => {
             return (
               <View key={`${field}-${id}`}>
                 <AppInput
@@ -293,8 +279,8 @@ const CameraDetails = ({navigation}) => {
             }}
             // disabled={check? false :true}
           />
+          <AppLoader loading={loading} />
         </View>
-        <AppLoader loading={loading} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -12,13 +12,17 @@ import {MyStatusBar} from '..';
 import SwitchSelector from 'react-native-switch-selector';
 import {useSelector} from 'react-redux';
 
-export const HomeHeader = ({onPressImage, onPress, userImage, value}) => {
+export const HomeHeader = ({
+  onPressImage,
+  onPress,
+  userImage,
+  value,
+  disabled,
+}) => {
   const [selected, setSelected] = useState(false);
   const {userType} = useSelector(state => state.auth);
   return (
     <>
-      {/* <MyStatusBar /> */}
-      {/* {console.log('value in child   ', value)} */}
       <View style={styles.mainContainer}>
         <TouchableOpacity onPress={onPressImage}>
           <Image source={userImage} style={styles.userStyle} />
@@ -43,7 +47,7 @@ export const HomeHeader = ({onPressImage, onPress, userImage, value}) => {
           height={38}
           valuePadding={2}
           disableValueChangeOnPress
-          // value={value}
+          disabled={disabled}
         />
         <TouchableOpacity
           activeOpacity={0.7}
@@ -70,18 +74,15 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     paddingVertical: WP('3'),
-    // paddingHorizontal: WP('3'),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.white,
-    // justifyContent: 'space-between',
   },
   notificationStyle: {
     height: 24,
     width: 24,
     marginHorizontal: WP('3'),
     alignSelf: 'center',
-    // justifyContent:'flex-end'
   },
   userStyle: {
     height: 35,
@@ -91,7 +92,6 @@ const styles = StyleSheet.create({
     marginLeft: WP('1.5'),
   },
   switchContainer: {
-    // height: 35,
     width: 220,
     marginHorizontal: WP('5'),
   },

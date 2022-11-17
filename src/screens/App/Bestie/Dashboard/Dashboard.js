@@ -1,73 +1,87 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, SafeAreaView, StatusBar, Alert} from 'react-native';
-import {HomeHeader} from '../../../../components';
+import {HomeHeader, AppLoader} from '../../../../components';
 import {BestieTopTab} from '../../../../navigation/TopTab/BestieTopTab';
 import {EndUserTopTab} from '../../../../navigation/TopTab/EndUserTopTab';
 import {styles} from './styles';
 import {useSelector, useDispatch} from 'react-redux';
-import {USER_TYPE} from '../../../../redux/actions/types/auth_types';
-
+import {updateUserType} from '../../../../redux/actions';
+import {checkConnected} from '../../../../shared/exporter';
 function useForceUpdate() {
   let [value, setState] = useState(true);
   return () => setState(!value);
 }
-
 const Dashboard = ({navigation}) => {
   const [tab, setTab] = useState(false);
   const dispatch = useDispatch();
   const {userInfo, userType} = useSelector(state => state.auth);
-  const [currentTab, setCurrentTab] = useState(0);
+  const [loading, setloading] = useState(false);
+  const [role, setrole] = useState(userType == 'user' ? 0 : 1);
 
-  console.log('type     ', userType);
+  const onChangeTabConfirm = async value => {
+    setrole(value);
 
-  const onChangeTab = value => {
-    // console.log('value ', value);
-    if (value == 1) setCurrentTab(1);
-    else setCurrentTab(0);
-  };
+    const check = await checkConnected();
+    if (check) {
+      try {
+        setloading(true);
+        const data = new FormData();
 
-  const onChangeTabConfirm = value => {
-    dispatch({type: USER_TYPE, payload: value == 0 ? 'user' : 'bestie'});
-    let newVal = value;
-    // console.log('val    ', value);
-    // console.log('state   ', currentTab);
-    // if (value == currentTab) return;
-    // Alert.alert(
-    //   '',
-    //   'Are you sure you want to Switch?',
-    //   [
-    //     {
-    //       text: 'Cancel',
-    //       onPress: () => {
-    //         console.log('working');
-    //         if (value == 1) setCurrentTab(0);
-    //         else setCurrentTab(1);
-    //         handleForceupdateMethod();
-    //       },
-    //       style: 'cancel',
-    //     },
-    //     {text: 'OK', onPress: () => onChangeTab(value)},
-    //   ],
-    //   {cancelable: false},
-    // );
+        data.append('profile_type', value == 0 ? 'user' : 'bestie');
+        const onSuccess = res => {
+          console.log('SWITCH PROFILE==> ', res?.data);
+
+          if (
+            res?.data?.profile_type == 'bestie' &&
+            res?.data?.profile_completed == false
+          ) {
+            navigation.navigate('Bestietack', {
+              screen: 'UpdateProfilePortfolio',
+            });
+          } else {
+            navigation.navigate('MainStack');
+          }
+
+          setloading(false);
+        };
+        const onFailure = res => {
+          setloading(false);
+        };
+        dispatch(updateUserType(data, onSuccess, onFailure));
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Alert.alert('Error', networkText);
+    }
   };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      {console.log('re render     ', currentTab)}
       <StatusBar
         translucent={false}
         barStyle={'dark-content'}
         backgroundColor={'#fff'}
       />
+
+      <AppLoader loading={loading} />
       <HomeHeader
         onPressImage={() => {
           navigation.navigate('Bestietack', {screen: 'Setting'});
         }}
-        onPress={value => onChangeTabConfirm(value)}
+        onPress={value =>
+          value == role
+            ? Alert.alert(
+                'Alert',
+                `You are already ${
+                  userType == 'bestie' ? 'Bestie' : 'End User.'
+                }`,
+              )
+            : onChangeTabConfirm(value)
+        }
         userImage={{uri: userInfo?.profile_image}}
       />
-      {tab ? <BestieTopTab /> : <EndUserTopTab />}
+      {userType == 'bestie' ? <BestieTopTab /> : <EndUserTopTab />}
     </SafeAreaView>
   );
 };
