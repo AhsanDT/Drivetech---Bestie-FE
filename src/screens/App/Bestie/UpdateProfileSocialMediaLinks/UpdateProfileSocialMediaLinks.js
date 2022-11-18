@@ -1,5 +1,5 @@
-import {Formik} from 'formik';
 import React, {useRef, useState, useEffect} from 'react';
+
 import {
   SafeAreaView,
   Text,
@@ -9,8 +9,16 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import {Formik} from 'formik';
+
 import {useDispatch, useSelector} from 'react-redux';
-import {AppButton, Header, AppInput, AppLoader} from '../../../../components';
+import {
+  AppButton,
+  Header,
+  AppInput,
+  AppLoader,
+  AppHeader,
+} from '../../../../components';
 import {
   updateProfileAction,
   updateSocialMediaLinks,
@@ -24,14 +32,13 @@ import {
   socialMediaLinks,
 } from '../../../../shared/exporter';
 import {styles} from './styles';
-const AccountRate = ({navigation}) => {
+const UpdateSocialMediaLink = ({navigation}) => {
   const dispatch = useDispatch();
   const ref = useRef();
   const {userInfo} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
 
   const handleSubmit = values => {
-    console.log(userInfo?.social_media);
     var newArr = [
       {title: 'instagram', link: values?.instagram},
       {title: 'tiktok', link: values?.tiktok},
@@ -41,21 +48,17 @@ const AccountRate = ({navigation}) => {
     try {
       setloading(true);
       const data = new FormData();
-      // data.append('profile[social_media_attributes][]', newArr);
       data.append('social_media', JSON.stringify(newArr));
       navigation.navigate('Bestietack', {
-        screen: 'UpdateProfileCameraDeatil',
+        screen: 'UpdateProfileAccountRate',
       });
       const cbSuccess = res => {
-        console.log('RES UPDATE SOCIal switch==> ', res);
         setloading(false);
-        // navigation.goBack();
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
-      // dispatch(updateProfileAction(data, cbSuccess, cbFailure));
       dispatch(updateSocialMediaLinks(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
@@ -70,13 +73,8 @@ const AccountRate = ({navigation}) => {
         backgroundColor={'#fff'}
       />
       <ScrollView>
-        <Header
-          title={'Update Social Media Links'}
-          backIcon={true}
-          onPressBack={() => {
-            navigation.goBack();
-          }}
-        />
+        <AppHeader title={'Connect Your\nSocial Media'} />
+
         <Formik
           innerRef={ref}
           initialValues={socialMediaLinks}
@@ -96,10 +94,10 @@ const AccountRate = ({navigation}) => {
             setFieldValue,
           }) => {
             useEffect(() => {
-              setFieldValue('pinterest', userInfo?.social_media[1]?.link);
-              setFieldValue('instagram', userInfo?.social_media[0]?.link);
-              setFieldValue('tiktok', userInfo?.social_media[3]?.link);
-              setFieldValue('linkedIn', userInfo?.social_media[2]?.link);
+              setFieldValue('pinterest', '');
+              setFieldValue('instagram', '');
+              setFieldValue('tiktok', '');
+              setFieldValue('linkedIn', '');
             }, []);
             return (
               <View style={{flexGrow: 0.98}}>
@@ -148,22 +146,11 @@ const AccountRate = ({navigation}) => {
                   </View>
                 </ScrollView>
                 <View style={styles.buttonContainer}>
-                  {/* <AppButton
-                title={'Back'}
-                width={WP('35')}
-                height={WP('13')}
-                bgColor={colors.g8}
-                textColor={colors.g9}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              /> */}
                   <AppButton
                     title={'Update'}
                     width={WP('35')}
                     height={WP('13')}
                     bgColor={colors.b1}
-                    //   disabled={image ? false : true}
                     onPress={() => {
                       handleSubmit();
                     }}
@@ -179,4 +166,4 @@ const AccountRate = ({navigation}) => {
   );
 };
 
-export default AccountRate;
+export default UpdateSocialMediaLink;

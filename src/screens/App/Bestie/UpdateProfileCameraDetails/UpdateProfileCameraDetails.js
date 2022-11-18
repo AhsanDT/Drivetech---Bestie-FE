@@ -33,7 +33,6 @@ import {
   updateUserTalentAction,
 } from '../../../../redux/actions';
 import {useFocusEffect} from '@react-navigation/native';
-import * as TYPES from '../../../../redux/actions/types/auth_types';
 
 var count = 0;
 const CameraDetails = ({navigation}) => {
@@ -146,10 +145,10 @@ const CameraDetails = ({navigation}) => {
       });
 
       const cbSuccess = res => {
-        console.log('RES==> ', res);
+        console.log('res');
         setloading(false);
         navigation.navigate('Bestietack', {
-          screen: 'UpdateProfileAccountRate',
+          screen: 'UpdateProfileSocialMediaLinks',
         });
       };
       const cbFailure = err => {
@@ -172,17 +171,12 @@ const CameraDetails = ({navigation}) => {
         barStyle={'dark-content'}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header
-          title={'Camera Details'}
-          backIcon={true}
-          onPressBack={() => {
-            navigation.goBack();
-          }}
-        />
+        <AppHeader title={'Add Your\nCamera Details '} />
+
         <View>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('EditTalents', {data: talentArr});
+              navigation.navigate('UpdateProfileTalents', {data: talentArr});
             }}>
             <AppInput
               inputContainerStyle={styles.inputContainerStyle}

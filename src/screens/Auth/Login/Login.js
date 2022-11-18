@@ -57,24 +57,21 @@ const Login = ({navigation}) => {
       data.append('user[password]', value.password);
       try {
         const cbSuccess = response => {
-          // Alert.alert('Alert', 'Log in successfully.');
-          console.log('LOGIN==> ', response);
-          setloading(false);
           ref.current.resetForm();
+          setloading(false);
 
           if (response?.data?.profile_type == 'bestie') {
             if (response?.data?.profile_completed) {
               navigation.replace('MainStack');
+              dispatch(clearSignupObject());
             } else {
-              // alert('not complete');
               navigation.navigate('Bestietack', {
-                screen: 'UpdateProfilePortfolio',
+                screen: 'UpdateProfileCameraDetails',
               });
             }
           } else {
             navigation.replace('MainStack');
           }
-          // navigation.replace('MainStack');
         };
 
         const cbFailure = err => {
@@ -99,7 +96,6 @@ const Login = ({navigation}) => {
     } else {
       askForPermissions();
     }
-    dispatch(clearSignupObject());
   }, []);
 
   const askForPermissions = async () => {
@@ -204,6 +200,7 @@ const Login = ({navigation}) => {
             navigation.replace('MainStack');
             signOutFacebook();
             googleSignOut();
+            dispatch(clearSignupObject());
           } else {
             navigation.navigate('SelectRole', {data: res?.data});
           }

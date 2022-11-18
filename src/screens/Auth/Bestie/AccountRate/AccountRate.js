@@ -26,7 +26,7 @@ const AccountRate = ({navigation}) => {
   const dispatch = useDispatch();
   const ref = useRef();
   const handleSubmit = values => {
-    dispatch({type: TYPES.UPDATE_SIGNUP_OBJECT, payload: {rate: values.rate}});
+    dispatch({type: TYPES.UPDATE_SIGNUP_OBJECT, payload: {rate: values?.rate}});
     navigation.navigate('AddSocialMediaLinks');
   };
   return (

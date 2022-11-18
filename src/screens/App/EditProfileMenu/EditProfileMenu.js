@@ -173,7 +173,7 @@ const Setting = ({navigation}) => {
           onPressCancel={() => setShow(false)}
         />
         <SettingCard
-          title={'Interest'}
+          title={'Interests'}
           onPress={() => navigation.navigate('EditInterest')}
         />
         <SettingCard

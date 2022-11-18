@@ -21,7 +21,7 @@ import {
 import {styles} from './styles';
 import {updateProfileAction} from '../../../../redux/actions';
 
-const AccountRate = ({navigation}) => {
+const EditAccountRate = ({navigation}) => {
   const {userInfo} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
@@ -128,4 +128,4 @@ const AccountRate = ({navigation}) => {
   );
 };
 
-export default AccountRate;
+export default EditAccountRate;

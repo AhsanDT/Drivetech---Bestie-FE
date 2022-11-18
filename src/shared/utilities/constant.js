@@ -204,7 +204,7 @@ var Camera_List = [
 var Equipment_List = [
   {
     id: 0,
-    title: 'Prime Ienses',
+    title: 'Prime lenses',
     selected: false,
   },
   {

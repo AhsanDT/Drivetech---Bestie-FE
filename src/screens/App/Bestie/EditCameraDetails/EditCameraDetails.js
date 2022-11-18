@@ -45,10 +45,7 @@ const CameraDetails = ({navigation}) => {
   const [cameraModel, setcameraModel] = useState(
     userInfo?.camera_detail?.model,
   );
-  const [fields, setFields] = useState([
-    {value: userInfo?.camera_detail?.others[0]},
-  ]);
-
+  const [fields, setFields] = useState([]);
   const [cameraType, setCameraType] = useState(
     userInfo?.camera_detail?.camera_type,
   );
@@ -66,23 +63,18 @@ const CameraDetails = ({navigation}) => {
       return () => unsubscribe;
     }, [signupObject]),
   );
-  const handleChange = (i, event) => {
-    const values = [...fields];
-    values[i].value = event;
-    setFields(values);
-  };
 
   const handleAdd = () => {
-    const values = [...fields];
-    if (values) {
-      values.push({value: ''});
-      setFields(values);
-    } else {
-      // alert(`Add Input`);
-    }
+    setFields([...fields, {value: ''}]);
   };
 
   useEffect(() => {
+    let otherInputs = userInfo?.camera_detail?.others;
+    setFields(
+      otherInputs?.map(item => {
+        return {value: item};
+      }),
+    );
     function findIndex(item) {
       return item.title === cameraType;
     }
@@ -95,16 +87,19 @@ const CameraDetails = ({navigation}) => {
   }, [cameraType]);
 
   useEffect(() => {
-    otherequipmentList?.forEach(element => {
-      if (
-        userInfo?.camera_detail?.equipment?.forEach(
-          item => item === element?.title,
-        )
-      ) {
-        element.selected = true;
+    let equipment = userInfo?.camera_detail?.equipment;
+    let arr = otherequipmentList?.map(mainItem => {
+      let isSame = equipment?.find(subItem => subItem === mainItem?.title);
+      if (isSame) {
+        return {
+          ...mainItem,
+          selected: true,
+        };
+      } else {
+        return mainItem;
       }
-      setotherequipmentList([...otherequipmentList]);
     });
+    setotherequipmentList(arr);
   }, []);
 
   const handleOtherEquipment = (item, index) => {
@@ -129,20 +124,38 @@ const CameraDetails = ({navigation}) => {
     if (talentArr?.length < 1) {
       alert('Please select atleast one talent');
     }
-
     try {
       setloading(true);
       const talent = new FormData();
-      const data = new FormData();
-
       talentArr?.forEach(element => {
         if (element.selected) {
           talent.append('talent_ids[]', element.id);
         }
       });
+
+      const cbSuccess = res => {
+        handleCameraDetail();
+      };
+      const cbFailure = err => {
+        setloading(false);
+        Alert.alert('Error', 'Something went wrong.');
+      };
+      dispatch(updateUserTalentAction(talent, cbSuccess, cbFailure));
+    } catch (error) {
+      setloading(false);
+    }
+  };
+
+  const handleCameraDetail = () => {
+    try {
+      setloading(true);
+      const data = new FormData();
+
       data.append('profile[camera_detail_attributes]model', cameraModel);
       fields?.forEach(obj => {
-        data.append('profile[camera_detail_attributes]others[]', obj?.value);
+        if (obj.value) {
+          data.append('profile[camera_detail_attributes]others[]', obj?.value);
+        }
       });
       otherequipmentList?.forEach(element => {
         if (element.selected) {
@@ -165,14 +178,14 @@ const CameraDetails = ({navigation}) => {
       const cbSuccess = res => {
         setloading(false);
         Alert.alert('Alert', 'Camera details updated successfully');
-        navigation.navigate('Setting');
+        navigation.navigate('EditProfileMenu');
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
+      console.log('DATA===> ', data);
       dispatch(updateProfileAction(data, cbSuccess, cbFailure));
-      dispatch(updateUserTalentAction(talent, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
     }
@@ -251,7 +264,8 @@ const CameraDetails = ({navigation}) => {
         <View style={styles.contentContainer}>
           <Text style={styles.modelTextStyle}>Other Equipment</Text>
           <FlatList
-            data={otherequipmentList || []}
+            extraData={otherequipmentList}
+            data={otherequipmentList}
             renderItem={({item, index}) => (
               <Camera
                 onPress={() => handleOtherEquipment(item, index)}
@@ -262,14 +276,17 @@ const CameraDetails = ({navigation}) => {
         </View>
         <View>
           <Text style={styles.textStyle}>Others</Text>
-          {fields?.map((field, id) => {
+          {fields?.map((field, index) => {
             return (
-              <View key={`${field}-${id}`}>
+              <View key={`${field}-${index}`}>
                 <AppInput
-                  placeholder={'Input here'}
+                  value={field?.value}
                   placeholderTextColor={colors.g3}
-                  value={field.value}
-                  onChangeText={txt => handleChange(id, txt)}
+                  onChangeText={txt => {
+                    const newArray = [...fields];
+                    newArray[index].value = txt;
+                    setFields(newArray);
+                  }}
                 />
               </View>
             );

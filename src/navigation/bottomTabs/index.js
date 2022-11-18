@@ -38,9 +38,7 @@ const BestieStack = () => (
 );
 
 const MainStack = () => {
-  const {signupObject, userType} = useSelector(state => state.auth);
-  console.log('type in tabs', userType);
-  const {profileType} = signupObject;
+  const {userType} = useSelector(state => state.auth);
   return userType == 'bestie' ? <BestieStack /> : <UserStack />;
 };
 

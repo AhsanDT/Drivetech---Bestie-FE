@@ -24,7 +24,11 @@ import {
 
 import {styles} from './styles';
 import * as Types from '../../../redux/actions/types/auth_types';
-import {logoutRequset, updateUserType} from '../../../redux/actions';
+import {
+  logoutRequset,
+  updateUserType,
+  clearSignupObject,
+} from '../../../redux/actions';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Icon, Switch} from 'react-native-elements';
@@ -35,12 +39,15 @@ const Setting = ({navigation}) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(userType == 'bestie' ? true : false);
   const [loading, setloading] = useState(false);
+  const [notifyCheck, setnotifyCheck] = useState(false);
 
   const handleLogout = () => {
     // dispatch(logoutRequset())
     GoogleSignin.signOut();
     AsyncStorage.removeItem('usertoken');
     dispatch(logoutRequset());
+    dispatch(clearSignupObject());
+
     navigation.reset({
       index: 0,
       routes: [{name: 'Auth'}],
@@ -60,15 +67,11 @@ const Setting = ({navigation}) => {
   };
 
   const onChangeToggle = async value => {
-    console.log('value', value);
-
     const check = await checkConnected();
     if (check) {
       try {
         setloading(true);
         const data = new FormData();
-        console.log('in', value);
-
         data.append('profile_type', value == false ? 'user' : 'bestie');
         const onSuccess = res => {
           console.log('SWITCH PROFILE==> setting', res?.data);
@@ -81,16 +84,14 @@ const Setting = ({navigation}) => {
               screen: 'UpdateProfilePortfolio',
             });
           } else {
-            navigation.navigate('MainStack');
+            // navigation.navigate('MainStack');
             setChecked(value);
           }
-
           setloading(false);
         };
         const onFailure = res => {
           setloading(false);
         };
-        console.log('dataaa', data);
         dispatch(updateUserType(data, onSuccess, onFailure));
       } catch (error) {
         console.log(error);
@@ -102,10 +103,10 @@ const Setting = ({navigation}) => {
     // dispatch({type: USER_TYPE, payload: value == 0 ? 'user' : 'bestie'});
   };
 
-  // const onChangeToggle = val => {
-  //   // Alert.alert('Are you sure to switch');
-  //   setChecked(val);
-  // };
+  const onChangeNotifyToggle = val => {
+    console.log('BA:LE', val);
+    setnotifyCheck(val);
+  };
 
   const renderItem = ({item, index}) => (
     <SettingCard title={item.title} onPress={() => handleNavigation(item)} />
@@ -132,6 +133,24 @@ const Setting = ({navigation}) => {
           <FlatList data={Setting_List} renderItem={renderItem} />
         </View>
 
+        <View style={styles.switchContainer}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '94%',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <Text style={styles.toggleText}>Appointment Notification</Text>
+            <Switch
+              value={notifyCheck}
+              onValueChange={value => onChangeNotifyToggle(value)}
+              style={{marginTop: 10}}
+              thumbColor="#fff"
+              trackColor={{false: '#ccc', true: colors.org1}}
+            />
+          </View>
+        </View>
         <View style={styles.switchContainer}>
           <View
             style={{

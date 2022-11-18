@@ -87,13 +87,7 @@ const showTalent = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <StatusBar backgroundColor={'#fff'} translucent={false} />
-      <Header
-        title={'Update Your Talents'}
-        backIcon={true}
-        onPressBack={() => {
-          navigation.goBack();
-        }}
-      />
+      <AppHeader title={'Select Your\nInterest'} />
 
       {list?.length > 0 ? (
         <FlatList

@@ -26,6 +26,7 @@ const Dashboard = ({navigation}) => {
       try {
         setloading(true);
         const data = new FormData();
+        console.log('SWITCH PROFILE==> ', value);
 
         data.append('profile_type', value == 0 ? 'user' : 'bestie');
         const onSuccess = res => {
@@ -47,6 +48,7 @@ const Dashboard = ({navigation}) => {
         const onFailure = res => {
           setloading(false);
         };
+        console.log('ok');
         dispatch(updateUserType(data, onSuccess, onFailure));
       } catch (error) {
         console.log(error);

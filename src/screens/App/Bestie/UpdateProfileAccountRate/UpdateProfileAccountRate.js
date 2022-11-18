@@ -10,7 +10,12 @@ import {
   Alert,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppButton, Header, AppInput, AppLoader} from '../../../../components';
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  AppLoader,
+} from '../../../../components';
 import {
   account_RateFormField,
   account_RateVS,
@@ -19,10 +24,9 @@ import {
   WP,
 } from '../../../../shared/exporter';
 import {styles} from './styles';
-import * as TYPES from '../../../../redux/actions/types/auth_types';
 import {updateProfileAction} from '../../../../redux/actions';
 
-const AccountRate = ({navigation}) => {
+const UpdateProfileAccountRate = ({navigation}) => {
   const {userInfo} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
@@ -38,7 +42,6 @@ const AccountRate = ({navigation}) => {
       const cbSuccess = res => {
         setloading(false);
         navigation.replace('MainStack');
-        console.log('RES===<.rate', res);
       };
       const cbFailure = err => {
         setloading(false);
@@ -57,13 +60,7 @@ const AccountRate = ({navigation}) => {
         barStyle={'dark-content'}
         backgroundColor={'#fff'}
       />
-      <Header
-        title={'Rate'}
-        backIcon={true}
-        onPressBack={() => {
-          navigation.goBack();
-        }}
-      />
+      <AppHeader title={'Set Your Rate'} />
       <Formik
         innerRef={ref}
         initialValues={account_RateFormField}
@@ -83,7 +80,7 @@ const AccountRate = ({navigation}) => {
           setFieldValue,
         }) => {
           useEffect(() => {
-            setFieldValue('rate', userInfo?.data?.rate?.toString());
+            setFieldValue('rate', userInfo?.data?.rate?.toString() || '');
           }, []);
           return (
             <View style={{flexGrow: 0.98}}>
@@ -130,4 +127,4 @@ const AccountRate = ({navigation}) => {
   );
 };
 
-export default AccountRate;
+export default UpdateProfileAccountRate;

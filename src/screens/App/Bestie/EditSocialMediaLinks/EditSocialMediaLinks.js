@@ -42,18 +42,15 @@ const AccountRate = ({navigation}) => {
       setloading(true);
       const data = new FormData();
       data.append('social_media', JSON.stringify(newArr));
-
       const cbSuccess = res => {
-        console.log('RES UPDATE SOCIal==> ', res);
         setloading(false);
-        // navigation.goBack();
+        navigation.goBack();
       };
       const cbFailure = err => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
         console.log('error==>', err);
       };
-      console.log('SOCIAL UPDATED==> ', data);
       dispatch(updateSocialMediaLinks(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);
@@ -70,7 +67,7 @@ const AccountRate = ({navigation}) => {
       />
       <ScrollView>
         <Header
-          title={'Update Social Media Links'}
+          title={'Add Social Media Links'}
           backIcon={true}
           onPressBack={() => {
             navigation.goBack();
@@ -95,10 +92,10 @@ const AccountRate = ({navigation}) => {
             setFieldValue,
           }) => {
             useEffect(() => {
-              setFieldValue('tiktok', userInfo?.social_media[1]?.link);
-              setFieldValue('instagram', userInfo?.social_media[0]?.link);
-              setFieldValue('pinterest', userInfo?.social_media[3]?.link);
-              setFieldValue('linkedIn', userInfo?.social_media[2]?.link);
+              setFieldValue('tiktok', userInfo?.social_media[1]?.link || '');
+              setFieldValue('instagram', userInfo?.social_media[0]?.link || '');
+              setFieldValue('pinterest', userInfo?.social_media[3]?.link || '');
+              setFieldValue('linkedIn', userInfo?.social_media[2]?.link || '');
             }, []);
             return (
               <View style={{flexGrow: 0.98}}>
@@ -147,16 +144,6 @@ const AccountRate = ({navigation}) => {
                   </View>
                 </ScrollView>
                 <View style={styles.buttonContainer}>
-                  {/* <AppButton
-                title={'Back'}
-                width={WP('35')}
-                height={WP('13')}
-                bgColor={colors.g8}
-                textColor={colors.g9}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              /> */}
                   <AppButton
                     title={'Update'}
                     width={WP('35')}

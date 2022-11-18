@@ -63,12 +63,16 @@ function* socialLoginUser(params) {
         payload: res,
       });
       AsyncStorage.setItem('usertoken', res?.auth_token);
-
       yield put({
         type: types.LOGIN_REQUEST_SUCCESS,
         payload: res,
       });
-      AsyncStorage.setItem('usertoken', res?.user?.auth_token);
+      console.log('SOCIAL LOGIN USERTYPE==> ', res?.data?.profile_type);
+      yield put({
+        type: types.USER_TYPE,
+        payload: res?.data?.profile_type,
+      });
+      // AsyncStorage.setItem('usertoken', res?.user?.auth_token);
       params?.cbSuccess(res);
     } else {
       yield put({

@@ -68,21 +68,24 @@ const AccountRate = ({navigation}) => {
         cameraType,
         otherEquipments,
         otherInputEquipment,
+        model,
+        location,
       } = signupObject;
       const data = new FormData();
       data.append('user[first_name]', firstName),
         data.append('user[email]', email?.toLowerCase()),
         data.append('user[last_name]', lastName);
-      console.log('LOGIN TYPe==> ', login_type);
-
       if (login_type == 'manual') {
         data.append('user[password]', password);
       }
       data.append('user[age]', age),
         data.append('user[phone_number]', phoneNumber),
+        data.append('user[camera_detail_attributes]model', model),
         data.append('user[experience]', experience),
         data.append('user[sex]', sex),
         data.append('user[profile_type]', profileType);
+      data.append('user[location]', location);
+
       data.append('user[rate]', rate);
       data.append(
         'user[camera_detail_attributes]camera_type',
@@ -131,7 +134,8 @@ const AccountRate = ({navigation}) => {
         name: profilePhoto?.fileName,
         type: profilePhoto?.type,
       });
-      data.append('user[social_media_attributes][]', newArr);
+      // data.append('user[social_media_attributes][]', newArr);
+      data.append('social_media', JSON.stringify(newArr));
 
       const cbSuccess = res => {
         setloading(false);
@@ -151,7 +155,6 @@ const AccountRate = ({navigation}) => {
         Alert.alert('Error', err);
       };
       if (login_type == 'social login') {
-        console.log('DATA social ==> ', email, data);
         dispatch(updateSocialLoginRequest(data, email, cbSuccess, cbFailure));
       } else {
         dispatch(signUpRequest(data, cbSuccess, cbFailure));
@@ -233,16 +236,6 @@ const AccountRate = ({navigation}) => {
                 </View>
               </ScrollView>
               <View style={styles.buttonContainer}>
-                {/* <AppButton
-                title={'Back'}
-                width={WP('35')}
-                height={WP('13')}
-                bgColor={colors.g8}
-                textColor={colors.g9}
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              /> */}
                 <AppButton
                   title={'Finish'}
                   width={WP('35')}

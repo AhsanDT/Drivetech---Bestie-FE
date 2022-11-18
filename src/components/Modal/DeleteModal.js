@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: size.text_14,
     lineHeight: 24,
-    padding: WP('8'),
+    padding: WP('6'),
   },
 });
 

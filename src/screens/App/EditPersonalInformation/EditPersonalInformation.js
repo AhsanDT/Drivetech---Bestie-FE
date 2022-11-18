@@ -161,7 +161,9 @@ const Register = ({navigation, route}) => {
                   touched={touched.email}
                   errorMessage={errors.email}
                   keyboardType={'email-address'}
-                  // editable={data?.email ? false : true}
+                  editable={
+                    userInfo?.data?.login_type == 'social login' ? false : true
+                  }
                 />
 
                 <AppInput

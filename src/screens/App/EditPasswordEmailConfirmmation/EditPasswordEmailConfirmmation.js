@@ -61,7 +61,11 @@ const ForgotPassword = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <Header title={'Change Password'} backIcon />
+        <Header
+          title={'Change Password'}
+          backIcon
+          onPressBack={() => navigation.goBack()}
+        />
         <Formik
           initialValues={forgotFormFields}
           onSubmit={values => {

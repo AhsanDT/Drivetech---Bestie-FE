@@ -49,8 +49,6 @@ const AddCard = ({navigation}) => {
           currency: currency,
           routingNumber: values.RoutingNumber,
         });
-        console.log('BANK TOKEN', data);
-
         if (data) {
           var form = new FormData();
           form.append('account_holder_name', values?.fullname);
@@ -63,8 +61,7 @@ const AddCard = ({navigation}) => {
           const onSuccess = res => {
             setloading(false);
             // alert(res);
-            console.log('On Add Card Success', res);
-            // navigation.navigate('GetPaymentList');
+            navigation.navigate('GetPaymentList');
           };
           const onFailure = res => {
             setloading(false);
@@ -85,7 +82,7 @@ const AddCard = ({navigation}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header
-        title={'Add Bank'}
+        title={'Add Bank Account'}
         backIcon={true}
         onPressBack={() => {
           setShow(true);

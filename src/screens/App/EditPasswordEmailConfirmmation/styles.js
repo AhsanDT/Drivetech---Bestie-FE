@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   btCon: {
-    marginVertical: WP('10'),
+    marginVertical: WP('30'),
   },
 });
 export default styles;

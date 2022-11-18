@@ -36,7 +36,7 @@ const AddCard = ({navigation}) => {
     const check = await checkConnected();
     if (check) {
       try {
-        // setloading(true);
+        setloading(true);
         const data = await createToken({
           name: values?.fullname,
           type: 'Card',
@@ -61,7 +61,6 @@ const AddCard = ({navigation}) => {
             Alert.alert('Failed', 'Unable to proceed payment!');
             console.log('On Add Card Failure', res);
           };
-          console.log('BANK TOEKN', data);
           dispatch(addCardRequest(form, onSuccess, onFailure));
         } else {
           setloading(false);

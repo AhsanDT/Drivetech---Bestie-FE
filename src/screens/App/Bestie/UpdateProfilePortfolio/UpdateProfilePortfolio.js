@@ -9,6 +9,7 @@ import {
   FlatList,
   PermissionsAndroid,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {
   AppButton,
@@ -29,7 +30,6 @@ const AddPortfolio = ({navigation}) => {
   const dispatch = useDispatch();
   const {userInfo} = useSelector(state => state.auth);
   const [loading, setloading] = useState(false);
-  console.log('userinfo', userInfo);
   const [picsArray, setPicsArray] = useState([
     {
       id: 1,
@@ -79,6 +79,7 @@ const AddPortfolio = ({navigation}) => {
           if (response.assets) {
             // setImage(response.assets[0]);
             updatePictureArray(response.assets[0]);
+            setloading(false);
           }
         }
       });
@@ -100,6 +101,7 @@ const AddPortfolio = ({navigation}) => {
           if (response.assets) {
             // setImage(response.assets[0]);
             updatePictureArray(response.assets[0]);
+            setloading(false);
           }
         }
       });
@@ -161,7 +163,7 @@ const AddPortfolio = ({navigation}) => {
         if (item === currentItemClicked) {
           return {
             ...item,
-            // loading: true,
+            loading: false,
             image: picture,
           };
         }
@@ -184,7 +186,7 @@ const AddPortfolio = ({navigation}) => {
       const cbSuccess = res => {
         setloading(false);
         navigation.navigate('Bestietack', {
-          screen: 'UpdateProfileSocialMediaLinks',
+          screen: 'UpdateProfileCameraDetails',
         });
       };
       const cbFailure = err => {
@@ -208,7 +210,7 @@ const AddPortfolio = ({navigation}) => {
         barStyle={'dark-content'}
       />
 
-      <Text style={styles.textStyle}>Update Portfolio To Become a Bestie</Text>
+      <Text style={styles.textStyle}>Add Portfolio To Become a Bestie</Text>
 
       <View style={styles.contentContainer}>
         <FlatList

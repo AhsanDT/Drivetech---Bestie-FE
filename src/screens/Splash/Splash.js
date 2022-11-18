@@ -7,21 +7,20 @@ import styles from './styles';
 import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
-  const {isLoggedIn} = useSelector(state => state.auth);
+  const {isLoggedIn, userInfo} = useSelector(state => state.auth);
 
   useEffect(() => {
     setTimeout(() => {
       console.log('');
       if (isLoggedIn) {
-        // props.navigation.replace('Home', {
-        //   screen: 'Home',
-        // });
-        navigation.replace('MainStack');
-        // navigation.navigate('Bestietack', {
-        //   screen: 'UpdateProfileCameraDeatil',
-        // });
+        if (userInfo?.data?.profile_completed) {
+          navigation.replace('MainStack');
+        } else {
+          navigation.replace('Bestietack', {
+            screen: 'UpdateProfilePortfolio',
+          });
+        }
       } else {
-        // dispatch(resetAllStateAction());
         navigation.replace('Auth');
       }
     }, 1500);
