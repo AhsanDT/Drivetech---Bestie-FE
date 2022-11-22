@@ -66,9 +66,16 @@ const Register = ({navigation, route}) => {
 
       const cbSuccess = res => {
         setloading(false);
+        Alert.alert(
+          'Alert',
+          'Your personal information has updated successfully.',
+        );
+
         navigation.goBack();
       };
       const cbFailure = err => {
+        console.log('RES==> ', err);
+
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
@@ -123,13 +130,12 @@ const Register = ({navigation, route}) => {
               setFieldValue('lastName', data?.last_name);
               setFieldValue('email', data?.email);
               setFieldValue('phone', data?.phone_number);
-              console.log('person data', data);
               if (userType == 'user') {
                 setFieldValue('country', data?.country);
                 setFieldValue('city', data?.city);
               }
               if (userType == 'bestie') {
-                setFieldValue('location', data?.location);
+                setFieldValue('location', 'USA');
               }
             }, []);
             return (

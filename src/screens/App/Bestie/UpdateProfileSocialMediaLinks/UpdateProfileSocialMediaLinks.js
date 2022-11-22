@@ -110,7 +110,7 @@ const UpdateSocialMediaLink = ({navigation}) => {
                       errorMessage={errors?.instagram}
                       touched={touched?.instagram}
                       renderErrorMessage={true}
-                      placeholder="Paste your instagram profile link"
+                      placeholder="Paste your instagram profile link here"
                       placeholderTextColor={colors.g3}
                     />
                     <AppInput
@@ -120,7 +120,7 @@ const UpdateSocialMediaLink = ({navigation}) => {
                       errorMessage={errors?.tiktok}
                       touched={touched?.tiktok}
                       renderErrorMessage={true}
-                      placeholder="Paste your tiktok profile link"
+                      placeholder="Paste your tiktok profile link here"
                       placeholderTextColor={colors.g3}
                     />
                     <AppInput
@@ -130,7 +130,7 @@ const UpdateSocialMediaLink = ({navigation}) => {
                       errorMessage={errors?.pinterest}
                       touched={touched?.pinterest}
                       renderErrorMessage={true}
-                      placeholder="Paste your pinterest profile link"
+                      placeholder="Paste your pinterest profile link here"
                       placeholderTextColor={colors.g3}
                     />
                     <AppInput
@@ -140,7 +140,7 @@ const UpdateSocialMediaLink = ({navigation}) => {
                       errorMessage={errors?.linkedIn}
                       touched={touched?.linkedIn}
                       renderErrorMessage={true}
-                      placeholder="Paste your linkedin profile link"
+                      placeholder="Paste your linkedin profile link here"
                       placeholderTextColor={colors.g3}
                     />
                   </View>

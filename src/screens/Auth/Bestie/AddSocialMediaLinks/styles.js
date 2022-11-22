@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     padding: WP('3'),
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginTop: WP('20'),
   },
   textStyle: {
     fontFamily: family.Poppin_Regular,

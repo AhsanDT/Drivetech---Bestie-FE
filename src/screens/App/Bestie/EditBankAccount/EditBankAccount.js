@@ -51,7 +51,6 @@ const AddCard = ({navigation, route}) => {
         };
         const onFailure = res => {
           setloading(false);
-          console.log('On Add Card Failure', res);
         };
         dispatch(updateBankInfo(form, data?.id, onSuccess, onFailure));
       } catch (error) {
@@ -101,6 +100,10 @@ const AddCard = ({navigation, route}) => {
                     navigation.goBack();
                   }}
                   onPressCancel={() => {
+                    setShow(false);
+                  }}
+                  onPressUpdate={() => {
+                    handleSubmit();
                     setShow(false);
                   }}
                 />

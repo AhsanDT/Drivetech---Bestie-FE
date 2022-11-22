@@ -147,9 +147,15 @@ const CameraDetails = ({navigation}) => {
       const cbSuccess = res => {
         console.log('res');
         setloading(false);
-        navigation.navigate('Bestietack', {
-          screen: 'UpdateProfileSocialMediaLinks',
-        });
+        if (userInfo?.social_media?.length < 1) {
+          navigation.navigate('Bestietack', {
+            screen: 'UpdateProfileSocialMediaLinks',
+          });
+        } else {
+          navigation.navigate('Bestietack', {
+            screen: 'UpdateProfileAccountRate',
+          });
+        }
       };
       const cbFailure = err => {
         setloading(false);

@@ -47,7 +47,6 @@ const showTalent = ({navigation}) => {
           element.selected = false;
         });
         response?.data?.forEach(element => {
-          console.log('ELEMENT===> ', element);
           if (userInfo?.talent?.find(item => item?.title == element?.title)) {
             element.selected = true;
             count = count + 1;
@@ -87,7 +86,7 @@ const showTalent = ({navigation}) => {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <StatusBar backgroundColor={'#fff'} translucent={false} />
-      <AppHeader title={'Select Your\nInterest'} />
+      <AppHeader title={'Select Your\nTalent'} />
 
       {list?.length > 0 ? (
         <FlatList

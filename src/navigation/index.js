@@ -12,9 +12,6 @@ import BottomTab from '../navigation/bottomTabs';
 const AppStack = createNativeStackNavigator();
 
 const MainAppNav = () => {
-  const {isLoggedIn} = useSelector(state => state.auth);
-  console.log('');
-
   return (
     <NavigationContainer>
       <AppStack.Navigator

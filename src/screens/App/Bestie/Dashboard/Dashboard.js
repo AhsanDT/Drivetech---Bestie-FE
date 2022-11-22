@@ -26,12 +26,8 @@ const Dashboard = ({navigation}) => {
       try {
         setloading(true);
         const data = new FormData();
-        console.log('SWITCH PROFILE==> ', value);
-
         data.append('profile_type', value == 0 ? 'user' : 'bestie');
         const onSuccess = res => {
-          console.log('SWITCH PROFILE==> ', res?.data);
-
           if (
             res?.data?.profile_type == 'bestie' &&
             res?.data?.profile_completed == false
@@ -48,11 +44,8 @@ const Dashboard = ({navigation}) => {
         const onFailure = res => {
           setloading(false);
         };
-        console.log('ok');
         dispatch(updateUserType(data, onSuccess, onFailure));
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     } else {
       Alert.alert('Error', networkText);
     }
@@ -68,6 +61,7 @@ const Dashboard = ({navigation}) => {
 
       <AppLoader loading={loading} />
       <HomeHeader
+        show={userType == 'user' ? true : false}
         onPressImage={() => {
           navigation.navigate('Bestietack', {screen: 'Setting'});
         }}

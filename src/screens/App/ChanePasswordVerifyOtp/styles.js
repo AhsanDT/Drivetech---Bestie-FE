@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.bl,
   },
+  verificationText: {
+    color: colors.b1,
+    fontFamily: family.Poppin_SemiBold,
+    fontSize: size.text_16,
+    lineHeight: WP('15'),
+  },
 });
 
 export default styles;

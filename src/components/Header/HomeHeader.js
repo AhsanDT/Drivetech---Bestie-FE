@@ -18,6 +18,7 @@ export const HomeHeader = ({
   userImage,
   value,
   disabled,
+  show,
 }) => {
   const [selected, setSelected] = useState(false);
   const {userType} = useSelector(state => state.auth);
@@ -54,11 +55,13 @@ export const HomeHeader = ({
           style={{
             flexDirection: 'row',
           }}>
-          <Image
-            source={appIcons.search}
-            style={styles.searchStyle}
-            resizeMode={'contain'}
-          />
+          {show && (
+            <Image
+              source={appIcons.search}
+              style={styles.searchStyle}
+              resizeMode={'contain'}
+            />
+          )}
           <Image
             source={appIcons.notification}
             style={[styles.notificationStyle]}

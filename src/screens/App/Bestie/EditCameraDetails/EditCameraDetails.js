@@ -40,7 +40,7 @@ const CameraDetails = ({navigation}) => {
   const [otherequipmentList, setotherequipmentList] = useState(Equipment_List);
   const dispatch = useDispatch();
   const {signupObject, userInfo} = useSelector(state => state.auth);
-  const [talentArr, settalentArr] = useState();
+  const [talentArr, settalentArr] = useState(userInfo?.talent);
   const [check, setcheck] = useState(false);
   const [cameraModel, setcameraModel] = useState(
     userInfo?.camera_detail?.model,
@@ -50,7 +50,6 @@ const CameraDetails = ({navigation}) => {
     userInfo?.camera_detail?.camera_type,
   );
   const [loading, setloading] = useState(false);
-
   useFocusEffect(
     React.useCallback(() => {
       const updateValue = () => {
@@ -63,6 +62,9 @@ const CameraDetails = ({navigation}) => {
       return () => unsubscribe;
     }, [signupObject]),
   );
+  useEffect(() => {
+    settalentArr(userInfo?.talent);
+  }, []);
 
   const handleAdd = () => {
     setFields([...fields, {value: ''}]);
@@ -123,6 +125,7 @@ const CameraDetails = ({navigation}) => {
   const handleSubmit = () => {
     if (talentArr?.length < 1) {
       alert('Please select atleast one talent');
+      return;
     }
     try {
       setloading(true);
@@ -184,7 +187,6 @@ const CameraDetails = ({navigation}) => {
         setloading(false);
         Alert.alert('Error', 'Something went wrong.');
       };
-      console.log('DATA===> ', data);
       dispatch(updateProfileAction(data, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);

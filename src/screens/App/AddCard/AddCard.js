@@ -59,7 +59,6 @@ const AddCard = ({navigation}) => {
           const onFailure = res => {
             setloading(false);
             Alert.alert('Failed', 'Unable to proceed payment!');
-            console.log('On Add Card Failure', res);
           };
           dispatch(addCardRequest(form, onSuccess, onFailure));
         } else {

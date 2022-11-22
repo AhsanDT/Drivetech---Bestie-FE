@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, SafeAreaView, Alert} from 'react-native';
+import {View, SafeAreaView, Alert, Text} from 'react-native';
 import styles from './styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
@@ -35,6 +35,8 @@ const CreatePassword = ({navigation, route}) => {
       try {
         const cbSuccess = response => {
           setloading(false);
+          Alert.alert('Alert', 'Your password has been changed.');
+
           navigation?.navigate('EditProfileMenu');
         };
         const cbFailure = err => {
@@ -53,7 +55,13 @@ const CreatePassword = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <Header title={'Change Password '} />
+        <Header
+          title={'Change Password '}
+          backIcon
+          onPressBack={() => navigation.goBack()}
+        />
+        <Text style={styles.verificationText}>Create New Password</Text>
+
         <Formik
           initialValues={createFormFields}
           onSubmit={values => {

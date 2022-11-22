@@ -64,9 +64,15 @@ const VerifyOtp = ({navigation, route}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Header title={'Change Password'} backIcon />
+      <Header
+        title={'Change Password'}
+        backIcon
+        onPressBack={() => navigation.goBack()}
+      />
 
       <View style={styles.headerContainer}>
+        <Text style={styles.verificationText}>Verification</Text>
+
         <Text style={styles.headerTextStyle}>
           Please enter your verification code sent to{'\n'}
           <Text style={styles.emailTextStyle}>{email}</Text>

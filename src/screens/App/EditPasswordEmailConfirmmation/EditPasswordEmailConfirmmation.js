@@ -40,7 +40,6 @@ const ForgotPassword = ({navigation}) => {
             userId: response?.data?.id,
           });
           setloading(false);
-          console.log('data id', response?.data?.id);
         };
         const cbFailure = err => {
           setloading(false);
