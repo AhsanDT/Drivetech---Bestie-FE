@@ -80,7 +80,7 @@ const Setting = ({navigation}) => {
             res?.data?.profile_type == 'bestie' &&
             res?.data?.profile_completed == false
           ) {
-            navigation.navigate('Bestietack', {
+            navigation.navigate('BestieStack', {
               screen: 'UpdateProfilePortfolio',
             });
           } else {

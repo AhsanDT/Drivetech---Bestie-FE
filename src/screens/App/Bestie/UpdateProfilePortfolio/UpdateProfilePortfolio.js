@@ -185,7 +185,7 @@ const AddPortfolio = ({navigation}) => {
 
       const cbSuccess = res => {
         setloading(false);
-        navigation.navigate('Bestietack', {
+        navigation.navigate('BestieStack', {
           screen: 'UpdateProfileCameraDetails',
         });
       };

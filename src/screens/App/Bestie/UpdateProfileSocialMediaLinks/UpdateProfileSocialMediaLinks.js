@@ -49,7 +49,7 @@ const UpdateSocialMediaLink = ({navigation}) => {
       setloading(true);
       const data = new FormData();
       data.append('social_media', JSON.stringify(newArr));
-      navigation.navigate('Bestietack', {
+      navigation.navigate('BestieStack', {
         screen: 'UpdateProfileAccountRate',
       });
       const cbSuccess = res => {

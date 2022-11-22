@@ -5,7 +5,7 @@ import Splash from '../screens/Splash';
 import AuthStack from './stacks/AuthStack';
 import SelectRole from '../screens/Auth/SelectRole';
 import {MainStack} from './bottomTabs';
-import StackNavigation from './stacks/BestieStack';
+import StackNavigation from './stacks';
 import {useSelector} from 'react-redux';
 import BottomTab from '../navigation/bottomTabs';
 
@@ -21,7 +21,7 @@ const MainAppNav = () => {
         <AppStack.Screen name={'SelectRole'} component={SelectRole} />
         <AppStack.Screen name={'Auth'} component={AuthStack} />
         <AppStack.Screen name="MainStack" component={MainStack} />
-        <AppStack.Screen name="Bestietack" component={StackNavigation} />
+        <AppStack.Screen name="BestieStack" component={StackNavigation} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

@@ -13,7 +13,7 @@ const Dummy = () => {
       }}>
       {/* <HomeHeader
       // onPressImage={() => {
-      //   navigation.navigate('Bestietack', {screen: 'Setting'});
+      //   navigation.navigate('BestieStack', {screen: 'Setting'});
       // }}
       // onPress={() => setTab(!tab)}
       /> */}

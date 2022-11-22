@@ -32,7 +32,7 @@ const Dashboard = ({navigation}) => {
             res?.data?.profile_type == 'bestie' &&
             res?.data?.profile_completed == false
           ) {
-            navigation.navigate('Bestietack', {
+            navigation.navigate('BestieStack', {
               screen: 'UpdateProfilePortfolio',
             });
           } else {
@@ -63,7 +63,7 @@ const Dashboard = ({navigation}) => {
       <HomeHeader
         show={userType == 'user' ? true : false}
         onPressImage={() => {
-          navigation.navigate('Bestietack', {screen: 'Setting'});
+          navigation.navigate('BestieStack', {screen: 'Setting'});
         }}
         onPress={value =>
           value == role

@@ -148,11 +148,11 @@ const CameraDetails = ({navigation}) => {
         console.log('res');
         setloading(false);
         if (userInfo?.social_media?.length < 1) {
-          navigation.navigate('Bestietack', {
+          navigation.navigate('BestieStack', {
             screen: 'UpdateProfileSocialMediaLinks',
           });
         } else {
-          navigation.navigate('Bestietack', {
+          navigation.navigate('BestieStack', {
             screen: 'UpdateProfileAccountRate',
           });
         }

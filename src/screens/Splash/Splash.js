@@ -16,7 +16,7 @@ const Splash = ({navigation}) => {
         if (userInfo?.data?.profile_completed) {
           navigation.replace('MainStack');
         } else {
-          navigation.replace('Bestietack', {
+          navigation.replace('BestieStack', {
             screen: 'UpdateProfilePortfolio',
           });
         }

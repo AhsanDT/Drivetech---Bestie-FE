@@ -65,7 +65,7 @@ const Login = ({navigation}) => {
               navigation.replace('MainStack');
               dispatch(clearSignupObject());
             } else {
-              navigation.navigate('Bestietack', {
+              navigation.navigate('BestieStack', {
                 screen: 'UpdateProfileCameraDetails',
               });
             }
