@@ -35,6 +35,8 @@
 			</dict>
 		</dict>
 	</dict>
+		<key>CFBundleURLTypes</key>
+
 		<array>
 			<dict>
 			 	<key>CFBundleURLSchemes</key>
@@ -67,7 +69,6 @@
 		<string>Application requires user’s location for better user experience.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Bestie needs access to your Microphone.</string>
-		<key>CFBundleURLTypes</key>
 	    <key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
