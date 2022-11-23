@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     width: WP('90'),
     height: 50,
     alignSelf: 'center',
-    marginBottom: WP('5'),
+    marginBottom: WP('1'),
     // padding: WP('4'),
   },
 });

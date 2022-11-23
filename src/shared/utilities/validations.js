@@ -123,8 +123,12 @@ export const socialMediaLinks = {
 };
 
 export const SocialLinks = yup.object().shape({
+  // instagram: yup.string().url('Insta link required').required('required'),
   instagram: yup.string().required('Instagram Link Required'),
+
+  // tiktok: yup.string().url('Insta link required'),
   tiktok: yup.string().required('Tiktok Link Required'),
+
   linkedIn: yup.string().required('Linkedin Link Required'),
   pinterest: yup.string().required('Pinterest Link Required'),
 });
@@ -151,8 +155,16 @@ export const SignUpVS = yup.object().shape({
     .string()
     .min(11, 'Phone number must be at least 11 characters')
     .required('Phone Number Required'),
-  country: yup.string().required('Country Name Required'),
-  city: yup.string().required('City Name Required'),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
+  city: yup
+    .string()
+    .required('City Name Required')
+    .nullable('City Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
   age: yup.string().required('Age Requried'),
   email: yup
     .string()
@@ -170,9 +182,22 @@ export const updateEndUserInfo = yup.object().shape({
   phone: yup
     .string()
     .min(11, 'Phone number must be at least 11 characters')
-    .required('Phone Number Required'),
-  country: yup.string().required('Country Name Required'),
-  city: yup.string().required('City Name Required'),
+    .required('Phone Number Required')
+    .matches(
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+      'Invalid Number',
+    ),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
+  city: yup
+    .string()
+    .required('City Name Required')
+    .nullable('City Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
+
   age: yup.string().required('Age Requried'),
   email: yup
     .string()
@@ -187,7 +212,14 @@ export const BestieRateVs = yup.object().shape({
 export const RegisterVS = yup.object().shape({
   firstName: yup.string().required('First Name Required'),
   lastName: yup.string().required('Last Name Required'),
-  phone: yup.string().required('Phone Number Required'),
+  phone: yup
+    .string()
+    .min(11, 'Phone number must be at least 11 characters')
+    .required('Phone Number Required')
+    .matches(
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+      'Invalid Phone Number',
+    ),
   location: yup.string().required('Location Required'),
   email: yup
     .string()
@@ -203,7 +235,14 @@ export const RegisterVS = yup.object().shape({
 export const UpdateBestieInfoSVS = yup.object().shape({
   firstName: yup.string().required('First Name Required'),
   lastName: yup.string().required('Last Name Required'),
-  phone: yup.string().required('Phone Number Required'),
+  phone: yup
+    .string()
+    .min(11, 'Phone number must be at least 11 characters')
+    .required('Phone Number Required')
+    .matches(
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+      'Invalid Phone Number',
+    ),
   location: yup.string().required('Location Required'),
   email: yup
     .string()
@@ -213,22 +252,49 @@ export const UpdateBestieInfoSVS = yup.object().shape({
 });
 
 export const SocialRegisterVS = yup.object().shape({
-  phone: yup.string().required('Phone Number Required'),
+  phone: yup
+    .string()
+    .min(11, 'Phone number must be at least 11 characters')
+    .required('Phone Number Required')
+    .matches(
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+      'Invalid Phone Number',
+    ),
   location: yup.string().required('Location Required'),
   age: yup.string().required('Age Requried'),
 });
 
 export const SPRegisterStep1VS = yup.object().shape({
-  city: yup.string().required('City Name Required').label('city'),
-  country: yup.string().required('Country Name Required').label('country'),
+  city: yup
+    .string()
+    .required('City Name Required')
+    .nullable('City Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
 });
 export const SocailSignUpVS = yup.object().shape({
   phone: yup
     .string()
     .min(11, 'Phone number must be at least 11 characters')
-    .required('Phone Number Required'),
-  country: yup.string().required('Country Name Required'),
-  city: yup.string().required('City Name Required'),
+    .required('Phone Number Required')
+    .matches(
+      /(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g,
+      'Invalid Phone Number',
+    ),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
+  city: yup
+    .string()
+    .required('City Name Required')
+    .nullable('City Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
   age: yup.string().required('Age Requried'),
 
   // sex: 'Sex required',
@@ -256,13 +322,21 @@ export const ForgotPasswordVS = yup.object().shape({
 
 export const payment_CardVS = yup.object().shape({
   fullname: yup.string().required('Full Name Required'),
-  country: yup.string().required('Country Required'),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
   // cardNumber: yup.string().required('Card Number Required'),
 });
 
 export const addBankAccountFields = yup.object().shape({
   fullname: yup.string().required('Full Name Required'),
-  country: yup.string().required('Country Required'),
+  country: yup
+    .string()
+    .required('Country Name Required')
+    .nullable('Country Name Required')
+    .matches(/^[aA-zZ\s]+$/, 'Only Alphabets Are Allowed'),
   bankAccNumber: yup.string().required('Bank Acc. Number Required'),
   RoutingNumber: yup.string().required('Routing Number Required'),
 });

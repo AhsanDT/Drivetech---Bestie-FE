@@ -100,7 +100,6 @@ const Register = ({navigation, route}) => {
             navigation.goBack();
           }}
         />
-        {console.log(':USERTYPE++>', userType)}
         <Formik
           initialValues={
             userType == 'bestie' ? updateBestieInfo : updateEnduserInfoFields

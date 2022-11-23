@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingVertical: 5,
     borderRadius: 10,
+    position: 'absolute',
+    bottom: 0,
+    width: WP('90'),
   },
   separator: {
     borderWidth: 0.5,

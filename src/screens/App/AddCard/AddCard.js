@@ -31,7 +31,7 @@ const AddCard = ({navigation}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
   const ref = useRef();
-
+  const [cardInfoError, setCardInfoError] = useState('');
   const onPressSaveCard = async values => {
     const check = await checkConnected();
     if (check) {
@@ -42,8 +42,6 @@ const AddCard = ({navigation}) => {
           type: 'Card',
           setupFutureUsage: 'OffSession',
         });
-        console.log('BANK TOEKN', data);
-
         if (data?.token?.id) {
           var form = new FormData();
           form.append('card[card_holder_name]', values?.fullname);
@@ -52,8 +50,6 @@ const AddCard = ({navigation}) => {
 
           const onSuccess = res => {
             setloading(false);
-            // alert(res);
-            console.log('On Add Card Success', res);
             navigation.navigate('GetPaymentList');
           };
           const onFailure = res => {
@@ -63,7 +59,8 @@ const AddCard = ({navigation}) => {
           dispatch(addCardRequest(form, onSuccess, onFailure));
         } else {
           setloading(false);
-          Alert.alert('Failed', 'Unable to proceed payment!');
+          // Alert.alert('Failed', 'Unable to proceed payment!');
+          setCardInfoError('Card Information Required');
         }
       } catch (error) {
         console.log(error);
@@ -133,7 +130,15 @@ const AddCard = ({navigation}) => {
                 touched={touched.country}
                 renderErrorMessage={true}
               />
-              <PaymentInput title={'Card Number'} />
+              <PaymentInput
+                title={'Card Number'}
+                style={{backgroundColor: 'red'}}
+              />
+              {cardInfoError ? (
+                <Text style={styles.errorTxtStyle}>{cardInfoError}</Text>
+              ) : (
+                <Text style={styles.errorTxtStyle} />
+              )}
             </KeyboardAwareScrollView>
             <AppButton
               width={WP('85')}

@@ -130,10 +130,9 @@ const CameraDetails = ({navigation}) => {
     try {
       setloading(true);
       const talent = new FormData();
+      console.log('talentArrtalentArr', talentArr);
       talentArr?.forEach(element => {
-        if (element.selected) {
-          talent.append('talent_ids[]', element.id);
-        }
+        talent.append('talent_ids[]', element.id);
       });
 
       const cbSuccess = res => {
@@ -141,8 +140,9 @@ const CameraDetails = ({navigation}) => {
       };
       const cbFailure = err => {
         setloading(false);
-        Alert.alert('Error', 'Something went wrong.');
+        // Alert.alert('Error', 'Something went wrong.');
       };
+      console.log('TALENETSaa==> ', talent);
       dispatch(updateUserTalentAction(talent, cbSuccess, cbFailure));
     } catch (error) {
       setloading(false);

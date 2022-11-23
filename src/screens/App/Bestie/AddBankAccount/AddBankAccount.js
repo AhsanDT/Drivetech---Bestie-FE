@@ -39,7 +39,7 @@ const AddCard = ({navigation}) => {
     const check = await checkConnected();
     if (check) {
       try {
-        // setloading(true);
+        setloading(true);
         const data = await createToken({
           type: 'BankAccount',
           setupFutureUsage: 'OffSession',
@@ -60,7 +60,6 @@ const AddCard = ({navigation}) => {
 
           const onSuccess = res => {
             setloading(false);
-            // alert(res);
             navigation.navigate('GetPaymentList');
           };
           const onFailure = res => {

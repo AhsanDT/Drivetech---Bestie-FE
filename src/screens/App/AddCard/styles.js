@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: WP('100'),
   },
+  errorTxtStyle: {
+    color: colors.red,
+    fontSize: size.text_12,
+    paddingLeft: WP('6'),
+  },
 });
 
 export {styles};

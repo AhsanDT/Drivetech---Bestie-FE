@@ -45,7 +45,6 @@ const showTalent = ({navigation, route}) => {
   const getTalent = () => {
     try {
       const cbSuccess = response => {
-        console.log('talents==> ', response);
         response?.data.forEach(element => {
           element.selected = false;
         });
@@ -95,8 +94,6 @@ const showTalent = ({navigation, route}) => {
           navigation.goBack();
         }}
       />
-      {/* {console.log('LIST==> ', list)} */}
-
       {list?.length > 0 ? (
         <FlatList
           data={list}
