@@ -47,6 +47,7 @@ const AddCard = ({navigation}) => {
           form.append('card[card_holder_name]', values?.fullname);
           form.append('card[token]', data?.token?.id);
           form.append('card[country]', values?.country);
+          setCardInfoError('');
 
           const onSuccess = res => {
             setloading(false);
