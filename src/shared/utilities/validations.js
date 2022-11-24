@@ -121,16 +121,25 @@ export const socialMediaLinks = {
   linkedIn: '',
   pinterest: '',
 };
+// const re =
+//   /(?:https?:)?\/\/(?:www\.)?(?:instagram\.com|instagr\.am)\/(?P<username>[A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)/;
+var linkedin =
+  /(https?)?:?(\/\/)?(([w]{3}||\w\w)\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+var tiktok =
+  '/bhttps?://(?:m|www|vm).tiktok.com/.*\b(?:(?:usr|v|embed|user|video)/|?shareId=|&item_id=)(d+)\b/';
+
+var pinterest =
+  /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 
 export const SocialLinks = yup.object().shape({
   // instagram: yup.string().url('Insta link required').required('required'),
-  instagram: yup.string().required('Instagram Link Required'),
+  instagram: yup.string().url('Instagram Link Required'),
 
   // tiktok: yup.string().url('Insta link required'),
-  tiktok: yup.string().required('Tiktok Link Required'),
+  tiktok: yup.string().url('Tiktok Link Required'),
 
-  linkedIn: yup.string().required('Linkedin Link Required'),
-  pinterest: yup.string().required('Pinterest Link Required'),
+  linkedIn: yup.string().url('Linkedin Link Required'),
+  pinterest: yup.string().url('Pinterest Link Required'),
 });
 
 export const support_MessageFormField = {
